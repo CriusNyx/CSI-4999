@@ -1,0 +1,3 @@
+[submodule "TouchCrawler-API"]
+	path = TouchCrawler-API
+	url = https://github.com/Firehead94/TouchCrawler-API.git
