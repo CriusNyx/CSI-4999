@@ -13,7 +13,7 @@ In more theoretical terms, and event broadcast is an abstraction of a method cal
 3. There is information hiding between the sender and receiver.
 4. It reduces the knowladge load on the programmers so multiple programmers can work together.
 
-Note: You don't need to put an event system in your scene, it will be created automatically the first time you call a method on it.
+Note: You don't need to put an event system in your scene, it will be created automatically the first time you call one of it's methods.
 
 ## How To Use
 
