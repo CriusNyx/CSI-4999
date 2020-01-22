@@ -45,6 +45,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private void OnSignIn()
     {
+        infoText.text = "";
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
@@ -55,6 +56,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private void OnSignOut()
     {
+        infoText.text = "";
         AddToInformation("Calling SignOut");
         GoogleSignIn.DefaultInstance.SignOut();
     }
