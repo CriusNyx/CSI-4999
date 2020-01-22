@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CheckDevice : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class CheckDevice : MonoBehaviour
     {
         if(SystemInfo.deviceType == DeviceType.Handheld)
         {
-            Destroy(ExitButton);
+            //GameObject.Destroy(ExitButton);
         }
     }
 }
