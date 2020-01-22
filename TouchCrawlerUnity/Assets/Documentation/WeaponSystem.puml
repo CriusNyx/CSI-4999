@@ -58,7 +58,7 @@ Weapon *-- ICooldown
 Weapon *-- IOnHitEffect
 
 interface IProjectileFactory{
-    + void Fire(\n\tWeapon weapon\n\tIActor weaponOwner,\n\tIWeaponTarget weaponTarget,\n\tVector3 spawnPosition,\n\tQuaternion spawnRotation,\n\tVector3 fireDirection)
+    + void Fire(\n\tWeapon weapon\n\tIActor weaponOwner,\n\tIWeaponTarget weaponTarget,\n\tVector3 spawnPosition,\n\tQuaternion spawnRotation)
 }
 
 class BasicProjectileFactory{
@@ -97,9 +97,19 @@ class DamageOnHitEffect{
 note right of DamageOnHitEffect : Impliments damage on hit
 
 abstract class Projectile{
-    constructor(\n\tWeapon weapon,\n\tDamageSource damageSource)
+    constructor(\n\tWeapon weapon,\n\tDamageSource damageSource,\n\tbool remembersTargets)
+    + void ClearTargetMemory()
     ---
     + readonly IDamageSource damageSource
+    - HashSet<IWeaponTarget> targetsAlreadyHit
+    // if not null, the target cache will cause 
+    // projectiles to only damage the same target once
+}
+
+Projectile <|-- Bullet
+
+class Bullet{
+
 }
 
 
@@ -196,7 +206,7 @@ class ProjectileFactoryBuilder{
 }
 
 class ProjectileBuilder{
-    + static Prjectile Create(definition)
+    + static Projectile Create(definition)
 }
 
 class DamageSourceBuilder{
