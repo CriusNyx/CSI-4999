@@ -1,0 +1,224 @@
+@startuml weaponSequenceDiagram
+
+== Weapon Fire Request == 
+
+weaponOwner -> weapon : requests fire
+weapon -> weapon : validates target
+
+
+alt target is valid
+
+weapon -> weapon : checks cooldown
+
+    alt cooldown is ready
+
+        weapon -> projectileFactory : request projectiles are created
+        projectileFactory -> projectiles : creates projectiles
+
+        alt projectile hits target
+
+            projectiles -> weapon : requests target validation for projectile
+            weapon -> projectiles : returns target validation
+
+            alt target is valid for projectile
+
+                projectiles -> onHitEffect : request on hit effects
+                onHitEffect -> weapon : requests target validation for on hit effect
+                weapon -> onHitEffect : returns target validation
+                alt target is valid for on hit
+                    onHitEffect -> target : apply effects to target
+                    target -> weaponOwner : notify target was hit
+                end
+
+            end
+
+        end
+
+    end
+end
+
+
+@enduml
+
+@startuml weaponClassDiagram
+
+
+class Weapon{
+    + ICooldown cooldown {get; private set;}
+    + IProjectileFactory projectileFactory {get; private set;}
+    + IOnHitEffect onHitEffect {get; private set;}
+    ---
+    + void Fire(\n\tIActor weaponOwner,\n\tIWeaponTarget target)
+    + bool ValidateTargetForProjectile(\n\tIWeaponTarget target)
+    + bool ValidateTargetForOnHitEffect(\n\tIWeaponTarget target)
+}
+
+Weapon *-- IProjectileFactory
+Weapon *-- ICooldown
+Weapon *-- IOnHitEffect
+
+interface IProjectileFactory{
+    + void Fire(\n\tWeapon weapon\n\tIActor weaponOwner,\n\tIWeaponTarget weaponTarget,\n\tVector3 spawnPosition,\n\tQuaternion spawnRotation)
+}
+
+class BasicProjectileFactory{
+    - Projectile projectileToCreate
+    + constructor(Projectile projectileToCreate)
+}
+
+BasicProjectileFactory *-- Projectile
+
+IProjectileFactory o-- BasicProjectileFactory
+
+interface ICooldown{
+    + void ResetCooldown()
+    + void TriggerCooldown()
+    + bool IsReady()
+}
+
+ICooldown o-- BasicCooldown
+
+class BasicCooldown{
+    + float cooldownTime
+    - float timeWhenReady
+    + constructor(float cooldownTime)
+}
+
+interface IOnHitEffect{
+    + void ApplyOnHitEffect(Weapon weapon, \n\tIWeaponTarget target,\n\tProjectile projectile,\n\tVector3 hitNormal)
+}
+
+IOnHitEffect o-- DamageOnHitEffect
+
+class DamageOnHitEffect{
+
+}
+
+note right of DamageOnHitEffect : Impliments damage on hit
+
+abstract class Projectile{
+    constructor(\n\tWeapon weapon,\n\tDamageSource damageSource,\n\tbool remembersTargets)
+    + void ClearTargetMemory()
+    ---
+    + readonly IDamageSource damageSource
+    - HashSet<IWeaponTarget> targetsAlreadyHit
+    // if not null, the target cache will cause 
+    // projectiles to only damage the same target once
+}
+
+Projectile <|-- Bullet
+
+class Bullet{
+
+}
+
+
+
+Projectile *-- IDamageSource
+
+class IDamageSource{
+    + float CalculateDamage(\n\tIWeaponOwner weaponOwner,\n\tIWeaponTarget target,\n\tProjectile projectile)
+}
+
+IDamageSource o-- FlatDamageSource
+
+class FlatDamageSource{
+    constructor(float damage)
+    - float damage
+}
+
+@enduml
+
+@startuml Scriptable Objects
+
+
+note top of WeaponDefinition : These objects are data containers used to construct weapons\nAll the base classes inherrit scriptable object 
+
+Class WeaponDefinition{
+    + CooldownDefinition cooldownDefinition
+    + ProjectileFactoryDefinition projectileFactory
+    + OnHitEffectDefinition onHitEffect
+}
+
+WeaponDefinition *-- CooldownDefinition
+WeaponDefinition *-- ProjectileFactoryDefinition
+WeaponDefinition *-- OnHitEffectDefinition
+
+abstract class CooldownDefinition{
+
+}
+
+CooldownDefinition <|-- BasicCooldownDefinition
+
+class BasicCooldownDefinition{
+    + float cooldownTime
+}
+
+abstract class ProjectileFactoryDefinition{
+}
+
+ProjectileFactoryDefinition <|-- BasicProjectileFactoryDefinition
+
+class BasicProjectileFactoryDefinition{
+    + ProjectileDefinition projectile
+}
+
+BasicProjectileFactoryDefinition *-- ProjectileDefinition
+
+abstract class OnHitEffectDefinition{
+
+}
+
+OnHitEffectDefinition <|-- DamageOnHitDefinition
+
+class DamageOnHitDefinition{
+
+}
+
+note bottom of DamageOnHitDefinition : Doesn't need fancy logic, just applies damage source to target
+
+class ProjectileDefinition{
+    + DamageSourceDefinition damageSource
+}
+
+ProjectileDefinition *-- DamageSourceDefinition
+
+class DamageSourceDefinition{
+
+}
+
+DamageSourceDefinition <|-- FlatDamageSourceDefinition
+
+class FlatDamageSourceDefinition{
+    + float damage
+}
+
+@enduml
+
+@startuml Builders
+
+class WeaponBuilder{
+    + static Weapon Create(definition)
+}
+
+class ProjectileFactoryBuilder{
+    + static ProjectileFactory Create(defintion)
+}
+
+class ProjectileBuilder{
+    + static Projectile Create(definition)
+}
+
+class DamageSourceBuilder{
+    + static DamageSource Create(definition)
+}
+
+class OnHitEffectBuilder{
+    + static OnHitEffect Create(definition)
+}
+
+class CooldownBuilder{
+    + static Cooldown Create(definition)
+}
+
+@enduml
