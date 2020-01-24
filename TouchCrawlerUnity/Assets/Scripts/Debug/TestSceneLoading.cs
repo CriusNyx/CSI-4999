@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Debug
+namespace Assets.Scripts.DebugScripts
 {
     public class TestSceneLoading : MonoBehaviour
     {
