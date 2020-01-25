@@ -1,8 +1,11 @@
-﻿using Assets.Scripts.WeaponSystem;
+﻿using Assets.Scripts.Util;
+using Assets.Scripts.WeaponSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Assets.Scripts.WeaponSystem.WeaponComponent;
+using static Assets.Scripts.Util.DecoratorUtil;
 
 namespace Assets.WeaponSystem
 {
@@ -19,83 +22,102 @@ namespace Assets.WeaponSystem
         public (bool cooldownPassed, bool weaponFired, IEnumerable<IProjectile> projectiles) Fire(IWeaponTarget target)
         {
             var components = GetAllComponents();
-            WeaponComponent.FireRequestResult requestResult = new WeaponComponent.FireRequestResult();
-            foreach(var component in components)
-            {
-                requestResult = component.RequestFire(this, target, requestResult);
-            }
+
+            var requestResult = PropegateMonad(
+                new FireRequestResult(), 
+                components, 
+                (x, y) => x.RequestFire(this, target, y));
+
 
             if(requestResult.fireRequestSuccessful)
             {
-                WeaponComponent.FireResult fireResult = new WeaponComponent.FireResult();
+                FireResult fireResult = new FireResult();
+                var accuracyControllerResult = PropegateMonad(
+                    new ComponentSearchResult<AccuracyController>(),
+                    components,
+                    (x, y) => x.ComponentSearch(y));
+
                 for(int i = 0; i < requestResult.projectileCount; i++)
                 {
-                    foreach(var component in components)
-                    {
-                        fireResult = component.Fire(this, target, fireResult);
-                    }
+                    fireResult = PropegateMonad(
+                        fireResult,
+                        components,
+                        (x, y) => x.Fire(this, target, accuracyControllerResult.value, y));
                 }
                 return (requestResult.fireRequestSuccessful, fireResult.success, fireResult.projectiles);
             }
 
-            return (requestResult.fireRequestSuccessful, false, null);
+            return (requestResult.fireRequestSuccessful, false, new IProjectile[0]);
         }
 
-        public IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction)
+        public IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController)
         {
             var components = GetAllComponents();
-            WeaponComponent.CreateProjectileResult result = new WeaponComponent.CreateProjectileResult();
+            CreateProjectileResult result = new CreateProjectileResult();
 
-            foreach(var component in components)
+            Vector3 position;
+            Quaternion rotation;
+            Vector3 direction;
+
+            if(accuracyController == null)
             {
-                result = component.CreateProjectile(this, target, position, rotation, direction, result);
+                (position, rotation, direction) = AccuracyController.GetDefaultSpawnPosition(this, target);
             }
+            else
+            {
+                (position, rotation, direction) = accuracyController.GetSpawnPosition(this, target);
+            }
+
+            result = PropegateMonad(
+                result, 
+                components, 
+                (x, y) => x.CreateProjectile(this, target, position, rotation, direction, y));
+
             return result.projectiles;
         }
 
         public void ApplyOnHitEffects(IWeaponTarget target)
         {
             var components = GetAllComponents();
-            WeaponComponent.ApplyOnHitEffectsResult result = new WeaponComponent.ApplyOnHitEffectsResult();
-            foreach(var component in components)
-            {
-                result = component.ApplyOnHitEffects(this, target, result);
-            }
+
+            var result = PropegateMonad(
+                new ApplyOnHitEffectsResult(), 
+                components, 
+                (x, y) => x.ApplyOnHitEffects(this, target, y));
         }
 
         public WeaponStatBlock GetStats()
         {
             var components = GetAllComponents();
-            WeaponComponent.GetStatsResult result = new WeaponComponent.GetStatsResult();
-            foreach(var component in components)
-            {
-                result = component.GetStats(this, result);
-            }
+
+            var result = PropegateMonad(
+                new GetStatsResult(),
+                components,
+                (x, y) => x.GetStats(this, y));
+
             return result.block;
         }
 
         public string GetName()
         {
             var components = GetAllComponents();
-            WeaponComponent.GetNameResult result = new WeaponComponent.GetNameResult();
 
-            foreach(var component in components)
-            {
-                result = component.GetName(this, result);
-            }
+            var result = PropegateMonad(
+                new GetNameResult(), 
+                components, 
+                (x, y) => x.GetName(this, y));
 
             return result.ToString();
         }
-
+        
         public void GetGraphics()
         {
             var components = GetAllComponents();
-            WeaponComponent.GetGraphicsResult result = new WeaponComponent.GetGraphicsResult();
 
-            foreach(var component in components)
-            {
-                result = component.GetGraphics(this, result);
-            }
+            var result = PropegateMonad(
+                new GetGraphicsResult(),
+                components,
+                (x, y) => x.GetGraphics(this, y));
 
             throw new NotImplementedException("Weapon Graphics is not fully implimented");
         }
@@ -103,24 +125,23 @@ namespace Assets.WeaponSystem
         public int GetCost()
         {
             var components = GetAllComponents();
-            WeaponComponent.GetCostResult result = new WeaponComponent.GetCostResult();
 
-            foreach(var component in components)
-            {
-                result = component.GetCost(this, result);
-            }
+            var result = PropegateMonad(
+                new GetCostResult(),
+                components,
+                (x, y) => x.GetCost(this, y));
+
             return result.cost;
         }
 
         public bool ShouldDestroyProjectile(IProjectile projectile, RaycastHit2D raycastHit)
         {
             var components = GetAllComponents();
-            WeaponComponent.ShouldDestroyProjectileResult result = new WeaponComponent.ShouldDestroyProjectileResult();
 
-            foreach(var component in components)
-            {
-                result = component.ShouldDestroyProjectile(this, projectile, raycastHit, result);
-            }
+            var result = PropegateMonad(
+                new ShouldDestroyProjectileResult(),
+                components,
+                (x, y) => x.ShouldDestroyProjectile(this, projectile, raycastHit, y));
 
             return result.shouldDestroy;
         }

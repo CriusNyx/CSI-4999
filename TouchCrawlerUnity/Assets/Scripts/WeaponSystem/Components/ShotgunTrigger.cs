@@ -8,13 +8,13 @@ public class ShotgunTrigger : WeaponComponent
 {
     public int projectileCount = 5;
 
-    public override FireResult Fire(Weapon weapon, IWeaponTarget target, FireResult result)
+    public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
     {
         result.success = true;
 
         for(int i = 0; i < projectileCount; i++)
         {
-            result.AddProjectile(weapon.CreateProjectile(target, default, default, default));
+            result.AddProjectile(weapon.CreateProjectile(target, accuracyController));
         }
         return result;
     }

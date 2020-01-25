@@ -20,7 +20,7 @@ namespace Assets.Scripts.WeaponSystem.Components
             return result;
         }
 
-        public override FireResult Fire(Weapon weapon, IWeaponTarget target, FireResult result)
+        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
         {
             cooldown.TriggerCooldown();
             return result;

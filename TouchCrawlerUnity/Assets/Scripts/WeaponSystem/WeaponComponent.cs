@@ -8,11 +8,72 @@ namespace Assets.Scripts.WeaponSystem
 {
     public abstract class WeaponComponent : MonoBehaviour
     {
+        #region Methods
         public virtual FireRequestResult RequestFire(Weapon weapon, IWeaponTarget target, FireRequestResult result)
         {
             return result;
         }
 
+        public virtual FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
+        {
+            return result;
+        }
+
+        public virtual CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, CreateProjectileResult result)
+        {
+            return result;
+        }
+
+        public virtual ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
+        {
+            return result;
+        }
+
+        public virtual GetStatsResult GetStats(Weapon weapon, GetStatsResult result)
+        {
+            return result;
+        }
+
+        public virtual GetNameResult GetName(Weapon weapon, GetNameResult result)
+        {
+            return result;
+        }
+
+        public virtual GetGraphicsResult GetGraphics(Weapon weapon, GetGraphicsResult result)
+        {
+            return result;
+        }
+
+        public virtual GetCostResult GetCost(Weapon weapon, GetCostResult result)
+        {
+            return result;
+        }
+
+        public virtual ShouldDestroyProjectileResult ShouldDestroyProjectile(Weapon weapon, IProjectile projectile, RaycastHit2D raycastHit, ShouldDestroyProjectileResult result)
+        {
+            return result;
+        }
+
+        public ComponentSearchResult<T> ComponentSearch<T>(ComponentSearchResult<T> result) where T : WeaponComponent
+        {
+            if (this is T t)
+            {
+                result.value = t;
+            }
+            return result;
+        }
+
+        public ComponentSetSearchResult<T> ComponentSetSearch<T>(ComponentSetSearchResult<T> result) where T : WeaponComponent
+        {
+            if (this is T t)
+            {
+                result.AddComponent(t);
+            }
+            return result;
+        }
+        #endregion
+
+        #region Result Classes
         public class FireRequestResult
         {
             public bool fireRequestSuccessful = false;
@@ -29,11 +90,6 @@ namespace Assets.Scripts.WeaponSystem
             }
         }
 
-        public virtual FireResult Fire(Weapon weapon, IWeaponTarget target, FireResult result)
-        {
-            return result;
-        }
-
         public class FireResult
         {
             public bool success = false;
@@ -46,11 +102,6 @@ namespace Assets.Scripts.WeaponSystem
             }
         }
 
-        public virtual CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, CreateProjectileResult result)
-        {
-            return result;
-        }
-
         public class CreateProjectileResult
         {
             public IEnumerable<IProjectile> projectiles => projectileList;
@@ -59,29 +110,14 @@ namespace Assets.Scripts.WeaponSystem
             public void Add(IProjectile projectile) => projectileList.Add(projectile);
         }
 
-        public virtual ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
-        {
-            return result;
-        }
-
         public class ApplyOnHitEffectsResult
         {
             public bool applyEffects = false;
         }
 
-        public virtual GetStatsResult GetStats(Weapon weapon, GetStatsResult result)
-        {
-            return result;
-        }
-
         public class GetStatsResult
         {
             public WeaponStatBlock block = new WeaponStatBlock();
-        }
-
-        public virtual GetNameResult GetName(Weapon weapon, GetNameResult result)
-        {
-            return result;
         }
 
         public class GetNameResult
@@ -92,19 +128,9 @@ namespace Assets.Scripts.WeaponSystem
             }
         }
 
-        public virtual GetGraphicsResult GetGraphics(Weapon weapon, GetGraphicsResult result)
-        {
-            return result;
-        }
-
         public class GetGraphicsResult
         {
 
-        }
-
-        public virtual GetCostResult GetCost(Weapon weapon, GetCostResult result)
-        {
-            return result;
         }
 
         public class GetCostResult
@@ -122,14 +148,23 @@ namespace Assets.Scripts.WeaponSystem
             }
         }
 
-        public virtual ShouldDestroyProjectileResult ShouldDestroyProjectile(Weapon weapon, IProjectile projectile, RaycastHit2D raycastHit, ShouldDestroyProjectileResult result)
-        {
-            return result;
-        }
-
         public class ShouldDestroyProjectileResult
         {
             public bool shouldDestroy = true;
         }
+
+        public class ComponentSearchResult<T> where T : WeaponComponent
+        {
+            public T value;
+        }
+
+        public class ComponentSetSearchResult<T> where T : WeaponComponent
+        {
+            private List<T> list = new List<T>();
+            public IEnumerable<T> set => list;
+
+            public void AddComponent(T t) => list.Add(t);
+        }
+        #endregion
     }
 }

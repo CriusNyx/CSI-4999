@@ -8,11 +8,11 @@ namespace Assets.Scripts.WeaponSystem.Components
 {
     public class SingleActionTrigger : WeaponComponent
     {
-        public override FireResult Fire(Weapon weapon, IWeaponTarget target, FireResult result)
+        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
         {
             result.success = true;
 
-            result.AddProjectile(weapon.CreateProjectile(target, Vector3.zero, Quaternion.identity, Vector3.up));
+            result.AddProjectile(weapon.CreateProjectile(target, accuracyController));
 
             return result;
         }
