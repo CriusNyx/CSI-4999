@@ -1,4 +1,5 @@
-﻿using Assets.WeaponSystem;
+﻿using Assets.Scripts.WeaponSystem.Components.AccuracyControllers;
+using Assets.WeaponSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,19 @@ namespace Assets.Scripts.WeaponSystem
 {
     public abstract class WeaponComponent : MonoBehaviour
     {
+        public abstract ComponentType componentType { get; }
+
+        public enum ComponentType
+        {
+            AccuracyController,
+            Trigger,
+            Cooldown,
+            ProjectileFactory,
+            Debug,
+            OnHitEffect,
+            None
+        }
+
         #region Methods
         public virtual FireRequestResult RequestFire(Weapon weapon, IWeaponTarget target, FireRequestResult result)
         {

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.WeaponSystem;
+using Assets.Scripts.WeaponSystem.Components.AccuracyControllers;
 using Assets.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace Assets.Scripts.WeaponSystem.Components
 {
     public class CooldownComponent : WeaponComponent
     {
+        public override ComponentType componentType => ComponentType.Cooldown;
+
         public Cooldown cooldown = new Cooldown();
 
         public override FireRequestResult RequestFire(Weapon weapon, IWeaponTarget target, FireRequestResult result)

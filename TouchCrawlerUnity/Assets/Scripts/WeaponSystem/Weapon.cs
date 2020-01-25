@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Assets.Scripts.WeaponSystem.WeaponComponent;
 using static Assets.Scripts.Util.DecoratorUtil;
+using Assets.Scripts.WeaponSystem.Components.AccuracyControllers;
 
 namespace Assets.WeaponSystem
 {
@@ -19,7 +20,7 @@ namespace Assets.WeaponSystem
             return gameObject.GetComponentsInChildren<WeaponComponent>();
         }
 
-        public (bool cooldownPassed, bool weaponFired, IEnumerable<IProjectile> projectiles) Fire(IWeaponTarget target)
+        public virtual (bool cooldownPassed, bool weaponFired, IEnumerable<IProjectile> projectiles) Fire(IWeaponTarget target)
         {
             var components = GetAllComponents();
 
@@ -50,7 +51,7 @@ namespace Assets.WeaponSystem
             return (requestResult.fireRequestSuccessful, false, new IProjectile[0]);
         }
 
-        public IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController)
+        public virtual IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, int projectileNumber)
         {
             var components = GetAllComponents();
             CreateProjectileResult result = new CreateProjectileResult();
@@ -61,11 +62,11 @@ namespace Assets.WeaponSystem
 
             if(accuracyController == null)
             {
-                (position, rotation, direction) = AccuracyController.GetDefaultSpawnPosition(this, target);
+                (position, rotation, direction) = AccuracyController.GetDefaultSpawnPosition(this, target, projectileNumber);
             }
             else
             {
-                (position, rotation, direction) = accuracyController.GetSpawnPosition(this, target);
+                (position, rotation, direction) = accuracyController.GetSpawnPosition(this, target, projectileNumber);
             }
 
             result = PropegateMonad(
@@ -76,7 +77,7 @@ namespace Assets.WeaponSystem
             return result.projectiles;
         }
 
-        public void ApplyOnHitEffects(IWeaponTarget target)
+        public virtual void ApplyOnHitEffects(IWeaponTarget target)
         {
             var components = GetAllComponents();
 
@@ -86,7 +87,7 @@ namespace Assets.WeaponSystem
                 (x, y) => x.ApplyOnHitEffects(this, target, y));
         }
 
-        public WeaponStatBlock GetStats()
+        public virtual WeaponStatBlock GetStats()
         {
             var components = GetAllComponents();
 
@@ -98,7 +99,7 @@ namespace Assets.WeaponSystem
             return result.block;
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             var components = GetAllComponents();
 
@@ -109,8 +110,8 @@ namespace Assets.WeaponSystem
 
             return result.ToString();
         }
-        
-        public void GetGraphics()
+
+        public virtual void GetGraphics()
         {
             var components = GetAllComponents();
 
@@ -122,7 +123,7 @@ namespace Assets.WeaponSystem
             throw new NotImplementedException("Weapon Graphics is not fully implimented");
         }
 
-        public int GetCost()
+        public virtual int GetCost()
         {
             var components = GetAllComponents();
 
@@ -134,7 +135,7 @@ namespace Assets.WeaponSystem
             return result.cost;
         }
 
-        public bool ShouldDestroyProjectile(IProjectile projectile, RaycastHit2D raycastHit)
+        public virtual bool ShouldDestroyProjectile(IProjectile projectile, RaycastHit2D raycastHit)
         {
             var components = GetAllComponents();
 
