@@ -2,10 +2,10 @@
 
 Impliment Accuracy Controller
 
-1. Burst Accuracy Controller fires bullets in automatic bursts
-2. Spray Accuracy Controller fires bullets with a spray pattern
-3. Bloom Accuracy Controller has redacle bloom
-4. Arc Accuracy Controller fires bullets and consistant angles
+1. Spray Accuracy Controller fires bullets with a spray pattern
+2. Bloom Accuracy Controller has redacle bloom
+3. Spread Accuracy Controller fires bullets at consistant angles
+4. Pattern Accuracy Controller fires bullets at predefined angles
 
 Powerup Component
 

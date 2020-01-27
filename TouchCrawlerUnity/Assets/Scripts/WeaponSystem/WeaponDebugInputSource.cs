@@ -19,7 +19,6 @@ public class WeaponDebugInputSource : MonoBehaviour
         {
             var weapon = GetComponent<Weapon>();
             var result = weapon.Fire(null);
-            Debug.Log("fire = " + result.ToString() + " count = " + result.projectiles.Count());
         }
     }
 }
