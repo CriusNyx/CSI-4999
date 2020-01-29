@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IStats : MonoBehaviour
+public interface IStats
 {
     // Start is called before the first frame update
     void Start()
@@ -17,9 +17,9 @@ public class IStats : MonoBehaviour
     }
 
     // Void methods defined in StatsController
-    void AddModifier();
+    void AddModifier(StatObject stat, ModifierTypeEnum modType, StatModifierObject modifier);
 
-    void RemoveModifier();
+    void RemoveModifier(StatObject stat, ModifierTypeEnum modType, StatModifierObject modifier);
 
-    void CalculateNewStats();
+    void CalculateNewStats(StatObject stat, ModifierTypeEnum modType, StatModifierObject modifier);
 }
