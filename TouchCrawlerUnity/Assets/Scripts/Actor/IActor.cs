@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IActor
+public interface IActor : Assets.Scripts.Events.IEvent
 {
     int actorLevel {
         get;
@@ -29,9 +29,7 @@ public interface IActor
 
     bool IsPlayer();
 
-    void AcceptEvent(Object E);
+    void UseItem(object item);
 
-    void UseItem(Object item);
-
-    void PickUpItem(Object item);
+    void PickUpItem(object item);
 }
