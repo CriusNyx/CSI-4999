@@ -15,11 +15,13 @@ namespace Assets.Scripts.Events
         public enum EventChannel
         {
             gameState,
+            player,
         }
 
         public enum EventSubChannel
         {
-            levelTransition
+            levelTransition,
+            input,
         }
 
         Dictionary<(EventChannel, EventSubChannel), List<IEventListener>> channels = new Dictionary<(EventChannel, EventSubChannel), List<IEventListener>>();
