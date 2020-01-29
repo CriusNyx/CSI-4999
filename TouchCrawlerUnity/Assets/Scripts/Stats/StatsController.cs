@@ -5,7 +5,7 @@ using UnityEngine;
 // StatsController is linked to the IStats interface
 public class StatsController : MonoBehaviour, IStats
 {
-    private enum StatTypeEnum
+    public enum StatTypeEnum
     {
         Health,
         Attack,
@@ -15,7 +15,7 @@ public class StatsController : MonoBehaviour, IStats
         Speed,
     }
 
-    private enum ModifierTypeEnum
+    public enum ModifierTypeEnum
     {
         Flat,
         Percent,
@@ -23,84 +23,103 @@ public class StatsController : MonoBehaviour, IStats
 
     #region Objects
     // Stat Modifier Object
-    public class StatModifierObject
+    public class StatModifier
     {
         // Need to relate ModType and ModValue to the ModifierTypeEnum somehow -Sam
-        public string ModifierKey { get; set; }
+        public ModifierKey ModifierKey { get; set; }
         public float ModifierValue { get; set; }
 
-        public StatModifierObject(string modKey, float modValue)
+        public StatModifier(ModifierKey modKey, float modValue)
         {
-            ModifierKey = this.modKey;
-            ModifierValue = this.modValue;
-        }
-
-        public void AddModifier(StatObject stat, ModifierTypeEnum modType, StatModifierObject modifier)
-        {
-
-        }
-
-        public void RemoveModifier(StatObject stat, ModifierTypeEnum modType, StatModifierObject modifier)
-        {
-
-        }
-
-        public void CalculateNewStats(StatObject stat, ModifierTypeEnum modType, StatModifierObject modifier)
-        {
-
+            // Component's Unique ID
+            this.ModifierKey = modKey;
+            // Component's Added Modifier Value (number)
+            this.ModifierValue = modValue;
         }
     }
 
-    // Stat Object
-    public class StatObject
+    public class ModifierKey
     {
-        public float Health { get; set; }
-        public float Attack { get; set; }
-        public float SpAttack { get; set; }
-        public float Defence { get; set; }
-        public float SpDefence { get; set; }
-        public float Speed { get; set; }
+        public ModifierKey()
+        { }
+    }
 
-        public StatObject(float health, float attack, float spAttack, float defence, float spDefence, float speed)
+    // Stat Object
+    public class Stat
+    {
+        public float BaseValue { get; set; }
+
+        //String = ModifierTypeEnum value, StatModifier is the object
+        Dictionary<ModifierKey, StatModifier> ModifierDictionary = new Dictionary<ModifierKey, StatModifier>();
+
+        public Stat(float baseValue)
         {
-            Health = this.health;
-            Attack = this.attack;
-            SpAttack = this.spAttack;
-            Defence = this.defence;
-            SpDefence = this.spDefence;
-            Speed = this.speed;
+            this.BaseValue = baseValue;
+        }
+        
+        public void AddModifier(StatModifier modifier)
+        {
+            ModifierDictionary.Add(modifier.ModifierKey, modifier);
+        }
+
+        public void RemoveModifier(ModifierKey key)
+        {
+            ModifierDictionary.Remove(key);
+        }
+
+        public void GetStatValue()
+        {
+            float statValue = BaseValue;
+
+            foreach (var modifier in ModifierDictionary) //(int i = 0; i < ModifierDictionary.Count; i++)
+            {
+                switch (modifier)
+                {
+                    case ModifierTypeEnum.Flat:
+                        // Calculate stat change
+                        //statValue = statValue + modifier.ModifierValue;
+                        break;
+                    case ModifierTypeEnum.Percent:
+                        // Calculate stat change
+                        //statValue = statValue * modifier.ModifierValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    // Stat Object Instances
+    Stat Health = new Stat(10);
+    Stat Attack = new Stat(10);
+    Stat SpAttack = new Stat(10);
+    Stat Defence = new Stat(10);
+    Stat SpDefence = new Stat(10);
+    Stat Speed = new Stat(10);
+    Stat None = new Stat(10);
 
     #region Supplemental Functions
-    public static void StatRelationship()
+    public Stat GetStat(StatTypeEnum statName)
     {
-        Hashtable typeToObject = new Hashtable();
-        StatObject statObject = new StatObject();
-
-        typeToObject.Add(StatTypeEnum.Health, statObject.Health);
-        typeToObject.Add(StatTypeEnum.Attack, statObject.Attack);
-        typeToObject.Add(StatTypeEnum.SpAttack, statObject.SpAttack);
-        typeToObject.Add(StatTypeEnum.Defence, statObject.Defence);
-        typeToObject.Add(StatTypeEnum.SpDefence, statObject.SpDefence);
-        typeToObject.Add(StatTypeEnum.Speed, statObject.Speed);
-
-        Hashtable objectToMods = new Hashtable();
-
-        objectToMods.Add("", "");
+        switch (statName)
+        {
+            case StatTypeEnum.Health:
+                return Health;
+            case StatTypeEnum.Attack:
+                return Attack;
+            case StatTypeEnum.SpAttack:
+                return SpAttack;
+            case StatTypeEnum.Defence:
+                return Defence;
+            case StatTypeEnum.SpDefence:
+                return SpDefence;
+            case StatTypeEnum.Speed:
+                return Speed;
+            default:
+                return None;
+        }
     }
     #endregion
 }
