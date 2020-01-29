@@ -1,0 +1,21 @@
+Sprite settings in Unity
+
+All sprites imported should have the same settigns applied. This will give us consistent scaling for the pixels as well as color matching. 
+
+Note: colors will not necessarily match intended colors exactly. What's important is that they are matched A) in the design program (Photoshop) and B) in Unity after import.
+
+Settings to CHANGE:
+
+Pixels Per Unit: 16
+Filter Mode: Point (no filter)
+
+Import Settings
+Override for PC...
+Max Size: 2048
+Resize Algorithm: Mitchell
+Format: RGB 16 bit
+
+Override for Android...
+Max Size: 2048
+Resize Algorithm: Mitchell
+Format: RGB 16 bit
