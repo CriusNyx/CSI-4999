@@ -22,7 +22,7 @@ public interface IActor
     {
         get;
     }
-    /*StatController{
+    /*StatController sc{
      * get;
      * }
      */
