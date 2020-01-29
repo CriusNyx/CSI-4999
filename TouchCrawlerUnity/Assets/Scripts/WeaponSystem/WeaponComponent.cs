@@ -63,7 +63,7 @@ namespace Assets.Scripts.WeaponSystem
             return result;
         }
 
-        public virtual ShouldDestroyProjectileResult ShouldDestroyProjectile(Weapon weapon, IProjectile projectile, RaycastHit2D raycastHit, ShouldDestroyProjectileResult result)
+        public virtual ShouldDestroyProjectileResult ShouldDestroyProjectile(Weapon weapon, IProjectile projectile, Collider2D collider, ShouldDestroyProjectileResult result)
         {
             return result;
         }
