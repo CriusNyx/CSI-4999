@@ -7,7 +7,7 @@ public class DefaultActor : MonoBehaviour, IActor
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public IActor target { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    public MovementController mc => throw new System.NotImplementedException();
+    public MovementController movementController => throw new System.NotImplementedException();
 
     public bool IsPlayer()
     {
