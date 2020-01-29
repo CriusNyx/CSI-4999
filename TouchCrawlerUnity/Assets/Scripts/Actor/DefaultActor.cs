@@ -31,6 +31,11 @@ public class DefaultActor : MonoBehaviour, IActor
         throw new System.NotImplementedException();
     }
 
+    public bool IsPlayer()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void PickUpItem(Object item)
     {
         throw new System.NotImplementedException();
