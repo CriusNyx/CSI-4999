@@ -9,20 +9,17 @@ public interface IActor : Assets.Scripts.Events.IEvent
         set;
     }
 
-    enum actorClass
-    {
-
-    }
     IActor target
     {
         get;
         set;
     }
-    MovementController mc
+    MovementController movementController
     {
         get;
     }
-    /*StatController sc{
+
+    /*StatController statController{
      * get;
      * }
      */
