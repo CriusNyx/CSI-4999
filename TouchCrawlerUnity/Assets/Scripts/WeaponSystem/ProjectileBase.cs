@@ -11,37 +11,33 @@ namespace Assets.Scripts.WeaponSystem
     [RequireComponent(typeof(Rigidbody2D))]
     class ProjectileBase : MonoBehaviour, IProjectile
     {
-        public Vector2 Current { get; set; }
+        public Vector2 Current { get; private set; }
 
-        public Vector2 Source { get; set; }
+        public Vector2 Source { get; private set; }
 
-        public Weapon WeaponSrc { get; set; }
+        public Weapon WeaponSrc { get; private set; }
 
-        public IWeaponTarget target { get; set; }
+        public IWeaponTarget target { get; private set; }
 
-        public Vector2 velocity { get; set; }
+        public Vector2 velocity { get; private set; }
 
-        public float acceleration { get; set; }
+        public float acceleration { get; private set; }
 
-        IProjectile projectile { get; set; }
-
-        GameObject IProjectile.projectile { get; }
-
-        Rigidbody2D rigidbody;
+        GameObject IProjectile.gameObject => this.gameObject;
 
         public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos)
         {
             this.WeaponSrc = weapon;
             this.target = target;
             this.velocity = velocity;
-            this.Current = pos;
+            this.Source = pos;
 
-            rigidbody = gameObject.GetComponent<Rigidbody2D>();
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
         }
 
         void OnCollisionEnter2D(Collision2D col)
         {
-            if (this.WeaponSrc.ShouldDestroyProjectile(this.projectile, col.collider)) 
+            if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
             {
                 if (target != null)
                 {
@@ -53,7 +49,7 @@ namespace Assets.Scripts.WeaponSystem
 
         void FixedUpdate()
         {
-            rigidbody.velocity = new Vector2(velocity.x + acceleration, velocity.y + acceleration);
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x + acceleration, velocity.y + acceleration);
         }
     }
 }

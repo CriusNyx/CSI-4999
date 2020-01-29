@@ -7,14 +7,13 @@ namespace Assets.Scripts.WeaponSystem
 {
     public interface IProjectile
     {
-        GameObject projectile { get; }
+        GameObject gameObject { get; }
         Vector2 Current { get; }
-        Vector2 Source { get; set; }
+        Vector2 Source { get; }
         Weapon WeaponSrc { get; }
         IWeaponTarget target { get; }
-        Vector2 Direction { get; }
 
-        void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos);
+        void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos);
 
     }
 }
