@@ -8,10 +8,7 @@ public interface IActor
         get;
         set;
     }
-    Rigidbody2D body
-    {
-        get;
-    }
+
     enum actorClass
     {
 
@@ -24,26 +21,17 @@ public interface IActor
     MovementController mc
     {
         get;
-        set;
     }
+    /*StatController{
+     * get;
+     * }
+     */
 
-    // Start is called before the first frame update
-    void ProtectedStart();
-
-    bool CheckIfPlayer();
+    bool IsPlayer();
 
     void AcceptEvent(Object E);
-
-    // Update is called once per frame
-    void UpdateActor();
 
     void UseItem(Object item);
 
     void PickUpItem(Object item);
-
-    void IncreaseStat();
-
-    void DecreaseStat();
-
-    void StatModifier();
 }

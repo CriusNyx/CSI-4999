@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    Rigidbody2D body
+    {
+        get;
+    }
     Vector2 nextLocation;
     // Start is called before the first frame update
     void Start()
