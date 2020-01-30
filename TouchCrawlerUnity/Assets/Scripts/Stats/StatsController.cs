@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // StatsController is linked to the IStats interface
 public class StatsController : MonoBehaviour, IStats
 {
-    public enum StatTypeEnum
+    public enum StatType
     {
         Health,
         Attack,
@@ -15,10 +16,11 @@ public class StatsController : MonoBehaviour, IStats
         Speed,
     }
 
-    public enum ModifierTypeEnum
+    public enum ModifierType
     {
-        Flat,
-        Percent,
+        AddBeforeMultiply,
+        Multiply,
+        AddAfterMultiply,
     }
 
     #region Objects
@@ -28,13 +30,15 @@ public class StatsController : MonoBehaviour, IStats
         // Need to relate ModType and ModValue to the ModifierTypeEnum somehow -Sam
         public ModifierKey ModifierKey { get; set; }
         public float ModifierValue { get; set; }
+        public ModifierType ModifierType { get; set; }
 
-        public StatModifier(ModifierKey modKey, float modValue)
+        public StatModifier(ModifierKey modKey, float modValue, ModifierType modType)
         {
             // Component's Unique ID
             this.ModifierKey = modKey;
             // Component's Added Modifier Value (number)
             this.ModifierValue = modValue;
+            this.ModifierType = modType;
         }
     }
 
@@ -67,26 +71,36 @@ public class StatsController : MonoBehaviour, IStats
             ModifierDictionary.Remove(key);
         }
 
-        public void GetStatValue()
+        public bool ContainsKey(ModifierKey key)
         {
-            float statValue = BaseValue;
+            return ModifierDictionary.ContainsKey(key);
+        }
 
-            foreach (var modifier in ModifierDictionary) //(int i = 0; i < ModifierDictionary.Count; i++)
+        public float CalculateStatValue()
+        {
+            float baseValue = BaseValue;
+            float AddBeforeMultiply = 0;
+            float Multiply = 1;
+            float AddAfterMultiply = 0;
+
+            foreach(KeyValuePair<ModifierKey, StatModifier> modifier in ModifierDictionary)
             {
-                switch (modifier)
+                //StatModifier modifier = ModifierDictionary[i];
+                switch(modifier.Value.ModifierType)
                 {
-                    case ModifierTypeEnum.Flat:
-                        // Calculate stat change
-                        //statValue = statValue + modifier.ModifierValue;
-                        break;
-                    case ModifierTypeEnum.Percent:
-                        // Calculate stat change
-                        //statValue = statValue * modifier.ModifierValue;
-                        break;
+                    case ModifierType.AddBeforeMultiply:
+                        return AddBeforeMultiply += modifier.Value.ModifierValue;
+                    case ModifierType.Multiply:
+                        return Multiply *= modifier.Value.ModifierValue;
+                    case ModifierType.AddAfterMultiply:
+                        return AddAfterMultiply += modifier.Value.ModifierValue;
                     default:
+                        // May cause issues. Should break out of the loop. -Sam
                         break;
                 }
             }
+
+            return (float)Math.Round(((baseValue + AddBeforeMultiply) * Multiply) + AddAfterMultiply, 4);
         }
     }
     #endregion
@@ -101,21 +115,21 @@ public class StatsController : MonoBehaviour, IStats
     Stat None = new Stat(10);
 
     #region Supplemental Functions
-    public Stat GetStat(StatTypeEnum statName)
+    public Stat GetStat(StatType statName)
     {
         switch (statName)
         {
-            case StatTypeEnum.Health:
+            case StatType.Health:
                 return Health;
-            case StatTypeEnum.Attack:
+            case StatType.Attack:
                 return Attack;
-            case StatTypeEnum.SpAttack:
+            case StatType.SpAttack:
                 return SpAttack;
-            case StatTypeEnum.Defence:
+            case StatType.Defence:
                 return Defence;
-            case StatTypeEnum.SpDefence:
+            case StatType.SpDefence:
                 return SpDefence;
-            case StatTypeEnum.Speed:
+            case StatType.Speed:
                 return Speed;
             default:
                 return None;
