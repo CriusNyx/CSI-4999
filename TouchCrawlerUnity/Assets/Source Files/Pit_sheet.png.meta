@@ -1,70 +1,61 @@
 fileFormatVersion: 2
-guid: f06e53c1df715a547ba2cc8129cc04be
+guid: 97c8d65c94e017e409a814fb80b74945
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6713291700187107041
-    second: N6
+      213: -3620551394888683672
+    second: pit_open_9
   - first:
-      213: 5185641697152699428
-    second: N7
+      213: 8061599201554206112
+    second: pit_open_10
   - first:
-      213: 7354257799214377801
-    second: N8
+      213: -6939149537630574168
+    second: pit_open_5
   - first:
-      213: -6125641369053702342
-    second: N9
+      213: 3333788310299525534
+    second: pit_open_6
   - first:
-      213: 2210616080060440252
-    second: N4
+      213: 8838914415477260880
+    second: pit_open_7
   - first:
-      213: -6316022104807352841
-    second: N5
+      213: 6269490454374037970
+    second: pit_open_8
   - first:
-      213: -4441021596335243831
-    second: N1
+      213: -6681016452448916879
+    second: pit_open_1
   - first:
-      213: 761518864316419298
-    second: N2
+      213: -1165664970922140025
+    second: pit_open_2
   - first:
-      213: -3137471164931465896
-    second: N3
+      213: -6650322679479620454
+    second: pit_open_3
   - first:
-      213: 2426668243384225578
-    second: W3
+      213: -6084981709145697684
+    second: pit_open_4
   - first:
-      213: -3719035615930033869
-    second: W4
+      213: 5418305684001416417
+    second: pit_door_5
   - first:
-      213: 2155693420846345789
-    second: E3
+      213: 8159465439494573629
+    second: pit_door_6
   - first:
-      213: 3321709784370216974
-    second: E4
+      213: -4047323320563214040
+    second: pit_door_7
   - first:
-      213: -6308720746733042159
-    second: W1
+      213: 7946753355531764677
+    second: pit_door_8
   - first:
-      213: 506186955673178809
-    second: W2
+      213: -5500059773271802225
+    second: pit_door_0
   - first:
-      213: -6923637615774005491
-    second: E1
+      213: 7550130448426388070
+    second: pit_door_2
   - first:
-      213: -2818314931348322762
-    second: E2
+      213: -1739359275824184708
+    second: pit_door_3
   - first:
-      213: 3802235627250492684
-    second: S3
-  - first:
-      213: -8654460358631133128
-    second: S4
-  - first:
-      213: 6853940728412894630
-    second: S1
-  - first:
-      213: -534596405697928826
-    second: S2
+      213: -8302094280227854284
+    second: pit_door_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -104,13 +95,13 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -161,11 +152,74 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: N6
+      name: pit_open_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba981a2d4994bbb46addeef2f8a5a870
+      internalID: -3620551394888683672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pit_open_10
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63b4e67ebc138cd44afd0bbe9040767f
+      internalID: 8061599201554206112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pit_open_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a02811c107587b4687b3ac4b4099867
+      internalID: -6939149537630574168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pit_open_6
       rect:
         serializedVersion: 2
         x: 48
-        y: 96
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -175,18 +229,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1fffd9e3e802d44f8a4b6395fa3be57
-      internalID: -6713291700187107041
+      spriteID: 394f98868f54aee4abbe4117e6e71ab8
+      internalID: 3333788310299525534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: N7
+      name: pit_open_7
       rect:
         serializedVersion: 2
         x: 64
-        y: 96
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -196,18 +250,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f05cd58765cef9841836b7ccb564a1a4
-      internalID: 5185641697152699428
+      spriteID: e16609a7871aa5c40aea2a55ec49ec65
+      internalID: 8838914415477260880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: N8
+      name: pit_open_8
       rect:
         serializedVersion: 2
         x: 80
-        y: 96
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -217,18 +271,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e05577ed7d5657478780bf4fec3c610
-      internalID: 7354257799214377801
+      spriteID: 680c2d7793c24c54c9a09792725fc58f
+      internalID: 6269490454374037970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: N9
+      name: pit_open_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 32
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -238,60 +292,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d928a0a9b5f9f9f45bf0a7036286523f
-      internalID: -6125641369053702342
+      spriteID: 1c088c9f480be0e409ddbb6ca258ff7d
+      internalID: -6681016452448916879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: N4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 046f0dfd1ddd09446b33f5fd672e95c2
-      internalID: 2210616080060440252
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: N5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a9cd24bb42fa894b8b6fd5d638ed29d
-      internalID: -6316022104807352841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: N1
+      name: pit_open_2
       rect:
         serializedVersion: 2
         x: 48
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -301,18 +313,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5ea3760ef05c4d4c8f889d869799525
-      internalID: -4441021596335243831
+      spriteID: 76a86c40bd99eb04f866829086805f81
+      internalID: -1165664970922140025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: N2
+      name: pit_open_3
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -322,122 +334,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b695dadcb566834387a716d8a96cd93
-      internalID: 761518864316419298
+      spriteID: 56264caa845888244a3535d96cefde51
+      internalID: -6650322679479620454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: N3
+      name: pit_open_4
       rect:
         serializedVersion: 2
         x: 80
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: edc491fb57ac4da45b31739de839f609
-      internalID: -3137471164931465896
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: W3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee8f9de66673e3740bee273cc5dc8e4c
-      internalID: 2426668243384225578
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: W4
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41031c46bfcb8654bb26e55a293eb80e
-      internalID: -3719035615930033869
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: E3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b1ef556b7dc926741ae7a17a66849939
-      internalID: 2155693420846345789
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: E4
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 641774274e1507b458557a07ea5b90b5
-      internalID: 3321709784370216974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: W1
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 32
         width: 16
         height: 16
@@ -448,18 +355,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e3849b397e0e8a4684ccc2933b6724b
-      internalID: -6308720746733042159
+      spriteID: 5cf65c41a48b5404590c7b8fab79eea8
+      internalID: -6084981709145697684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: W2
+      name: pit_door_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -469,18 +376,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64b1906dc2ceb02459d481def8c990f9
-      internalID: 506186955673178809
+      spriteID: 833f3022847f0d442a06bded3b90c46b
+      internalID: 5418305684001416417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: E1
+      name: pit_door_6
       rect:
         serializedVersion: 2
-        x: 96
-        y: 32
+        x: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -490,35 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b13340f49744e2498e98af47a329f51
-      internalID: -6923637615774005491
+      spriteID: e27a05146b1b74643b292bd24bc83b10
+      internalID: 8159465439494573629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: E2
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f7f7eb41f8697544b9a53a448d66560
-      internalID: -2818314931348322762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: S3
+      name: pit_door_7
       rect:
         serializedVersion: 2
         x: 64
@@ -532,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3635341554e687a4e9ea00a0fd8da4de
-      internalID: 3802235627250492684
+      spriteID: 1d17d56ba1a55c44fafb5e19de435cdf
+      internalID: -4047323320563214040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S4
+      name: pit_door_8
       rect:
         serializedVersion: 2
         x: 80
@@ -553,14 +439,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de60db2d62cda7f4f98d4d7d4e18152e
-      internalID: -8654460358631133128
+      spriteID: ea5fcc2959be55b4b842cff70494a199
+      internalID: 7946753355531764677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S1
+      name: pit_door_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53542f8258fb3a0499871d22d42937ae
+      internalID: -5500059773271802225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pit_door_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 827ecb4f28a239142ae28f27f79a725d
+      internalID: 7550130448426388070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pit_door_3
       rect:
         serializedVersion: 2
         x: 64
@@ -574,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9d26cf1563bc784782d6fea1f4c454d
-      internalID: 6853940728412894630
+      spriteID: d6e865dd26727ab46ba755855252587a
+      internalID: -1739359275824184708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S2
+      name: pit_door_4
       rect:
         serializedVersion: 2
         x: 80
@@ -595,8 +523,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05c18613d60c4224c95891172c82f616
-      internalID: -534596405697928826
+      spriteID: 1b6ce9e8036c80c4384af1ef0dd0e69c
+      internalID: -8302094280227854284
       vertices: []
       indices: 
       edges: []

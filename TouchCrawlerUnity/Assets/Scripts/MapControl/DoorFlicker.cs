@@ -7,7 +7,7 @@ public class DoorFlicker : MonoBehaviour
 {
     private Tilemap overlay;
     private bool on;
-    // Start is called before the first frame update
+    
     void Start()
     {
         on = false;
@@ -39,8 +39,9 @@ public class DoorFlicker : MonoBehaviour
 
     void Light()
     {
-            StartCoroutine(WaitLight());
-            StopCoroutine(WaitLight());
+        on = false; //here for relighting, stops Flicker
+        StartCoroutine(WaitLight());
+        StopCoroutine(WaitLight());
     }
 
     IEnumerator WaitLight()
