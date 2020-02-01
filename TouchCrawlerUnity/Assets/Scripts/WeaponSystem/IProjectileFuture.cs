@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.WeaponSystem;
+using UnityEngine;
 
 namespace Assets.Scripts.WeaponSystem
 {
@@ -17,6 +19,31 @@ namespace Assets.Scripts.WeaponSystem
             {
                 return isSet;
             }
+        }
+
+        public GameObject gameObject => GetFuture().gameObject;
+
+        public Vector2 Current => GetFuture().Current;
+
+        public Vector2 Source => GetFuture().Source;
+
+        public Weapon WeaponSrc => GetFuture().WeaponSrc;
+
+        public IWeaponTarget target => GetFuture().target;
+
+        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos) => GetFuture().Initialize(weapon, target, velocity, pos);
+
+        private IProjectile GetFuture()
+        {
+            if (!IsReady)
+            {
+                throw new FutureNotReady();
+            }
+            else
+            {
+                return future;
+            }
+
         }
 
         public void SetProjectile(IProjectile projectile)

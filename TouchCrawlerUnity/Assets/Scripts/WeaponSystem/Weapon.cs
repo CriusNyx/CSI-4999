@@ -135,14 +135,14 @@ namespace Assets.WeaponSystem
             return result.cost;
         }
 
-        public virtual bool ShouldDestroyProjectile(IProjectile projectile, RaycastHit2D raycastHit)
+        public virtual bool ShouldDestroyProjectile(IProjectile projectile, Collider2D collider)
         {
             var components = GetAllComponents();
 
             var result = PropegateMonad(
                 new ShouldDestroyProjectileResult(),
                 components,
-                (x, y) => x.ShouldDestroyProjectile(this, projectile, raycastHit, y));
+                (x, y) => x.ShouldDestroyProjectile(this, projectile, collider, y));
 
             return result.shouldDestroy;
         }
