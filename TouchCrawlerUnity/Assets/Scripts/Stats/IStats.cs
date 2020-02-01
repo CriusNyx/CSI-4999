@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static StatsController;
 
 public interface IStats
 {
     // Void methods defined in StatsController
+    
+    // Note: Still need to fix interface
 
-    /*void AddModifier(float stat, ModifierTypeEnum modType, StatModifierObject modifier);
 
-    void RemoveModifier(float stat, ModifierTypeEnum modType, StatModifierObject modifier);
+    //GetStat(Stat);
+    //SetStat(Stat, float);
+    //AddModifier(StatModifier);
+    //RemoveModifier(StatModifier);
 
-    void CalculateNewStats(float stat, ModifierTypeEnum modType, StatModifierObject modifier);*/
 }

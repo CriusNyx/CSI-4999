@@ -23,7 +23,7 @@ public class StatsController : MonoBehaviour, IStats
         AddAfterMultiply,
     }
 
-    #region Objects
+    #region Nested Classes
     // Stat Modifier Object
     public class StatModifier
     {
@@ -89,9 +89,11 @@ public class StatsController : MonoBehaviour, IStats
                 switch(modifier.Value.ModifierType)
                 {
                     case ModifierType.AddBeforeMultiply:
-                        return AddBeforeMultiply += modifier.Value.ModifierValue;
+                        AddBeforeMultiply += modifier.Value.ModifierValue;
+                        break;
                     case ModifierType.Multiply:
-                        return Multiply *= modifier.Value.ModifierValue;
+                        Multiply *= modifier.Value.ModifierValue;
+                        break;
                     case ModifierType.AddAfterMultiply:
                         return AddAfterMultiply += modifier.Value.ModifierValue;
                     default:
