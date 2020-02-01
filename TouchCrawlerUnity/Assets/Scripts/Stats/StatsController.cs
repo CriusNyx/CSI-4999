@@ -95,7 +95,8 @@ public class StatsController : MonoBehaviour, IStats
                         Multiply *= modifier.Value.ModifierValue;
                         break;
                     case ModifierType.AddAfterMultiply:
-                        return AddAfterMultiply += modifier.Value.ModifierValue;
+                        AddAfterMultiply += modifier.Value.ModifierValue;
+                        break;
                     default:
                         // May cause issues. Should break out of the loop. -Sam
                         break;
