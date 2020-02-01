@@ -1,11 +1,19 @@
-public class DummyDamage {
+using UnityEngine;
 
-    private ContactPoint contact { get; } //TODO: Set on projectile logic prior to destroying projectile
+public class Damage {
 
-    public DummyDamage DummyDamage(ContactPoint contact) {
+    public ContactPoint contact { get; private set;  } //TODO: Set on projectile logic prior to destroying projectile
+
+    public Damage(ContactPoint contact) {
         this.contact = contact;
-        return this;
+        //This is a constructor. It doesn't return itself.
+        //This is not Javascript. lol
     }
+}
 
-
+public class DummyDamage : Damage
+{
+    public DummyDamage(ContactPoint contact) : base(contact)
+    {
+    }
 }

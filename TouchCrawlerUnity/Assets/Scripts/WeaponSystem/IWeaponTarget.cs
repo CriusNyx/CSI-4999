@@ -8,8 +8,6 @@ namespace Assets.Scripts.WeaponSystem
     {
         GameObject gameObject { get; }
 
-        bool DoDamage(DummyDamage dd) {
-            
-        }
+        bool DoDamage(Damage damage);
     }
 }

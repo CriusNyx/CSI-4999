@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Util.Latches;
 using Assets.Scripts.WeaponSystem;
+using Assets.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class OnHitEffect : WeaponComponent
 
     public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
         if (ApplyDebuff(target)) {
-            SpawnAnimation(target.gameObject.location);
+            SpawnAnimation(target.gameObject.transform.position);
             result.applyEffects = true;
         }
         return result;
@@ -27,7 +28,7 @@ public class OnHitEffect : WeaponComponent
         throw new System.NotImplementedException();
     }
 
-    private void SpawnAnimation(Vector2 location) {
+    protected virtual void SpawnAnimation(Vector2 location) {
         throw new System.NotImplementedException();
     }
 }
