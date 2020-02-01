@@ -1,5 +1,6 @@
 using Assets.Scripts.Util.Latches;
 using Assets.Scripts.WeaponSystem;
+using Assets.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,13 +17,17 @@ public class EffectExplosion : EffectAOE
         List<IWeaponTarget> targets = GetTargetsInRadius(target.gameObject.transform.position, range);
         SpawnAnimation(new Vector2(target.gameObject.transform.position.x, target.gameObject.transform.position.y));
         foreach (IWeaponTarget tar in targets) {
-            tar.DoDamage(new DummyDamage()); //TODO: Modify when damage system implemented. 
+            throw new System.NotImplementedException();
+            //tar.DoDamage(new DummyDamage(null)); //TODO: Modify when damage system implemented. 
         }
-    
+
+
+        //Justin Fix
+        throw new System.NotImplementedException();
     }
 
     //TODO: Explosion Animations
-    public override void SpawnAnimation(Vector2 location) {
+    protected override void SpawnAnimation(Vector2 location) {
         throw new System.NotImplementedException();
     }
 }

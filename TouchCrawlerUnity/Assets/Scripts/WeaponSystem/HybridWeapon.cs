@@ -67,9 +67,9 @@ namespace Assets.Scripts.WeaponSystem
             return base.GetStats();
         }
 
-        public override bool ShouldDestroyProjectile(IProjectile projectile, RaycastHit2D raycastHit)
+        public override bool ShouldDestroyProjectile(IProjectile projectile, Collider2D collider)
         {
-            return base.ShouldDestroyProjectile(projectile, raycastHit);
+            return base.ShouldDestroyProjectile(projectile, collider);
         }
 
         private IEnumerable<Weapon> GetSubWeapons()

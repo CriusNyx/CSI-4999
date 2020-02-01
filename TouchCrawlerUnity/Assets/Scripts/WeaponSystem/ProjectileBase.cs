@@ -38,12 +38,15 @@ namespace Assets.Scripts.WeaponSystem
         void OnCollisionEnter2D(Collision2D col)
         {
             if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
-            {
-                if (target != null)
-                {
-                    this.WeaponSrc.ApplyOnHitEffects(target);
-                }
+            { 
                 Destroy(this.gameObject);
+            }
+
+            var colliderTarget = col.collider.GetComponent<IWeaponTarget>();
+
+            if(colliderTarget != null)
+            {
+                this.WeaponSrc.ApplyOnHitEffects(colliderTarget);
             }
         }
 

@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class EffectAOE : OnHitEffect
 { 
-    private List<IWeaponTarget> GetTargetsInRadius(Vector3 location, float radius) {
+    protected List<IWeaponTarget> GetTargetsInRadius(Vector3 location, float radius) {
         List<IWeaponTarget> targets = new List<IWeaponTarget>();
         Collider[] targetColliders = Physics.OverlapSphere(location, radius);
         
         foreach (Collider col in targetColliders) {
-            if (col.gameObject.GetComponent(IWeaponTarget) != null) {
-                targets.Add(col.gameObject.GetComponent(IWeaponTarget));
+            if (col.gameObject.GetComponent<IWeaponTarget>() != null) {
+                targets.Add(col.gameObject.GetComponent<IWeaponTarget>());
             }
         }
         return targets;
