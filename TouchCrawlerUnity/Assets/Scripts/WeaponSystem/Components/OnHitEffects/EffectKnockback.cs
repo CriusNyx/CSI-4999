@@ -10,4 +10,7 @@ public class EffectKnockback : OnHitEffect
     ** Moves target in opposite direction
     ** of bullet hit.
     */
+
+    
+
 }
