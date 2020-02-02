@@ -22,5 +22,7 @@ public class EventSystemEditor : Editor
                 GUILayout.Label(message);
             }
         }
+
+        Repaint();
     }
 }
