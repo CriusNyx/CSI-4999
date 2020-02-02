@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // StatsController is linked to the IStats interface
-public class StatsController : MonoBehaviour, IStats
+public class StatsController : MonoBehaviour
 {
     public enum StatType
     {
@@ -49,7 +49,7 @@ public class StatsController : MonoBehaviour, IStats
     }
 
     // Stat Object
-    public class Stat
+    public class Stat: IStats
     {
         public float BaseValue { get; set; }
 
