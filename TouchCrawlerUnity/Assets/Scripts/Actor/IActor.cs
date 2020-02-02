@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IActor : Assets.Scripts.Events.IEvent
+public interface IActor : Assets.Scripts.Events.IEventListener
 {
     int actorLevel {
         get;
