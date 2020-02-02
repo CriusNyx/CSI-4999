@@ -19,13 +19,13 @@ namespace Assets.Scripts.WeaponSystem.Components.Triggers
 
         public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
         {
-            IProjectileFuture[] futures = new IProjectileFuture[bulletCount].Fill(() => new IProjectileFuture());
+            ProjectileFuture[] futures = new ProjectileFuture[bulletCount].Fill(() => new ProjectileFuture());
             result.AddProjectile(futures);
             StartCoroutine(BurstRoutine(weapon, target, accuracyController, futures));
             return result;
         }
 
-        public IEnumerator BurstRoutine(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, IProjectileFuture[] futures)
+        public IEnumerator BurstRoutine(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, ProjectileFuture[] futures)
         {
             for (int i = 0; i < futures.Length; i++)
             {

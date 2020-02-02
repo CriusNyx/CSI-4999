@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.WeaponSystem
 {
-    public class IProjectileFuture : IProjectile
+    public class ProjectileFuture : IProjectile
     {
         bool isSet = false;
         IProjectile future;
