@@ -37,16 +37,14 @@ namespace Assets.Scripts.WeaponSystem
 
         void OnCollisionEnter2D(Collision2D col)
         {
+            Damage dmg = null;
             if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
             { 
                 Destroy(this.gameObject);
             }
-
-            var colliderTarget = col.collider.GetComponent<IWeaponTarget>();
-
-            if(colliderTarget != null)
-            {
-                this.WeaponSrc.ApplyOnHitEffects(colliderTarget);
+            if (col.otherCollider.gameObject.GetComponent<IWeaponTarget>() != null ) {
+                dmg = new Damage(col.contacts);
+                this.WeaponSrc.ApplyOnHitEffects(col.collider.GetComponent<IWeaponTarget>(), dmg);
             }
         }
 
