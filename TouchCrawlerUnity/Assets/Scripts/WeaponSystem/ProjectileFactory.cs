@@ -19,7 +19,10 @@ public class ProjectileFactory : WeaponComponent
         if(projectile != null)
         {
             Vector2 velocity = target.gameObject.transform.position - weapon.gameObject.transform.position;
-            projectile.Initialize(weapon, target, direction, position);
+            var owner = weapon.owner;
+            var actor = owner.actor;
+            var targetType = actor.AttackWeaponTargetType;
+            projectile.Initialize(weapon, target, direction, position, weapon.owner.actor.AttackWeaponTargetType);
             result.Add(projectile);
         }
 

@@ -13,7 +13,11 @@ namespace Assets.Scripts.WeaponSystem
         Weapon WeaponSrc { get; }
         IWeaponTarget target { get; }
 
-        void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos);
+        bool IgnoreOtherProjectiles { get; }
+
+        Weapon.WeaponTargetType attackTargetType { get; }
+
+        void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos, Weapon.WeaponTargetType attackTargetType);
 
     }
 }

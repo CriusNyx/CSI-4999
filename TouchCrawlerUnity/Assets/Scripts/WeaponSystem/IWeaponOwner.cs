@@ -7,5 +7,6 @@ namespace Assets.Scripts.WeaponSystem
     public interface IWeaponOwner
     {
         GameObject gameObject { get; }
+        IActor actor { get; }
     }
 }
