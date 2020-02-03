@@ -15,7 +15,32 @@ namespace Assets.Scripts.WeaponSystem.Components.AccuracyControllers
 
         public static (Vector3 position, Quaternion rotation, Vector3 direction) GetDefaultSpawnPosition(Weapon weapon, IWeaponTarget target, int projectileNumber)
         {
-            return (default, default, Vector3.right);
+            Vector3 position;
+            Quaternion rotation;
+            Vector3 direction;
+
+            try
+            {
+                position = weapon.transform.position;
+            }
+            catch
+            {
+                position = default;
+            }
+
+            try
+            {
+                direction = target.gameObject.transform.position - position;
+                direction = direction.normalized;
+                rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(90f, -90f, 0f);
+            }
+            catch
+            {
+                direction = default;
+                rotation = default;
+            }
+
+            return (position, rotation, direction);
         }
     }
 }

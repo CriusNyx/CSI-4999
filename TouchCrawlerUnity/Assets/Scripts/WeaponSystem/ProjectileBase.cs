@@ -11,7 +11,13 @@ namespace Assets.Scripts.WeaponSystem
     [RequireComponent(typeof(Rigidbody2D))]
     class ProjectileBase : MonoBehaviour, IProjectile
     {
-        public Vector2 Current { get; private set; }
+        public Vector2 Current
+        {
+            get
+            {
+                return transform.position;
+            }
+        }
 
         public Vector2 Source { get; private set; }
 
@@ -21,38 +27,95 @@ namespace Assets.Scripts.WeaponSystem
 
         public Vector2 velocity { get; private set; }
 
-        public float acceleration { get; private set; }
+        public float acceleration = 0f;
+        public float baseSpeed = 10f;
 
-        GameObject IProjectile.gameObject => this.gameObject;
+        public Vector2 AccelerationVector { get; private set; }
 
-        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos)
+        public bool IgnoreOtherProjectiles => ignoreOtherProjectiles;
+
+        public bool ignoreOtherProjectiles = true;
+
+        public float lifetime = 1f;
+        private float destroyTime = -1f;
+
+        public float maxTravelDistance = -1f;
+
+
+        public Weapon.WeaponTargetType attackTargetType { get; private set; }
+
+        //GameObject IProjectile.gameObject => this.gameObject;
+
+        private void Awake()
         {
-            this.WeaponSrc = weapon;
-            this.target = target;
-            this.velocity = velocity;
-            this.Source = pos;
-
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
+            this.gameObject.layer = LayerMask.NameToLayer("Projectile");
+            if (lifetime >= 0f)
+            {
+                destroyTime = Time.time + lifetime;
+            }
         }
 
-        void OnCollisionEnter2D(Collision2D col)
+        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos, Weapon.WeaponTargetType attackTargetType)
         {
-            if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
-            { 
-                Destroy(this.gameObject);
-            }
+            direction = direction.normalized;
 
-            var colliderTarget = col.collider.GetComponent<IWeaponTarget>();
+            this.WeaponSrc = weapon;
+            this.target = target;
+            this.velocity = direction * baseSpeed;
+            this.AccelerationVector = direction * acceleration;
+            this.Source = pos;
+            this.attackTargetType = attackTargetType;
 
-            if(colliderTarget != null)
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = direction;
+        }
+
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            var colliderTarget = collider.GetComponent<IWeaponTarget>();
+            var otherProjectile = collider.GetComponent<IProjectile>();
+
+            if (colliderTarget != null)
             {
-                this.WeaponSrc.ApplyOnHitEffects(colliderTarget);
+                if (colliderTarget.ValidateTarget(attackTargetType))
+                {
+                    if (this.WeaponSrc.ShouldDestroyProjectile(this, collider))
+                    {
+                        Destroy(this.gameObject);
+                    }
+
+                    this.WeaponSrc.ApplyOnHitEffects(colliderTarget);
+                }
+            }
+            else if (IgnoreOtherProjectiles && otherProjectile != null)
+            {
+                //Do Nothing. Ignore the collision
+            }
+            else
+            {
+                if (this.WeaponSrc.ShouldDestroyProjectile(this, collider))
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
 
         void FixedUpdate()
         {
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x + acceleration, velocity.y + acceleration);
+            velocity = velocity + AccelerationVector * Time.fixedDeltaTime;
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
+
+            if (destroyTime != -1f && Time.time >= destroyTime)
+            {
+                Destroy(gameObject);
+            }
+
+            if (maxTravelDistance != -1f)
+            {
+                if (Vector2.Distance(Source, Current) > maxTravelDistance)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 }

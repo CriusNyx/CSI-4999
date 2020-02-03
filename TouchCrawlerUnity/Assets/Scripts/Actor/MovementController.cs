@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
 {
     Rigidbody2D body;
-    BoxCollider2D collider;
+    new BoxCollider2D collider;
     Vector2 destination;
     Vector2 velocity;
     public Vector2 maxVelocity;
@@ -59,9 +60,7 @@ public class MovementController : MonoBehaviour
 
     private bool IsAtDestination()
     {
-        bool isAtX = (Mathf.Round(body.position.x * 5) / 5.0) == (Mathf.Round(destination.x * 5) / 5.0);
-        bool isAtY = (Mathf.Round(body.position.y * 5) / 5.0) == (Mathf.Round(destination.y * 5) / 5.0);
-        return isAtX && isAtY;
+        return Vector2.Distance(body.position, destination) < 0.1f;
     }
 
 }
