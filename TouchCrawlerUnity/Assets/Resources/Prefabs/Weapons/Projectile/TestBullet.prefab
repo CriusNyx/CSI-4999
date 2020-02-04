@@ -133,5 +133,5 @@ MonoBehaviour:
   acceleration: 0
   baseSpeed: 30
   ignoreOtherProjectiles: 1
-  lifetime: -1
-  maxTravelDistance: 3
+  lifetime: 10
+  maxTravelDistance: -1
