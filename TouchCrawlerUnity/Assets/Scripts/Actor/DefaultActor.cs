@@ -6,6 +6,7 @@ using Assets.WeaponSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(MovementController))]
+[RequireComponent(typeof(StatsController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }

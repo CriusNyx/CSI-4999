@@ -28,17 +28,24 @@ public class StatsController : MonoBehaviour
     public class StatModifier
     {
         // Need to relate ModType and ModValue to the ModifierTypeEnum somehow -Sam
-        public ModifierKey ModifierKey { get; set; }
-        public float ModifierValue { get; set; }
-        public ModifierType ModifierType { get; set; }
+        public string ModifierName { get; private set; }
+        public ModifierKey ModifierKey { get; private set; }
+        public float ModifierValue { get; private set; }
+        public ModifierType ModifierType { get; private set; }
 
-        public StatModifier(ModifierKey modKey, float modValue, ModifierType modType)
+        public StatModifier(string name, ModifierKey modKey, float modValue, ModifierType modType)
         {
+            this.ModifierName = name;
             // Component's Unique ID
             this.ModifierKey = modKey;
             // Component's Added Modifier Value (number)
             this.ModifierValue = modValue;
             this.ModifierType = modType;
+        }
+
+        public override string ToString()
+        {
+            return "Name = " + ModifierName + "\n  Type = " + ModifierType.ToString() + "\n  Value = " + ModifierValue.ToString();
         }
     }
 
@@ -55,6 +62,7 @@ public class StatsController : MonoBehaviour
 
         //String = ModifierTypeEnum value, StatModifier is the object
         Dictionary<ModifierKey, StatModifier> ModifierDictionary = new Dictionary<ModifierKey, StatModifier>();
+        public IReadOnlyDictionary<ModifierKey, StatModifier> ModifierMap => ModifierDictionary;
 
         public Stat(float baseValue)
         {
