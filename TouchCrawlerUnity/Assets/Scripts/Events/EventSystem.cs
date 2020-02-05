@@ -23,6 +23,7 @@ namespace Assets.Scripts.Events
             levelTransition,
             input,
             gameOver,
+            item,
         }
 
         Dictionary<(EventChannel, EventSubChannel), List<IEventListener>> channels = new Dictionary<(EventChannel, EventSubChannel), List<IEventListener>>();

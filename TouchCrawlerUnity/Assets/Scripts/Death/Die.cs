@@ -49,5 +49,16 @@ namespace Assets.Scripts.Death
         }
     }
 
+    class DropItem : OnDieEffect
+    {
+        public override void OnDie(IActor actor) { this.actor = actor; }
+
+        public DropItem()
+        {
+            IEvent e = new DropEvent(actor);
+            Broadcast(EventChannel.gameState, EventSubChannel.item, e);
+        }
+    }
+
 
 }
