@@ -18,9 +18,9 @@ namespace Assets.Scripts.Death
 
     class PassEventsOnDie : OnDieEffect
     {
-        public IEvent eventOnDie;
-        public EventChannel channel;
-        public EventSubChannel subChannel;
+        public IEvent eventOnDie = new DeathEvent(null);
+        public EventChannel channel = EventChannel.gameState;
+        public EventSubChannel subChannel = EventSubChannel.gameOver;
         public PassEventsOnDie()
         {
             Broadcast(channel, subChannel, eventOnDie);
