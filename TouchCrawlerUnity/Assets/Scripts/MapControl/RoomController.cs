@@ -11,11 +11,11 @@ public class RoomController : MonoBehaviour
     void Start()
     {
         cleared = false;
-        doorList[0] = this.transform.GetChild(0).gameObject; //west     0
-        doorList[1] = this.transform.GetChild(1).gameObject; //north    1
-        doorList[2] = this.transform.GetChild(2).gameObject; //east     2
-        doorList[3] = this.transform.GetChild(3).gameObject; //south    3
-        doorList[4] = this.transform.GetChild(4).gameObject; //down     4
+        for (int i = 0; i < 5; i++)
+        {
+            doorList[i] = this.transform.GetChild(i).gameObject;
+            //west = 0, north = 1, east = 2, south = 3, down = 4
+        }
     }
 
     void CheckNeighbors()
@@ -25,11 +25,11 @@ public class RoomController : MonoBehaviour
 
 
     void ToggleDoorOpen(bool set)
-    {
-        //true = open
+    {   
         if (set)
         {
-            foreach(GameObject door in doorList)
+            //true = open
+            foreach (GameObject door in doorList)
             {            
                 //test if it doesn't like inactive doors    
                 door.transform.GetChild(2).gameObject.SetActive(false); //turn door OFF
@@ -46,7 +46,6 @@ public class RoomController : MonoBehaviour
                 //check if lit, record, relight after?
             }
         }
-        //false = close
     }
 
     void ToggleDoorLit(bool set, int id)
@@ -61,7 +60,5 @@ public class RoomController : MonoBehaviour
         {
             doorList[id].transform.GetChild(1).gameObject.SetActive(false);
         }
-
     }
-
 }
