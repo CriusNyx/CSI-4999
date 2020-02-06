@@ -25,8 +25,7 @@ public class RoomController : MonoBehaviour
 
 
     void ToggleDoorOpen(bool set)
-    {
-        
+    {   
         if (set)
         {
             //true = open
@@ -40,7 +39,6 @@ public class RoomController : MonoBehaviour
             }
         }else
         {
-            //false = close
             foreach (GameObject door in doorList)
             {
                 door.transform.GetChild(2).gameObject.SetActive(true); //turn door ON
@@ -48,7 +46,6 @@ public class RoomController : MonoBehaviour
                 //check if lit, record, relight after?
             }
         }
-        
     }
 
     void ToggleDoorLit(bool set, int id)
@@ -63,7 +60,5 @@ public class RoomController : MonoBehaviour
         {
             doorList[id].transform.GetChild(1).gameObject.SetActive(false);
         }
-
     }
-
 }

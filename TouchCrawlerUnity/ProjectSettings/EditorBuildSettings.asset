@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: 71d4b3f6a0e4d7348a8782ba3985ea48
+  - enabled: 1
+    path: Assets/SimpleMainMenu/Scenes/MainMenu.unity
+    guid: 601c5a736e5792548a5aa8ffbd274f64
+  - enabled: 1
+    path: Assets/Scenes/DemoForSprint2.unity
+    guid: e21999f26b14bc349b041a56fd3808dc
   m_configObjects: {}

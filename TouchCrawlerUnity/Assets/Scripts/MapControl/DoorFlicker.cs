@@ -26,11 +26,15 @@ public class DoorFlicker : MonoBehaviour
     }
 
     void LightOn()
-    {
-        on = false; //here for relighting, stops Flicker
-        StartCoroutine(WaitLight());
-        StopCoroutine(WaitLight());
+        Light();
     }
+
+    void Flicker()
+    {
+        StartCoroutine(WaitFlicker());
+        StopCoroutine(WaitFlicker());
+    }
+
 
     //pause .01 seconds, increase graphic alpha by 5%
     //loops until alpha is 100% and the door is "lit"
@@ -38,6 +42,7 @@ public class DoorFlicker : MonoBehaviour
     IEnumerator WaitLight()
     {
         yield return new WaitForSeconds(0.01f);
+        Debug.Log("test WaitLight()");
         var temp = overlay.color;
         temp.a += .05f;
         overlay.color = temp;
@@ -51,7 +56,6 @@ public class DoorFlicker : MonoBehaviour
             Flicker();
         }
     }
-
 
 
     void Flicker()
@@ -75,5 +79,4 @@ public class DoorFlicker : MonoBehaviour
             Flicker();
         }
     }
-
 }
