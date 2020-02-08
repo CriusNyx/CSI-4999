@@ -25,16 +25,10 @@ public class DoorFlicker : MonoBehaviour
         overlay.color = temp;
     }
 
-    void LightOn()
-        Light();
+    void LightOn() {
+        StartCoroutine(WaitLight());
+        StopCoroutine(WaitLight());
     }
-
-    void Flicker()
-    {
-        StartCoroutine(WaitFlicker());
-        StopCoroutine(WaitFlicker());
-    }
-
 
     //pause .01 seconds, increase graphic alpha by 5%
     //loops until alpha is 100% and the door is "lit"

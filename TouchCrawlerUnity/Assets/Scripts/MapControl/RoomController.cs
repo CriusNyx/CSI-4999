@@ -5,9 +5,10 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
     private GameObject[] doorList = new GameObject[5];
+    public GameObject[] neighbors = new GameObject[4];
     public bool cleared;
+    public Vector3 gridPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
         cleared = false;
@@ -16,7 +17,16 @@ public class RoomController : MonoBehaviour
             doorList[i] = this.transform.GetChild(i).gameObject;
             //west = 0, north = 1, east = 2, south = 3, down = 4
         }
+
+        setPosition();
     }
+
+    public void setPosition()
+    {
+        this.transform.position = new Vector3((gridPosition.x * 16)
+            , (gridPosition.y * 12), 0);
+    }
+
 
     void CheckNeighbors()
     {
