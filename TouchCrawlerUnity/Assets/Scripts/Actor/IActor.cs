@@ -29,6 +29,8 @@ public interface IActor : IEventListener, IWeaponTarget
 
     bool IsPlayer();
 
+    Vector2 GetLocation();
+
     void UseItem(object item);
 
     void PickUpItem(object item);

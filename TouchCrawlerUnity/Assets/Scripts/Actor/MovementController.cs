@@ -25,6 +25,7 @@ public class MovementController : MonoBehaviour
         if (IsAtDestination())
         {
             Stop();
+
         }
 
         var delta = (destination - body.position);
@@ -46,10 +47,14 @@ public class MovementController : MonoBehaviour
         this.destination = nextLocation;
     }
 
+    public void Move(IActor target)
+    {
+        destination = target.GetLocation();
+    }
+
     void Stop()
     {
-        destination = body.position;
-      
+        destination = body.position;  
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -58,9 +63,14 @@ public class MovementController : MonoBehaviour
         Stop();
     }
 
-    private bool IsAtDestination()
+    public bool IsAtDestination()
     {
         return Vector2.Distance(body.position, destination) < 0.1f;
+    }
+
+    public Vector2 GetLocation()
+    {
+        return body.position;
     }
 
 }

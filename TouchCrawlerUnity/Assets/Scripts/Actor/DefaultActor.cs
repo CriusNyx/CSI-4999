@@ -51,6 +51,10 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
     }
 
+    public Vector2 GetLocation()
+    {
+        return movementController.GetLocation();
+    }
     public void PickUpItem(object item)
     {
         throw new System.NotImplementedException();
