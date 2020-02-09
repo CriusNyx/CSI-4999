@@ -26,7 +26,8 @@ public class DoorFlicker : MonoBehaviour
     }
 
     void LightOn()
-        Light();
+    { 
+        Flicker();
     }
 
     void Flicker()
@@ -55,13 +56,6 @@ public class DoorFlicker : MonoBehaviour
             on = true;
             Flicker();
         }
-    }
-
-
-    void Flicker()
-    {
-        StartCoroutine(WaitFlicker());
-        StopCoroutine(WaitFlicker());
     }
 
     //continues forever, unless the door light goes off
