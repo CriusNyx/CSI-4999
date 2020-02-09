@@ -8,6 +8,7 @@ using UnityEditor;
 using System.Reflection;
 using static ActorStatModifier;
 using Assets.Scripts.Util;
+using Assets.Editor;
 
 [CustomEditor(typeof(StatModifierSet))]
 public class StatDefinitionSetEditor : Editor
@@ -20,43 +21,58 @@ public class StatDefinitionSetEditor : Editor
 
         StatModifierDefinition[] arr = typeof(StatModifierSet).GetField("modifiers", (BindingFlags)(-1)).GetValue(statModifier) as StatModifierDefinition[];
 
-        List<StatModifierDefinition> list = new List<StatModifierDefinition>(arr);
+        //List<StatModifierDefinition> list = new List<StatModifierDefinition>(arr);
 
-        StatModifierDefinition remove = null;
+        //StatModifierDefinition remove = null;
 
-        foreach(var def in list)
-        {
-            GUILayout.Label("Mod");
-            GUILayout.BeginHorizontal();
+        //foreach(var def in list)
+        //{
+        //    GUILayout.Label("Mod");
+        //    GUILayout.BeginHorizontal();
+        //    {
+        //        def.name = EditorGUILayout.TextField("\tName", def.name);
+        //        if(GUILayout.Button("-", GUILayout.Width(25)))
+        //        {
+        //            remove = def;
+        //        }
+        //    }
+        //    GUILayout.EndHorizontal();
+
+
+        //    def.statToModify = (StatsController.StatType)EditorGUILayout.EnumPopup("\tStat To Modify", def.statToModify);
+
+        //    def.modifierType = (StatsController.ModifierType)EditorGUILayout.EnumPopup("\tModifier Type", def.modifierType);
+
+        //    def.value = EditorGUILayout.FloatField("\tModifier Value", def.value);
+        //}
+
+        //GUILayout.Space(50);
+
+        //if(remove != null)
+        //{
+        //    list.Remove(remove);
+        //}
+
+        //if(GUILayout.Button("Add Mod"))
+        //{
+        //    list.Add(new StatModifierDefinition());
+        //}
+
+        arr = ResizeableArrayEditor.DrawEditor(
+            arr,
+            (def) =>
             {
-                def.name = EditorGUILayout.TextField("\tName", def.name);
-                if(GUILayout.Button("-", GUILayout.Width(25)))
-                {
-                    remove = def;
-                }
-            }
-            GUILayout.EndHorizontal();
+                def.statToModify = (StatsController.StatType)EditorGUILayout.EnumPopup("\tStat To Modify", def.statToModify);
 
+                def.modifierType = (StatsController.ModifierType)EditorGUILayout.EnumPopup("\tModifier Type", def.modifierType);
 
-            def.statToModify = (StatsController.StatType)EditorGUILayout.EnumPopup("\tStat To Modify", def.statToModify);
+                def.value = EditorGUILayout.FloatField("\tModifier Value", def.value);
 
-            def.modifierType = (StatsController.ModifierType)EditorGUILayout.EnumPopup("\tModifier Type", def.modifierType);
+                return def;
+            },
+            "Add Mod",
+            () => new StatModifierDefinition());
 
-            def.value = EditorGUILayout.FloatField("\tModifier Value", def.value);
-        }
-
-        GUILayout.Space(50);
-
-        if(remove != null)
-        {
-            list.Remove(remove);
-        }
-
-        if(GUILayout.Button("Add Mod"))
-        {
-            list.Add(new StatModifierDefinition());
-        }
-
-        typeof(StatModifierSet).GetField("modifiers", (BindingFlags)(-1)).SetValue(statModifier, list.ToArray());
+        typeof(StatModifierSet).GetField("modifiers", (BindingFlags)(-1)).SetValue(statModifier, arr);
     }
 }

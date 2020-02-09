@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(WeaponComponent), true)]
-public class ComponentEditor : Editor
+public class WeaponComponentEditor : Editor
 {
     public override void OnInspectorGUI()
     {
