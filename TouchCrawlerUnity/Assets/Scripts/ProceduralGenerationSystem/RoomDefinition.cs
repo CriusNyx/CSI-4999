@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomData : MonoBehaviour
+public class RoomDefinition : MonoBehaviour
 {
     public bool isSpawnRoom = false;
     public bool isBossRoom = false;

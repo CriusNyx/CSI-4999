@@ -54,7 +54,7 @@ public class LevelDefinitionEditor : Editor
 
                 if (x != null)
                 {
-                    var roomData = x.GetComponent<RoomData>();
+                    var roomData = x.GetComponent<RoomDefinition>();
                     if (roomData == null)
                     {
                         GUILayout.BeginHorizontal();
@@ -62,7 +62,7 @@ public class LevelDefinitionEditor : Editor
                             GUILayout.Label("<color=red>Warning:</color> Room is missing definition");
                             if (GUILayout.Button("Fix", GUILayout.Width(70)))
                             {
-                                x.AddComponent<RoomData>();
+                                x.AddComponent<RoomDefinition>();
                             }
                         }
                         GUILayout.EndHorizontal();
