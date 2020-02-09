@@ -11,6 +11,11 @@ namespace Assets.Scripts.WeaponSystem
 
         IActor actor { get; }
 
+        /// <summary>
+        /// Returns true if the damage object is accepted
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <returns></returns>
         bool DoDamage(Damage damage);
     }
 

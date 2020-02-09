@@ -36,5 +36,21 @@ namespace Assets.Scripts.Util
 
             return array;
         }
+
+        public static T[] Push<T>(this T[] arr)
+        {
+            T[] output = new T[arr.Length + 1];
+            Array.Copy(arr, 0, output, 0, arr.Length);
+            output[arr.Length] = default;
+            return output;
+        }
+
+        public static T[] Remove<T>(this T[] arr, int indexToRemove)
+        {
+            T[] output = new T[arr.Length - 1];
+            Array.Copy(arr, 0, output, 0, indexToRemove);
+            Array.Copy(arr, indexToRemove + 1, output, indexToRemove, int.MaxValue);
+            return output;
+        }
     }
 }
