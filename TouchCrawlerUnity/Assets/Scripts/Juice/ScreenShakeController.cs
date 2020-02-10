@@ -48,20 +48,18 @@ public class ScreenShakeController : MonoBehaviour
                 // OffsetX = maxOffset * trauma * RandomFloatFromNegOneToOne
                 // OffsetY = maxOffset * trauma * RandomFloatFromNegOneToOne
 
-                float offsetXYZ = Random.Range(-1f, 1f) * trauma;
+                float offsetXY = Random.Range(-1f, 1f) * trauma;
                 float cameraShake = Mathf.Pow(trauma, 2);
                 
                 // Note: The recurring number 25 is the "frequency" of the Perlin Noise
                 // Many things can be turned into component variables, but I left it out for simplicity's sake -Sam
                 transform.localPosition = new Vector3(
-                    (Mathf.PerlinNoise(offsetXYZ, Time.time * 25) * 2 - 1),
-                    (Mathf.PerlinNoise(offsetXYZ + 1, Time.time * 25) * 2 - 1),
-                    (Mathf.PerlinNoise(offsetXYZ + 2, Time.time * 25) * 2 - 1)) * cameraShake;
+                    (Mathf.PerlinNoise(offsetXY, Time.time * 25) * 2 - 1),
+                    (Mathf.PerlinNoise(offsetXY + 1, Time.time * 25) * 2 - 1), 0) * cameraShake;
 
                 transform.localRotation = Quaternion.Euler(new Vector3(
-                    (Mathf.PerlinNoise(offsetXYZ + 3, Time.time * 25) * 2 - 1),
-                    (Mathf.PerlinNoise(offsetXYZ + 4, Time.time * 25) * 2 - 1),
-                    (Mathf.PerlinNoise(offsetXYZ + 5, Time.time * 25) * 2 - 1)) * cameraShake);
+                    (Mathf.PerlinNoise(offsetXY + 3, Time.time * 25) * 2 - 1),
+                    (Mathf.PerlinNoise(offsetXY + 4, Time.time * 25) * 2 - 1), 0) * cameraShake);
 
                 elapsed += Time.deltaTime;
                 
