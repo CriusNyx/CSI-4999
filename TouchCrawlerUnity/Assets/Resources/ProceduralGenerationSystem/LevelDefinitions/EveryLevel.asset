@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86be77f8fa4a0bc43bac578aed484fae, type: 3}
-  m_Name: SpawnRoom
+  m_Name: EveryLevel
   m_EditorClassIdentifier: 
   definitionsToInherrit: []
   roomsToInstantiate: []

@@ -15,12 +15,18 @@ public class WeaponComponentEditor : Editor
         WeaponComponent component = target as WeaponComponent;
 
         Weapon weapon = component.GetComponent<Weapon>();
-        if(weapon == null)
+        CheckErrorForMissingWeapon(weapon);
+
+        Repaint();
+    }
+
+    private static void CheckErrorForMissingWeapon(Weapon weapon)
+    {
+        if (weapon == null)
         {
             GUIStyle style = "label";
             style.richText = true;
             GUILayout.Label("<color=red>Warning:</color> <color=black>There is no weapon attached to this component.</color>");
         }
-        Repaint();
     }
 }

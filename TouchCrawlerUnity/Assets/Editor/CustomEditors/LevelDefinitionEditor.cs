@@ -10,18 +10,25 @@ public class LevelDefinitionEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        
+
         GUILayout.Label(target.name, "BoldLabel");
 
-        GUILayout.Label("Level Definitions", "BoldLabel");
-
         LevelDefinition levelDefinition = target as LevelDefinition;
-        levelDefinition.definitionsToInherrit = ResizeableArrayEditor.DrawEditor(
-            levelDefinition.definitionsToInherrit,
-            (x) =>
-            {
-                return EditorGUILayout.ObjectField("", x, typeof(LevelDefinition), true) as LevelDefinition;
-            },
-            "Add Inherrited Definition");
+
+        Undo.RecordObject(levelDefinition, "Edited Level Definition \"" + levelDefinition.name + "\"");
+
+
+        GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition."), "BoldLabel");
+
+        levelDefinition.definitionsToInherrit =
+            Assets.Editor.EditorGUIUtility.DrawEditor(
+                levelDefinition.definitionsToInherrit,
+                (x) =>
+                {
+                    return EditorGUILayout.ObjectField("", x, typeof(LevelDefinition), true) as LevelDefinition;
+                },
+                "Add Inherrited Definition");
 
 
 
@@ -45,8 +52,8 @@ public class LevelDefinitionEditor : Editor
 
 
 
-        GUILayout.Label("Rooms", "BoldLabel");
-        levelDefinition.roomsToInstantiate = ResizeableArrayEditor.DrawEditor(
+        GUILayout.Label(new GUIContent("Room Prefabs", "A set of rooms that can spawn on this level."), "BoldLabel");
+        levelDefinition.roomsToInstantiate = Assets.Editor.EditorGUIUtility.DrawEditor(
             levelDefinition.roomsToInstantiate,
             (x) =>
             {
@@ -72,7 +79,7 @@ public class LevelDefinitionEditor : Editor
                         Editor editor = Editor.CreateEditor(roomData);
                         editor.OnInspectorGUI();
                     }
-                    if(x.transform.position != Vector3.zero | x.transform.rotation != Quaternion.identity | x.transform.localScale != Vector3.one)
+                    if (x.transform.position != Vector3.zero | x.transform.rotation != Quaternion.identity | x.transform.localScale != Vector3.one)
                     {
                         GUILayout.BeginHorizontal();
                         {
@@ -85,7 +92,7 @@ public class LevelDefinitionEditor : Editor
                             }
                         }
                         GUILayout.EndHorizontal();
-                    } 
+                    }
                 }
 
                 return x;

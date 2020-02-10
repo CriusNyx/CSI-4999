@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86be77f8fa4a0bc43bac578aed484fae, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
-  definitionsToInherrit: []
+  definitionsToInherrit:
+  - {fileID: 11400000, guid: faaa362227b494b448e72164d268ecb3, type: 2}
   roomsToInstantiate: []
