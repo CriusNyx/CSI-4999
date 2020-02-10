@@ -6,6 +6,7 @@ public class RoomController : MonoBehaviour
 {
     private GameObject[] doorList = new GameObject[5];
     public GameObject[] neighbors = new GameObject[4];
+    public int neighborCount;
     public bool cleared;
     public Vector3 gridPosition;
 
