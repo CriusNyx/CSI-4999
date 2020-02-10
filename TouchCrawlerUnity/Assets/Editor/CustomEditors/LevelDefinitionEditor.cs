@@ -19,7 +19,7 @@ public class LevelDefinitionEditor : Editor
         Undo.RecordObject(levelDefinition, "Edited Level Definition \"" + levelDefinition.name + "\"");
 
 
-        GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition."), "BoldLabel");
+        GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition. It behaives a little like css."), "BoldLabel");
 
         levelDefinition.definitionsToInherrit =
             Assets.Editor.EditorGUIUtility.DrawArrayEditor(
