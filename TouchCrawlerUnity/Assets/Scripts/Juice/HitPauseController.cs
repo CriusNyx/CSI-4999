@@ -4,35 +4,29 @@ using UnityEngine;
 
 public class HitPauseController : MonoBehaviour
 {
-    [Range(0f,1.5f)]
+    [Range(0f,3f)]
     public float duration = 1f;
     float pendingFreezeDuration = 0f;
     bool isFrozen = false;
 
     void Update()
     {
-        if (pendingFreezeDuration < 0 && !isFrozen)
+        if (Input.GetKey(KeyCode.R))
         {
             StartCoroutine(DoFreeze());
         }
     }
 
-    public void Freeze()
-    {
-        pendingFreezeDuration = duration;
-    }
-
     IEnumerator DoFreeze()
     {
-        isFrozen = true;
-        var original = Time.timeScale;
         Time.timeScale = 0f;
+        float pauseEndTime = Time.realtimeSinceStartup + duration;
 
-        yield return new WaitForSecondsRealtime(duration);
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
 
-        Time.timeScale = original;
-        pendingFreezeDuration = 0;
-        isFrozen = false;
-
+        Time.timeScale = 1;
     }
 }
