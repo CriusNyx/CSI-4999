@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class ProbabilityDistributionFunction : IList<float>
     private List<float> pdf;
     private float[] cdf;
 
-    private float Total
+    public float Total
     {
         get
         {
@@ -118,5 +119,16 @@ public class ProbabilityDistributionFunction : IList<float>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return ((IList<float>)pdf).GetEnumerator();
+    }
+
+    public int Find(float targetValue)
+    {
+        float[] cdf = GetCDF();
+        int index = Array.BinarySearch(cdf, targetValue);
+        if(index < 0)
+        {
+            index = ~index; 
+        }
+        return index;
     }
 }

@@ -82,4 +82,10 @@ public class WeightedRandomSelector<T> : IList<T>
     }
 
     IEnumerator IEnumerable.GetEnumerator() => elements.GetEnumerator();
+
+    public T Select(float randomValue)
+    {
+        randomValue *= pdf.Total;
+        return elements[pdf.Find(randomValue)];
+    }
 }
