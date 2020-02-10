@@ -14,7 +14,7 @@ public class ScreenShakeController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.T))
         {
             StartCoroutine(Shake(shakeMagnitude, shakeTime));
         }
