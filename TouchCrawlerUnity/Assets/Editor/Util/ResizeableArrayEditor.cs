@@ -18,7 +18,7 @@ namespace Assets.Editor
         /// <param name="elementEditor"></param>
         /// <param name="addElementButtonName"></param>
         /// <returns></returns>
-        public static T[] DrawEditor<T>(T[] arr, Func<T, T> elementEditor, string addElementButtonName) => DrawEditor<T>(arr, elementEditor, addElementButtonName, () => default(T));
+        public static T[] DrawArrayEditor<T>(T[] arr, Func<T, T> elementEditor, string addElementButtonName) => DrawArrayEditor<T>(arr, elementEditor, addElementButtonName, () => default(T));
 
         /// <summary>
         /// Draw a custom editor for an array that can add and remove elements dynamically
@@ -29,7 +29,7 @@ namespace Assets.Editor
         /// <param name="addElementButtonName"></param>
         /// <param name="constructor"></param>
         /// <returns></returns>
-        public static T[] DrawEditor<T>(T[] arr, Func<T, T> elementEditor, string addElementButtonName, Func<T> constructor)
+        public static T[] DrawArrayEditor<T>(T[] arr, Func<T, T> elementEditor, string addElementButtonName, Func<T> constructor)
         {
             List<T> list = new List<T>(arr);
             int elementToRemove = -1;

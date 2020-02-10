@@ -22,7 +22,7 @@ public class LevelDefinitionEditor : Editor
         GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition."), "BoldLabel");
 
         levelDefinition.definitionsToInherrit =
-            Assets.Editor.EditorGUIUtility.DrawEditor(
+            Assets.Editor.EditorGUIUtility.DrawArrayEditor(
                 levelDefinition.definitionsToInherrit,
                 (x) =>
                 {
@@ -53,7 +53,7 @@ public class LevelDefinitionEditor : Editor
 
 
         GUILayout.Label(new GUIContent("Room Prefabs", "A set of rooms that can spawn on this level."), "BoldLabel");
-        levelDefinition.roomsToInstantiate = Assets.Editor.EditorGUIUtility.DrawEditor(
+        levelDefinition.roomsToInstantiate = Assets.Editor.EditorGUIUtility.DrawArrayEditor(
             levelDefinition.roomsToInstantiate,
             (x) =>
             {

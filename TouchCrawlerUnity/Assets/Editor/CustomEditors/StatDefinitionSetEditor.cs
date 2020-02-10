@@ -27,7 +27,7 @@ public class StatDefinitionSetEditor : Editor
         StatModifierDefinition[] arr = modifiersField.GetValue(statModifier) as StatModifierDefinition[];
 
         //Draw editor for array
-        arr = Assets.Editor.EditorGUIUtility.DrawEditor(
+        arr = Assets.Editor.EditorGUIUtility.DrawArrayEditor(
             arr,
             (def) =>
             {
