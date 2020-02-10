@@ -8,8 +8,8 @@ public class MovementController : MonoBehaviour
     Rigidbody2D body;
     new BoxCollider2D collider;
     Vector2 destination;
-    Vector2 velocity;
-    public Vector2 maxVelocity;
+    public Vector2 velocity;
+    public Vector2 maxVelocity = new Vector2(3f, 3f);
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,7 @@ public class MovementController : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         velocity = Vector2.zero;
         destination = body.position;
-        maxVelocity = new Vector2(3f, 3f);
+        
     }
 
     void FixedUpdate()
@@ -50,22 +50,34 @@ public class MovementController : MonoBehaviour
     public void Move(IActor target)
     {
         destination = target.GetLocation();
+
     }
 
-    void Stop()
+    public void Stop()
     {
         destination = body.position;  
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collision Detected");
         Stop();
     }
 
     public bool IsAtDestination()
     {
         return Vector2.Distance(body.position, destination) < 0.1f;
+    }
+
+    public Vector2 DistanceToDestination()
+    {
+        if (destination != null)
+        {
+            return destination - body.position;
+        }
+        else
+        {
+            return Vector2.zero;
+        }
     }
 
     public Vector2 GetLocation()

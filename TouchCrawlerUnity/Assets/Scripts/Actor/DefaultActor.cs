@@ -60,6 +60,11 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         throw new System.NotImplementedException();
     }
 
+    public Vector2 DistanceToDestination()
+    {
+        return movementController.DistanceToDestination();
+    }
+
     public void UseItem(object item)
     {
         throw new System.NotImplementedException();
