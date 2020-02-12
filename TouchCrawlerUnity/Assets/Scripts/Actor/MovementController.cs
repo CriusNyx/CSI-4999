@@ -5,12 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
 {
+    //Components
     Rigidbody2D body;
     new BoxCollider2D collider;
+
+    //Velocity variables
     Vector2 destination;
     public Vector2 velocity;
     public Vector2 maxVelocity = new Vector2(3f, 3f);
-    // Start is called before the first frame update
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();

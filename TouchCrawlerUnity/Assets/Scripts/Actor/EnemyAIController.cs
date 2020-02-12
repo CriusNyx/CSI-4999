@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.WeaponSystem;
@@ -7,47 +8,50 @@ using Assets.WeaponSystem;
 
 public class EnemyAIController : MonoBehaviour
 {
-    public bool isWanderer;
-    public Vector2[] wanderPath;
-    public int timeBeforeNextWander;
-    private int timeSinceLastWander;
-    private int wanderIterator;
+    //Behavior variables
+    public bool isPatrolling;
+    public bool isWandering;
+    public Vector2[] patrolPath;
+    public int stopDuration;
+    private int stopTime;
     public float attackDistance = 3f;
     public float stopDistance = 1.5f;
+
+    //Actor components
     private IActor target;
     private NPCActor npcActor;
     private Rigidbody2D body;
     private MovementController movementController;
     private Weapon weapon;
-    // Start is called before the first frame update
+
     void Start()
     {
         movementController = GetComponent<MovementController>();
-        wanderIterator = 0;
-        timeSinceLastWander = 0;
+        stopTime = 0;
         target = GameObject.FindObjectOfType<PlayerActor>();
         weapon = GetComponentInChildren<Weapon>();
         body = GetComponent<Rigidbody2D>();
         npcActor = GetComponent<NPCActor>();
-        if(wanderPath == null)
+        if (patrolPath == null)
         {
-            wanderPath = new Vector2[] { body.position } ;
+            patrolPath = new Vector2[] { body.position } ;
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (WasAttackedYet())
         {
-
+            StartAttacking();
         }
-        if (isWanderer)
+
+        if (isPatrolling)
+        {
+            Patrol();
+        }else if (isWandering)
         {
             Wander();
-            if (WasAttackedYet())
-            {
-                StartAttacking();
-            }
         }
         else
         {
@@ -58,20 +62,36 @@ public class EnemyAIController : MonoBehaviour
             }
             if (IsCloseEnoughToAttack())
             {
-
                 this.Attack();
             }
            
         }
     }
 
-    private void Wander()
+    private void Patrol()
     {
-        if (movementController.IsAtDestination() && timeSinceLastWander++ >= timeBeforeNextWander)
+        if ((movementController.IsAtDestination() || body.velocity == Vector2.zero) && stopTime++ >= stopDuration)
         {
             movementController.Move(NextWanderLocation());
-            timeSinceLastWander = 0;
+            stopTime = 0;
         }
+    }
+
+    private void Wander()
+    {
+        if ((movementController.IsAtDestination() || body.velocity == Vector2.zero) && stopTime++ >= stopDuration)
+        {
+            int lowerLimitX = (int)body.position.x - 3;
+            int upperLimitX = (int)body.position.x + 3;
+            int lowerLimitY = (int)body.position.y - 3;
+            int upperLimitY = (int)body.position.y + 3;
+            var random = new System.Random();
+            int nextX = random.Next(lowerLimitX, upperLimitX);
+            int nextY = random.Next(lowerLimitY, upperLimitY);
+            movementController.Move(new Vector2((float)nextX, (float)nextY));
+            stopTime = 0;
+        }
+        
     }
 
     private void Attack()
@@ -81,10 +101,10 @@ public class EnemyAIController : MonoBehaviour
 
     private Vector2 NextWanderLocation()
     {
-        Vector2 nextLocation = wanderPath[wanderIterator++];
-        if(wanderIterator >= wanderPath.Length)
+        Vector2 nextLocation = patrolPath[stopTime++];
+        if(stopTime >= patrolPath.Length)
         {
-            wanderIterator = 0;
+            stopTime = 0;
         }
         return nextLocation;
     }
@@ -92,13 +112,13 @@ public class EnemyAIController : MonoBehaviour
     private bool IsCloseEnoughToAttack()
     {
         Vector2 distance = movementController.DistanceToDestination();
-        return System.Math.Abs(distance.x) <= 3f && System.Math.Abs(distance.y) <= 3f;
+        return System.Math.Abs(distance.x) <= attackDistance && System.Math.Abs(distance.y) <= attackDistance;
     }
 
     private bool IsCloseEnoughToStop()
     {
         Vector2 distance = movementController.DistanceToDestination();
-        return System.Math.Abs(distance.x) <= 1.5f && System.Math.Abs(distance.y) <= 1.5f;
+        return System.Math.Abs(distance.x) <= stopDistance && System.Math.Abs(distance.y) <= stopDistance;
     }
 
     private bool WasAttackedYet()
@@ -106,8 +126,9 @@ public class EnemyAIController : MonoBehaviour
         return npcActor.attacker != null;
     }
 
-    public void StartAttacking()
+    private void StartAttacking()
     {
-        isWanderer = false;
+        isPatrolling = false;
+        isWandering = false;
     }
 }
