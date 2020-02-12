@@ -51,7 +51,7 @@ public class DoorFlicker : MonoBehaviour
         }
     }
 
-
+    // will need to call flicker after reactivating a room.
     void Flicker()
     {
         StartCoroutine(WaitFlicker());

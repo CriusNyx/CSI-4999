@@ -31,7 +31,13 @@ public class MapGenerator : MonoBehaviour
         nextToAdd.Enqueue(seedRoom);
         AddRoom(Random.Range(2,5));
         RoomKill();
-        FindNeighbors();
+        FindNeighbors(roomObjects[0]); //closest to origin room
+        HangingRoomKill();
+
+        foreach (GameObject room in roomObjects)
+        {
+            room.GetComponent<RoomController>().CheckNeighborDoors();
+        }
 
         //neighbor rooms
 
@@ -60,7 +66,7 @@ public class MapGenerator : MonoBehaviour
 
 
 
-        Debug.Log("Neighbors to add:" + totalNeighbors);
+        //Debug.Log("Neighbors to add:" + totalNeighbors);
 
         indexes = new List<int> { 0, 1, 2, 3 };
         Vector3 newPosition = new Vector3(0, 0, 0);
@@ -104,7 +110,7 @@ public class MapGenerator : MonoBehaviour
 
                 if ((System.Math.Abs(newPosition.x) > gridRadius) || (System.Math.Abs(newPosition.y) > gridRadius))
                 {
-                    Debug.Log("Deleted! New Position = " + newPosition);
+                    // outside of grid
                     GameObject.Destroy(room);
                     totalNeighbors = System.Math.Max(4, totalNeighbors++);
                 } else
@@ -115,7 +121,7 @@ public class MapGenerator : MonoBehaviour
                         RoomController roomCheckCont = roomCheck.GetComponent<RoomController>();
                         if(roomCheckCont.gridPosition == newPosition)
                         {
-                            Debug.Log("Deleted! Overlap position = " + newPosition);
+                            //room exists here already
                             GameObject.Destroy(room);
                             totalNeighbors = System.Math.Max(4, totalNeighbors++);
                             exists = true;
@@ -123,16 +129,15 @@ public class MapGenerator : MonoBehaviour
                     }
                     if (!exists)
                     {
-                        Debug.Log("Success! Added to Queue as Neighbor: " + i);
+                        //all good, add the room
                         roomCont.gridPosition = newPosition;
+                        roomCont.setPosition();
                         currNumRooms++;
                         nextToAdd.Enqueue(room);
                         roomObjects.Add(room);
 
                     }
-
                 }
-
             }
         }
 
@@ -145,6 +150,7 @@ public class MapGenerator : MonoBehaviour
 
     }
 
+    //add some more variability
     void RoomKill()
     {
         for(int i = 0; i < roomObjects.Count*.25; i++)
@@ -157,64 +163,88 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    void FindNeighbors()
+
+    //takes no input, makes sure all rooms are reachable from the origin point
+    void HangingRoomKill()
     {
-        //seed
         for(int i = 0; i < roomObjects.Count; i++)
         {
-            //neighbor
-            for(int j = i; j < roomObjects.Count; j++)
-            {
-                int xDiff = (int)(roomObjects[i].GetComponent<RoomController>().gridPosition.x - roomObjects[j].GetComponent<RoomController>().gridPosition.x);
-                int yDiff = (int)(roomObjects[i].GetComponent<RoomController>().gridPosition.y - roomObjects[j].GetComponent<RoomController>().gridPosition.y);
-                RoomController seedCont = roomObjects[i].GetComponent<RoomController>();
-                RoomController neighborCont = roomObjects[j].GetComponent<RoomController>();
-                //Debug.Log(xDiff.ToString() + yDiff.ToString());
-
-                switch (xDiff.ToString() + yDiff.ToString()) {
-                    case "01":  seedCont.neighbors[3] = roomObjects[j];
-                                seedCont.neighborCount++;
-                                neighborCont.neighbors[1] = roomObjects[i];
-                                neighborCont.neighborCount++;
-                        break;
-
-                    case "0-1": seedCont.neighbors[1] = roomObjects[j];
-                                seedCont.neighborCount++;
-                                neighborCont.neighbors[3] = roomObjects[i];
-                                neighborCont.neighborCount++;
-                        break;
-
-                    case "10":  seedCont.neighbors[0] = roomObjects[j];
-                                seedCont.neighborCount++;
-                                neighborCont.neighbors[2] = roomObjects[i];
-                                neighborCont.neighborCount++;
-                        break;
-
-                    case "-10": seedCont.neighbors[2] = roomObjects[j];
-                                seedCont.neighborCount++;
-                                neighborCont.neighbors[0] = roomObjects[i];
-                                neighborCont.neighborCount++;
-                        break;
-
-                }
-
-            }
-
-            //Debug.Log(roomObjects[i].GetComponent<RoomController>().neighbors == null);
             if (roomObjects[i].GetComponent<RoomController>().neighborCount == 0)
             {
-                Debug.Log("Remove hanging room");
                 GameObject temp = roomObjects[i];
                 roomObjects.Remove(roomObjects[i]);
                 GameObject.Destroy(temp);
                 i--; //list is smaller
             }
+        }
+    }
+
+    //start from origin (called in start) and as neighbors are found, they, in turn, find their neighbors
+    void FindNeighbors(GameObject seedRoom)
+    {
+        foreach (GameObject checkRoom in roomObjects)
+        {
+            int xDiff = (int)(seedRoom.GetComponent<RoomController>().gridPosition.x - checkRoom.GetComponent<RoomController>().gridPosition.x);
+            int yDiff = (int)(seedRoom.GetComponent<RoomController>().gridPosition.y - checkRoom.GetComponent<RoomController>().gridPosition.y);
+
+            RoomController seedCont = seedRoom.GetComponent<RoomController>();
+            RoomController neighborCont = checkRoom.GetComponent<RoomController>();
+
+            switch (xDiff.ToString() + yDiff.ToString())
+            {
+                case "01":
+                    //without internal if check, will constantly call its already found neighbors
+                    if(seedCont.neighbors[3] != checkRoom)
+                    {
+                        seedCont.neighbors[3] = checkRoom;
+                        seedCont.neighborCount++;
+                        neighborCont.neighbors[1] = seedRoom;
+                        neighborCont.neighborCount++;
+                        FindNeighbors(checkRoom);
+                    }
+                    break;
+
+                case "0-1":
+                    if (seedCont.neighbors[1] != checkRoom)
+                    {
+                        seedCont.neighbors[1] = checkRoom;
+                        seedCont.neighborCount++;
+                        neighborCont.neighbors[3] = seedRoom;
+                        neighborCont.neighborCount++;
+                        FindNeighbors(checkRoom);
+                    }
+                    
+                    break;
+
+                case "10":
+                    if (seedCont.neighbors[0] != checkRoom)
+                    {
+                        seedCont.neighbors[0] = checkRoom;
+                        seedCont.neighborCount++;
+                        neighborCont.neighbors[2] = seedRoom;
+                        neighborCont.neighborCount++;
+                        FindNeighbors(checkRoom);
+                    }
+                        
+                    break;
+
+                case "-10":
+                    if (seedCont.neighbors[2] != checkRoom)
+                    {
+                        seedCont.neighbors[2] = checkRoom;
+                        seedCont.neighborCount++;
+                        neighborCont.neighbors[0] = seedRoom;
+                        neighborCont.neighborCount++;
+                        FindNeighbors(checkRoom);
+                    }
+                        
+                    break;
+
+            }
 
         }
 
-
-
-
+    
     }
 
 

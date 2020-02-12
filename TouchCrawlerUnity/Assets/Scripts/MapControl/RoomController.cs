@@ -13,26 +13,36 @@ public class RoomController : MonoBehaviour
     void Start()
     {
         cleared = false;
-        for (int i = 0; i < 5; i++)
-        {
-            doorList[i] = this.transform.GetChild(i).gameObject;
-            //west = 0, north = 1, east = 2, south = 3, down = 4
-        }
 
-        setPosition();
     }
 
     public void setPosition()
     {
-        this.transform.position = new Vector3((gridPosition.x * 16)
+        transform.position = new Vector3((gridPosition.x * 16)
             , (gridPosition.y * 12), 0);
     }
 
 
-    void CheckNeighbors()
+    public void CheckNeighborDoors()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            doorList[i] = transform.GetChild(i + 2).gameObject;
+            //west = 0, north = 1, east = 2, south = 3, down = 4
+            doorList[i].SetActive(false);
+        }
+
         //check if neighboring cells have rooms, set doors active
+        for (int i = 0; i < 4; i++)
+        {
+            //doorList[0].SetActive(true);
+            if (neighbors[i] != null)
+            {
+                doorList[i].SetActive(true);
+            }
+        }
     }
+
 
 
     void ToggleDoorOpen(bool set)
