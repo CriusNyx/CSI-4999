@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Editor
 {
-    public static class EditorGUIUtility
+    public static class EditorGUICustomUtility
     {
         /// <summary>
         /// Draw a custom editor for an array that can add and remove elements dynamically
@@ -36,13 +36,13 @@ namespace Assets.Editor
 
             GuiLine(2, 5);
 
-            for (int i = 0; i < list.Count; i++)
+            for(int i = 0; i < list.Count; i++)
             {
                 var element = list[i];
                 GUILayout.BeginHorizontal();
                 {
                     GUILayout.Label(element?.ToString());
-                    if (GUILayout.Button("-", GUILayout.Width(20)))
+                    if(GUILayout.Button("-", GUILayout.Width(20)))
                     {
                         elementToRemove = i;
                     }
@@ -55,11 +55,11 @@ namespace Assets.Editor
                 GuiLine(2, 5);
             }
 
-            if (elementToRemove != -1)
+            if(elementToRemove != -1)
             {
                 list.RemoveAt(elementToRemove);
             }
-            if (GUILayout.Button(addElementButtonName))
+            if(GUILayout.Button(addElementButtonName))
             {
                 list.Add(constructor());
             }
@@ -95,6 +95,46 @@ namespace Assets.Editor
             EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
 
             GUILayout.Space(paddingBelow);
+        }
+
+        public static void DrawSelectableNameField(float padding, GameObject target, string undoName)
+        {
+            Undo.RecordObject(target, undoName);
+
+            GUIStyle buttonStyle = GUI.skin.GetStyle("Button");
+            GUIStyle testStyle = GUI.skin.GetStyle("textField");
+
+            Color oldColor = GUI.color;
+
+            if(Selection.activeGameObject == target)
+            {
+                GUI.color *= Color.red;
+            }
+
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.Space(padding);
+                if(GUILayout.Button("+"))
+                {
+                    Selection.activeObject = target;
+                }
+                target.name = EditorGUILayout.TextField(target.name);
+            }
+            GUILayout.EndHorizontal();
+
+            GUI.color = oldColor;
+        }
+
+        public static void DrawDefaultHandles(GameObject gameObject)
+        {
+            Undo.RecordObject(gameObject.transform, "Transform " + gameObject.name);
+
+            switch(Tools.current)
+            {
+                case Tool.Move:
+                    gameObject.transform.position = Handles.PositionHandle(Tools.handlePosition, Tools.handleRotation);
+                    break;
+            }
         }
     }
 }
