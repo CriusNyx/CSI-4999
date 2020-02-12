@@ -5,7 +5,6 @@ using UnityEngine;
 public class ScreenShakeController : MonoBehaviour
 {
     public Camera mainCamera;
-
     // Length of shake effect
     public float shakeTime = 0.5f;
     // Magntiude of shake effect
