@@ -50,7 +50,7 @@ namespace Assets.WeaponSystem
                     fireResult = PropegateMonad(
                         fireResult,
                         components,
-                        (x, y) => x.Fire(this, target, accuracyControllerResult.value, y));
+                        (x, y) => x.Fire(this, target, accuracyControllerResult.value, requestResult.spawnInfo, y));
                 }
                 return (requestResult.fireRequestSuccessful, fireResult.success, fireResult.projectiles);
             }
@@ -58,7 +58,7 @@ namespace Assets.WeaponSystem
             return (requestResult.fireRequestSuccessful, false, new IProjectile[0]);
         }
 
-        public virtual IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, int projectileNumber)
+        public virtual IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, int projectileNumber)
         {
             var components = GetAllComponents();
             CreateProjectileResult result = new CreateProjectileResult();
@@ -79,7 +79,7 @@ namespace Assets.WeaponSystem
             result = PropegateMonad(
                 result,
                 components,
-                (x, y) => x.CreateProjectile(this, target, position, rotation, direction, y));
+                (x, y) => x.CreateProjectile(this, target, position, rotation, direction, bulletSpawnInfo, y));
 
             return result.projectiles;
         }
