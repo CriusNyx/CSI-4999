@@ -5,23 +5,44 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
     private GameObject[] doorList = new GameObject[5];
+    public GameObject[] neighbors = new GameObject[4];
+    public int neighborCount;
     public bool cleared;
+    public Vector3 gridPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
         cleared = false;
+
+    }
+
+    public void setPosition()
+    {
+        transform.position = new Vector3((gridPosition.x * 16)
+            , (gridPosition.y * 12), 0);
+    }
+
+
+    public void CheckNeighborDoors()
+    {
         for (int i = 0; i < 5; i++)
         {
-            doorList[i] = this.transform.GetChild(i).gameObject;
+            doorList[i] = transform.GetChild(i + 2).gameObject;
             //west = 0, north = 1, east = 2, south = 3, down = 4
+            doorList[i].SetActive(false);
+        }
+
+        //check if neighboring cells have rooms, set doors active
+        for (int i = 0; i < 4; i++)
+        {
+            //doorList[0].SetActive(true);
+            if (neighbors[i] != null)
+            {
+                doorList[i].SetActive(true);
+            }
         }
     }
 
-    void CheckNeighbors()
-    {
-        //check if neighboring cells have rooms, set doors active
-    }
 
 
     void ToggleDoorOpen(bool set)
