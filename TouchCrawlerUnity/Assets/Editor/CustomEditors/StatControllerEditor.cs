@@ -13,6 +13,7 @@ public class StatControllerEditor : Editor
     {
         DrawDefaultInspector();
 
+        //Custom editor just prints, no need to record undos
         StatsController statsController = target as StatsController;
 
         foreach(var statTypeObject in Enum.GetValues(typeof(StatsController.StatType)))

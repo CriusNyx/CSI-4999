@@ -2,7 +2,7 @@
 using UnityEngine;
 using static ActorStatModifier;
 
-[CreateAssetMenu(fileName = "Modifier Set", menuName = "Scriptable Objects/Modifier Set", order = 100000000)]
+[CreateAssetMenu(fileName = "ModifierSet", menuName = "Scriptable Objects/Modifier Set", order = 100000000)]
 public class StatModifierSet : ScriptableObject
 {
 

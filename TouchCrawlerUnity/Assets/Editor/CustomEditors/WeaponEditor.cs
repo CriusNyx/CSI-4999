@@ -12,11 +12,19 @@ public class WeaponEditor : Editor
     {
         DrawDefaultInspector();
 
-        HashSet<WeaponComponent.ComponentType> listedTypes = new HashSet<WeaponComponent.ComponentType>();
-
         Weapon weapon = target as Weapon;
 
-        foreach(var component in weapon.GetComponents<WeaponComponent>())
+        CheckErrorForMissingWeaponComponents(weapon);
+
+        Repaint();
+    }
+
+    private void CheckErrorForMissingWeaponComponents(Weapon weapon)
+    {
+        HashSet<WeaponComponent.ComponentType> listedTypes = new HashSet<WeaponComponent.ComponentType>();
+
+
+        foreach (var component in weapon.GetComponents<WeaponComponent>())
         {
             if (!listedTypes.Contains(component.componentType))
             {
@@ -25,13 +33,11 @@ public class WeaponEditor : Editor
         }
 
         CheckTypes(
-            listedTypes, 
-            WeaponComponent.ComponentType.Cooldown, 
-            WeaponComponent.ComponentType.AccuracyController, 
-            WeaponComponent.ComponentType.ProjectileFactory, 
+            listedTypes,
+            WeaponComponent.ComponentType.Cooldown,
+            WeaponComponent.ComponentType.AccuracyController,
+            WeaponComponent.ComponentType.ProjectileFactory,
             WeaponComponent.ComponentType.Trigger);
-
-        Repaint();
     }
 
     private void CheckTypes(HashSet<WeaponComponent.ComponentType> listedTypes, params WeaponComponent.ComponentType[] types)
