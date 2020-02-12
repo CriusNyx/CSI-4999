@@ -60,8 +60,10 @@ namespace Assets.Scripts.Death
         public override void OnDie(IActor actor) { this.actor = actor; }
         public GameOver()
         {
-            IEvent e = new GameOverEvent();
-            Broadcast(EventChannel.gameState, EventSubChannel.gameOver, e);
+            if (actor.IsPlayer()) {
+                IEvent e = new GameOverEvent();
+                Broadcast(EventChannel.gameState, EventSubChannel.gameOver, e);
+            }
         }
     }
 
