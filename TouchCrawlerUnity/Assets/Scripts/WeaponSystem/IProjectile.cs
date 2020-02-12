@@ -17,7 +17,7 @@ namespace Assets.Scripts.WeaponSystem
 
         Weapon.WeaponTargetType attackTargetType { get; }
 
-        void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos, Weapon.WeaponTargetType attackTargetType);
+        void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos, Color? color, float speedMod, Weapon.WeaponTargetType attackTargetType);
 
     }
 }

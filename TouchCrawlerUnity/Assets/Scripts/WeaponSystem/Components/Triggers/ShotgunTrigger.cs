@@ -13,13 +13,13 @@ namespace Assets.Scripts.WeaponSystem.Components.Triggers
 
         public int projectileCount = 5;
 
-        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
+        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, FireResult result)
         {
             result.success = true;
 
             for (int i = 0; i < projectileCount; i++)
             {
-                result.AddProjectile(weapon.CreateProjectile(target, accuracyController, i));
+                result.AddProjectile(weapon.CreateProjectile(target, accuracyController, bulletSpawnInfo, i));
             }
             return result;
         }

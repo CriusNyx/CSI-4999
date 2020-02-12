@@ -33,11 +33,14 @@ public class WeaponEditor : Editor
         }
 
         CheckTypes(
-            listedTypes,
-            WeaponComponent.ComponentType.Cooldown,
-            WeaponComponent.ComponentType.AccuracyController,
-            WeaponComponent.ComponentType.ProjectileFactory,
-            WeaponComponent.ComponentType.Trigger);
+            listedTypes, 
+            WeaponComponent.ComponentType.Cooldown, 
+            WeaponComponent.ComponentType.AccuracyController, 
+            WeaponComponent.ComponentType.ProjectileFactory, 
+            WeaponComponent.ComponentType.Trigger,
+            WeaponComponent.ComponentType.ProjectileDefinition);
+
+        Repaint();
     }
 
     private void CheckTypes(HashSet<WeaponComponent.ComponentType> listedTypes, params WeaponComponent.ComponentType[] types)

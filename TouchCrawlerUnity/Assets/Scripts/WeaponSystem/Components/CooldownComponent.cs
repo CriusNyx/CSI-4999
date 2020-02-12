@@ -23,7 +23,7 @@ namespace Assets.Scripts.WeaponSystem.Components
             return result;
         }
 
-        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
+        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, FireResult result)
         {
             cooldown.Trip();
             return result;

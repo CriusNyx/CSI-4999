@@ -11,11 +11,11 @@ namespace Assets.Scripts.WeaponSystem.Components.Triggers
     {
         public override ComponentType componentType => ComponentType.Trigger;
 
-        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
+        public override FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, FireResult result)
         {
             result.success = true;
 
-            result.AddProjectile(weapon.CreateProjectile(target, accuracyController, 0));
+            result.AddProjectile(weapon.CreateProjectile(target, accuracyController, bulletSpawnInfo, 0));
 
             return result;
         }
