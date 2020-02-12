@@ -9,6 +9,11 @@ using static Assets.Scripts.Events.EventSystem;
 
 namespace Assets.Scripts.Death
 {
+    /// <summary>
+    /// OnDieEffect is the base class for any action that is suppose to happen
+    /// upon the death of an actor. To add a new OnDieEffect, simply inheirit OnDieEffect
+    /// and implement OnDie.
+    /// </summary>
     abstract class OnDieEffect : MonoBehaviour
     {
         public IActor actor { get; set; }
@@ -16,6 +21,10 @@ namespace Assets.Scripts.Death
 
     }
 
+    /// <summary>
+    /// This OnDieEffect broadcasts a passed event into the event system when
+    /// an actor dies. Channel information is defined in Events.EventSystem
+    /// </summary>
     class PassEventsOnDie : OnDieEffect
     {
         public IEvent eventOnDie = new DeathEvent(null);
@@ -29,6 +38,9 @@ namespace Assets.Scripts.Death
         public override void OnDie(IActor actor) { this.actor = actor; }
     }
 
+    /// <summary>
+    /// This event destroys the actors gameobject when it dies.
+    /// </summary>
     class DestructionOnDie : OnDieEffect
     {
         public DestructionOnDie() 
@@ -39,6 +51,10 @@ namespace Assets.Scripts.Death
         public override void OnDie(IActor actor) { this.actor = actor; }
     }
 
+    /// <summary>
+    /// This event passes a game over event into the event system when the actor
+    /// dies. Should only be used when a player dies.
+    /// </summary>
     class GameOver : OnDieEffect
     {
         public override void OnDie(IActor actor) { this.actor = actor; }
@@ -49,6 +65,9 @@ namespace Assets.Scripts.Death
         }
     }
 
+    /// <summary>
+    /// This effects passes a drop event to the event system when an actor dies.
+    /// </summary>
     class DropItem : OnDieEffect
     {
         public override void OnDie(IActor actor) { this.actor = actor; }
