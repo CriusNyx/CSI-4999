@@ -13,7 +13,7 @@ namespace Assets.Scripts.WeaponSystem.Components
         public Color color = Color.white;
         public float time = 1f;
 
-        public override CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, CreateProjectileResult result)
+        public override CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, BulletSpawnInfo bulletSpawnInfo, CreateProjectileResult result)
         {
             //Debug.Log("fire position = " + (position, rotation, direction).ToString());
             Debug.DrawRay(position, direction, color, time);

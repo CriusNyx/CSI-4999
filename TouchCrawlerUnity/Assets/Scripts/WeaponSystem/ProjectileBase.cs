@@ -55,18 +55,24 @@ namespace Assets.Scripts.WeaponSystem
             }
         }
 
-        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos, Weapon.WeaponTargetType attackTargetType)
+        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 direction, Vector2 pos, Color? color, float speedMod, Weapon.WeaponTargetType attackTargetType)
         {
             direction = direction.normalized;
 
             this.WeaponSrc = weapon;
             this.target = target;
+            this.baseSpeed *= speedMod;
             this.velocity = direction * baseSpeed;
             this.AccelerationVector = direction * acceleration;
             this.Source = pos;
             this.attackTargetType = attackTargetType;
 
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = direction;
+            if(color != null)
+            {
+                this.GetComponent<MeshRenderer>().material.color = color.Value;
+            }
+
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
         }
 
         void OnTriggerEnter2D(Collider2D collider)

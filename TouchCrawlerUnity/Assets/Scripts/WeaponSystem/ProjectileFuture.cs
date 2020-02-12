@@ -35,7 +35,7 @@ namespace Assets.Scripts.WeaponSystem
 
         public bool IgnoreOtherProjectiles => GetFuture().IgnoreOtherProjectiles;
 
-        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos, Weapon.WeaponTargetType type) => GetFuture().Initialize(weapon, target, velocity, pos, type);
+        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos, Color? color, float speedMod, Weapon.WeaponTargetType type) => GetFuture().Initialize(weapon, target, velocity, pos, color, speedMod, type);
 
         private IProjectile GetFuture()
         {

@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 6567719467391138022}
   - component: {fileID: 2834959450101720508}
   - component: {fileID: -8939910910144485703}
+  - component: {fileID: 1595683118758034595}
+  - component: {fileID: 1183742535605916855}
+  - component: {fileID: 8185229788685648518}
   m_Layer: 0
   m_Name: TestWeapon
   m_TagString: Untagged
@@ -101,7 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8105166356373043456, guid: 718ecbfcd9f618a45b4b71a520e9c918, type: 3}
 --- !u!114 &-8939910910144485703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,3 +117,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileCount: 5
+--- !u!114 &1595683118758034595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f28c9deadf1bc47a26ee125f300ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8105166356373043456, guid: 718ecbfcd9f618a45b4b71a520e9c918, type: 3}
+--- !u!114 &1183742535605916855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13eb7782d012c9b41b6c65521e08d566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &8185229788685648518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf8b1a49644f1d4db5702c58a115ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedModifierRatio: 1.2

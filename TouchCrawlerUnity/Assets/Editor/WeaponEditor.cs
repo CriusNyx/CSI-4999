@@ -29,7 +29,8 @@ public class WeaponEditor : Editor
             WeaponComponent.ComponentType.Cooldown, 
             WeaponComponent.ComponentType.AccuracyController, 
             WeaponComponent.ComponentType.ProjectileFactory, 
-            WeaponComponent.ComponentType.Trigger);
+            WeaponComponent.ComponentType.Trigger,
+            WeaponComponent.ComponentType.ProjectileDefinition);
 
         Repaint();
     }
