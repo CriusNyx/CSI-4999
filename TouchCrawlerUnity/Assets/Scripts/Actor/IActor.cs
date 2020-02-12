@@ -17,6 +17,11 @@ public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
         get;
         set;
     }
+
+    IActor attacker
+    {
+        get;
+    }
     MovementController movementController
     {
         get;

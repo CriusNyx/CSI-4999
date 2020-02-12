@@ -15,6 +15,7 @@ public class EnemyAIController : MonoBehaviour
     public float attackDistance = 3f;
     public float stopDistance = 1.5f;
     private IActor target;
+    private NPCActor npcActor;
     private Rigidbody2D body;
     private MovementController movementController;
     private Weapon weapon;
@@ -27,14 +28,26 @@ public class EnemyAIController : MonoBehaviour
         target = GameObject.FindObjectOfType<PlayerActor>();
         weapon = GetComponentInChildren<Weapon>();
         body = GetComponent<Rigidbody2D>();
+        npcActor = GetComponent<NPCActor>();
+        if(wanderPath == null)
+        {
+            wanderPath = new Vector2[] { body.position } ;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        {
+
+        }
         if (isWanderer)
         {
             Wander();
+            if (WasAttackedYet())
+            {
+                StartAttacking();
+            }
         }
         else
         {
@@ -86,6 +99,11 @@ public class EnemyAIController : MonoBehaviour
     {
         Vector2 distance = movementController.DistanceToDestination();
         return System.Math.Abs(distance.x) <= 1.5f && System.Math.Abs(distance.y) <= 1.5f;
+    }
+
+    private bool WasAttackedYet()
+    {
+        return npcActor.attacker != null;
     }
 
     public void StartAttacking()

@@ -9,10 +9,20 @@ using UnityEngine;
 [RequireComponent(typeof(StatsController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
+
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public IActor target { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    public Weapon weapon { get; set; }
+    public IActor attacker
+    {
+        get;
+        private set;
+    }
+
+    public Weapon weapon { 
+        get; 
+        private set;
+    }
 
     public MovementController movementController
     {
@@ -86,6 +96,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     public bool DoDamage(Damage damage)
     {
         Debug.Log(damage.ToString());
+        attacker = damage.weaponOwner;
         return true;
     }
 }
