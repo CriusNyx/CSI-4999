@@ -65,7 +65,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     {
         if (e is MoveInputEvent moveInputEvent)
         {
-            Vector2 nextLocation = (Vector2)moveInputEvent.ray.origin;
+            Vector2 nextLocation = moveInputEvent.ray.origin;
             movementController.Move(nextLocation);
         }
         if (e is AttackInputEvent attackInputEvent)
