@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Damage {
@@ -9,6 +10,7 @@ public class Damage {
         //This is a constructor. It doesn't return itself.
         //This is not Javascript. lol
     }
+
 }
 
 public class DummyDamage : Damage
