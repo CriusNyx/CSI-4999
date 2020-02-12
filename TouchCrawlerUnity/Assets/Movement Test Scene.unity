@@ -217,12 +217,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38374eac5e210941b5011a8c7065f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWanderer: 1
-  wanderPath:
-  - {x: -2, y: 2}
+  isPatrolling: 0
+  isWandering: 1
+  patrolPath:
   - {x: 2, y: 2}
-  timeBeforeNextWander: 5
-  attackDistance: 3
+  - {x: -2, y: 2}
+  stopDuration: 0
+  attackDistance: 30
   stopDistance: 1.5
 --- !u!4 &288357758 stripped
 Transform:
