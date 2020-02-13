@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using Assets.Scripts.Util;
 using Assets.Editor;
+using System;
 
 [CustomEditor(typeof(RoomDefinition))]
 public class RoomDefinitionEditor : Editor
@@ -14,10 +15,6 @@ public class RoomDefinitionEditor : Editor
     {
         RoomDefinition roomDefinition = target as RoomDefinition;
 
-        Handles.BeginGUI();
-        EditorGUICustomUtility.DrawDefaultHandles(roomDefinition.gameObject);
-        Handles.EndGUI();
-
         DrawRoomDefinitionEditorSceneGUI(target as RoomDefinition);
 
         Repaint();
@@ -25,37 +22,40 @@ public class RoomDefinitionEditor : Editor
 
     public static void DrawRoomDefinitionEditorSceneGUI(RoomDefinition roomDefinition)
     {
-        scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(200));
-
-        foreach(var spawnSet in roomDefinition.GetComponentsInChildren<SpawnSet>())
+        Handles.BeginGUI();
         {
-            EditorGUICustomUtility.DrawSelectableNameField(0, spawnSet.gameObject, "Edit Spawn Set");
-
-            foreach(var spawnPoint in spawnSet.GetComponentsInChildren<SpawnPoint>())
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(200), GUILayout.Height(500));
             {
-                EditorGUICustomUtility.DrawSelectableNameField(50, spawnPoint.gameObject, "Edit Spawn Point");
-            }
-
-            GUILayout.BeginHorizontal();
-            {
-                GUILayout.Space(50);
-                if(GUILayout.Button("Add Spawn Point"))
+                foreach (var spawnSet in roomDefinition.GetComponentsInChildren<SpawnSet>())
                 {
-                    var spawnPoint = GameObjectFactory.Create("SpawnPoint", Vector3.zero, Quaternion.identity, spawnSet.transform);
-                    spawnPoint.AddComponent<SpawnPoint>();
-                    Undo.RegisterCreatedObjectUndo(spawnPoint, "Create Spawn Point");
+                    EditorGUICustomUtility.DrawSelectableNameField(0, spawnSet.gameObject, "Edit Spawn Set");
+
+                    foreach (var spawnPoint in spawnSet.GetComponentsInChildren<SpawnPoint>())
+                    {
+                        EditorGUICustomUtility.DrawSelectableNameField(20, spawnPoint.gameObject, "Edit Spawn Point");
+                    }
+
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.Space(20);
+                        if (GUILayout.Button("Add Spawn Point"))
+                        {
+                            var spawnPoint = GameObjectFactory.Create("SpawnPoint", Vector3.zero, Quaternion.identity, spawnSet.transform);
+                            spawnPoint.AddComponent<SpawnPoint>();
+                            Undo.RegisterCreatedObjectUndo(spawnPoint, "Create Spawn Point");
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                }
+                if (GUILayout.Button("Create new Spawn Set"))
+                {
+                    var spawnSet = GameObjectFactory.Create("SpawnSet", Vector3.zero, Quaternion.identity, roomDefinition.transform);
+                    spawnSet.AddComponent<SpawnSet>();
+                    Undo.RegisterCreatedObjectUndo(spawnSet, "Create Spawn Set");
                 }
             }
-            GUILayout.EndHorizontal();
+            EditorGUILayout.EndScrollView();
         }
-        if(GUILayout.Button("Create new Spawn Set"))
-        {
-            var spawnSet = GameObjectFactory.Create("SpawnSet", Vector3.zero, Quaternion.identity, roomDefinition.transform);
-            spawnSet.AddComponent<SpawnSet>();
-            Undo.RegisterCreatedObjectUndo(spawnSet, "Create Spawn Set");
-        }
-
-
-        GUILayout.EndScrollView();
+        Handles.EndGUI();
     }
 }

@@ -36,13 +36,13 @@ namespace Assets.Editor
 
             GuiLine(2, 5);
 
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 var element = list[i];
                 GUILayout.BeginHorizontal();
                 {
                     GUILayout.Label(element?.ToString());
-                    if(GUILayout.Button("-", GUILayout.Width(20)))
+                    if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
                         elementToRemove = i;
                     }
@@ -55,11 +55,11 @@ namespace Assets.Editor
                 GuiLine(2, 5);
             }
 
-            if(elementToRemove != -1)
+            if (elementToRemove != -1)
             {
                 list.RemoveAt(elementToRemove);
             }
-            if(GUILayout.Button(addElementButtonName))
+            if (GUILayout.Button(addElementButtonName))
             {
                 list.Add(constructor());
             }
@@ -106,7 +106,7 @@ namespace Assets.Editor
 
             Color oldColor = GUI.color;
 
-            if(Selection.activeGameObject == target)
+            if (Selection.activeGameObject == target)
             {
                 GUI.color *= Color.red;
             }
@@ -114,7 +114,7 @@ namespace Assets.Editor
             GUILayout.BeginHorizontal();
             {
                 GUILayout.Space(padding);
-                if(GUILayout.Button("+"))
+                if (GUILayout.Button("+"))
                 {
                     Selection.activeObject = target;
                 }
@@ -125,15 +125,64 @@ namespace Assets.Editor
             GUI.color = oldColor;
         }
 
-        public static void DrawDefaultHandles(GameObject gameObject)
-        {
-            Undo.RecordObject(gameObject.transform, "Transform " + gameObject.name);
+        private const float DEFAULT_INDENT_AMOUNT = 20f;
 
-            switch(Tools.current)
+        public static void DrawTree<T>(T
+            root,
+            Func<T, IEnumerable<T>> GetChildren,
+            float indentAmount = DEFAULT_INDENT_AMOUNT,
+            params (Type type, Action<T> typeEditor)[] editors)
+            => DrawTreeFull<T>(root, GetChildren, null, indentAmount, 0, editors);
+
+        public static void DrawTree<T>(T
+            root,
+            Func<T, IEnumerable<T>> GetChildren,
+            Action<T> defaultEditor,
+            params (Type type, Action<T> typeEditor)[] editors)
+            => DrawTreeFull<T>(root, GetChildren, defaultEditor, DEFAULT_INDENT_AMOUNT, 0, editors);
+
+        public static void DrawTree<T>(T
+            root,
+            Func<T, IEnumerable<T>> GetChildren,
+            Action<T> defaultEditor,
+            float indentAmount,
+            params (Type type, Action<T> typeEditor)[] editors)
+            => DrawTreeFull<T>(root, GetChildren, defaultEditor, indentAmount, 0, editors);
+
+        private static void DrawTreeFull<T>(
+            T root, 
+            Func<T, IEnumerable<T>> GetChildren, 
+            Action<T> defaultTypeEditor, 
+            float indentAmount, 
+            int currentIndent, 
+            (Type type, Action<T> typeEditor)[] editors)
+        {
+            foreach (var (type, editor) in editors)
             {
-                case Tool.Move:
-                    gameObject.transform.position = Handles.PositionHandle(Tools.handlePosition, Tools.handleRotation);
-                    break;
+                if (root.GetType().IsAssignableFrom(type))
+                {
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.Space(indentAmount * currentIndent);
+                        GUILayout.BeginVertical();
+                        {
+                            if (editor == null)
+                            {
+                                defaultTypeEditor?.Invoke(root);
+                            }
+                            else
+                            {
+                                editor(root);
+                            }
+                        }
+                        GUILayout.EndVertical();
+                    }
+                    GUILayout.EndHorizontal();
+                }
+            }
+            foreach (var child in GetChildren(root))
+            {
+                DrawTreeFull<T>(child, GetChildren, defaultTypeEditor, indentAmount, currentIndent + 1, editors);
             }
         }
     }
