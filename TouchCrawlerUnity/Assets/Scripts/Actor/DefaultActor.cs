@@ -61,20 +61,37 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
     }
 
+    /// <summary>
+    /// Returns the location of the actor
+    /// </summary>
+    /// <returns>Returns the location of the actor</returns>
     public Vector2 GetLocation()
     {
         return movementController.GetLocation();
     }
+    
+    /// <summary>
+    /// Not implemented yet
+    /// </summary>
+    /// <param name="item"></param>
     public void PickUpItem(object item)
     {
         throw new System.NotImplementedException();
     }
 
+    /// <summary>
+    /// Passes down the distance to destination from movement controller
+    /// </summary>
+    /// <returns>The distance between the actor and its destination</returns>
     public Vector2 DistanceToDestination()
     {
         return movementController.DistanceToDestination();
     }
 
+    /// <summary>
+    /// Not implemented yet
+    /// </summary>
+    /// <param name="item"></param>
     public void UseItem(object item)
     {
         throw new System.NotImplementedException();

@@ -68,6 +68,9 @@ public class EnemyAIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This moves the enemy in loop along the points in the patrolPath array
+    /// </summary>
     private void Patrol()
     {
         if ((movementController.IsAtDestination() || body.velocity == Vector2.zero) && stopTime++ >= stopDuration)
