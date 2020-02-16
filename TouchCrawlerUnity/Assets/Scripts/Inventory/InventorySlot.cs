@@ -7,12 +7,12 @@ public class InventorySlot : MonoBehaviour
     private Inventory inventory;
     public int index;
 
-    private void Start()
+    void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
 
-    private void Update()
+    void Update()
     {
         if (transform.childCount <= 0)
         {

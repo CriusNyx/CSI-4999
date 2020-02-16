@@ -7,6 +7,7 @@ public class PickUpItem : MonoBehaviour
 {
     private Inventory inventory;
     private GameObject[] itemSlots;
+    private GameObject originalObject;
     private SpriteRenderer itemIcon;
 
     private void Start()
@@ -14,6 +15,7 @@ public class PickUpItem : MonoBehaviour
         // Get Player prefab, get ItemSlot prefabs
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
+        originalObject = gameObject;
     }
 
     // Checks to see if player collides with item
@@ -28,23 +30,21 @@ public class PickUpItem : MonoBehaviour
                     // Store item into inventory
                     inventory.items[i] = 1;
 
-                    // Set the image and color, if applicable, of the item picked up
+                    // Set the sprite image and color, if applicable, of the item picked up
                     Image image = itemSlots[i].transform.Find("ItemIcon").GetComponent<Image>();
 
                     if (!image.enabled)
                     {
                         image.enabled = true;
+                    }
+                    
+                    itemIcon = this.GetComponent<SpriteRenderer>();
+                    image.sprite = itemIcon.sprite;
+                    image.color = itemIcon.color;
 
-                        itemIcon = this.GetComponent<SpriteRenderer>();
-                        image.sprite = itemIcon.sprite;
-                        image.color = itemIcon.color;
-                    }
-                    else
-                    {
-                        itemIcon = gameObject.GetComponent<SpriteRenderer>();
-                        image.sprite = itemIcon.sprite;
-                        image.color = itemIcon.color;
-                    }
+                    // Create a clone of the item within ItemSlot, rename to "ItemObject"
+                    GameObject clone = Instantiate(originalObject, itemSlots[i].transform, false);
+                    clone.name = "ItemObject";
 
                     // Remove item from overworld
                     Destroy(gameObject);
