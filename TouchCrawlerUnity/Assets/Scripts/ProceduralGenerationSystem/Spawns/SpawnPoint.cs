@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Util;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -23,5 +24,10 @@ public class SpawnPoint : MonoBehaviour
         {
             Gizmos.DrawIcon(transform.position, "Icons/enemy_spawn.png", false);
         }
+    }
+
+    public GameObject Spawn()
+    {
+        return GameObjectFactory.Instantiate(prefab, transform.position, transform.rotation);
     }
 }

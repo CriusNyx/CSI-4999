@@ -82,4 +82,18 @@ public class RoomController : MonoBehaviour
             doorList[id].transform.GetChild(1).gameObject.SetActive(false);
         }
     }
+
+    public void OnRoomEnter()
+    {
+        WeightedRandomSelector<SpawnSet> randomSelector = new WeightedRandomSelector<SpawnSet>();
+        foreach(var spawn in gameObject.GetComponentsInChildren<SpawnSet>())
+        {
+            randomSelector.Add(spawn, spawn.weight);
+        }
+        var spawner = randomSelector.Select(Random.value);
+        foreach(var spawnPoint in spawner.GetComponentsInChildren<SpawnPoint>())
+        {
+            spawnPoint.Spawn();
+        }
+    }
 }

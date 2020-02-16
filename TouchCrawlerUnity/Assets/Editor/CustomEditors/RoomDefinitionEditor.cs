@@ -24,11 +24,12 @@ public class RoomDefinitionEditor : Editor
     {
         Handles.BeginGUI();
         {
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(200), GUILayout.Height(500));
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(250), GUILayout.Height(500));
             {
                 foreach (var spawnSet in roomDefinition.GetComponentsInChildren<SpawnSet>())
                 {
                     EditorGUICustomUtility.DrawSelectableNameField(0, spawnSet.gameObject, "Edit Spawn Set");
+                    spawnSet.weight = EditorGUILayout.FloatField("Weight", spawnSet.weight);
 
                     foreach (var spawnPoint in spawnSet.GetComponentsInChildren<SpawnPoint>())
                     {

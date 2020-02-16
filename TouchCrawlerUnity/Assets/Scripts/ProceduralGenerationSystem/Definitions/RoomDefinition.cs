@@ -24,4 +24,9 @@ public class RoomDefinition : MonoBehaviour
         Gizmos.DrawCube(center - scaley / 2f, Vector3.one);
         Gizmos.DrawCube(center + scaley / 2f, Vector3.one);
     }
+
+    public void OnRoomEnter()
+    {
+
+    }
 }

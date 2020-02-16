@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SpawnSet : MonoBehaviour
 {
-
+    public float weight = 1f;
 }
