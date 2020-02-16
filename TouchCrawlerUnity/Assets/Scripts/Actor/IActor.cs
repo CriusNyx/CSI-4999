@@ -35,4 +35,6 @@ public interface IActor : IEventListener, IWeaponTarget
 
     Weapon.WeaponTargetType AttackWeaponTargetType { get; }
     Weapon.WeaponTargetType DefenseWeaponTargetType { get; }
+
+    Inventory inventory { get; }
 }

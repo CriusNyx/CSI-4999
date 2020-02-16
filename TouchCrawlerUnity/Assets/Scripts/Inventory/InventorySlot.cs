@@ -14,9 +14,9 @@ public class InventorySlot : MonoBehaviour
 
     void Update()
     {
-        if (transform.childCount <= 0)
-        {
-            inventory.items[index] = 0;
-        }
+        //if (transform.childCount <= 0)
+        //{
+        //    inventory.items[index] = 0;
+        //}
     }
 }

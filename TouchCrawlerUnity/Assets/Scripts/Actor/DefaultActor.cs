@@ -7,6 +7,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
+[RequireComponent(typeof(Inventory))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -30,10 +31,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public IActor actor => this;
 
+    private Inventory _inventory;
+
+    public Inventory inventory => _inventory;
+
     public void Start()
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
+        _inventory = gameObject.GetComponent<Inventory>();
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -61,7 +67,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         throw new System.NotImplementedException();
     }
 
-    public void AcceptEvent(IEvent e)
+    public virtual void AcceptEvent(IEvent e)
     {
         if (e is MoveInputEvent moveInputEvent)
         {

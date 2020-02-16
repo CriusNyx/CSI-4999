@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour/*, ICollection<Item>*/
 {
-    // Initialize to determine # of inventory slots (prefabs)
-    public GameObject[] slots;
-    public int[] items;
+    private List<Item> itemList = new List<Item>();
+    private int maxNumber = 6;
+
+    public bool IsFull
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
