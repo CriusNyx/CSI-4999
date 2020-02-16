@@ -200,3 +200,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Firebase stuff
+TouchCrawlerUnity/Assets/Firebase/Plugins/link.xml*
