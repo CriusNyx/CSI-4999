@@ -5,31 +5,52 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
     private GameObject[] doorList = new GameObject[5];
+    public GameObject[] neighbors = new GameObject[4];
+    public int neighborCount;
     public bool cleared;
+    public Vector3 gridPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
         cleared = false;
-        doorList[0] = this.transform.GetChild(0).gameObject; //west     0
-        doorList[1] = this.transform.GetChild(1).gameObject; //north    1
-        doorList[2] = this.transform.GetChild(2).gameObject; //east     2
-        doorList[3] = this.transform.GetChild(3).gameObject; //south    3
-        doorList[4] = this.transform.GetChild(4).gameObject; //down     4
+
     }
 
-    void CheckNeighbors()
+    public void setPosition()
     {
-        //check if neighboring cells have rooms, set doors active
+        transform.position = new Vector3((gridPosition.x * 16)
+            , (gridPosition.y * 12), 0);
     }
+
+
+    public void CheckNeighborDoors()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            doorList[i] = transform.GetChild(i + 2).gameObject;
+            //west = 0, north = 1, east = 2, south = 3, down = 4
+            doorList[i].SetActive(false);
+        }
+
+        //check if neighboring cells have rooms, set doors active
+        for (int i = 0; i < 4; i++)
+        {
+            //doorList[0].SetActive(true);
+            if (neighbors[i] != null)
+            {
+                doorList[i].SetActive(true);
+            }
+        }
+    }
+
 
 
     void ToggleDoorOpen(bool set)
-    {
-        //true = open
+    {   
         if (set)
         {
-            foreach(GameObject door in doorList)
+            //true = open
+            foreach (GameObject door in doorList)
             {            
                 //test if it doesn't like inactive doors    
                 door.transform.GetChild(2).gameObject.SetActive(false); //turn door OFF
@@ -46,7 +67,6 @@ public class RoomController : MonoBehaviour
                 //check if lit, record, relight after?
             }
         }
-        //false = close
     }
 
     void ToggleDoorLit(bool set, int id)
@@ -61,7 +81,5 @@ public class RoomController : MonoBehaviour
         {
             doorList[id].transform.GetChild(1).gameObject.SetActive(false);
         }
-
     }
-
 }

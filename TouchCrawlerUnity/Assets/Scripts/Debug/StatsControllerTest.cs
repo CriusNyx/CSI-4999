@@ -12,19 +12,12 @@ public class StatsControllerTest : MonoBehaviour
     {
 
         #region Testing / Debug
-        /*statsController = gameObject.GetComponent<StatsController>();
+        statsController = gameObject.GetComponent<StatsController>();
 
         ModifierKey key = new ModifierKey();
-        StatModifier modifier = new StatModifier(key, 10, ModifierType.Flat);
+        StatModifier modifier = new StatModifier("Debug Add After", key, 10, ModifierType.AddAfterMultiply);
 
         statsController.GetStat(StatType.Health).AddModifier(modifier);
-        Debug.Log("should be true: " + statsController.GetStat(StatType.Health).ContainsKey(key));
-        Debug.Log("stat value should equal 20: " + statsController.GetStat(StatType.Health).CalculateStatValue());
-
-        statsController.GetStat(StatType.Health).RemoveModifier(key);
-
-        Debug.Log("should be false: " + statsController.GetStat(StatType.Health).ContainsKey(key));
-        Debug.Log("stat value should equal 10: " + statsController.GetStat(StatType.Health).CalculateStatValue());*/
         #endregion
     }
 

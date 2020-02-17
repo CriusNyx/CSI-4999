@@ -12,7 +12,14 @@ namespace Assets.WeaponSystem
 {
     public class Weapon : MonoBehaviour
     {
-        public IWeaponOwner owner { get; }
+        public IWeaponOwner owner
+        {
+            get
+            {
+                return gameObject.GetComponentInParent<IWeaponOwner>();
+            }
+        }
+
         public WeaponStatBlock baseStats { get; private set; }
 
         public Damage Damage {get; set;}
@@ -27,12 +34,12 @@ namespace Assets.WeaponSystem
             var components = GetAllComponents();
 
             var requestResult = PropegateMonad(
-                new FireRequestResult(), 
-                components, 
+                new FireRequestResult(),
+                components,
                 (x, y) => x.RequestFire(this, target, y));
 
 
-            if(requestResult.fireRequestSuccessful)
+            if (requestResult.fireRequestSuccessful)
             {
                 FireResult fireResult = new FireResult();
                 var accuracyControllerResult = PropegateMonad(
@@ -40,12 +47,12 @@ namespace Assets.WeaponSystem
                     components,
                     (x, y) => x.ComponentSearch(y));
 
-                for(int i = 0; i < requestResult.projectileCount; i++)
+                for (int i = 0; i < requestResult.projectileCount; i++)
                 {
                     fireResult = PropegateMonad(
                         fireResult,
                         components,
-                        (x, y) => x.Fire(this, target, accuracyControllerResult.value, y));
+                        (x, y) => x.Fire(this, target, accuracyControllerResult.value, requestResult.spawnInfo, y));
                 }
                 return (requestResult.fireRequestSuccessful, fireResult.success, fireResult.projectiles);
             }
@@ -53,7 +60,7 @@ namespace Assets.WeaponSystem
             return (requestResult.fireRequestSuccessful, false, new IProjectile[0]);
         }
 
-        public virtual IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, int projectileNumber)
+        public virtual IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, int projectileNumber)
         {
             var components = GetAllComponents();
             CreateProjectileResult result = new CreateProjectileResult();
@@ -62,7 +69,7 @@ namespace Assets.WeaponSystem
             Quaternion rotation;
             Vector3 direction;
 
-            if(accuracyController == null)
+            if (accuracyController == null)
             {
                 (position, rotation, direction) = AccuracyController.GetDefaultSpawnPosition(this, target, projectileNumber);
             }
@@ -72,9 +79,9 @@ namespace Assets.WeaponSystem
             }
 
             result = PropegateMonad(
-                result, 
-                components, 
-                (x, y) => x.CreateProjectile(this, target, position, rotation, direction, y));
+                result,
+                components,
+                (x, y) => x.CreateProjectile(this, target, position, rotation, direction, bulletSpawnInfo, y));
 
             return result.projectiles;
         }
@@ -84,8 +91,8 @@ namespace Assets.WeaponSystem
             var components = GetAllComponents();
             this.Damage = damage;
             var result = PropegateMonad(
-                new ApplyOnHitEffectsResult(), 
-                components, 
+                new ApplyOnHitEffectsResult(),
+                components,
                 (x, y) => x.ApplyOnHitEffects(this, target, y));
         }
 
@@ -109,8 +116,8 @@ namespace Assets.WeaponSystem
             var components = GetAllComponents();
 
             var result = PropegateMonad(
-                new GetNameResult(), 
-                components, 
+                new GetNameResult(),
+                components,
                 (x, y) => x.GetName(this, y));
 
             return result.ToString();
@@ -150,6 +157,13 @@ namespace Assets.WeaponSystem
                 (x, y) => x.ShouldDestroyProjectile(this, projectile, collider, y));
 
             return result.shouldDestroy;
+        }
+
+        [Flags]
+        public enum WeaponTargetType
+        {
+            player = 1 << 0,
+            enemy = 1 << 1,
         }
     }
 }

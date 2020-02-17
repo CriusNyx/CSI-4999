@@ -21,7 +21,7 @@ namespace Assets.Scripts.Util
         public static GameObject Instantiate(GameObject original, Vector3 position = default, Quaternion rotation = default, Transform parent = default)
         {
             return Create(
-                () => Instantiate(original), 
+                () => GameObject.Instantiate(original), 
                 position, 
                 rotation,
                 parent);

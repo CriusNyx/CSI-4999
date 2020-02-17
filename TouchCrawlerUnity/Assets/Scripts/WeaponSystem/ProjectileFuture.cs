@@ -31,7 +31,11 @@ namespace Assets.Scripts.WeaponSystem
 
         public IWeaponTarget target => GetFuture().target;
 
-        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos) => GetFuture().Initialize(weapon, target, velocity, pos);
+        public Weapon.WeaponTargetType attackTargetType => GetFuture().attackTargetType;
+
+        public bool IgnoreOtherProjectiles => GetFuture().IgnoreOtherProjectiles;
+
+        public void Initialize(Weapon weapon, IWeaponTarget target, Vector2 velocity, Vector2 pos, Color? color, float speedMod, Weapon.WeaponTargetType type) => GetFuture().Initialize(weapon, target, velocity, pos, color, speedMod, type);
 
         private IProjectile GetFuture()
         {

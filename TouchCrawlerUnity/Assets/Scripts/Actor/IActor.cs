@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Events;
+using Assets.Scripts.WeaponSystem;
+using Assets.WeaponSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IActor : Assets.Scripts.Events.IEventListener
+public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
 {
     int actorLevel {
         get;
@@ -14,19 +17,31 @@ public interface IActor : Assets.Scripts.Events.IEventListener
         get;
         set;
     }
+
+    IActor attacker
+    {
+        get;
+    }
     MovementController movementController
     {
         get;
     }
 
-    /*StatController statController{
-     * get;
-     * }
-     */
+    Weapon weapon
+    {
+        get;
+    }
 
     bool IsPlayer();
+
+    Vector2 GetLocation();
+
+    Vector2 DistanceToDestination();
 
     void UseItem(object item);
 
     void PickUpItem(object item);
+
+    Weapon.WeaponTargetType AttackWeaponTargetType { get; }
+    Weapon.WeaponTargetType DefenseWeaponTargetType { get; }
 }
