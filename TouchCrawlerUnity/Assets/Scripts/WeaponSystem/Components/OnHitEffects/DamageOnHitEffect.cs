@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class DamageOnHitEffect : OnHitEffect
 {
-    public Damage damage = new Damage();
+    public FlatDamage damage = new FlatDamage();
 
     public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
     {
