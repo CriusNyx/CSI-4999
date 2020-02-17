@@ -197,6 +197,11 @@ PrefabInstance:
       propertyPath: defenseWeaponTargetType
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 294095362937814815, guid: 1fcc96ad55a45b748893450c12285660,
+        type: 3}
+      propertyPath: maxVelocity.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fcc96ad55a45b748893450c12285660, type: 3}
 --- !u!1 &251528059
@@ -290,6 +295,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &407936076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4922492941089700679, guid: caafa8da584adf94d9e5a03bd86bf7a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1676125188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &407936078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407936076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4165057e677a17a458fb9c43b8caa164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0
+  damage:
+    ammount: 10
 --- !u!1001 &792062985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -449,6 +482,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4434a2531d886024ea4825931c064be7, type: 3}
+--- !u!1 &1374698294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1520028020045547558, guid: 903fec3e12910d344a2f06f756e04948,
+    type: 3}
+  m_PrefabInstance: {fileID: 792062985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1374698295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374698294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c180406ae2af648a2215b739bf81d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  shakeMagnitude: 0.4
 --- !u!1001 &1676125188
 PrefabInstance:
   m_ObjectHideFlags: 0

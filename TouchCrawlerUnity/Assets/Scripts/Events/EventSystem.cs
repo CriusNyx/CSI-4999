@@ -22,6 +22,9 @@ namespace Assets.Scripts.Events
         {
             levelTransition,
             input,
+            gameOver,
+            item,
+            screenShake,
         }
 
         Dictionary<(EventChannel, EventSubChannel), List<IEventListener>> channels = new Dictionary<(EventChannel, EventSubChannel), List<IEventListener>>();

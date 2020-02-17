@@ -12,38 +12,27 @@ public class DoorFlicker : MonoBehaviour
     {
         on = false;
         overlay = GetComponent<Tilemap>();
-        Light();
+        LightOn();
     }
 
-    void Flicker()
+    //Set graphic alpha to 0
+    //likely unnecessary, we'll just deactivate/reactivate object as needed
+    void LightOff()
     {
-        StartCoroutine(WaitFlicker());
-        StopCoroutine(WaitFlicker());
-    }
-
-    IEnumerator WaitFlicker()
-    {
-        yield return new WaitForSeconds(0.05f);
-        Debug.Log("test WaitLight()");
+        on = false;
         var temp = overlay.color;
-        temp.a = Random.Range(.5f, 1);
+        temp.a = 0;
         overlay.color = temp;
-
-        if (on)
-        {
-            Flicker();
-        }
     }
 
-
-
-    void Light()
-    {
-        on = false; //here for relighting, stops Flicker
+    void LightOn() {
         StartCoroutine(WaitLight());
         StopCoroutine(WaitLight());
     }
 
+    //pause .01 seconds, increase graphic alpha by 5%
+    //loops until alpha is 100% and the door is "lit"
+    //start flicker animation
     IEnumerator WaitLight()
     {
         yield return new WaitForSeconds(0.01f);
@@ -54,7 +43,7 @@ public class DoorFlicker : MonoBehaviour
 
         if(temp.a <= .95)
         {
-            Light();
+            LightOn();
         } else
         {
             on = true;
@@ -62,4 +51,26 @@ public class DoorFlicker : MonoBehaviour
         }
     }
 
+    // will need to call flicker after reactivating a room.
+    void Flicker()
+    {
+        StartCoroutine(WaitFlicker());
+        StopCoroutine(WaitFlicker());
+    }
+
+    //continues forever, unless the door light goes off
+    //ex: when the door is closed, flip to on = false
+    //randomly pick a value between 50% and 100% for alpha every .05 seconds
+    IEnumerator WaitFlicker()
+    {
+        yield return new WaitForSeconds(0.05f);
+        var temp = overlay.color;
+        temp.a = Random.Range(.5f, 1);
+        overlay.color = temp;
+
+        if (on)
+        {
+            Flicker();
+        }
+    }
 }

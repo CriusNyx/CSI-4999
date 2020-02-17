@@ -3,6 +3,7 @@ using Assets.Scripts.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.WeaponSystem.Components.OnHitEffects;
 
 public class EffectBurn : OnHitEffect
 { 

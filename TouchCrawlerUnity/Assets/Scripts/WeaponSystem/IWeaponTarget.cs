@@ -5,12 +5,15 @@ using UnityEngine;
 
 namespace Assets.Scripts.WeaponSystem
 {
-    public interface IWeaponTarget
+    public interface IWeaponTarget : IHasGameObject
     {
-        GameObject gameObject { get; }
-
         IActor actor { get; }
 
+        /// <summary>
+        /// Returns true if the damage object is accepted
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <returns></returns>
         bool DoDamage(Damage damage);
     }
 

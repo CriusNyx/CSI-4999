@@ -7,7 +7,7 @@ public class HealthController : MonoBehaviour
     /// <summary>
     /// CurrentHealth is the current health of a character. Float because that takes less memory space.
     /// </summary>
-    public float CurrentHealth;
+    public float CurrentHealth = 100f;
     
     /// <summary>
     /// Each frame, the game will check to see if health is less than or equal to 0. It will crash if Health falls that low.
@@ -17,7 +17,8 @@ public class HealthController : MonoBehaviour
     {
        if(CurrentHealth <= 0)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
+            Destroy(gameObject);
         }
     }
 
@@ -31,7 +32,7 @@ public class HealthController : MonoBehaviour
         float oldHealth = CurrentHealth;
         if (damage is FlatDamage flatDamage)
         {
-            float damageAmount = flatDamage.damageAmount;
+            float damageAmount = flatDamage.ammount;
             CurrentHealth = CurrentHealth - damageAmount;
         }
         
