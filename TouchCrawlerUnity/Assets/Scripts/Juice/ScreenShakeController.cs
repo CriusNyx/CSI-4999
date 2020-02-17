@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Events;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenShakeController : MonoBehaviour
+public class ScreenShakeController : MonoBehaviour, IEventListener
 {
     public Camera mainCamera;
     // Length of shake effect
@@ -11,12 +12,22 @@ public class ScreenShakeController : MonoBehaviour
     [Range(0f, 1f)]
     public float shakeMagnitude = 0.4f;
 
+    private void Start()
+    {
+        EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.screenShake, this);
+    }
+
+    public static void StartShake(float trauma, float length)
+    {
+        EventSystem.Broadcast(EventSystem.EventChannel.player, EventSystem.EventSubChannel.screenShake, new ScreenShakeEvent(trauma, length));
+    }
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.T))
-        {
-            StartCoroutine(Shake(shakeMagnitude, shakeTime));
-        }
+        //if (Input.GetKey(KeyCode.T))
+        //{
+        //    StartCoroutine(Shake(shakeMagnitude, shakeTime));
+        //}
     }
 
     void Awake()
@@ -29,8 +40,7 @@ public class ScreenShakeController : MonoBehaviour
 
     public IEnumerator Shake(float trauma, float length)
     {
-        this.shakeMagnitude = trauma;
-        this.shakeTime = length;
+        //this.shakeTime = length;
 
         // Store normal position + rotation before we start shaking
         Vector3 originalPosition = transform.localPosition;
@@ -66,8 +76,28 @@ public class ScreenShakeController : MonoBehaviour
             }
 
             // Go back to normal position + rotation
-            transform.localPosition = originalPosition;
-            transform.localRotation = originalRotation;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            yield return null;
         }
+    }
+
+    public void AcceptEvent(IEvent e)
+    {
+        if(e is ScreenShakeEvent sse)
+        {
+            StartCoroutine(Shake(sse.trama, sse.length));
+        }
+    }
+}
+
+public class ScreenShakeEvent : IEvent
+{
+    public readonly float trama, length;
+
+    public ScreenShakeEvent(float trama, float length)
+    {
+        this.trama = trama;
+        this.length = length;
     }
 }
