@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class HitPauseController : MonoBehaviour
 {
-    [Range(0f,3f)]
-    public float duration = 0.05f;
-    // Magntiude of shake effect
-    [Range(0f, 1f)]
-    public float shakeMagnitude = 0.4f;
+    //[Range(0f, 3f)]
+    //public float duration = 0.05f;
+    //// Magntiude of shake effect
+    //[Range(0f, 1f)]
+    //public float shakeMagnitude = 0.4f;
 
-    void Update()
+    //void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.R))
+    //    {
+    //        StartCoroutine(DoFreeze());
+    //    }
+    //}
+
+    public void StartShake(float duration, float shakeMagnitude)
     {
-        if (Input.GetKey(KeyCode.R))
-        {
-            StartCoroutine(DoFreeze());
-        }
+        StartCoroutine(DoFreeze(duration, shakeMagnitude));
     }
 
-    IEnumerator DoFreeze()
+    IEnumerator DoFreeze(float duration, float shakeMagnitude)
     {
         float pauseEndTime = Time.realtimeSinceStartup + duration;
         Rigidbody2D rigidBody = gameObject.GetComponent<Rigidbody2D>();
@@ -32,9 +37,11 @@ public class HitPauseController : MonoBehaviour
         while (Time.realtimeSinceStartup < pauseEndTime)
         {
             Shake(shakeMagnitude, duration, originalPosition, originalRotation);
-            
-            yield return 0;
+
+            yield return null;
         }
+
+        yield return null;
 
         rigidBody.isKinematic = false;
         // Go back to original position + rotation
@@ -42,11 +49,8 @@ public class HitPauseController : MonoBehaviour
         transform.rotation = originalRotation;
     }
 
-    public void Shake(float trauma, float length, Vector3 originalPosition, Quaternion originalRotation)
+    private void Shake(float trauma, float length, Vector3 originalPosition, Quaternion originalRotation)
     {
-        this.shakeMagnitude = trauma;
-        this.duration = length;
-
         if (trauma > 0)
         {
             float offsetXYZ = Random.Range(-1f, 1f) * trauma;
