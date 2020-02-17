@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7375190918781602690}
   - component: {fileID: 6196671059138709593}
   - component: {fileID: 3696549913187844474}
+  - component: {fileID: 8377221842537342000}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
-  maxVelocity: {x: 0, y: 0}
+  maxVelocity: {x: 2, y: 2}
 --- !u!114 &294095362937814813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +189,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 100
+--- !u!114 &8377221842537342000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294095362937814812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38374eac5e210941b5011a8c7065f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPatrolling: 0
+  isWandering: 1
+  patrolPath: []
+  stopDuration: 0
+  attackDistance: 3
+  stopDistance: 1.5
 --- !u!1 &294095364424365660
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,16 +11,17 @@ GameObject:
   - component: {fileID: 5970317213393411756}
   - component: {fileID: 6452244056329744253}
   - component: {fileID: 381558103821927873}
-  - component: {fileID: 204601962023348298}
   - component: {fileID: 6567719467391138022}
   - component: {fileID: 2834959450101720508}
-  - component: {fileID: -8939910910144485703}
   - component: {fileID: 1595683118758034595}
   - component: {fileID: 1183742535605916855}
   - component: {fileID: 8185229788685648518}
   - component: {fileID: 5659224516861995740}
   - component: {fileID: 3818876268310459363}
   - component: {fileID: 7609961481845615910}
+  - component: {fileID: 3531504000007252886}
+  - component: {fileID: 1001810031158234330}
+  - component: {fileID: 379575319260834217}
   m_Layer: 0
   m_Name: TestWeapon
   m_TagString: Untagged
@@ -68,19 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown:
     cooldownTime: 0.2
---- !u!114 &204601962023348298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922492941089700679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80293e8f46ed7f7498d4dc3988c55257, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angleRange: 0.5
 --- !u!114 &6567719467391138022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,19 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8939910910144485703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922492941089700679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eca1ad1c0fe33e45bf39d3fdff7efda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileCount: 5
 --- !u!114 &1595683118758034595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trauma: 0.5
-  length: 0.1
+  length: 0.05
 --- !u!114 &3818876268310459363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,4 +183,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trauma: 0.5
-  length: 0.1
+  length: 0.05
+--- !u!114 &3531504000007252886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8920232fcd3d08c4592b2e7a13c92dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0
+  duration: 0.1
+  trauma: 0.2
+--- !u!114 &1001810031158234330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f827ccbd0511c4788c419b45823a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &379575319260834217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80293e8f46ed7f7498d4dc3988c55257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angleRange: 5
