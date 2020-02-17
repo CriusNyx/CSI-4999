@@ -9,10 +9,20 @@ using UnityEngine;
 [RequireComponent(typeof(StatsController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
+
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public IActor target { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    public Weapon weapon { get; set; }
+    public IActor attacker
+    {
+        get;
+        private set;
+    }
+
+    public Weapon weapon { 
+        get; 
+        private set;
+    }
 
     public MovementController movementController
     {
@@ -51,11 +61,37 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
     }
 
+    /// <summary>
+    /// Returns the location of the actor
+    /// </summary>
+    /// <returns>Returns the location of the actor</returns>
+    public Vector2 GetLocation()
+    {
+        return movementController.GetLocation();
+    }
+    
+    /// <summary>
+    /// Not implemented yet
+    /// </summary>
+    /// <param name="item"></param>
     public void PickUpItem(object item)
     {
         throw new System.NotImplementedException();
     }
 
+    /// <summary>
+    /// Passes down the distance to destination from movement controller
+    /// </summary>
+    /// <returns>The distance between the actor and its destination</returns>
+    public Vector2 DistanceToDestination()
+    {
+        return movementController.DistanceToDestination();
+    }
+
+    /// <summary>
+    /// Not implemented yet
+    /// </summary>
+    /// <param name="item"></param>
     public void UseItem(object item)
     {
         throw new System.NotImplementedException();
@@ -77,6 +113,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     public bool DoDamage(Damage damage)
     {
         Debug.Log(damage.ToString());
+        attacker = damage.weaponOwner;
         return true;
     }
 }

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IActor : IEventListener, IWeaponTarget
+public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
 {
     int actorLevel {
         get;
@@ -16,6 +16,11 @@ public interface IActor : IEventListener, IWeaponTarget
     {
         get;
         set;
+    }
+
+    IActor attacker
+    {
+        get;
     }
     MovementController movementController
     {
@@ -28,6 +33,10 @@ public interface IActor : IEventListener, IWeaponTarget
     }
 
     bool IsPlayer();
+
+    Vector2 GetLocation();
+
+    Vector2 DistanceToDestination();
 
     void UseItem(object item);
 
