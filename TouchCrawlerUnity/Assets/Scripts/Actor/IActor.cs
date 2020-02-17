@@ -7,7 +7,8 @@ using UnityEngine;
 
 public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
 {
-    int actorLevel {
+    int actorLevel
+    {
         get;
         set;
     }
@@ -28,6 +29,11 @@ public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
     }
 
     Weapon weapon
+    {
+        get;
+    }
+
+    HealthController healthController
     {
         get;
     }

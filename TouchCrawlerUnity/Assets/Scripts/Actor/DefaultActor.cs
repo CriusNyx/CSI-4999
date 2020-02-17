@@ -7,6 +7,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
+[RequireComponent(typeof(HealthController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
 
@@ -30,6 +31,8 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         private set;
     }
 
+    public HealthController healthController { get; private set; }
+
     public virtual Weapon.WeaponTargetType AttackWeaponTargetType { get => attackWeaponTargetType; set => attackWeaponTargetType = value; }
 
     public Weapon.WeaponTargetType attackWeaponTargetType;
@@ -44,6 +47,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
+        healthController = GetComponent<HealthController>();
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -112,7 +116,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public bool DoDamage(Damage damage)
     {
-        throw new System.NotImplementedException();
+        healthController.TakeDamage(damage);
         //Debug.Log(damage.ToString());
         //attacker = damage.weaponOwner;
         return true;

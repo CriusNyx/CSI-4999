@@ -301,20 +301,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1676125188}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &407936077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407936076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f388fa353e4e24faea0cba9056988b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trauma: 1
-  length: 0.1
 --- !u!114 &407936078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +321,8 @@ MonoBehaviour:
       percentChance: 0
     cooldown:
       cooldownTime: 0
+  damage:
+    ammount: 10
 --- !u!1001 &792062985
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 8185229788685648518}
   - component: {fileID: 5659224516861995740}
   - component: {fileID: 3818876268310459363}
+  - component: {fileID: 7609961481845615910}
   m_Layer: 0
   m_Name: TestWeapon
   m_TagString: Untagged
@@ -192,3 +193,19 @@ MonoBehaviour:
       percentChance: 0
     cooldown:
       cooldownTime: 0
+  damage:
+    ammount: 10
+--- !u!114 &7609961481845615910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f388fa353e4e24faea0cba9056988b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trauma: 0.5
+  length: 0.1
