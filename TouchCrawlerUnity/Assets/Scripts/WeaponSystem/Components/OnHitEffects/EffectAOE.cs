@@ -1,8 +1,10 @@
 using Assets.Scripts.Util.Latches;
 using Assets.Scripts.WeaponSystem;
+using Assets.Scripts.WeaponSystem.Components.OnHitEffects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class EffectAOE : OnHitEffect
 { 

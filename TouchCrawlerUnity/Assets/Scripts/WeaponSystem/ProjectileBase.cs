@@ -77,6 +77,16 @@ namespace Assets.Scripts.WeaponSystem
 
         void OnTriggerEnter2D(Collider2D collider)
         {
+//<<<<<<< HEAD
+//            Damage dmg = null;
+//            if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
+//            { 
+//                Destroy(this.gameObject);
+//            }
+//            if (col.otherCollider.gameObject.GetComponent<IWeaponTarget>() != null ) {
+//                dmg = new Damage(col.contacts);
+//                this.WeaponSrc.ApplyOnHitEffects(col.collider.GetComponent<IWeaponTarget>(), dmg);
+//=======
             var colliderTarget = collider.GetComponent<IWeaponTarget>();
             var otherProjectile = collider.GetComponent<IProjectile>();
 

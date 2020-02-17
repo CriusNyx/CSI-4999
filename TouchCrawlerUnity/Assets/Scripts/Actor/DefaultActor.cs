@@ -113,7 +113,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     public bool DoDamage(Damage damage)
     {
         Debug.Log(damage.ToString());
-        attacker = damage.weaponOwner;
+        //attacker = damage.weaponOwner;
         return true;
     }
 }
