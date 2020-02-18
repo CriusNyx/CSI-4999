@@ -14,9 +14,10 @@ public class PickUpItem : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         IActor actor = other.GetComponentInParent<IActor>();
+
         if (actor != null)
         {
-            actor.AcceptEvent(new PickupItemTouchedEvent(this));
+            actor.AcceptEvent(new PickupItemTouchedEvent(item));
         }
     }
 
@@ -28,10 +29,12 @@ public class PickUpItem : MonoBehaviour
         }
         else
         {
-            //check if we can be picked up
+            //Check if item can be picked up
             isPickedUp = ValidatePickup(actor);
+            Debug.Log("Inside RequestPickup");
             if (isPickedUp)
             {
+
                 //Destroy self
                 //Add self to actor inventory
                 return true;

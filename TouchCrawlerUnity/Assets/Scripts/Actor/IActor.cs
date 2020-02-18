@@ -29,9 +29,9 @@ public interface IActor : IEventListener, IWeaponTarget
 
     bool IsPlayer();
 
-    void UseItem(object item);
+    void UseItem(Item item);
 
-    void PickUpItem(object item);
+    void PickUpItem(Item item);
 
     Weapon.WeaponTargetType AttackWeaponTargetType { get; }
     Weapon.WeaponTargetType DefenseWeaponTargetType { get; }

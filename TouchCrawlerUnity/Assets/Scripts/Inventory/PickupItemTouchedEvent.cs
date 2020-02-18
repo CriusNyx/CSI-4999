@@ -2,9 +2,9 @@
 
 public class PickupItemTouchedEvent : IEvent
 {
-    public readonly PickUpItem item;
+    public readonly Item item;
 
-    public PickupItemTouchedEvent(PickUpItem item)
+    public PickupItemTouchedEvent(Item item)
     {
         this.item = item;
     }

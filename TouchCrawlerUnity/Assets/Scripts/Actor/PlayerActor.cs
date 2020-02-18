@@ -10,9 +10,18 @@ public class PlayerActor : DefaultActor
     public override void AcceptEvent(IEvent e)
     {
         base.AcceptEvent(e);
-        if(e is PickupItemTouchedEvent pickupItemEvent)
+
+        if (e is PickupItemTouchedEvent pickupItemEvent)
         {
-            throw new NotImplementedException();
+            this.inventory.Add(pickupItemEvent.item);
+            DestroyImmediate(pickupItemEvent.item);
+
+            Debug.Log("Picked up: " + pickupItemEvent.item.name);
         }
+    }
+
+    public void PlayerPickUp(Item item)
+    {
+        this.inventory.Add(item);
     }
 }
