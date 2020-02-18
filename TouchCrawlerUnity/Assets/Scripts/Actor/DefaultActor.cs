@@ -59,7 +59,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public void PickUpItem(Item item)
     {
-        _inventory.Add(item);
+        if (_inventory.IsFull)
+        {
+            Debug.Log("Inventory is full! Cannot pick up: " + item.name);
+        }
+        else
+        {
+            _inventory.Add(item);
+        }
+
         Debug.Log("PickUpItem: " + item.name);
     }
 

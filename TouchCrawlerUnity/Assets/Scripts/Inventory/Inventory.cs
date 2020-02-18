@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour, ICollection<Item>
 {
-    private List<Item> itemList = new List<Item>();
+    // Made this public for debugging purposes
+    public List<Item> itemList = new List<Item>();
     private int maxNumber = 6;
 
     public bool IsFull

@@ -4,11 +4,9 @@ using UnityEngine;
 public class PickupItemTouchedEvent : IEvent
 {
     public readonly Item item;
-    public readonly GameObject itemObject;
 
-    public PickupItemTouchedEvent(Item item, GameObject itemObject)
+    public PickupItemTouchedEvent(Item item)
     {
         this.item = item;
-        this.itemObject = itemObject;
     }
 }
