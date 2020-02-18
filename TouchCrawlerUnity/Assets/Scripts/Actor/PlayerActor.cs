@@ -13,15 +13,9 @@ public class PlayerActor : DefaultActor
 
         if (e is PickupItemTouchedEvent pickupItemEvent)
         {
-            this.inventory.Add(pickupItemEvent.item);
-            DestroyImmediate(pickupItemEvent.item);
-
-            Debug.Log("Picked up: " + pickupItemEvent.item.name);
+            Debug.Log("PickupItemTouchedEvent");
+            this.PickUpItem(pickupItemEvent.item);
+            Destroy(pickupItemEvent.itemObject);
         }
-    }
-
-    public void PlayerPickUp(Item item)
-    {
-        this.inventory.Add(item);
     }
 }

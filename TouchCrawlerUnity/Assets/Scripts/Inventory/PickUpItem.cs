@@ -11,13 +11,13 @@ public class PickUpItem : MonoBehaviour
     public Item item;
 
     // Checks to see if player collides with item
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        IActor actor = other.GetComponentInParent<IActor>();
+        IActor actor = collider.GetComponentInParent<IActor>();
 
         if (actor != null)
         {
-            actor.AcceptEvent(new PickupItemTouchedEvent(item));
+            actor.AcceptEvent(new PickupItemTouchedEvent(item, this.gameObject));
         }
     }
 
