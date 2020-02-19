@@ -43,6 +43,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
+            EventSystem.AddEventListener(EventSystem.EventChannel.inventory, EventSystem.EventSubChannel.item, this);
         }
     }
     public bool IsPlayer()
@@ -77,6 +78,10 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         if (e is AttackInputEvent attackInputEvent)
         {
             this.weapon?.Fire(attackInputEvent.attackable.GetTarget());
+        }
+        if(e is DropItemEvent dropItemEvent)
+        {
+            Debug.Log("Drop item");
         }
     }
 

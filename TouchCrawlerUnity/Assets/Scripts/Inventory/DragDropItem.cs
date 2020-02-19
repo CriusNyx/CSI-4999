@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class DragDropItem : MonoBehaviour
 {
-    void Start()
+    public void OnTouch()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        Debug.Log("Touch");
     }
 }
