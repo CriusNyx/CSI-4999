@@ -1,0 +1,36 @@
+﻿@startuml dieDiagram
+
+abstract class OnDeathEffect {
+    +IActor actor
+    ---
+    +void OnDie(IActor actor)
+}
+
+class PassEvents {
+    +IEvent eventOnDie
+    +EventChannel channel
+    +EventSubChannel subChannel
+    ---
+    +PassEventsOnDie()
+    +void OnDie(IActor actor)
+}
+PassEvents --|> OnDeathEffect
+
+class DestructionOnDie {
+    +DestructionOnDie()
+    +void OnDie(IActor actor)
+}
+DestructionOnDie --|> OnDeathEffect
+
+class GameOver {
+    +GameOver()
+    +void OnDie(IActor actor)
+}
+GameOver --|> OnDeathEffect
+
+class DropItem {
+    +DropItem()
+    +void OnDie(IActor actor)
+}
+DropItem --|> OnDeathEffect
+@enduml

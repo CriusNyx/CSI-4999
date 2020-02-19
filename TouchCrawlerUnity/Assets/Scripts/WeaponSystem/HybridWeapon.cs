@@ -19,7 +19,7 @@ namespace Assets.Scripts.WeaponSystem
             //do nothing
         }
 
-        public override IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, int projectileNumber)
+        public override IEnumerable<IProjectile> CreateProjectile(IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, int projectileNumber)
         {
             //do nothing
             return new IProjectile[] { };

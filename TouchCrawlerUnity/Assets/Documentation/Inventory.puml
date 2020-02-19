@@ -1,0 +1,3 @@
+class Invectory{
+    -List<Item> items
+}

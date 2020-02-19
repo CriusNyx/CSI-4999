@@ -19,6 +19,7 @@ namespace Assets.Scripts.WeaponSystem
             ProjectileFactory,
             Debug,
             OnHitEffect,
+            ProjectileDefinition,
             None
         }
 
@@ -28,12 +29,12 @@ namespace Assets.Scripts.WeaponSystem
             return result;
         }
 
-        public virtual FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, FireResult result)
+        public virtual FireResult Fire(Weapon weapon, IWeaponTarget target, AccuracyController accuracyController, BulletSpawnInfo bulletSpawnInfo, FireResult result)
         {
             return result;
         }
 
-        public virtual CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, CreateProjectileResult result)
+        public virtual CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, BulletSpawnInfo bulletSpawnInfo, CreateProjectileResult result)
         {
             return result;
         }
@@ -92,6 +93,7 @@ namespace Assets.Scripts.WeaponSystem
         {
             public bool fireRequestSuccessful = false;
             public int projectileCount { get; private set; } = 0;
+            public readonly BulletSpawnInfo spawnInfo = new BulletSpawnInfo();
 
             public void AddProjectile(int count)
             {
@@ -178,6 +180,18 @@ namespace Assets.Scripts.WeaponSystem
             public IEnumerable<T> set => list;
 
             public void AddComponent(T t) => list.Add(t);
+        }
+
+        public class BulletSpawnInfo
+        {
+            public Color? color;
+            public GameObject prefabToSpawn;
+            public float speedModifier { get; private set; } = 1f;
+
+            public void AddSpeedModRatio(float speed)
+            {
+                speedModifier *= speed;
+            }
         }
         #endregion
     }
