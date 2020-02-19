@@ -12,12 +12,11 @@ public class DoorFlicker : MonoBehaviour
     {
         on = false;
         overlay = GetComponent<Tilemap>();
-        LightOn();
     }
 
     //Set graphic alpha to 0
     //likely unnecessary, we'll just deactivate/reactivate object as needed
-    void LightOff()
+    public void LightOff()
     {
         on = false;
         var temp = overlay.color;
@@ -25,7 +24,7 @@ public class DoorFlicker : MonoBehaviour
         overlay.color = temp;
     }
 
-    void LightOn() {
+    public void LightOn() {
         StartCoroutine(WaitLight());
         StopCoroutine(WaitLight());
     }
@@ -52,7 +51,7 @@ public class DoorFlicker : MonoBehaviour
     }
 
     // will need to call flicker after reactivating a room.
-    void Flicker()
+    public void Flicker()
     {
         StartCoroutine(WaitFlicker());
         StopCoroutine(WaitFlicker());

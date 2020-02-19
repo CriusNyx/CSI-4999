@@ -13,7 +13,6 @@ public class RoomController : MonoBehaviour
     void Start()
     {
         cleared = false;
-
     }
 
     public void setPosition()
@@ -44,43 +43,15 @@ public class RoomController : MonoBehaviour
     }
 
 
-
-    void ToggleDoorOpen(bool set)
-    {   
-        if (set)
-        {
-            //true = open
-            foreach (GameObject door in doorList)
-            {            
-                //test if it doesn't like inactive doors    
-                door.transform.GetChild(2).gameObject.SetActive(false); //turn door OFF
-                door.transform.GetChild(0).gameObject.SetActive(true); //turn trigger collider ON
-                //cleared is only open condition?
-                cleared = true;
-            }
-        }else
-        {
-            foreach (GameObject door in doorList)
-            {
-                door.transform.GetChild(2).gameObject.SetActive(true); //turn door ON
-                door.transform.GetChild(0).gameObject.SetActive(false); //turn trigger collider OFF
-                //check if lit, record, relight after?
-            }
-        }
+    public void ToggleDoorOpen(int id, bool open)
+    {
+        doorList[id].GetComponent<DoorController>().ToggleDoor(open);
     }
 
-    void ToggleDoorLit(bool set, int id)
+
+    public void ToggleDoorLit(bool set, int id)
     {
-        //true = on; room explored
-        //false = off; room not explored
-        if (set)
-        {
-            doorList[id].transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            doorList[id].transform.GetChild(1).gameObject.SetActive(false);
-        }
+        doorList[id].GetComponent<DoorController>().ToggleLightDoor(set);
     }
 
     public void OnRoomEnter()
