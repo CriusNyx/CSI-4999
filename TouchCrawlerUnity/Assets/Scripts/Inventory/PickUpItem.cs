@@ -50,7 +50,7 @@ public class PickUpItem : MonoBehaviour
             {
                 foreach(GameObject itemSlot in itemSlots)
                 {
-                    if (itemSlot.transform.childCount < 2)
+                    if (itemSlot.transform.transform.childCount < 2)
                     {
                         actor.inventory.Add(item);
 
