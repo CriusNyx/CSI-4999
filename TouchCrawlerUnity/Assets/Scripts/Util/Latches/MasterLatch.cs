@@ -13,7 +13,8 @@ namespace Assets.Scripts.Util.Latches
         {
             cooldown,
             dice,
-            counter
+            counter,
+            none
         }
 
         public LatchType latchType = LatchType.cooldown;

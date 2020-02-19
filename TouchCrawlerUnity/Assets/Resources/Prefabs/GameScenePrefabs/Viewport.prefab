@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7317612971270003045}
   - component: {fileID: 2401249136875895832}
   - component: {fileID: 5614679211327268223}
+  - component: {fileID: 7386184252908220430}
   m_Layer: 0
   m_Name: Viewport
   m_TagString: MainCamera
@@ -97,3 +98,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 2800000, guid: a9ae0267b06e7b24d90f188a4370cce3, type: 3}
+--- !u!114 &7386184252908220430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728698036186897771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c9f593f986fa84a838a1398a26f02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 7317612971270003045}
+  shakeTime: 0.5
+  shakeMagnitude: 0.4

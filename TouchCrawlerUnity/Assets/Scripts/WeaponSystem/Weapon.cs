@@ -22,6 +22,8 @@ namespace Assets.WeaponSystem
 
         public WeaponStatBlock baseStats { get; private set; }
 
+        public Damage Damage {get; set;}
+
         public IEnumerable<WeaponComponent> GetAllComponents()
         {
             return gameObject.GetComponentsInChildren<WeaponComponent>();
@@ -84,15 +86,18 @@ namespace Assets.WeaponSystem
             return result.projectiles;
         }
 
-        public virtual void ApplyOnHitEffects(IWeaponTarget target)
+        public virtual void ApplyOnHitEffects(IWeaponTarget target, Damage damage) 
         {
             var components = GetAllComponents();
-
+            this.Damage = damage;
             var result = PropegateMonad(
                 new ApplyOnHitEffectsResult(),
                 components,
                 (x, y) => x.ApplyOnHitEffects(this, target, y));
         }
+
+        public virtual void ApplyOnHitEffects(IWeaponTarget target) => ApplyOnHitEffects(target, null);
+
 
         public virtual WeaponStatBlock GetStats()
         {
