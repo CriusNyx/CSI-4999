@@ -7,12 +7,28 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.I))
+        {
+            foreach (Item item in this.inventory.itemList)
+            {
+                Debug.Log(item.name);
+            }
+
+            Debug.Log("Count: " + this.inventory.itemList.Count);
+        }
+    }
+
     public override void AcceptEvent(IEvent e)
     {
         base.AcceptEvent(e);
-        if(e is PickupItemTouchedEvent pickupItemEvent)
+
+        if (e is PickupItemTouchedEvent pickupItemEvent)
         {
-            throw new NotImplementedException();
+            Debug.Log("PickupItemTouchedEvent");
+
+            //this.PickUpItem(pickupItemEvent.item);
         }
     }
 }

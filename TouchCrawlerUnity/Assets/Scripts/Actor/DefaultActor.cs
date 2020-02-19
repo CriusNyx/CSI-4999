@@ -32,7 +32,6 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     public IActor actor => this;
 
     private Inventory _inventory;
-
     public Inventory inventory => _inventory;
 
     public void Start()
@@ -40,6 +39,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
         _inventory = gameObject.GetComponent<Inventory>();
+
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -58,12 +58,21 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
     }
 
-    public void PickUpItem(object item)
+    public void PickUpItem(Item item)
     {
-        throw new System.NotImplementedException();
+        if (_inventory.IsFull)
+        {
+            Debug.Log("Inventory is full! Cannot pick up: " + item.name);
+        }
+        else
+        {
+            _inventory.Add(item);
+        }
+
+        Debug.Log("PickUpItem: " + item.name);
     }
 
-    public void UseItem(object item)
+    public void UseItem(Item item)
     {
         throw new System.NotImplementedException();
     }
