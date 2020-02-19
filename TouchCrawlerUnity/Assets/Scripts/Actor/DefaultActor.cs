@@ -8,18 +8,31 @@ using UnityEngine;
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(HealthController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
+
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public IActor target { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    public Weapon weapon { get; set; }
+    public IActor attacker
+    {
+        get;
+        private set;
+    }
+
+    public Weapon weapon { 
+        get; 
+        private set;
+    }
 
     public MovementController movementController
     {
         get;
         private set;
     }
+
+    public HealthController healthController { get; private set; }
 
     public virtual Weapon.WeaponTargetType AttackWeaponTargetType { get => attackWeaponTargetType; set => attackWeaponTargetType = value; }
 
@@ -31,15 +44,14 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public IActor actor => this;
 
-    private Inventory _inventory;
-    public Inventory inventory => _inventory;
+    public Inventory inventory { get; private set; }
 
     public void Start()
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
-        _inventory = gameObject.GetComponent<Inventory>();
-
+        inventory = gameObject.GetComponent<Inventory>();
+        healthController = GetComponent<HealthController>();
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -58,20 +70,46 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
     }
 
+    /// <summary>
+    /// Returns the location of the actor
+    /// </summary>
+    /// <returns>Returns the location of the actor</returns>
+    public Vector2 GetLocation()
+    {
+        return movementController.GetLocation();
+    }
+    
+    /// <summary>
+    /// Not implemented yet
+    /// </summary>
+    /// <param name="item"></param>
     public void PickUpItem(Item item)
     {
-        if (_inventory.IsFull)
+        if (inventory.IsFull)
         {
             Debug.Log("Inventory is full! Cannot pick up: " + item.name);
         }
         else
         {
-            _inventory.Add(item);
+            inventory.Add(item);
         }
 
         Debug.Log("PickUpItem: " + item.name);
     }
 
+    /// <summary>
+    /// Passes down the distance to destination from movement controller
+    /// </summary>
+    /// <returns>The distance between the actor and its destination</returns>
+    public Vector2 DistanceToDestination()
+    {
+        return movementController.DistanceToDestination();
+    }
+
+    /// <summary>
+    /// Not implemented yet
+    /// </summary>
+    /// <param name="item"></param>
     public void UseItem(Item item)
     {
         throw new System.NotImplementedException();
@@ -96,7 +134,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public bool DoDamage(Damage damage)
     {
-        Debug.Log(damage.ToString());
+        healthController.TakeDamage(damage);
+        //Debug.Log(damage.ToString());
+        //attacker = damage.weaponOwner;
         return true;
     }
 }

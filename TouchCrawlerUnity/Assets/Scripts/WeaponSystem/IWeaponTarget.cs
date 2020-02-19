@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.WeaponSystem
 {
-    public interface IWeaponTarget
+    public interface IWeaponTarget : IHasGameObject
     {
-        GameObject gameObject { get; }
-
         IActor actor { get; }
 
         /// <summary>

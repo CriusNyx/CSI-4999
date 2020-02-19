@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2574178835906547538}
-  - component: {fileID: 9176790886389793579}
+  - component: {fileID: -209560206309804966}
   m_Layer: 0
   m_Name: TestRoom2
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9176790886389793579
+--- !u!114 &-209560206309804966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

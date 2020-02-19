@@ -25,6 +25,7 @@ namespace Assets.Scripts.Events
             input,
             gameOver,
             item,
+            screenShake,
         }
 
         Dictionary<(EventChannel, EventSubChannel), List<IEventListener>> channels = new Dictionary<(EventChannel, EventSubChannel), List<IEventListener>>();

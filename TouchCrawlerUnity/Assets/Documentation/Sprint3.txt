@@ -1,0 +1,13 @@
+* Make it so it accepts the damage objects and applies the damage.
+
+* Damage file.
+
+* Store a float value for how much health you have. Percentage of how much health is left.
+
+* Want to retrieve the stat value for Max Health and take damage, convert it to percentage of max health.
+
+* Take the damage object into takeDamage function. Use damage.damageAmount to create a percentage of max health (get from stat controller component).
+
+* Subtract that percentage amount from Health Float Value. Double check if the new value is the same or different from the old one (will always return true as of now).
+
+* If they are the same, return false. Otherwise true.

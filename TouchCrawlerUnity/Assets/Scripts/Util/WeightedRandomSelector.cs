@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeightedRandomSelector<T> : IList<T>
+public class WeightedRandomSelector<T>
 {
     List<T> elements = new List<T>();
     ProbabilityDistributionFunction pdf = new ProbabilityDistributionFunction();
@@ -36,10 +36,10 @@ public class WeightedRandomSelector<T> : IList<T>
         pdf.Add(weight);
     }
 
-    public void Add(T item)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void Add(T item)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     public void Clear()
     {
@@ -80,8 +80,6 @@ public class WeightedRandomSelector<T> : IList<T>
         elements.RemoveAt(index);
         pdf.RemoveAt(index);
     }
-
-    IEnumerator IEnumerable.GetEnumerator() => elements.GetEnumerator();
 
     public T Select(float randomValue)
     {
