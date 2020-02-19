@@ -16,6 +16,7 @@ namespace Assets.Scripts.Events
         {
             gameState,
             player,
+            inventory,
         }
 
         public enum EventSubChannel

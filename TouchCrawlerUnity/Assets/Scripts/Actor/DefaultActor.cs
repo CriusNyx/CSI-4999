@@ -7,6 +7,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
+[RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(HealthController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
@@ -43,14 +44,18 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public IActor actor => this;
 
+    public Inventory inventory { get; private set; }
+
     public void Start()
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
+        inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
+            EventSystem.AddEventListener(EventSystem.EventChannel.inventory, EventSystem.EventSubChannel.item, this);
         }
     }
     public bool IsPlayer()
@@ -78,9 +83,18 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     /// Not implemented yet
     /// </summary>
     /// <param name="item"></param>
-    public void PickUpItem(object item)
+    public void PickUpItem(Item item)
     {
-        throw new System.NotImplementedException();
+        if (inventory.IsFull)
+        {
+            Debug.Log("Inventory is full! Cannot pick up: " + item.name);
+        }
+        else
+        {
+            inventory.Add(item);
+        }
+
+        Debug.Log("PickUpItem: " + item.name);
     }
 
     /// <summary>
@@ -96,12 +110,12 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     /// Not implemented yet
     /// </summary>
     /// <param name="item"></param>
-    public void UseItem(object item)
+    public void UseItem(Item item)
     {
         throw new System.NotImplementedException();
     }
 
-    public void AcceptEvent(IEvent e)
+    public virtual void AcceptEvent(IEvent e)
     {
         if (e is MoveInputEvent moveInputEvent)
         {
@@ -111,6 +125,10 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         if (e is AttackInputEvent attackInputEvent)
         {
             this.weapon?.Fire(attackInputEvent.attackable.GetTarget());
+        }
+        if(e is DropItemEvent dropItemEvent)
+        {
+            Debug.Log("Drop item");
         }
     }
 

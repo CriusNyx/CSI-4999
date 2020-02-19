@@ -40,14 +40,17 @@ public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
 
     bool IsPlayer();
 
+
+    void UseItem(Item item);
+
     Vector2 GetLocation();
 
     Vector2 DistanceToDestination();
 
-    void UseItem(object item);
-
-    void PickUpItem(object item);
+    void PickUpItem(Item item);
 
     Weapon.WeaponTargetType AttackWeaponTargetType { get; }
     Weapon.WeaponTargetType DefenseWeaponTargetType { get; }
+
+    Inventory inventory { get; }
 }

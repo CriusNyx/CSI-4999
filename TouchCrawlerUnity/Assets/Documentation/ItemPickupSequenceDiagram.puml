@@ -1,0 +1,10 @@
+@startuml ItemPickupSequenceDiagram
+
+Item --> IActor : Send Item Was Touched Event
+IActor --> IActor : Process Event
+IActor --> Item : Request pickup
+Item --> Item : Validate Pickup
+Item --> IActor.Inventory : Add Item To Inventory
+Item --> Item : Destroy Self
+
+@enduml
