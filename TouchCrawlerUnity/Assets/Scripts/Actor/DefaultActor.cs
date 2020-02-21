@@ -70,19 +70,13 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
     }
 
-    /// <summary>
-    /// Returns the location of the actor
-    /// </summary>
-    /// <returns>Returns the location of the actor</returns>
+    // Returns the location of the actor
     public Vector2 GetLocation()
     {
         return movementController.GetLocation();
     }
     
-    /// <summary>
-    /// Not implemented yet
-    /// </summary>
-    /// <param name="item"></param>
+    // Picks up the item if inventory is not full
     public void PickUpItem(Item item)
     {
         if (inventory.IsFull)
@@ -97,19 +91,13 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         Debug.Log("PickUpItem: " + item.name);
     }
 
-    /// <summary>
-    /// Passes down the distance to destination from movement controller
-    /// </summary>
-    /// <returns>The distance between the actor and its destination</returns>
+    // Passes down the distance to destination from movement controller
     public Vector2 DistanceToDestination()
     {
         return movementController.DistanceToDestination();
     }
 
-    /// <summary>
-    /// Not implemented yet
-    /// </summary>
-    /// <param name="item"></param>
+    // Not implemented yet
     public void UseItem(Item item)
     {
         throw new System.NotImplementedException();

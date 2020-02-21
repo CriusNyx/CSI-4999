@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
+    // Debug to see how many items the player has. -Sam
     void Update()
     {
         if (Input.GetKey(KeyCode.I))
@@ -27,8 +28,6 @@ public class PlayerActor : DefaultActor
         if (e is PickupItemTouchedEvent pickupItemEvent)
         {
             Debug.Log("PickupItemTouchedEvent");
-
-            //this.PickUpItem(pickupItemEvent.item);
         }
     }
 }
