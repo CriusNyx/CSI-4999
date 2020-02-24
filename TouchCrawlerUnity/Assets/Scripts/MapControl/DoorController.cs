@@ -65,7 +65,7 @@ public class DoorController : MonoBehaviour
                 newDoor = doorID + 2;
             }
             nextRoom.GetComponent<RoomController>().doorList[newDoor].GetComponent<DoorController>().SetEnabled(false);
-            other.gameObject.transform.position = nextRoom.GetComponent<RoomController>().getSpawns(newDoor);
+            other.gameObject.GetComponent<MovementController>().Warp(nextRoom.GetComponent<RoomController>().getSpawns(newDoor));
 
             //set camera target
 
