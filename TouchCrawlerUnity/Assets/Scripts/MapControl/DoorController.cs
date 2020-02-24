@@ -5,13 +5,20 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     DoorFlicker roomLight;
-    public int roomID;
-    GameObject nextRoom;
+    public int doorID;
+    public GameObject nextRoom;
+    private bool enabledColl;
     // Start is called before the first frame update
     void Start()
     {
         roomLight = transform.GetChild(0).GetComponent<DoorFlicker>();
-        nextRoom = transform.parent.GetComponent<RoomController>().neighbors[roomID];
+        nextRoom = transform.parent.GetComponent<RoomController>().neighbors[doorID];
+    }
+
+    public void SetEnabled(bool set)
+    {
+        enabledColl = set;
+        //Debug.Log("Setting spawn room doors on - doors to : " + set + "|| is now: " + enabledColl);
     }
 
     public void ToggleDoor(bool open)
@@ -19,12 +26,12 @@ public class DoorController : MonoBehaviour
         if (open)
         {
             transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetComponent<BoxCollider2D>().enabled = true;
+            enabledColl = false;
 
         } else
         {
             transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetComponent<BoxCollider2D>().enabled = false;
+            enabledColl = false;
         }
     }
 
@@ -40,21 +47,36 @@ public class DoorController : MonoBehaviour
     }
 
     //
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && enabledColl)
         {
+            Debug.Log("Trigger entered!");
             //activate correct neighbor
             nextRoom.SetActive(true);
 
             //teleport player to correct door spawn
-            other.gameObject.transform.position = nextRoom.GetComponent<RoomController>().getSpawns(roomID);
+            int newDoor;
+            if(doorID > 1)
+            {
+                newDoor = doorID - 2;
+            } else
+            {
+                newDoor = doorID + 2;
+            }
+            nextRoom.GetComponent<RoomController>().doorList[newDoor].GetComponent<DoorController>().SetEnabled(false);
+            other.gameObject.transform.position = nextRoom.GetComponent<RoomController>().getSpawns(newDoor);
 
             //set camera target
 
-            gameObject.SetActive(false);            
+            gameObject.transform.parent.gameObject.SetActive(false);            
 
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        transform.parent.GetComponent<RoomController>().SetDoorColliders(true);
     }
 
 }
