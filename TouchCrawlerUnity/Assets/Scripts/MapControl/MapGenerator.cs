@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public GameObject roomPrefab;
+    public LevelDefinition levelDefinition;
+    public GameObject spawnRoomPrefab;
     public int minRoomAmount;
     public int maxRoomAmount;
     public int gridRadius;
@@ -19,8 +20,8 @@ public class MapGenerator : MonoBehaviour
     {
         finalNumRooms = Random.Range(minRoomAmount, maxRoomAmount+1);
         //Origin point
-        GameObject seedRoom = Instantiate(roomPrefab);
-        seedRoom.transform.SetParent(transform.root.gameObject.transform);
+        GameObject seedRoom = Instantiate(spawnRoomPrefab);
+        seedRoom.transform.parent = transform;
         RoomController seedRoomCont = seedRoom.GetComponent<RoomController>();
 
         seedRoomCont.gridPosition = new Vector3(0,0,0);
@@ -58,8 +59,8 @@ public class MapGenerator : MonoBehaviour
         foreach(GameObject checkRoom in roomObjects)
         {
             // neighbor exist?
-            if ((System.Math.Abs(checkRoom.GetComponent<RoomController>().gridPosition.x) - (System.Math.Abs(seedRoom.GetComponent<RoomController>().gridPosition.x)) == 1)
-                || (System.Math.Abs(checkRoom.GetComponent<RoomController>().gridPosition.y) - (System.Math.Abs(seedRoom.GetComponent<RoomController>().gridPosition.y)) == 1)){
+            if (IsAdjacent(seedRoom, checkRoom))
+            {
                 totalNeighbors = System.Math.Max(totalNeighbors--, 0);
             }
         }
@@ -87,9 +88,9 @@ public class MapGenerator : MonoBehaviour
             if(currNumRooms < finalNumRooms)
             {
                 //make 1 new room
-                GameObject room = Instantiate(roomPrefab);
-                room.transform.SetParent(transform.root.gameObject.transform);
-                RoomController roomCont = room.GetComponent<RoomController>();
+                GameObject room = Instantiate(levelDefinition.roomsToInstantiate[Random.Range(0, levelDefinition.roomsToInstantiate.Length)]);
+                room.transform.parent = transform;
+                RoomController roomController = room.GetComponent<RoomController>();
 
                 //Pick random neighbor location
                 switch (randInd[i])
@@ -130,8 +131,8 @@ public class MapGenerator : MonoBehaviour
                     if (!exists)
                     {
                         //all good, add the room
-                        roomCont.gridPosition = newPosition;
-                        roomCont.setPosition();
+                        roomController.gridPosition = newPosition;
+                        roomController.setPosition();
                         currNumRooms++;
                         nextToAdd.Enqueue(room);
                         roomObjects.Add(room);
@@ -148,6 +149,22 @@ public class MapGenerator : MonoBehaviour
         }
 
 
+    }
+
+    private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
+    {
+        return (IsAdjacentHorizontal(seedRoom, checkRoom))
+                        || IsAdjacentVertical(seedRoom, checkRoom);
+    }
+
+    private static bool IsAdjacentVertical(GameObject seedRoom, GameObject checkRoom)
+    {
+        return (System.Math.Abs(checkRoom.GetComponent<RoomController>().gridPosition.y) - (System.Math.Abs(seedRoom.GetComponent<RoomController>().gridPosition.y)) == 1);
+    }
+
+    private static bool IsAdjacentHorizontal(GameObject seedRoom, GameObject checkRoom)
+    {
+        return System.Math.Abs(checkRoom.GetComponent<RoomController>().gridPosition.x) - (System.Math.Abs(seedRoom.GetComponent<RoomController>().gridPosition.x)) == 1;
     }
 
     //add some more variability
