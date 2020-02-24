@@ -56,7 +56,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652d88ca929ac6d489ffe0e8706ed16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 4754820465505261761, guid: 1d28aa3aebde9154d817a096d2218171,
+  levelDefinition: {fileID: 0}
+  spawnRoomPrefab: {fileID: 4754820465505261761, guid: 1d28aa3aebde9154d817a096d2218171,
     type: 3}
   minRoomAmount: 20
   maxRoomAmount: 40

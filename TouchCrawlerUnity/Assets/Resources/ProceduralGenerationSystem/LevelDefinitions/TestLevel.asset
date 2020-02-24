@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   definitionsToInherrit:
   - {fileID: 11400000, guid: faaa362227b494b448e72164d268ecb3, type: 2}
-  roomsToInstantiate: []
+  roomsToInstantiate:
+  - {fileID: 4754820465505261761, guid: 1d28aa3aebde9154d817a096d2218171, type: 3}
+  - {fileID: 7405005985023533124, guid: c7e6267c251cd4243bdc38b8dd224b48, type: 3}

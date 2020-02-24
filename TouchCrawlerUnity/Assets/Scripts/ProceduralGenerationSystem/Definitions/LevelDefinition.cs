@@ -9,11 +9,13 @@ public class LevelDefinition : ScriptableObject
     /// <summary>
     /// A set of additional level defintions to ineherrit.
     /// </summary>
+    [SerializeField]
     public LevelDefinition[] definitionsToInherrit = new LevelDefinition[] { };
 
     /// <summary>
     /// A set of rooms to build.
     /// </summary>
+    [SerializeField]
     public GameObject[] roomsToInstantiate = new GameObject[] { };
 
     public static LevelDefinition[] ResolveDependancies(LevelDefinition levelDefinition)

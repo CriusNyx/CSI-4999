@@ -4,25 +4,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(LevelDefinition))]
 public class LevelDefinitionEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        
-
         GUILayout.Label(target.name, "BoldLabel");
 
         LevelDefinition levelDefinition = target as LevelDefinition;
 
-        Undo.RecordObject(levelDefinition, "Edited Level Definition \"" + levelDefinition.name + "\"");
-
+        EditorGUI.BeginChangeCheck();
 
         GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition. It behaives a little like css."), "BoldLabel");
 
-        levelDefinition.definitionsToInherrit =
-            Assets.Editor.EditorGUICustomUtility.DrawArrayEditor(
+        var newDefinitionsToInherrit = levelDefinition.definitionsToInherrit =
+            EditorGUICustomUtility.DrawArrayEditor(
                 levelDefinition.definitionsToInherrit,
                 (x) =>
                 {
@@ -53,7 +52,7 @@ public class LevelDefinitionEditor : Editor
 
 
         GUILayout.Label(new GUIContent("Room Prefabs", "A set of rooms that can spawn on this level."), "BoldLabel");
-        levelDefinition.roomsToInstantiate = Assets.Editor.EditorGUICustomUtility.DrawArrayEditor(
+        var newRoomArray = EditorGUICustomUtility.DrawArrayEditor(
             levelDefinition.roomsToInstantiate,
             (x) =>
             {
@@ -99,9 +98,22 @@ public class LevelDefinitionEditor : Editor
             },
             "Add Room");
 
-
-
         CheckErrorsForInherritdDefinitions(warningStyle, defs);
+
+        
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(levelDefinition, "Edited Level Definition: " + levelDefinition.name);
+            levelDefinition.definitionsToInherrit = newDefinitionsToInherrit;
+            levelDefinition.roomsToInstantiate = newRoomArray;
+
+            PrefabUtility.RecordPrefabInstancePropertyModifications(levelDefinition);
+
+            EditorUtility.SetDirty(target);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
     }
 
     private static void CheckErrorsForInherritdDefinitions(GUIStyle warningStyle, LevelDefinition[] defs)
