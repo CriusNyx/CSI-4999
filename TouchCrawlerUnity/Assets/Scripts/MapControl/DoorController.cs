@@ -48,6 +48,7 @@ public class DoorController : MonoBehaviour
             nextRoom.SetActive(true);
 
             //teleport player to correct door spawn
+            other.gameObject.transform.position = nextRoom.GetComponent<RoomController>().getSpawns(roomID);
 
             //set camera target
 

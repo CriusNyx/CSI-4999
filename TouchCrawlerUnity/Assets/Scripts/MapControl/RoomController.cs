@@ -6,6 +6,8 @@ public class RoomController : MonoBehaviour
 {
     private GameObject[] doorList = new GameObject[5];
     public GameObject[] neighbors = new GameObject[4];
+    private GameObject[] playerSpawns = new GameObject[4];
+
     public int neighborCount;
     public bool cleared;
     public Vector3 gridPosition;
@@ -27,6 +29,7 @@ public class RoomController : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             doorList[i] = transform.GetChild(i + 2).gameObject;
+            playerSpawns[i] = transform.Find("PlayerSpawns").GetChild(i).gameObject;
             //west = 0, north = 1, east = 2, south = 3, down = 4
             doorList[i].SetActive(false);
         }
@@ -42,6 +45,10 @@ public class RoomController : MonoBehaviour
         }
     }
 
+    public Vector3 getSpawns(int index)
+    {
+        return playerSpawns[index].transform.position;
+    }
 
     public void ToggleDoorOpen(int id, bool open)
     {
