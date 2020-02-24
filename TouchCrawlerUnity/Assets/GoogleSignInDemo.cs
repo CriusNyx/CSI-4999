@@ -7,6 +7,7 @@ using Firebase.Auth;
 using Google;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GoogleSignInDemo : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
+
+    public SceneField MainMenu;
 
     private void Awake()
     {
@@ -49,7 +52,7 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        AddToInformation("Calling SignIn");
+        AddToInformation("Signing In");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
@@ -90,11 +93,21 @@ public class GoogleSignInDemo : MonoBehaviour
         }
         else
         {
-            AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            AddToInformation("Email = " + task.Result.Email);
-            AddToInformation("Google ID Token = " + task.Result.IdToken);
-            AddToInformation("Email = " + task.Result.Email);
-            SignInWithGoogleOnFirebase(task.Result.IdToken);
+            // AddToInformation("Welcome: " + task.Result.DisplayName + "!");
+            // AddToInformation("Email = " + task.Result.Email);
+            // AddToInformation("Google ID Token = " + task.Result.IdToken);
+            // AddToInformation("Email = " + task.Result.Email);
+            if (MainMenu != null)
+            {
+                SignInWithGoogleOnFirebase(task.Result.IdToken);
+                SceneManager.LoadScene(MainMenu, LoadSceneMode.Single);
+                
+            }
+            else
+            {
+                AddToInformation("No Main Menu Scene set.");
+            }
+            
         }
     }
 
