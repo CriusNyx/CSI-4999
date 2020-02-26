@@ -39,8 +39,18 @@ public class MapGenerator : MonoBehaviour
         {
             room.GetComponent<RoomController>().CheckNeighborDoors();
         }
+        for (int i = 0; i < roomObjects.Count; i++ ){
+            
+            if(i == 0)
+            {
+                roomObjects[0].GetComponent<RoomController>().SetDoorColliders(true);
+            } else
+            {
+                roomObjects[i].SetActive(false);
+                roomObjects[i].GetComponent<RoomController>().SetDoorColliders(false);
+            }
+        }
 
-        //neighbor rooms
 
     }
 

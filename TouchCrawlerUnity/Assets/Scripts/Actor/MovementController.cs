@@ -72,6 +72,11 @@ public class MovementController : MonoBehaviour
         destination = body.position;  
     }
 
+    public void Warp(Vector3 newLoc)
+    {
+        transform.position = newLoc;
+    }
+
     /// <summary>
     /// Will stop on a collision
     /// </summary>
