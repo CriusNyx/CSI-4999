@@ -140,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
@@ -259,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
@@ -378,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
@@ -497,7 +497,7 @@ PrefabInstance:
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 548707000}
   m_Layer: 0
   m_Name: Yellow Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -863,6 +863,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1769335035}
     m_Modifications:
+    - target: {fileID: 1232747133337332951, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -876,7 +881,7 @@ PrefabInstance:
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
@@ -990,7 +995,7 @@ GameObject:
   - component: {fileID: 950812567}
   m_Layer: 0
   m_Name: Red Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1290,7 +1295,7 @@ GameObject:
   - component: {fileID: 1267367009}
   m_Layer: 0
   m_Name: Pink Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1415,7 +1420,7 @@ GameObject:
   - component: {fileID: 1705177298}
   m_Layer: 0
   m_Name: Lt Blue Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1546,7 +1551,7 @@ GameObject:
   - component: {fileID: 1778632336}
   m_Layer: 0
   m_Name: Blue Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1671,7 +1676,7 @@ GameObject:
   - component: {fileID: 1918273406}
   m_Layer: 0
   m_Name: Green Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1801,7 +1806,7 @@ PrefabInstance:
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
@@ -1915,7 +1920,7 @@ GameObject:
   - component: {fileID: 2064441870}
   m_Layer: 0
   m_Name: Purple Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

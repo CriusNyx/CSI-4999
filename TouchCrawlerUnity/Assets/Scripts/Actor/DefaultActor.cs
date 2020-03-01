@@ -46,7 +46,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public Inventory inventory { get; private set; }
 
-    public void Start()
+    public void Awake()
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
@@ -114,10 +114,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         {
             this.weapon?.Fire(attackInputEvent.attackable.GetTarget());
         }
-        if(e is DropItemEvent dropItemEvent)
+        // Temporarily commented out
+        /*if (e is PickupItemTouchedEvent pickupItemTouchedEvent)
+        {
+            Debug.Log("Pick up item");
+        }
+        if (e is DropItemEvent dropItemEvent)
         {
             Debug.Log("Drop item");
-        }
+        }*/
     }
 
     public bool DoDamage(Damage damage)

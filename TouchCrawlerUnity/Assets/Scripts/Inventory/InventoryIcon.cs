@@ -19,6 +19,8 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         lastMousePosition = eventData.position;
+        item = this.transform.parent.GetChild(1).GetComponent<PickUpItem>().item;
+        //Debug.Log("Name: " + this.name + " Item: " + this.transform.parent.GetChild(1).GetComponent<PickUpItem>().item.name);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -48,6 +50,7 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         if (results.Count == 0)
         {
             Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item));
+           // Debug.Log("Dropped - " + item.name);
         }
     }
 

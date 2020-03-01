@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour, ICollection<Item>
     // Made this public for debugging purposes
     public List<Item> itemList = new List<Item>();
     private int maxNumber = 6;
+    public Action<Item, GameObject> onPickUp;
+    public Action<Item, bool> onDrop;
 
     public bool IsFull
     {
@@ -26,12 +28,25 @@ public class Inventory : MonoBehaviour, ICollection<Item>
     }
 
     public int Count => itemList.Count;
-
     public bool IsReadOnly => false;
+
+    public void Add(Item item, GameObject itemObject)
+    {
+        itemList.Add(item);
+        onPickUp?.Invoke(item, itemObject);
+    }
 
     public void Add(Item item)
     {
-        itemList.Add(item);
+        Debug.Log("Don't call Inventory.Add() without GameObject");
+    }
+
+    public bool Remove(Item item)
+    {
+        var remove = itemList.Remove(item);
+        onDrop?.Invoke(item, remove);
+
+        return remove;
     }
 
     public void Clear()
@@ -59,11 +74,6 @@ public class Inventory : MonoBehaviour, ICollection<Item>
     public IEnumerator<Item> GetEnumerator()
     {
         return itemList.GetEnumerator();
-    }
-
-    public bool Remove(Item item)
-    {
-        return itemList.Remove(item);
     }
 
     IEnumerator IEnumerable.GetEnumerator()

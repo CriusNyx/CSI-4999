@@ -7,7 +7,17 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
-    // Debug to see how many items the player has. -Sam
+    private GameObject player;
+    private IActor actor;
+    private GameObject[] itemSlots;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
+        actor = player.GetComponent<IActor>();
+    }
+
     void Update()
     {
         if (Input.GetKey(KeyCode.I))
@@ -25,9 +35,15 @@ public class PlayerActor : DefaultActor
     {
         base.AcceptEvent(e);
 
+        if (e is DropItemEvent dropItemEvent)
+        {
+            Debug.Log("Player: DropItemEvent - " + dropItemEvent.item.name);
+            //this.inventory.Remove(dropItemEvent.item);
+        }
+
         if (e is PickupItemTouchedEvent pickupItemEvent)
         {
-            Debug.Log("PickupItemTouchedEvent");
+            Debug.Log("Player: PickupItemTouchedEvent - " + pickupItemEvent.item.name);
         }
     }
 }
