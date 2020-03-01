@@ -38,6 +38,20 @@ namespace Assets.Scripts.Death
         public override void OnDie(IActor actor) { this.actor = actor; }
     }
 
+    class ActionOnDie : OnDieEffect
+    {
+        public System.Action<IActor> deathAction;
+        IActor actor;
+        public void createActionOnDie(System.Action<IActor> deathAction, IActor actor)
+        {
+            this.deathAction = deathAction;
+            this.actor = actor;
+        }
+
+        public override void OnDie(IActor actor) { deathAction.Invoke(actor); }
+    }
+
+
     /// <summary>
     /// This event destroys the actors gameobject when it dies.
     /// </summary>

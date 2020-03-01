@@ -64,6 +64,15 @@ public class MovementController : MonoBehaviour
     }
 
     // Will stop on a collision
+    public void Warp(Vector3 newLoc)
+    {
+        transform.position = newLoc;
+    }
+
+    /// <summary>
+    /// Will stop on a collision
+    /// </summary>
+    /// <param name="other"></param>
     void OnCollisionEnter2D(Collision2D other)
     {
         Stop();

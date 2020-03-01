@@ -957,7 +957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d6170b17c91c24b8250298357c7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 3
+  doorID: 3
+  nextRoom: {fileID: 0}
 --- !u!1 &4754820464199994637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,7 +2535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d6170b17c91c24b8250298357c7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 2
+  doorID: 2
+  nextRoom: {fileID: 0}
 --- !u!1 &4754820464313996308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,7 +3858,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d6170b17c91c24b8250298357c7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 1
+  doorID: 1
+  nextRoom: {fileID: 0}
 --- !u!1 &4754820465301484238
 GameObject:
   m_ObjectHideFlags: 0
@@ -4811,7 +4814,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &4754820465497859952
 GameObject:
   m_ObjectHideFlags: 0
@@ -5131,7 +5134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d6170b17c91c24b8250298357c7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 0
+  doorID: 0
+  nextRoom: {fileID: 0}
 --- !u!1 &4754820465505261761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5185,6 +5189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723c30a4503de0646a9d3e91ec7cf687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   neighbors:
   - {fileID: 0}
   - {fileID: 0}
@@ -5752,7 +5762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d6170b17c91c24b8250298357c7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: 4
+  doorID: 4
+  nextRoom: {fileID: 0}
 --- !u!1 &4754820465646527890
 GameObject:
   m_ObjectHideFlags: 0

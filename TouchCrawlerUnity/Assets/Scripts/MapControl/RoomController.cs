@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
-    private GameObject[] doorList = new GameObject[5];
+    public GameObject[] doorList = new GameObject[5];
     public GameObject[] neighbors = new GameObject[4];
     private GameObject[] playerSpawns = new GameObject[4];
+
 
     public int neighborCount;
     public bool cleared;
@@ -24,17 +25,32 @@ public class RoomController : MonoBehaviour
     }
 
 
+    public void SetDoorColliders(bool set)
+    {
+        foreach (GameObject door in doorList)
+        {
+            //Debug.Log("Setting doors enabled - room");
+            door.GetComponent<DoorController>().SetEnabled(set);
+        }
+    }
+
+
     public void CheckNeighborDoors()
     {
+        //check if neighboring cells have rooms, set doors active
         for (int i = 0; i < 5; i++)
         {
+            //Debug.Log("Locating Neighbor " + i);
             doorList[i] = transform.GetChild(i + 2).gameObject;
-            playerSpawns[i] = transform.Find("PlayerSpawns").GetChild(i).gameObject;
+            if (i < 4)
+            {
+                playerSpawns[i] = transform.Find("PlayerSpawns").GetChild(i).gameObject;
+            }
+
             //west = 0, north = 1, east = 2, south = 3, down = 4
             doorList[i].SetActive(false);
         }
 
-        //check if neighboring cells have rooms, set doors active
         for (int i = 0; i < 4; i++)
         {
             //doorList[0].SetActive(true);
@@ -53,6 +69,7 @@ public class RoomController : MonoBehaviour
     public void ToggleDoorOpen(int id, bool open)
     {
         doorList[id].GetComponent<DoorController>().ToggleDoor(open);
+        SetDoorColliders(open);
     }
 
 
