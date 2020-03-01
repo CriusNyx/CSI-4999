@@ -12,6 +12,11 @@ using UnityEngine;
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
 
+    public MonoBehaviour monoBehaviour
+    {
+        get => this;
+    }
+
     public int actorLevel { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public IActor target { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
@@ -58,7 +63,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
             EventSystem.AddEventListener(EventSystem.EventChannel.inventory, EventSystem.EventSubChannel.item, this);
         }
+
+        ProtectedStart();
     }
+
+    protected virtual void ProtectedStart()
+    {
+
+    }
+
     public bool IsPlayer()
     {
         if (this is PlayerActor)
@@ -131,5 +144,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         //Debug.Log(damage.ToString());
         //attacker = damage.weaponOwner;
         return true;
+    }
+
+    public virtual void OnRoomEnter(RoomController roomController)
+    {
+
+    }
+
+    public virtual void OnRoomExit(RoomController roomController)
+    {
+
     }
 }

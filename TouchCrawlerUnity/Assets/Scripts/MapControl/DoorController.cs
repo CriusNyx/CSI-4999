@@ -51,9 +51,8 @@ public class DoorController : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && enabledColl)
         {
-            Debug.Log("Trigger entered!");
+            //Debug.Log("Trigger entered!");
             //activate correct neighbor
-            nextRoom.SetActive(true);
 
             //teleport player to correct door spawn
             int newDoor;
@@ -64,12 +63,18 @@ public class DoorController : MonoBehaviour
             {
                 newDoor = doorID + 2;
             }
-            nextRoom.GetComponent<RoomController>().doorList[newDoor].GetComponent<DoorController>().SetEnabled(false);
-            other.gameObject.GetComponent<MovementController>().Warp(nextRoom.GetComponent<RoomController>().getSpawns(newDoor));
+
+            this.GetComponentInParent<RoomController>().OnRoomExit();
+
+            var roomController = nextRoom.GetComponent<RoomController>();
+            roomController.EnterDoor(other.GetComponent<IActor>(), newDoor);
+            roomController.OnRoomEnter();
+            //nextRoom.GetComponent<RoomController>().doorList[newDoor].GetComponent<DoorController>().SetEnabled(false);
+            //other.gameObject.GetComponent<MovementController>().Warp(nextRoom.GetComponent<RoomController>().getSpawns(newDoor));
 
             //set camera target
 
-            gameObject.transform.parent.gameObject.SetActive(false);            
+            //gameObject.transform.parent.gameObject.SetActive(false);            
 
         }
     }

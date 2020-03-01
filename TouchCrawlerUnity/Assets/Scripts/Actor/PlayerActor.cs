@@ -7,16 +7,30 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
-    private GameObject player;
-    private IActor actor;
-    private GameObject[] itemSlots;
-
-    void Start()
+    protected override void ProtectedStart()
     {
+        base.ProtectedStart();
+        
         player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
         actor = player.GetComponent<IActor>();
+
+        Viewport.Instance.CameraController.objectToTrack = gameObject;
     }
+
+    // Debug to see how many items the player has. -Sam
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.I))
+        {
+            foreach (Item item in this.inventory.itemList)
+            {
+                Debug.Log(item.name);
+            }
+
+    private GameObject player;
+    private IActor actor;
+    private GameObject[] itemSlots;
 
     public override void AcceptEvent(IEvent e)
     {
@@ -32,5 +46,13 @@ public class PlayerActor : DefaultActor
         {
             Debug.Log("Player: PickupItemTouchedEvent - " + pickupItemEvent.item.name);
         }
+    }
+
+    public override void OnRoomEnter(RoomController roomController)
+    {
+        base.OnRoomEnter(roomController);
+
+        //Viewport.Instance.CameraController.objectToTrack = gameObject;
+        Viewport.Instance.CameraController.target = roomController.CameraTarget;
     }
 }

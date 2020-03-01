@@ -60,13 +60,14 @@ public class MovementController : MonoBehaviour
     // Stops the actor
     public void Stop()
     {
-        destination = body.position;  
+        destination = transform.position;  
     }
 
     // Will stop on a collision
     public void Warp(Vector3 newLoc)
     {
         transform.position = newLoc;
+        Stop();
     }
 
     /// <summary>
