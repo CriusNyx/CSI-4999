@@ -85,10 +85,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
         else
         {
+            Debug.Log("PickUpItem: " + item.name);
             inventory.Add(item);
         }
-
-        Debug.Log("PickUpItem: " + item.name);
     }
 
     // Passes down the distance to destination from movement controller
