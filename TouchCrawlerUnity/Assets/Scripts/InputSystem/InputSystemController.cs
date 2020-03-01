@@ -46,7 +46,8 @@ namespace Assets.Scripts.InputSystem
         {
             List<GameInput> inputs = new List<GameInput>();
 
-            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            if(false)
             {
                 // Prevent movement on UI click
                 return new GameInput[0];
