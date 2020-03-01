@@ -46,12 +46,13 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public Inventory inventory { get; private set; }
 
-    public void Start()
+    public void Awake()
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
         inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
+
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -85,10 +86,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         }
         else
         {
+            Debug.Log("PickUpItem: " + item.name);
             inventory.Add(item);
         }
-
-        Debug.Log("PickUpItem: " + item.name);
     }
 
     // Passes down the distance to destination from movement controller
@@ -114,10 +114,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         {
             this.weapon?.Fire(attackInputEvent.attackable.GetTarget());
         }
-        if(e is DropItemEvent dropItemEvent)
+        // Temporarily commented out
+        /*if (e is PickupItemTouchedEvent pickupItemTouchedEvent)
+        {
+            Debug.Log("Pick up item");
+        }
+        if (e is DropItemEvent dropItemEvent)
         {
             Debug.Log("Drop item");
-        }
+        }*/
     }
 
     public bool DoDamage(Damage damage)

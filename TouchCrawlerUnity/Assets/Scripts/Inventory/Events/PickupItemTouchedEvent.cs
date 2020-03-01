@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Events;
-using UnityEngine;
 
 public class PickupItemTouchedEvent : IEvent
 {
