@@ -20,7 +20,7 @@ public class PickUpItem : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         IActor actor = collider.GetComponentInParent<IActor>();
-
+        
         if (actor != null)
         {
             if (RequestPickup(actor))
@@ -48,30 +48,9 @@ public class PickUpItem : MonoBehaviour
 
             if (isPickedUp)
             {
-                foreach(GameObject itemSlot in itemSlots)
-                {
-                    if (itemSlot.transform.transform.childCount < 2)
-                    {
-                        actor.inventory.Add(item);
-
-                        Image image = itemSlot.transform.Find("ItemIcon").GetComponent<Image>();
-                        itemIcon = this.GetComponent<SpriteRenderer>();
-
-                        image.enabled = true;
-                        image.sprite = itemIcon.sprite;
-                        image.color = itemIcon.color;
-
-                        // Create a clone of the item within item slot
-                        GameObject clone = Instantiate(gameObject, itemSlot.transform, false);
-                        clone.name = item.name;
-
-                        Destroy(gameObject);
-
-                        return true;
-                    }
-                }
-
-                return false;
+                actor.inventory.Add(item, gameObject);
+                Destroy(gameObject);
+                return true;
             }
             else
             {

@@ -6,14 +6,19 @@ using UnityEngine.EventSystems;
 public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public Item item;
-    RectTransform rectTransform;
-    private Vector2 lastMousePosition;
     public Vector3 basePosition;
+    RectTransform rectTransform; 
+
+    private Vector2 lastMousePosition;
+    private Vector3 finalWorldPosition;
+    private GameObject parent;
+    private GameObject itemObjectFromUI;
 
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         basePosition = rectTransform.localPosition;
+        parent = gameObject.transform.parent.gameObject;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -27,13 +32,15 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         Vector2 diff = currentMousePosition - lastMousePosition;
         RectTransform rect = GetComponent<RectTransform>();
 
-        Vector3 newPosition = rect.position + new Vector3(diff.x, diff.y, transform.position.z);
-        Vector3 oldPosition = rect.position;
-        rect.position = newPosition;
+        Vector3 newPosition = rectTransform.position + new Vector3(diff.x, diff.y, transform.position.z);
+        Vector3 oldPosition = rectTransform.position;
+        rectTransform.position = newPosition;
+
+        finalWorldPosition = Camera.main.ScreenToWorldPoint(rectTransform.position);
 
         if (!IsRectTransformInsideSreen(rect))
         {
-            rect.position = oldPosition;
+            rectTransform.position = oldPosition;
         }
 
         lastMousePosition = currentMousePosition;
@@ -45,9 +52,16 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
+        // Activate DropItemEvent
         if (results.Count == 0)
         {
-            Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item));
+            // Take object from UI and move into the scene
+            itemObjectFromUI = parent.transform.GetChild(1).gameObject;
+
+            GameObject itemObjectInScene = Instantiate(itemObjectFromUI, new Vector3(finalWorldPosition.x, finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
+            itemObjectInScene.name = itemObjectFromUI.name;
+
+            Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item, parent));
         }
     }
 

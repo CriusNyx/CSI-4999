@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    //Components
+    // Components
     Rigidbody2D body;
     new BoxCollider2D collider;
 
-    //Velocity variables
+    // Velocity variables
     Vector2 destination;
     public Vector2 velocity;
     public Vector2 maxVelocity = new Vector2(3f, 3f);
 
     void Start()
     {
-        //Initialize all components;
+        // Initialize all components;
         body = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         velocity = Vector2.zero;
@@ -42,36 +42,28 @@ public class MovementController : MonoBehaviour
         {
             body.velocity = velocity;
         }
-
     }
 
-    /// <summary>
-    /// Sets the destination of the actor to the Vector2
-    /// </summary>
-    /// <param name="nextLocation">The desitination of the actor</param>
+    // Sets the destination of the actor to the Vector2
     public void Move(Vector2 nextLocation)
     {
         this.destination = nextLocation;
     }
 
-    /// <summary>
-    /// Sets the destination of the actor to the position of an actor
-    /// </summary>
-    /// <param name="target">The actor this actor will move towards</param>
+    // Sets the destination of the actor to the position of an actor
     public void Move(IActor target)
     {
         destination = target.GetLocation();
 
     }
 
-    /// <summary>
-    /// Stops the actor
-    /// </summary>
+    // Stops the actor
     public void Stop()
     {
         destination = transform.position;  
     }
 
+    // Will stop on a collision
     public void Warp(Vector3 newLoc)
     {
         transform.position = newLoc;
@@ -87,20 +79,13 @@ public class MovementController : MonoBehaviour
         Stop();
     }
 
-    /// <summary>
-    /// Tests if the actor is at the destination yet
-    /// </summary>
-    /// <returns>True if it is at it's destination otherwise false</returns>
+    // Tests if the actor is at the destination yet
     public bool IsAtDestination()
     {
         return Vector2.Distance(body.position, destination) < 0.1f;
     }
 
-    /// <summary>
-    /// Returns the distance to the actors destination
-    /// </summary>
-    /// <returns>A Vector2 for the distance between the actor and the destination</returns>
-
+    // Returns the distance to the actors destination
     public Vector2 DistanceToDestination()
     {
         if (destination != null)
@@ -113,13 +98,9 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Returns the location the actor
-    /// </summary>
-    /// <returns>A Vector2 for the location of the actor</returns>
+    // Returns the location the actor
     public Vector2 GetLocation()
     {
         return body.position;
     }
-
 }

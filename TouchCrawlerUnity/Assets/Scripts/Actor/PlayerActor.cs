@@ -10,6 +10,10 @@ public class PlayerActor : DefaultActor
     protected override void ProtectedStart()
     {
         base.ProtectedStart();
+        
+        player = GameObject.FindGameObjectWithTag("Player");
+        itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
+        actor = player.GetComponent<IActor>();
 
         Viewport.Instance.CameraController.objectToTrack = gameObject;
     }
@@ -24,17 +28,23 @@ public class PlayerActor : DefaultActor
                 Debug.Log(item.name);
             }
 
-            Debug.Log("Count: " + this.inventory.itemList.Count);
-        }
-    }
+    private GameObject player;
+    private IActor actor;
+    private GameObject[] itemSlots;
 
     public override void AcceptEvent(IEvent e)
     {
         base.AcceptEvent(e);
 
+        if (e is DropItemEvent dropItemEvent)
+        {
+            Debug.Log("Player: DropItemEvent - " + dropItemEvent.item.name);
+            this.inventory.Remove(dropItemEvent.item, dropItemEvent.itemSlot);
+        }
+
         if (e is PickupItemTouchedEvent pickupItemEvent)
         {
-            Debug.Log("PickupItemTouchedEvent");
+            Debug.Log("Player: PickupItemTouchedEvent - " + pickupItemEvent.item.name);
         }
     }
 

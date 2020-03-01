@@ -46,38 +46,47 @@ namespace Assets.Scripts.InputSystem
         {
             List<GameInput> inputs = new List<GameInput>();
 
-            if(Input.GetMouseButtonDown(0))
+            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
-                inputs.Add(new GameInput(GameInput.EventType.down, Vector2.zero, Input.mousePosition));
+                // Prevent movement on UI click
+                return new GameInput[0];
             }
-            if(Input.GetMouseButtonUp(0))
+            else
             {
-                inputs.Add(new GameInput(GameInput.EventType.up, Vector2.zero, Input.mousePosition));
-            }
-            if(mousePositionLastFrame != Input.mousePosition)
-            {
-                inputs.Add(new GameInput(GameInput.EventType.drag, Input.mousePosition - mousePositionLastFrame, Input.mousePosition));
-            }
 
-            foreach(var touch in Input.touches)
-            {
-                switch(touch.phase)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    case TouchPhase.Began:
-                        inputs.Add(new GameInput(GameInput.EventType.down, Vector2.zero, touch.position));
-                        break;
-                    case TouchPhase.Ended:
-                        inputs.Add(new GameInput(GameInput.EventType.up, Vector2.zero, touch.position));
-                        break;
-                    case TouchPhase.Moved:
-                        inputs.Add(new GameInput(GameInput.EventType.drag, touch.deltaPosition, touch.position));
-                        break;
+                    inputs.Add(new GameInput(GameInput.EventType.down, Vector2.zero, Input.mousePosition));
                 }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    inputs.Add(new GameInput(GameInput.EventType.up, Vector2.zero, Input.mousePosition));
+                }
+                if (mousePositionLastFrame != Input.mousePosition)
+                {
+                    inputs.Add(new GameInput(GameInput.EventType.drag, Input.mousePosition - mousePositionLastFrame, Input.mousePosition));
+                }
+
+                foreach (var touch in Input.touches)
+                {
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            inputs.Add(new GameInput(GameInput.EventType.down, Vector2.zero, touch.position));
+                            break;
+                        case TouchPhase.Ended:
+                            inputs.Add(new GameInput(GameInput.EventType.up, Vector2.zero, touch.position));
+                            break;
+                        case TouchPhase.Moved:
+                            inputs.Add(new GameInput(GameInput.EventType.drag, touch.deltaPosition, touch.position));
+                            break;
+                    }
+                }
+
+                mousePositionLastFrame = Input.mousePosition;
+
+                return inputs.ToArray();
             }
-
-            mousePositionLastFrame = Input.mousePosition;
-
-            return inputs.ToArray();
         }
 
         /// <summary>
