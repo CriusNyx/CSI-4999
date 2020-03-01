@@ -18,7 +18,6 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     {
         rectTransform = GetComponent<RectTransform>();
         basePosition = rectTransform.localPosition;
-
         parent = gameObject.transform.parent.gameObject;
     }
 
@@ -53,15 +52,15 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
-        // Take object from UI and move into the scene
-        itemObjectFromUI = parent.transform.GetChild(1).gameObject;
-
-        GameObject itemObjectInScene = Instantiate(itemObjectFromUI, new Vector3(finalWorldPosition.x, finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
-        itemObjectInScene.name = itemObjectFromUI.name;
-
         // Activate DropItemEvent
         if (results.Count == 0)
         {
+            // Take object from UI and move into the scene
+            itemObjectFromUI = parent.transform.GetChild(1).gameObject;
+
+            GameObject itemObjectInScene = Instantiate(itemObjectFromUI, new Vector3(finalWorldPosition.x, finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
+            itemObjectInScene.name = itemObjectFromUI.name;
+
             Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item, parent));
         }
     }

@@ -18,19 +18,6 @@ public class PlayerActor : DefaultActor
         actor = player.GetComponent<IActor>();
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.I))
-        {
-            foreach (Item item in this.inventory.itemList)
-            {
-                Debug.Log(item.name);
-            }
-
-            Debug.Log("Count: " + this.inventory.itemList.Count);
-        }
-    }
-
     public override void AcceptEvent(IEvent e)
     {
         base.AcceptEvent(e);
