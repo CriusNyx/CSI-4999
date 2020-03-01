@@ -38,7 +38,7 @@ public class PlayerActor : DefaultActor
         if (e is DropItemEvent dropItemEvent)
         {
             Debug.Log("Player: DropItemEvent - " + dropItemEvent.item.name);
-            //this.inventory.Remove(dropItemEvent.item);
+            this.inventory.Remove(dropItemEvent.item, dropItemEvent.itemSlot);
         }
 
         if (e is PickupItemTouchedEvent pickupItemEvent)

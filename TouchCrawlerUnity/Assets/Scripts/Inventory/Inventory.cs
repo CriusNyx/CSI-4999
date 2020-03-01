@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour, ICollection<Item>
     public List<Item> itemList = new List<Item>();
     private int maxNumber = 6;
     public Action<Item, GameObject> onPickUp;
-    public Action<Item, bool> onDrop;
+    public Action<Item, GameObject, bool> onDrop;
 
     public bool IsFull
     {
@@ -41,12 +41,17 @@ public class Inventory : MonoBehaviour, ICollection<Item>
         Debug.Log("Don't call Inventory.Add() without GameObject");
     }
 
-    public bool Remove(Item item)
+    public bool Remove(Item item, GameObject itemSlot)
     {
         var remove = itemList.Remove(item);
-        onDrop?.Invoke(item, remove);
+        onDrop?.Invoke(item, itemSlot, remove);
 
         return remove;
+    }
+
+    public bool Remove(Item item)
+    {
+        return false;
     }
 
     public void Clear()

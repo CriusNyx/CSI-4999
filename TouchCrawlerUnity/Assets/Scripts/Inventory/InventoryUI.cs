@@ -8,8 +8,10 @@ public class InventoryUI : MonoBehaviour
 {
     private GameObject player;
     private IActor actor;
+    private GameObject selectedSlot;
     private GameObject[] itemSlots;
     private SpriteRenderer itemIcon;
+    private Image image;
 
     void Start()
     {
@@ -30,12 +32,13 @@ public class InventoryUI : MonoBehaviour
         {
             if (itemSlot.transform.transform.childCount < 2)
             {
-                Image image = itemSlot.transform.Find("ItemIcon").GetComponent<Image>();
+                image = itemSlot.transform.Find("ItemIcon").GetComponent<Image>();
                 //itemIcon = image.GetComponent<SpriteRenderer>();
-
+     
                 image.enabled = true;
                 image.sprite = item.icon;
                 image.color = item.color;
+                image.GetComponent<InventoryIcon>().item = item;
 
                 // Create a clone of the item within item slot
                 GameObject clone = Instantiate(itemObject, itemSlot.transform, false);
@@ -48,15 +51,18 @@ public class InventoryUI : MonoBehaviour
         return;
     }
 
-    public void OnDrop(Item item, bool success)
+    public void OnDrop(Item item, GameObject itemSlot, bool success)
     {
-        if (success)
+        if (success && itemSlot.transform.childCount > 1)
         {
-            Debug.Log("Success");
-        }
-        else
-        {
-            Debug.Log("Failed");
+            image = itemSlot.transform.GetChild(0).GetComponent<Image>();
+
+            image.enabled = false;
+            image.sprite = null;
+            image.color = Color.white;
+            image.GetComponent<InventoryIcon>().item = null;
+
+            Destroy(itemSlot.transform.GetChild(1).gameObject);
         }
     }
 }
