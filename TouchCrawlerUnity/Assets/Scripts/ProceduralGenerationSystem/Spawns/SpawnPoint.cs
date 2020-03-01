@@ -28,6 +28,11 @@ public class SpawnPoint : MonoBehaviour
 
     public GameObject Spawn()
     {
-        return GameObjectFactory.Instantiate(prefab, transform.position, transform.rotation);
+        if (prefab != null)
+            return GameObjectFactory.Instantiate(prefab, transform.position, transform.rotation);
+        else
+        {
+            return null;
+        }
     }
 }

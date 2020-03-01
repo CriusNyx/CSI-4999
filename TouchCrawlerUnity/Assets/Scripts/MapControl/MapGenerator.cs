@@ -27,6 +27,8 @@ public class MapGenerator : MonoBehaviour
         seedRoomCont.gridPosition = new Vector3(0,0,0);
         roomObjects.Add(seedRoom);
 
+        seedRoomCont.OnRoomEnter();
+
         currNumRooms = 1;
 
         nextToAdd.Enqueue(seedRoom);
@@ -46,7 +48,7 @@ public class MapGenerator : MonoBehaviour
                 roomObjects[0].GetComponent<RoomController>().SetDoorColliders(true);
             } else
             {
-                roomObjects[i].SetActive(false);
+                //roomObjects[i].SetActive(false);
                 roomObjects[i].GetComponent<RoomController>().SetDoorColliders(false);
             }
         }

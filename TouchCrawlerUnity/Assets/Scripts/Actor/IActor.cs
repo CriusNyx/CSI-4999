@@ -53,4 +53,8 @@ public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
     Weapon.WeaponTargetType DefenseWeaponTargetType { get; }
 
     Inventory inventory { get; }
+
+    void OnRoomEnter(RoomController room);
+
+    void OnRoomExit(RoomController room);
 }

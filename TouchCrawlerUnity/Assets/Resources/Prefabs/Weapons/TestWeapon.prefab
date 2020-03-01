@@ -20,8 +20,8 @@ GameObject:
   - component: {fileID: 3818876268310459363}
   - component: {fileID: 7609961481845615910}
   - component: {fileID: 3531504000007252886}
-  - component: {fileID: 1001810031158234330}
   - component: {fileID: 379575319260834217}
+  - component: {fileID: 1193923460008467950}
   m_Layer: 0
   m_Name: TestWeapon
   m_TagString: Untagged
@@ -206,18 +206,6 @@ MonoBehaviour:
       cooldownTime: 0
   duration: 0.1
   trauma: 0.2
---- !u!114 &1001810031158234330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922492941089700679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f827ccbd0511c4788c419b45823a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &379575319260834217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,3 +219,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleRange: 5
+--- !u!114 &1193923460008467950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e91bf85cbc30048a9825cf5b3b6d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletCount: 15
+  burstTime: 0.25

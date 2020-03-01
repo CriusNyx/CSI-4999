@@ -7,6 +7,13 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
+    protected override void ProtectedStart()
+    {
+        base.ProtectedStart();
+
+        Viewport.Instance.CameraController.objectToTrack = gameObject;
+    }
+
     // Debug to see how many items the player has. -Sam
     void Update()
     {
@@ -29,5 +36,13 @@ public class PlayerActor : DefaultActor
         {
             Debug.Log("PickupItemTouchedEvent");
         }
+    }
+
+    public override void OnRoomEnter(RoomController roomController)
+    {
+        base.OnRoomEnter(roomController);
+
+        //Viewport.Instance.CameraController.objectToTrack = gameObject;
+        Viewport.Instance.CameraController.target = roomController.CameraTarget;
     }
 }

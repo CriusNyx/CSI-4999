@@ -69,12 +69,13 @@ public class MovementController : MonoBehaviour
     /// </summary>
     public void Stop()
     {
-        destination = body.position;  
+        destination = transform.position;  
     }
 
     public void Warp(Vector3 newLoc)
     {
         transform.position = newLoc;
+        Stop();
     }
 
     /// <summary>

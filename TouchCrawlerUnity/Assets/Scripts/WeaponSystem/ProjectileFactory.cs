@@ -13,6 +13,18 @@ public class ProjectileFactory : WeaponComponent
 
     public override CreateProjectileResult CreateProjectile(Weapon weapon, IWeaponTarget target, Vector3 position, Quaternion rotation, Vector3 direction, BulletSpawnInfo spawnInfo, CreateProjectileResult result)
     {
+        if(target == null)
+        {
+            return result;
+        }
+        if(target.monoBehaviour == null)
+        {
+            return result;
+        }
+        if(target.gameObject == null)
+        {
+            return result;
+        }
         var instance = GameObjectFactory.Instantiate(spawnInfo.prefabToSpawn, position, rotation);
         var projectile = instance.GetComponent<IProjectile>();
 

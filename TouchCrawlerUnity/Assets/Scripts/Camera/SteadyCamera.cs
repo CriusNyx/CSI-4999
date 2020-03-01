@@ -6,6 +6,7 @@ public class SteadyCamera : MonoBehaviour
 {
     public float cameraDecay = 0.1f;
     Vector2 currentPos;
+    //public Vector2 targetPosition;
 
     public void LateUpdate()
     {
@@ -13,6 +14,11 @@ public class SteadyCamera : MonoBehaviour
         Vector2 delta = targetPosition - currentPos;
         delta = delta * MathFunctions.LogarithmicDecay(cameraDecay, Time.deltaTime);
         currentPos = currentPos + delta;
+
+        Vector3 position = currentPos;
+        position.z = transform.position.z;
+
+        transform.position = position;
 
         Debug.DrawRay(currentPos, Vector3.up);
     }
