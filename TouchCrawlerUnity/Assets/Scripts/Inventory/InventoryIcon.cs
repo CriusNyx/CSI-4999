@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public Item item;
-    RectTransform rectTransform;
+    public Vector3 basePosition;
+    RectTransform rectTransform; 
+
     private Vector2 lastMousePosition;
     private Vector3 finalWorldPosition;
-    private Quaternion finalWorldRotation;
-    public Vector3 basePosition;
-    GameObject parent;
-    GameObject itemObject;
+    private GameObject parent;
+    private GameObject itemObjectFromUI;
 
     private void Start()
     {
@@ -53,10 +53,13 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
-        itemObject = parent.transform.GetChild(1).gameObject;
+        // Take object from UI and move into the scene
+        itemObjectFromUI = parent.transform.GetChild(1).gameObject;
 
-        GameObject test = Instantiate(itemObject, new Vector3(finalWorldPosition.x, finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
+        GameObject itemObjectInScene = Instantiate(itemObjectFromUI, new Vector3(finalWorldPosition.x, finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
+        itemObjectInScene.name = itemObjectFromUI.name;
 
+        // Activate DropItemEvent
         if (results.Count == 0)
         {
             Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item, parent));
