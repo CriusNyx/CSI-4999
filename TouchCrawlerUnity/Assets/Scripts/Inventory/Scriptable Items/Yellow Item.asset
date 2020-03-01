@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   icon: {fileID: 21300000, guid: 0ef34fb2203db4c429b6f3f0b1ac0e8c, type: 3}
-  color: {r: 0.941763, g: 0.9622642, b: 0.12255252, a: 1}
+  color: {r: 0.9433962, g: 0.7792946, b: 0.17354932, a: 1}
   itemEffect: No Effect
   NotAPickup: 0
