@@ -61,11 +61,15 @@ public class PickUpItem : MonoBehaviour
 
     private bool ValidatePickup(IActor actor)
     {
-        // Check if inventory is full
-        if (actor.inventory.IsFull)
+        if(actor == null || actor.inventory == null)
         {
             return false;
         }
+        else if(actor.inventory.IsFull)
+        {
+            return false;
+        }
+        // Check if inventory is full
         else
         {
             // Allow pick up
