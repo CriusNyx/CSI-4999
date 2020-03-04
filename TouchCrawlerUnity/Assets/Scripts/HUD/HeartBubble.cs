@@ -26,7 +26,8 @@ public class HeartBubble : MonoBehaviour
             var renderer = go.AddComponent<RawImage>();
             go.AddComponent<HeartAdd>();
             renderer.texture = heartSprite;
-            go.GetComponent<RectTransform>().localScale = Vector3.one * 0.2f;
+            var rectTransform = go.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = Vector2.one * 32;
             go.transform.SetParent(transform);
 
             hearts.Add(go);
