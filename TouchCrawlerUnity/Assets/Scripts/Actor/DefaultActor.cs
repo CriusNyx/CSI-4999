@@ -51,13 +51,19 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public Inventory inventory { get; private set; }
 
+    public bool wasAttacked
+    {
+        get;
+        private set;
+    }
+
     public void Awake()
     {
         movementController = GetComponent<MovementController>();
         weapon = GetComponentInChildren<Weapon>();
         inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
-
+        wasAttacked = false;
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -141,8 +147,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     public bool DoDamage(Damage damage)
     {
         healthController.TakeDamage(damage);
+        Debug.Log(this + ": Attacked");
         //Debug.Log(damage.ToString());
-        //attacker = damage.weaponOwner;
+        wasAttacked = true;
         return true;
     }
 
