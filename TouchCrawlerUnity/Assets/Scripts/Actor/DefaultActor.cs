@@ -58,12 +58,15 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
 
-        if (IsPlayer())
+        if(IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
             EventSystem.AddEventListener(EventSystem.EventChannel.inventory, EventSystem.EventSubChannel.item, this);
         }
+    }
 
+    public void Start()
+    {
         ProtectedStart();
     }
 
