@@ -1,0 +1,51 @@
+gobs:
+has all animations
+
+mimic:
+idle - mimic_idle
+walk_front - mimic_move
+walk_side - mimic_move
+walk_back - mimic_move
+attack - mimic_attack
+
+mush:
+idle - _idle
+walk_front - _move
+walk_side - _move
+walk_back - _move
+attack - _move (faster)
+
+pillbug:
+idle - pill_bug_idle
+walk_front - pill_bug_walk
+walk_side - pill_bug_walk
+walk_back - pill_bug_walk
+attack - pill_bug_attack (rotating)
+
+slime:
+idle - slime_idle
+walk_front - slime_move
+walk_side - slime_move
+walk_back - slime_move
+attack - slime_attack
+
+pillbug big: //rotate 90 CC
+idle - //static
+walk_front - pill_bug_move
+walk_side - pill_bug_move
+walk_back - pill_bug_move
+attack - pill_bug_attack (rotating)
+
+gobman:
+idle - gobman_idle
+walk_front - gobman_walk_front
+walk_side - gobman_walk_front
+walk_back - gobman_walk_back
+attack - gobman_walk_front (sped up)
+
+lizard:
+idle - //static
+walk_front - lizard_walk_front
+walk_side - lizard_walk_side //rotate 90 CC
+walk_back - lizard_walk_back
+attack - ??

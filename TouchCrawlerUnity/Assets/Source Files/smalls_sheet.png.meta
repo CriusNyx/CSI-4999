@@ -29,6 +29,9 @@ TextureImporter:
   - first:
       213: 4530517025950528013
     second: smalls_sheet_8
+  - first:
+      213: -6323569548976557427
+    second: smalls_sheet_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -139,7 +142,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4aa3c80858ede524fbc4826ae32cae0e
+      spriteID: 9dedb1194a9d28645a22fcb4509518eb
       internalID: -2169285340724144326
       vertices: []
       indices: 
@@ -160,7 +163,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a9610b5411d2df4589d7248122120f9
+      spriteID: da515770d2b5d664e8374ffbba868138
       internalID: -4006156036660893085
       vertices: []
       indices: 
@@ -181,7 +184,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5572648f2d182c48870d5066bbbdca0
+      spriteID: 48626647cfe5a394eb51230e737a187b
       internalID: -7864301937466912915
       vertices: []
       indices: 
@@ -202,7 +205,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44e1f7c00799a9344a43460408183004
+      spriteID: 3d455ba923995524fa38c2253f7d4265
       internalID: 3190368021826986104
       vertices: []
       indices: 
@@ -223,7 +226,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57d42fe970d10884aa361bf730b47310
+      spriteID: 61d79ceb3bc67914ab9840238c86c3da
       internalID: -4244707679547378484
       vertices: []
       indices: 
@@ -244,7 +247,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e466c69dc95096a488702adc47c12564
+      spriteID: 8bdb1f27513069c4bbfe6a6009c640ca
       internalID: 5746584610177422288
       vertices: []
       indices: 
@@ -252,6 +255,27 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: smalls_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6f53206d39e4544db0cee01ff396c15
+      internalID: -5430483325607752338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smalls_sheet_7
       rect:
         serializedVersion: 2
         x: 0
@@ -265,14 +289,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77278c2f5a03cf541adfccc5e51b18f7
-      internalID: -5430483325607752338
+      spriteID: d8c3c1affcaf53c47aafec9b3440f186
+      internalID: -4624193677968874148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smalls_sheet_7
+      name: smalls_sheet_8
       rect:
         serializedVersion: 2
         x: 16
@@ -286,14 +310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 766d9a74eac5e824a8238e1c3939cfd8
-      internalID: -4624193677968874148
+      spriteID: c814a76a59e15c044809ab69461d7121
+      internalID: 4530517025950528013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smalls_sheet_8
+      name: smalls_sheet_9
       rect:
         serializedVersion: 2
         x: 32
@@ -307,8 +331,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 725dd040ecae886439a6877131493c73
-      internalID: 4530517025950528013
+      spriteID: 20b8b5c7093a26b4bb88f1f0eb681fce
+      internalID: -6323569548976557427
       vertices: []
       indices: 
       edges: []
