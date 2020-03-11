@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 0.7764706}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -461,6 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: 100
   heartSprite: {fileID: 2800000, guid: 473c80dcc8164f044a5c8fd70cd75dfc, type: 3}
+  text: {fileID: 8255215581167968724}
 --- !u!1001 &4491523349904252996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -468,6 +469,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 567654449186355484}
     m_Modifications:
+    - target: {fileID: 1232747134990263668, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -593,6 +599,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 567654449186355484}
     m_Modifications:
+    - target: {fileID: 1232747134990263668, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -718,6 +729,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 567654449186355484}
     m_Modifications:
+    - target: {fileID: 1232747134990263668, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -843,6 +859,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 567654449186355484}
     m_Modifications:
+    - target: {fileID: 1232747134990263668, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -968,6 +989,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 567654449186355484}
     m_Modifications:
+    - target: {fileID: 1232747134990263668, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1093,6 +1119,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 567654449186355484}
     m_Modifications:
+    - target: {fileID: 1232747134990263668, guid: 4a2682534780500499f70159acb564e9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1232747134990263669, guid: 4a2682534780500499f70159acb564e9,
         type: 3}
       propertyPath: m_LocalPosition.x

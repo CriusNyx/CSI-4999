@@ -11,6 +11,8 @@ public class HeartBubble : MonoBehaviour
 
     List<GameObject> hearts = new List<GameObject>();
 
+    public Text text;
+
     private void Start()
     {
 
@@ -24,13 +26,19 @@ public class HeartBubble : MonoBehaviour
         {
             GameObject go = new GameObject();
             var renderer = go.AddComponent<RawImage>();
+            renderer.raycastTarget = false;
             go.AddComponent<HeartAdd>();
             renderer.texture = heartSprite;
             var rectTransform = go.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = Vector2.one * 32;
+            rectTransform.sizeDelta = Vector2.one * 50;
             go.transform.SetParent(transform);
 
             hearts.Add(go);
+        }
+
+        if(text != null)
+        {
+            text.text = count.ToString();
         }
 
         while(hearts.Count > count)

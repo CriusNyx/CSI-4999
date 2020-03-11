@@ -18,9 +18,20 @@ public static class ParticleFunctions
             particleSystem.gameObject,
             () =>
             {
-                if(Time.time > freezeTime)
-                    if(particleSystem.particleCount == 0)
+                if (Time.time > freezeTime)
+                {
+                    bool delete = true;
+                    foreach (var system in output.GetComponentsInChildren<ParticleSystem>())
+                    {
+
+                        if (system.particleCount > 0)
+                            delete = false;
+                    }
+                    if (delete)
+                    {
                         GameObject.Destroy(output);
+                    }
+                }
             });
 
         return output;
