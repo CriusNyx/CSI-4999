@@ -99,7 +99,7 @@ namespace Assets.Scripts.WeaponSystem
                         Destroy(this.gameObject);
                     }
 
-                    this.WeaponSrc.ApplyOnHitEffects(colliderTarget);
+                    this.WeaponSrc.ApplyOnHitEffects(transform.position, (transform.position - collider.transform.position).normalized, colliderTarget);
                 }
             }
             else if (IgnoreOtherProjectiles && otherProjectile != null)
