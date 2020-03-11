@@ -14,6 +14,7 @@ public class EnemyAIController : MonoBehaviour
 
     public int stopDuration;
     private int stopTime;
+    private bool wasLastBehaviorWander;
 
 
     //Actor components
@@ -34,29 +35,30 @@ public class EnemyAIController : MonoBehaviour
         aIBehaviorWander = GetComponent<AIBehaviorWander>();
         npcActor = GetComponent<NPCActor>();
         body = GetComponent<Rigidbody2D>();
-
-        if (aIBehaviorWander.enabled && aIBehaviorPatrol.enabled && aIBehaviorAttack.enabled)
+        wasLastBehaviorWander = false;
+        if (aIBehaviorWander.enabled)
         {
+            wasLastBehaviorWander = true;
             aIBehaviorWander.enabled = true;
             aIBehaviorPatrol.enabled = false;
             aIBehaviorAttack.enabled = false;
         }
-        if((aIBehaviorWander.enabled || aIBehaviorPatrol.enabled) && aIBehaviorAttack.enabled)
+        if(aIBehaviorPatrol.enabled)
         {
             aIBehaviorAttack.enabled = false;
-        }
-        if (aIBehaviorWander.enabled && aIBehaviorPatrol.enabled)
-        {
-            aIBehaviorPatrol.enabled = false;
         }
     }
 
     // Update is called once per frame
     void Update()
     { 
-        if (WasAttackedYet())
+        if (WasAttackedYet() && aIBehaviorAttack.hasTarget)
         {
             StartAttacking();
+        }
+        if (!aIBehaviorAttack.hasTarget)
+        {
+            StopAtttacking();
         }
     }
     
@@ -75,5 +77,18 @@ public class EnemyAIController : MonoBehaviour
         aIBehaviorAttack.enabled = true;
         aIBehaviorPatrol.enabled = false;
         aIBehaviorWander.enabled = false;
+    }
+    
+    private void StopAtttacking()
+    {
+        aIBehaviorAttack.enabled = false;
+        if (wasLastBehaviorWander)
+        {
+            aIBehaviorWander.enabled = true;
+        }
+        else
+        {
+            aIBehaviorPatrol.enabled = true;
+        }
     }
 }
