@@ -4,10 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.WeaponSystem.Components.OnHitEffects;
+using Assets.WeaponSystem;
+using static StatsController;
 
 
 namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
-    public class EffectBurn : OnHitEffect, MonoBehavior
+    public class EffectBurn : OnHitEffect 
     { 
         /* Apply Fire typed DoT to target
         ** Damage is based on stats/level
@@ -28,12 +30,12 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
             StatsController srcStats = weapon.owner.actor.statsController;
             this.target = target;
 
-            stat spellPower = srcStats.GetStat(StatType.SpellPower);
+            Stat spellPower = srcStats.GetStat(StatType.SpellPower);
 
             this.amount = spellPower.BaseValue;
-            this.amount += spellPower.CalculateStatValue * coefficient;
+            this.amount += spellPower.CalculateStatValue() * coefficient;
 
-            StartCoroutine(BurnTarget);
+            StartCoroutine(BurnTarget());
 
             result.applyEffects = true;
 
@@ -45,7 +47,7 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
 
                 //TODO: Spawn Fire on targets location
 
-                yield return new waitforseconds(SecondsPerTick);
+                yield return new WaitForSeconds(SecondsPerTick);
                 SpellDamage damage = new SpellDamage(amount/(burnTime/SecondsPerTick));
                 target.DoDamage(damage);
             }

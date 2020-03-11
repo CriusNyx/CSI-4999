@@ -6,6 +6,7 @@ public class Damage
 {
 
     public ContactPoint2D[] Contact { get; private set; } //TODO: Set on projectile logic prior to destroying projectile
+    public float amount = 0f;
 
     public Damage(ContactPoint2D[] contact)
     {
@@ -43,7 +44,7 @@ public class FlatDamage : Damage
 public class SpellDamage : Damage
 {
     public float amount = 0f;
-    public SpellDamage(int amount)
+    public SpellDamage(float amount)
     {
         this.amount = amount;
     }
@@ -57,7 +58,7 @@ public class SpellDamage : Damage
 public class PhysicalDamage : Damage
 {
     public float amount = 0f;
-    public PhysicalDamage(int amount)
+    public PhysicalDamage(float amount)
     {
         this.amount = amount;
     }

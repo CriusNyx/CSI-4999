@@ -13,12 +13,8 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
         public MasterLatch latch = new MasterLatch();
 
         public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
-            if (ApplyDebuff(target))
-            {
-                SpawnAnimation(target.gameObject.transform.position);
-                ApplyKnockback(weapon, target);
-                result.applyEffects = true;
-            }
+            result.applyEffects = true;
+        
             return result;
         } 
 

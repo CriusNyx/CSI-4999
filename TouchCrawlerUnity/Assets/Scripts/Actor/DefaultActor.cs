@@ -4,6 +4,7 @@ using Assets.Scripts.Events;
 using Assets.Scripts.WeaponSystem;
 using Assets.WeaponSystem;
 using UnityEngine;
+using static StatsController;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
@@ -155,8 +156,8 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
         //TODO: modify damage based on stats
 
-        Stat spellResistance = statsController.GetStat(StatType.spellResistance);
-        Stat physicalResistance = statsController.GetStat(StatType.physicalResistance);
+        Stat spellResistance = statsController.GetStat(StatType.SpellResistance);
+        Stat physicalResistance = statsController.GetStat(StatType.DamageResistance);
 
         if (damage.Equals(typeof(SpellDamage))) {
             damage.amount -= spellResistance.CalculateStatValue() * 0.1f;

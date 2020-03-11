@@ -32,7 +32,7 @@ public class HealthController : MonoBehaviour
         float oldHealth = CurrentHealth;
         if (damage is FlatDamage flatDamage)
         {
-            float damageAmount = flatDamage.ammount;
+            float damageAmount = flatDamage.amount;
             CurrentHealth = CurrentHealth - damageAmount;
         }
         

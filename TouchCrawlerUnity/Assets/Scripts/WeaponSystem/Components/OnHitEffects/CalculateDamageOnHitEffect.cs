@@ -10,19 +10,22 @@ public class CalculateDamageOnHitEffect : OnHitEffect
 
     public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
     {
-        StatsController srcStats = weapon.owner.actor.StatsController;
+        StatsController srcStats = weapon.owner.actor.statsController;
 
-        if (weapon.damage.Equals(typeof(SpellDamage))){
-            SpellDamage damage = weapon.damage;
-            damage += srcStats.GetStat(SpellPower).CalculateStatValue * 0.1f;
-        } else if (weapon.damage.Equals(typeof(PhysicalDamage))) {
-            PhysicalDamage damage = weapon.damage;
-            damage += srcStats.GetStat(AttackPower).CalculateStatValue * 0.1f;
+        if (weapon.Damage.Equals(typeof(SpellDamage))){
+            SpellDamage damage = (SpellDamage)weapon.Damage;
+            damage.amount += srcStats.GetStat(StatsController.StatType.SpellPower).CalculateStatValue() * 0.1f;
+            target.DoDamage(damage);
+        } else if (weapon.Damage.Equals(typeof(PhysicalDamage))) {
+            PhysicalDamage damage = (PhysicalDamage)weapon.Damage;
+            damage.amount += srcStats.GetStat(StatsController.StatType.AttackPower).CalculateStatValue() * 0.1f;
+            target.DoDamage(damage);
         } else {
-            Damage damage = weapon.damage;
+            Damage damage = weapon.Damage;
+            target.DoDamage(damage);
         }
         result.applyEffects = true;
-        target.DoDamage(damage);
+        
         return result;
     }
 }

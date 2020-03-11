@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // StatsController is linked to the IStats interface
+
 public class StatsController : MonoBehaviour
 {
     public enum StatType
@@ -132,14 +133,14 @@ public class StatsController : MonoBehaviour
         {
             case StatType.Health:
                 return Health;
-            case StatType.Attack:
-                return Attack;
-            case StatType.SpAttack:
-                return SpAttack;
-            case StatType.Defence:
-                return Defence;
-            case StatType.SpDefence:
-                return SpDefence;
+            case StatType.AttackPower:
+                return AttackPower;
+            case StatType.SpellPower:
+                return SpellPower;
+            case StatType.DamageResistance:
+                return DamageResistance;
+            case StatType.SpellResistance:
+                return SpellResistance;
             case StatType.Speed:
                 return Speed;
             default:
