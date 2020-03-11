@@ -13,11 +13,18 @@ namespace Assets.Scripts.Death
     }
 
     public class GameOverEventListener : IEventListener {
+        
+        public GameObject gui;
 
         public void AcceptEvent(IEvent e){
             if(e is GameOverEvent myEvent){
-                DoSomething(myEvent);
+                ShowScreen(myEvent);
             }
         }
+        private void ShowScreen(GameOverEvent e){   
+            gui = GameObject.Instantiate(Resources.Load("GameOverScreen")) as GameObject;
+        }
     }
+
+    
 }
