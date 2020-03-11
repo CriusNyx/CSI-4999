@@ -26,15 +26,44 @@ public class Damage
 [Serializable]
 public class FlatDamage : Damage
 {
-    public float ammount = 10f;
+    public float amount = 10f;
 
     public FlatDamage()
     {
 
     }
 
-    public FlatDamage(float ammount, ContactPoint2D[] contact) : base(contact)
+    public FlatDamage(float amount, ContactPoint2D[] contact) : base(contact)
     {
-        this.ammount = ammount;
+        this.amount = amount;
+    }
+}
+
+[Serializable]
+public class SpellDamage : Damage
+{
+    public float amount = 0f;
+    public SpellDamage(int amount)
+    {
+        this.amount = amount;
+    }
+    public SpellDamage(float amount, ContactPoint2D[] contact) : base(contact)
+    {
+        this.amount = amount;
+    }
+}
+
+[Serializable]
+public class PhysicalDamage : Damage
+{
+    public float amount = 0f;
+    public PhysicalDamage(int amount)
+    {
+        this.amount = amount;
+    }
+
+    public PhysicalDamage(float amount, ContactPoint2D[] contact) : base(contact)
+    {
+        this.amount = amount;
     }
 }
