@@ -9,10 +9,10 @@ public class StatsController : MonoBehaviour
     public enum StatType
     {
         Health,
-        Attack,
-        SpAttack,
-        Defence,
-        SpDefence,
+        AttackPower,
+        SpellPower,
+        DamageResistance,
+        SpellResistance,
         Speed,
     }
 
@@ -118,10 +118,10 @@ public class StatsController : MonoBehaviour
 
     // Stat Object Instances
     Stat Health = new Stat(10);
-    Stat Attack = new Stat(10);
-    Stat SpAttack = new Stat(10);
-    Stat Defence = new Stat(10);
-    Stat SpDefence = new Stat(10);
+    Stat AttackPower = new Stat(10);
+    Stat SpellPower = new Stat(10);
+    Stat DamageResistance = new Stat(10);
+    Stat SpellResistance = new Stat(10);
     Stat Speed = new Stat(10);
     Stat None = new Stat(10);
 
