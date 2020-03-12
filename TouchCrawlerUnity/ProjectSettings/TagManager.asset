@@ -7,6 +7,7 @@ TagManager:
   - Item Slot
   - Item Icon
   - Item
+  - Weapon
   layers:
   - Default
   - TransparentFX
