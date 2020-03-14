@@ -49,3 +49,10 @@ walk_front - lizard_walk_front
 walk_side - lizard_walk_side //rotate 90 CC
 walk_back - lizard_walk_back
 attack - ??
+
+
+
+animation controller parameters:
+bool isWalking
+bool isAttacking
+int direction (1 = front, 2 = back, 3 = side)
