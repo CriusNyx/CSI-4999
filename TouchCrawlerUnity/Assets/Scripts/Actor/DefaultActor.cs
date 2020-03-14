@@ -69,7 +69,10 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
             EventSystem.AddEventListener(EventSystem.EventChannel.inventory, EventSystem.EventSubChannel.item, this);
         }
+    }
 
+    public void Start()
+    {
         ProtectedStart();
     }
 
