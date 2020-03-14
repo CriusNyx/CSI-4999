@@ -8,6 +8,7 @@ using UnityEngine;
 public class ProjectileFactory : WeaponComponent
 {
     public override ComponentType componentType => ComponentType.ProjectileFactory;
+    public float range = -1f;
 
     //public GameObject prefab;
 
@@ -26,6 +27,11 @@ public class ProjectileFactory : WeaponComponent
             return result;
         }
         var instance = GameObjectFactory.Instantiate(spawnInfo.prefabToSpawn, position, rotation);
+        var destroyWithRange = instance.AddComponent<DestroyWithRange>();
+
+        destroyWithRange.range = this.range;
+        destroyWithRange.spawnPosition = instance.transform.position;
+
         var projectile = instance.GetComponent<IProjectile>();
 
         if(projectile != null)
