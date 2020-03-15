@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ce6f3ec3aef894f8b9c3b484f23581, type: 3}
   m_Name: Crossbow
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 8969509287117074440, guid: d680ef9981f17d647b1449302d29ff52, type: 3}
+  icon: {fileID: 1506177856002552958, guid: 62888c9bcf547214b840f8af3f2ab219, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   itemEffect: No Effect
   NotAPickup: 0

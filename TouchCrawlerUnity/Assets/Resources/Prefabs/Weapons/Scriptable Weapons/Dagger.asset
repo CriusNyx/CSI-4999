@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ce6f3ec3aef894f8b9c3b484f23581, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 6092149902539042580, guid: 33d5c5dbc09fa5e4996008a9510561a5, type: 3}
+  icon: {fileID: -3510146843992586703, guid: 62888c9bcf547214b840f8af3f2ab219, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   itemEffect: No Effect
   NotAPickup: 0

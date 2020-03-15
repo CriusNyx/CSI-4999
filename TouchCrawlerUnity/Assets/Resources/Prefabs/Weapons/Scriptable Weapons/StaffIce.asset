@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ce6f3ec3aef894f8b9c3b484f23581, type: 3}
   m_Name: StaffIce
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 3737432788367994419, guid: 647dec42f425df14b938bcd204c8ffc4, type: 3}
+  icon: {fileID: 8576197976935498907, guid: 62888c9bcf547214b840f8af3f2ab219, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   itemEffect: No Effect
   NotAPickup: 0
