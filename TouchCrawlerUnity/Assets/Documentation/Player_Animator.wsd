@@ -1,0 +1,25 @@
+@startuml
+title: Player Animator States
+start -> idle
+idle <-> walk_front
+idle <-> walk_side
+idle <-> walk_back
+idle <-> attack_front
+idle <-> attack_side
+idle <-> attack_back
+walk_front <-> walk_side
+walk_front <-> walk_back
+walk_front <-> attack_front
+walk_front <-> attack_side
+walk_front <-> attack_back
+walk_side <-> walk_back
+walk_side <-> attack_front
+walk_side <-> attack_side
+walk_side <-> attack_back
+walk_back <-> attack_front
+walk_back <-> attack_side
+walk_back <-> attack_back
+attack_front <-> attack_side
+attack_front <-> attack_back
+attack_side <-> attack_back
+@enduml
