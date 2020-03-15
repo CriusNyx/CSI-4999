@@ -11,6 +11,8 @@ namespace Assets.Scripts.WeaponSystem
     [RequireComponent(typeof(Rigidbody2D))]
     class ProjectileBase : MonoBehaviour, IProjectile
     {
+        private Vector3 previousPosition;
+
         public Vector2 Current
         {
             get
@@ -99,7 +101,7 @@ namespace Assets.Scripts.WeaponSystem
                         Destroy(this.gameObject);
                     }
 
-                    this.WeaponSrc.ApplyOnHitEffects(transform.position, (transform.position - collider.transform.position).normalized, colliderTarget);
+                    this.WeaponSrc.ApplyOnHitEffects(transform.position, (previousPosition - collider.transform.position).normalized, colliderTarget);
                 }
             }
             else if (IgnoreOtherProjectiles && otherProjectile != null)
@@ -132,6 +134,8 @@ namespace Assets.Scripts.WeaponSystem
                     Destroy(gameObject);
                 }
             }
+
+            previousPosition = transform.position;
         }
     }
 }

@@ -20,7 +20,8 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
                 result.applyEffects = true;
             }
             return result;
-        } 
+        }
+
         private bool ApplyDebuff(IWeaponTarget target) {
             //TODO: Debuffs
             //Get Target Actor
