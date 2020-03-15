@@ -86,17 +86,17 @@ namespace Assets.WeaponSystem
             return result.projectiles;
         }
 
-        public virtual void ApplyOnHitEffects(IWeaponTarget target, Damage damage) 
+        public virtual void ApplyOnHitEffects(Vector3 position, Vector3 normal, IWeaponTarget target, Damage damage) 
         {
             var components = GetAllComponents();
             this.Damage = damage;
             var result = PropegateMonad(
                 new ApplyOnHitEffectsResult(),
                 components,
-                (x, y) => x.ApplyOnHitEffects(this, target, y));
+                (x, y) => x.ApplyOnHitEffects(position, normal, this, target, y));
         }
 
-        public virtual void ApplyOnHitEffects(IWeaponTarget target) => ApplyOnHitEffects(target, null);
+        public virtual void ApplyOnHitEffects(Vector3 position, Vector3 normal, IWeaponTarget target) => ApplyOnHitEffects(position, normal, target, null);
 
 
         public virtual WeaponStatBlock GetStats()

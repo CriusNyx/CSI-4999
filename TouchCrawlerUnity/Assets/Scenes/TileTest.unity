@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed1cecf7bb42594a8efb113934b18e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDecay: 0.1
+  cameraDecay: 0.05
 --- !u!1001 &459212942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,6 +220,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 567654449186355483, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 567654449245645314, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_Name
@@ -360,6 +365,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3408803033710314800, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3408803033710314801, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -390,6 +400,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4977984779420816426, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4977984779420816427, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -450,6 +465,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7329309683097794573, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7837168572361633614, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -478,6 +498,16 @@ PrefabInstance:
     - target: {fileID: 7837168572361633614, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7837168572361633615, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255215581167968724, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8487681636757245358, guid: 72cd24317788b04498689348b574df88,
@@ -540,6 +570,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8513644300556629735, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8681814642907412932, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -568,6 +603,11 @@ PrefabInstance:
     - target: {fileID: 8681814642907412932, guid: 72cd24317788b04498689348b574df88,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681814642907412933, guid: 72cd24317788b04498689348b574df88,
+        type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

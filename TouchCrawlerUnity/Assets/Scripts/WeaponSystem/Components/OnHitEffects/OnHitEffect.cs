@@ -12,7 +12,7 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
 
         public MasterLatch latch = new MasterLatch();
 
-        public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
+        public override ApplyOnHitEffectsResult ApplyOnHitEffects(Vector3 position, Vector3 normal, Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
             if (ApplyDebuff(target))
             {
                 SpawnAnimation(target.gameObject.transform.position);
@@ -20,7 +20,8 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
                 result.applyEffects = true;
             }
             return result;
-        } 
+        }
+
         private bool ApplyDebuff(IWeaponTarget target) {
             //TODO: Debuffs
             //Get Target Actor

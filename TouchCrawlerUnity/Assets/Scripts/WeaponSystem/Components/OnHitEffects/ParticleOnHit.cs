@@ -5,14 +5,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageOnHitEffect : OnHitEffect
+public class ParticleOnHit : OnHitEffect
 {
-    public FlatDamage damage = new FlatDamage();
+    public GameObject particleGameObject;
 
     public override ApplyOnHitEffectsResult ApplyOnHitEffects(Vector3 position, Vector3 normal, Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
     {
-        result.applyEffects = true;
-        target.DoDamage(damage);
+        //Debug.Break();
+        ParticleFunctions.PlayOneOff(particleGameObject, position + Vector3.back * 0.1f, Quaternion.LookRotation(Vector3.forward, normal));
+
         return result;
     }
 }
