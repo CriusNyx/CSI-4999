@@ -20,6 +20,9 @@ GameObject:
   - component: {fileID: 8595434533583182409}
   - component: {fileID: 8595434533583182410}
   - component: {fileID: 8595434533583182411}
+  - component: {fileID: 889901843845215489}
+  - component: {fileID: 5391646304619622860}
+  - component: {fileID: 7564172087879979192}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Weapon
@@ -129,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: -1
 --- !u!114 &8595434533583182413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +244,46 @@ MonoBehaviour:
       cooldownTime: 0.1
   duration: 0.1
   trauma: 5
+--- !u!114 &889901843845215489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595434533583182404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: 0}
+  range: -1
+--- !u!114 &5391646304619622860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595434533583182404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04843c4f75ad6c64a8f4f5828548721b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: a9f389a24234f964f96848cd9a88f5bd, type: 2}
+--- !u!58 &7564172087879979192
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595434533583182404}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
