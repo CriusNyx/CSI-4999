@@ -13,7 +13,7 @@ public class EffectKnockback : OnHitEffect
     ** of bullet hit.
     */
 
-    public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
+    public override ApplyOnHitEffectsResult ApplyOnHitEffects(Vector3 position, Vector3 normal, Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
         return result;
     }
 
