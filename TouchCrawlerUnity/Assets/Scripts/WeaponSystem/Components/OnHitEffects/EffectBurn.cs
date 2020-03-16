@@ -25,7 +25,7 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
 
         IWeaponTarget target = null;
 
-        public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
+        public override ApplyOnHitEffectsResult ApplyOnHitEffects(Vector3 position, Vector3 normal, Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
 
             StatsController srcStats = weapon.owner.actor.statsController;
             this.target = target;
