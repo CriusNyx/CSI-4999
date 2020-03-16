@@ -14,7 +14,7 @@ public class NPCAnimator : MonoBehaviour
     private MovementController playMove;
 
     private bool isLizard = true;
-    private bool isSlime = false;
+    private bool isSlime = true;
 
 
     void Start()
