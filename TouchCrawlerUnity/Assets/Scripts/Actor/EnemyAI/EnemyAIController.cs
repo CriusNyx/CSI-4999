@@ -56,6 +56,7 @@ public class EnemyAIController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    { 
         if (WasAttackedYet() && aIBehaviorAttack.hasTarget)
         {
             StartAttacking();
