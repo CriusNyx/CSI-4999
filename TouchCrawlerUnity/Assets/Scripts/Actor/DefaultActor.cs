@@ -166,20 +166,20 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         Stat spellResistance = statsController.GetStat(StatType.SpellResistance);
         Stat physicalResistance = statsController.GetStat(StatType.DamageResistance);
 
-        if (damage.Equals(typeof(SpellDamage))) {
+        if (damage is SpellDamage) {
             damage.amount -= spellResistance.CalculateStatValue() * 0.1f;
             healthController.TakeDamage(damage);
         }
-        if (damage.Equals(typeof(PhysicalDamage))){
+        if (damage is PhysicalDamage){
             damage.amount -= physicalResistance.CalculateStatValue() * 0.1f;
             healthController.TakeDamage(damage);
         }
-        if (damage.Equals(typeof(FlatDamage))){
+        if (damage is FlatDamage){
             healthController.TakeDamage(damage);
         }
 
-        healthController.TakeDamage(damage);
-        Debug.Log(this + ": Attacked");
+        //healthController.TakeDamage(damage);
+        //Debug.Log(this + ": Attacked");
         //Debug.Log(damage.ToString());
         wasAttacked = true;
 

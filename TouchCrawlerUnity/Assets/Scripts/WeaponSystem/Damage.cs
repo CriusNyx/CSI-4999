@@ -27,8 +27,6 @@ public class Damage
 [Serializable]
 public class FlatDamage : Damage
 {
-    public float amount = 10f;
-
     public FlatDamage()
     {
 
@@ -43,7 +41,6 @@ public class FlatDamage : Damage
 [Serializable]
 public class SpellDamage : Damage
 {
-    public float amount = 0f;
     public SpellDamage(float amount)
     {
         this.amount = amount;
@@ -57,7 +54,6 @@ public class SpellDamage : Damage
 [Serializable]
 public class PhysicalDamage : Damage
 {
-    public float amount = 0f;
     public PhysicalDamage(float amount)
     {
         this.amount = amount;

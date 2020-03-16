@@ -1,0 +1,15 @@
+@startuml
+title: NPC Animator States
+start -> idle
+idle <-> walk_front
+idle <-> walk_side
+idle <-> walk_back
+idle <-> attack
+walk_front <-> walk_side
+walk_front <-> walk_back
+walk_front <-> attack
+walk_side <-> walk_back
+walk_side <-> attack
+walk_back <-> attack
+
+@enduml
