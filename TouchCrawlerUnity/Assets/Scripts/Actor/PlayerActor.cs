@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
+    public static PlayerActor Instance { get; private set; }
+
     private GameObject player;
     //private IActor actor;
     private GameObject[] itemSlots;
@@ -14,6 +16,8 @@ public class PlayerActor : DefaultActor
     protected override void ProtectedStart()
     {
         base.ProtectedStart();
+
+        Instance = this;
 
         player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
