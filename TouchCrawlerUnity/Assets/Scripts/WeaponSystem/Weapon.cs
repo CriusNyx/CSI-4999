@@ -22,11 +22,25 @@ namespace Assets.WeaponSystem
 
         public WeaponStatBlock baseStats { get; private set; }
 
-        public Damage Damage {get; set;}
+        //public Damage Damage {get; set;}
 
         public IEnumerable<WeaponComponent> GetAllComponents()
         {
             return gameObject.GetComponentsInChildren<WeaponComponent>();
+        }
+
+        public void Update()
+        {
+            var actor = gameObject.GetComponentInParent<IActor>();
+            if(actor != null)
+            {
+                transform.localPosition = Vector3.zero;
+                gameObject.GetComponent<Collider2D>().enabled = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Collider2D>().enabled = true;
+            }
         }
 
         public virtual (bool cooldownPassed, bool weaponFired, IEnumerable<IProjectile> projectiles) Fire(IWeaponTarget target)
@@ -86,17 +100,15 @@ namespace Assets.WeaponSystem
             return result.projectiles;
         }
 
-        public virtual void ApplyOnHitEffects(IWeaponTarget target, Damage damage) 
+        public virtual void ApplyOnHitEffects(Vector3 position, Vector3 normal, IWeaponTarget target) 
         {
             var components = GetAllComponents();
-            this.Damage = damage;
+            //this.Damage = damage;
             var result = PropegateMonad(
                 new ApplyOnHitEffectsResult(),
                 components,
-                (x, y) => x.ApplyOnHitEffects(this, target, y));
+                (x, y) => x.ApplyOnHitEffects(position, normal, this, target, y));
         }
-
-        public virtual void ApplyOnHitEffects(IWeaponTarget target) => ApplyOnHitEffects(target, null);
 
 
         public virtual WeaponStatBlock GetStats()

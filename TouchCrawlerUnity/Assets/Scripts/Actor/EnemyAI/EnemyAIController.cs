@@ -23,7 +23,7 @@ public class EnemyAIController : MonoBehaviour
     private AIBehaviorAttack aIBehaviorAttack;
     private Rigidbody2D body;
     private MovementController movementController;
-    private NPCActor npcActor;
+    private DefaultActor actor;
     
 
     void Start()
@@ -33,7 +33,10 @@ public class EnemyAIController : MonoBehaviour
         aIBehaviorAttack = GetComponent<AIBehaviorAttack>();
         aIBehaviorPatrol = GetComponent<AIBehaviorPatrol>();
         aIBehaviorWander = GetComponent<AIBehaviorWander>();
-        npcActor = GetComponent<NPCActor>();
+        aIBehaviorWander.enabled = false;
+        aIBehaviorPatrol.enabled = false;
+        aIBehaviorAttack.enabled = false;
+        actor = GetComponent<NPCActor>();
         body = GetComponent<Rigidbody2D>();
         wasLastBehaviorWander = false;
         if (aIBehaviorWander.enabled)
@@ -45,13 +48,14 @@ public class EnemyAIController : MonoBehaviour
         }
         if(aIBehaviorPatrol.enabled)
         {
+            aIBehaviorWander.enabled = false;
+            aIBehaviorPatrol.enabled = true;
             aIBehaviorAttack.enabled = false;
         }
     }
 
     // Update is called once per frame
     void Update()
-    { 
         if (WasAttackedYet() && aIBehaviorAttack.hasTarget)
         {
             StartAttacking();
@@ -69,7 +73,7 @@ public class EnemyAIController : MonoBehaviour
 
     private bool WasAttackedYet()
     {
-        return npcActor.attacker != null;
+        return actor.wasAttacked;
     }
 
     private void StartAttacking()

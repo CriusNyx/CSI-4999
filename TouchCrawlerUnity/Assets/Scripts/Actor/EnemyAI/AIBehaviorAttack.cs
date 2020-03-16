@@ -22,6 +22,7 @@ public class AIBehaviorAttack : MonoBehaviour
     {
         weapon = GetComponentInChildren<Weapon>();
         movementController = GetComponent<MovementController>();
+        target = GameObject.FindObjectOfType<PlayerActor>();
     }
 
     // Update is called once per frame
@@ -66,6 +67,7 @@ public class AIBehaviorAttack : MonoBehaviour
             movementController.Move(target);
         }
     }
+
     private bool IsCloseEnoughToAttack()
     {
         Vector2 distance = movementController.DistanceToDestination();
