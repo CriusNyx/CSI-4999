@@ -30,11 +30,9 @@ public class HealthController : MonoBehaviour
     public bool TakeDamage(Damage damage)
     {
         float oldHealth = CurrentHealth;
-        if (damage is FlatDamage flatDamage)
-        {
-            float damageAmount = flatDamage.ammount;
-            CurrentHealth = CurrentHealth - damageAmount;
-        }
+
+        float damageAmount = damage.amount;
+        CurrentHealth = CurrentHealth - damageAmount;
         
         if(CurrentHealth != oldHealth)
         {

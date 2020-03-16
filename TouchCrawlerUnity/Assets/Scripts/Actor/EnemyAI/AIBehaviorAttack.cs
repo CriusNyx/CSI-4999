@@ -16,6 +16,7 @@ public class AIBehaviorAttack : MonoBehaviour
     {
         weapon = GetComponentInChildren<Weapon>();
         movementController = GetComponent<MovementController>();
+        target = GameObject.FindObjectOfType<PlayerActor>();
     }
 
     // Update is called once per frame
@@ -38,7 +39,6 @@ public class AIBehaviorAttack : MonoBehaviour
     private void Attack()
     {
         target = GameObject.FindObjectOfType<PlayerActor>();
-        Debug.Log(target);
         weapon.Fire(target);
     }
 

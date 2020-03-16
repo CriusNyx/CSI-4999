@@ -14,7 +14,7 @@ public class AIBehaviorPatrol : MonoBehaviour
     {
         patrolIterator = 0;
         stopTime = 0;
-        if (patrolPath == null)
+        if (patrolPath.Length == 0)
         {
             patrolPath = new Vector2[] { GetComponent<Rigidbody2D>().position };
         }

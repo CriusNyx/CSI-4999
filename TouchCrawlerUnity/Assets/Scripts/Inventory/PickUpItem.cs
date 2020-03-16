@@ -48,9 +48,18 @@ public class PickUpItem : MonoBehaviour
 
             if (isPickedUp)
             {
-                actor.inventory.Add(item, gameObject);
-                Destroy(gameObject);
-                return true;
+                // If Weapon, store inside inventory. Else, apply stats to player.
+                if (gameObject.tag == "Weapon")
+                {
+                    actor.inventory.Add(item, gameObject);
+                    Destroy(gameObject);
+                    return true;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                    return true;
+                }
             }
             else
             {
@@ -61,11 +70,15 @@ public class PickUpItem : MonoBehaviour
 
     private bool ValidatePickup(IActor actor)
     {
-        // Check if inventory is full
-        if (actor.inventory.IsFull)
+        if (actor == null || actor.inventory == null)
         {
             return false;
         }
+        else if (actor.inventory.IsFull)
+        {
+            return false;
+        }
+        // Check if inventory is full
         else
         {
             // Allow pick up
