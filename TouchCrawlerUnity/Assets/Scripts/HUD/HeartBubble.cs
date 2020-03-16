@@ -27,6 +27,8 @@ public class HeartBubble : MonoBehaviour
 
     private void Update()
     {
+        count = Mathf.CeilToInt((float)PlayerActor.Instance?.healthController?.CurrentHealth);
+
         count = Mathf.Max(0, count);
 
         while(hearts.Count < count)
