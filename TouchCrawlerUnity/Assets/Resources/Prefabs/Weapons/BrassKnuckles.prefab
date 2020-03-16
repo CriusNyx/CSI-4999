@@ -20,6 +20,9 @@ GameObject:
   - component: {fileID: 8295030466092973123}
   - component: {fileID: 8295030466092973124}
   - component: {fileID: 8295030466092973125}
+  - component: {fileID: 8862339035391494776}
+  - component: {fileID: 5047601793346123837}
+  - component: {fileID: 181425310530826105}
   m_Layer: 0
   m_Name: BrassKnuckles
   m_TagString: Weapon
@@ -129,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: -1
 --- !u!114 &8295030466092973135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +244,46 @@ MonoBehaviour:
       cooldownTime: 0.1
   duration: 0.1
   trauma: 5
+--- !u!114 &8862339035391494776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295030466092973126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: 0}
+  range: -1
+--- !u!114 &5047601793346123837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295030466092973126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04843c4f75ad6c64a8f4f5828548721b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 70d377ee0b343594589a2cf93cc454a6, type: 2}
+--- !u!58 &181425310530826105
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295030466092973126}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1

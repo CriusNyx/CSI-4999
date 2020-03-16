@@ -20,6 +20,9 @@ GameObject:
   - component: {fileID: 3737432788367994420}
   - component: {fileID: 3737432788367994421}
   - component: {fileID: 3737432788367994418}
+  - component: {fileID: 6309126405697522740}
+  - component: {fileID: 1063311847675142419}
+  - component: {fileID: 753257002278089544}
   m_Layer: 0
   m_Name: StaffIce
   m_TagString: Weapon
@@ -129,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: -1
 --- !u!114 &3737432788367994440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +244,46 @@ MonoBehaviour:
       cooldownTime: 0.1
   duration: 0.1
   trauma: 5
+--- !u!114 &6309126405697522740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737432788367994419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: 0}
+  range: -1
+--- !u!114 &1063311847675142419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737432788367994419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04843c4f75ad6c64a8f4f5828548721b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: a85e6f911eab29f40ba5da94599ed47d, type: 2}
+--- !u!58 &753257002278089544
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737432788367994419}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1

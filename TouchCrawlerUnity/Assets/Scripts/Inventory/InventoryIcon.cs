@@ -58,10 +58,12 @@ public class InventoryIcon : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             // Take object from UI and move into the scene
             itemObjectFromUI = parent.transform.GetChild(1).gameObject;
 
-            GameObject itemObjectInScene = Instantiate(itemObjectFromUI, new Vector3(finalWorldPosition.x, finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
+            GameObject itemObjectInScene = Instantiate(itemObjectFromUI, new Vector3(finalWorldPosition.x, 
+                finalWorldPosition.y, 0), new Quaternion(0, 0, 0, 0));
             itemObjectInScene.name = itemObjectFromUI.name;
 
-            Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item, parent));
+            Assets.Scripts.Events.EventSystem.Broadcast(Assets.Scripts.Events.EventSystem.EventChannel.inventory, 
+                Assets.Scripts.Events.EventSystem.EventSubChannel.item, new DropItemEvent(item, parent));
         }
     }
 
