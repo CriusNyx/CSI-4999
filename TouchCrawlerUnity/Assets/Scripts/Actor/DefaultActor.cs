@@ -26,9 +26,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         private set;
     }
 
-    public Weapon weapon { 
-        get; 
-        private set;
+    public Weapon weapon {
+        get { return gameObject.GetComponentInChildren<Weapon>(); }
+        //private set;
     }
 
     public MovementController movementController
@@ -60,7 +60,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     public void Awake()
     {
         movementController = GetComponent<MovementController>();
-        weapon = GetComponentInChildren<Weapon>();
+        //weapon = GetComponentInChildren<Weapon>();
         inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
         wasAttacked = false;

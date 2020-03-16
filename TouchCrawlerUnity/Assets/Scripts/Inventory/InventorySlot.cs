@@ -32,6 +32,7 @@ public class InventorySlot : MonoBehaviour
                     new Quaternion(0, 0, 0, 0), player.transform);
 
                 equippedWeapon.name = itemObject.name;
+                equippedWeapon.GetComponent<CircleCollider2D>().enabled = false;
             }
         }
         else
