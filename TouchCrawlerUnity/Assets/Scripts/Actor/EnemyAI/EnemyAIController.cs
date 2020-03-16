@@ -14,6 +14,7 @@ public class EnemyAIController : MonoBehaviour
 
     public int stopDuration;
     private int stopTime;
+    public bool wander = false, patrol = false, attack = false;
 
 
     //Actor components
@@ -22,7 +23,7 @@ public class EnemyAIController : MonoBehaviour
     private AIBehaviorAttack aIBehaviorAttack;
     private Rigidbody2D body;
     private MovementController movementController;
-    private NPCActor npcActor;
+    private DefaultActor actor;
     
 
     void Start()
@@ -32,28 +33,55 @@ public class EnemyAIController : MonoBehaviour
         aIBehaviorAttack = GetComponent<AIBehaviorAttack>();
         aIBehaviorPatrol = GetComponent<AIBehaviorPatrol>();
         aIBehaviorWander = GetComponent<AIBehaviorWander>();
-        npcActor = GetComponent<NPCActor>();
+        aIBehaviorWander.enabled = false;
+        aIBehaviorPatrol.enabled = false;
+        aIBehaviorAttack.enabled = false;
+        actor = GetComponent<NPCActor>();
         body = GetComponent<Rigidbody2D>();
-
-        if (aIBehaviorWander.enabled && aIBehaviorPatrol.enabled && aIBehaviorAttack.enabled)
+        aIBehaviorAttack.enabled = attack;
+        aIBehaviorPatrol.enabled = patrol;
+        aIBehaviorWander.enabled = wander;
+        Debug.Log(aIBehaviorWander.isActiveAndEnabled);
+        if (wander)
         {
             aIBehaviorWander.enabled = true;
             aIBehaviorPatrol.enabled = false;
             aIBehaviorAttack.enabled = false;
-        }
-        if((aIBehaviorWander.enabled || aIBehaviorPatrol.enabled) && aIBehaviorAttack.enabled)
+        }else if (patrol)
         {
+            aIBehaviorWander.enabled = false;
+            aIBehaviorPatrol.enabled = true;
             aIBehaviorAttack.enabled = false;
         }
-        if (aIBehaviorWander.enabled && aIBehaviorPatrol.enabled)
+        else if (attack)
         {
+            aIBehaviorWander.enabled = false;
             aIBehaviorPatrol.enabled = false;
+            aIBehaviorAttack.enabled = true;
         }
     }
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        if (wander)
+        {
+            aIBehaviorWander.enabled = true;
+            aIBehaviorPatrol.enabled = false;
+            aIBehaviorAttack.enabled = false;
+        }
+        else if (patrol)
+        {
+            aIBehaviorWander.enabled = false;
+            aIBehaviorPatrol.enabled = true;
+            aIBehaviorAttack.enabled = false;
+        }
+        else if (attack)
+        {
+            aIBehaviorWander.enabled = false;
+            aIBehaviorPatrol.enabled = false;
+            aIBehaviorAttack.enabled = true;
+        }
         if (WasAttackedYet())
         {
             StartAttacking();
@@ -67,7 +95,7 @@ public class EnemyAIController : MonoBehaviour
 
     private bool WasAttackedYet()
     {
-        return npcActor.attacker != null;
+        return actor.wasAttacked;
     }
 
     private void StartAttacking()

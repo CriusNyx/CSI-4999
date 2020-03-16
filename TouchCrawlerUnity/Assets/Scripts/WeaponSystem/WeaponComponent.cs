@@ -39,7 +39,7 @@ namespace Assets.Scripts.WeaponSystem
             return result;
         }
 
-        public virtual ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
+        public virtual ApplyOnHitEffectsResult ApplyOnHitEffects(Vector3 position, Vector3 normal, Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result)
         {
             return result;
         }

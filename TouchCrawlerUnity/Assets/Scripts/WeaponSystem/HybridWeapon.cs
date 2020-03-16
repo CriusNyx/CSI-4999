@@ -14,7 +14,7 @@ namespace Assets.Scripts.WeaponSystem
 {
     public class HybridWeapon : Weapon
     {
-        public override void ApplyOnHitEffects(IWeaponTarget target)
+        public override void ApplyOnHitEffects(Vector3 position, Vector3 normal, IWeaponTarget target)
         {
             //do nothing
         }

@@ -13,7 +13,7 @@ public class EffectExplosion : EffectAOE
     */
     int range = 2;
 
-    public override ApplyOnHitEffectsResult ApplyOnHitEffects(Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
+    public override ApplyOnHitEffectsResult ApplyOnHitEffects(Vector3 position, Vector3 normal, Weapon weapon, IWeaponTarget target, ApplyOnHitEffectsResult result) {
         List<IWeaponTarget> targets = GetTargetsInRadius(target.gameObject.transform.position, range);
         SpawnAnimation(new Vector2(target.gameObject.transform.position.x, target.gameObject.transform.position.y));
         foreach (IWeaponTarget tar in targets) {

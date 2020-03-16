@@ -9,7 +9,7 @@ public class BasicCameraController : MonoBehaviour
 
     public Vector2 GetPosition()
     {
-        if(target == null)
+        if (target == null)
         {
             return GetObjectPosition();
         }
@@ -21,13 +21,13 @@ public class BasicCameraController : MonoBehaviour
 
     private Vector2 GetObjectPosition()
     {
-        if(objectToTrack == null)
+        if (objectToTrack == null)
         {
             return transform.position;
         }
         else
         {
-            return objectToTrack.transform.position;
+            return objectToTrack.transform.position + Vector3.down * 1f;
         }
     }
 }
