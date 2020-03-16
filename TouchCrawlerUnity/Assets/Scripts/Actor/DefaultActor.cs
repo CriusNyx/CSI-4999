@@ -4,11 +4,13 @@ using Assets.Scripts.Events;
 using Assets.Scripts.WeaponSystem;
 using Assets.WeaponSystem;
 using UnityEngine;
+using static StatsController;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
 [RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(HealthController))]
+[RequireComponent(typeof(StatsController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
 
@@ -37,6 +39,8 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         private set;
     }
 
+    public StatsController statsController { get; private set; }
+
     public HealthController healthController { get; private set; }
 
     public virtual Weapon.WeaponTargetType AttackWeaponTargetType { get => attackWeaponTargetType; set => attackWeaponTargetType = value; }
@@ -63,7 +67,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         //weapon = GetComponentInChildren<Weapon>();
         inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
+        statsController = GetComponent<StatsController>();
         wasAttacked = false;
+        
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
@@ -149,10 +155,34 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public bool DoDamage(Damage damage)
     {
+        
+        //Debug.Log(damage.ToString());
+        //attacker = damage.weaponOwner;
+
+
+
+        //TODO: modify damage based on stats
+
+        Stat spellResistance = statsController.GetStat(StatType.SpellResistance);
+        Stat physicalResistance = statsController.GetStat(StatType.DamageResistance);
+
+        if (damage.Equals(typeof(SpellDamage))) {
+            damage.amount -= spellResistance.CalculateStatValue() * 0.1f;
+            healthController.TakeDamage(damage);
+        }
+        if (damage.Equals(typeof(PhysicalDamage))){
+            damage.amount -= physicalResistance.CalculateStatValue() * 0.1f;
+            healthController.TakeDamage(damage);
+        }
+        if (damage.Equals(typeof(FlatDamage))){
+            healthController.TakeDamage(damage);
+        }
+
         healthController.TakeDamage(damage);
         Debug.Log(this + ": Attacked");
         //Debug.Log(damage.ToString());
         wasAttacked = true;
+
         return true;
     }
 
