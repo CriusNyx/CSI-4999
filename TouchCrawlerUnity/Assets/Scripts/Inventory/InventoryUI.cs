@@ -63,6 +63,11 @@ public class InventoryUI : MonoBehaviour
             image.GetComponent<InventoryIcon>().item = null;
 
             Destroy(itemSlot.transform.GetChild(1).gameObject);
+
+            if (player.transform.childCount > 0)
+            {
+                Destroy(player.transform.GetChild(0).gameObject);
+            }
         }
     }
 }

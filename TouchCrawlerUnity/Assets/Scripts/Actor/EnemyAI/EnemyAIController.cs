@@ -67,11 +67,6 @@ public class EnemyAIController : MonoBehaviour
         }
     }
     
-
-
-
-
-
     private bool WasAttackedYet()
     {
         return actor.wasAttacked;
