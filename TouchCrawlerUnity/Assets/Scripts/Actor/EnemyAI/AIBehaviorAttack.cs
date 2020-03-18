@@ -6,8 +6,14 @@ using Assets.WeaponSystem;
 public class AIBehaviorAttack : MonoBehaviour
 {
     Weapon weapon;
-    IActor target;
+    public IActor target
+    {
+        get;
+        private set;
+    }
+    public bool hasTarget = true;
     MovementController movementController;
+    public bool manual = false;
     public float attackDistance = 3f;
     public float stopDistance = 1.5f;
 
@@ -16,10 +22,37 @@ public class AIBehaviorAttack : MonoBehaviour
     {
         weapon = GetComponentInChildren<Weapon>();
         movementController = GetComponent<MovementController>();
+        target = GameObject.FindObjectOfType<PlayerActor>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
+    {
+        if (manual)
+        {
+            ManualAttack();
+        }
+        else
+        {
+            AutomaticAttack();
+        }
+    }
+
+    private bool Attack()
+    {
+        target = GameObject.FindObjectOfType<PlayerActor>();
+        hasTarget = target != null;
+        Debug.Log(target);
+        return weapon.Fire(target).weaponFired;
+    }
+    private void AutomaticAttack()
+    {
+        if (!Attack())
+        {
+            movementController.Move(target);
+        }
+    }
+    private void ManualAttack()
     {
         if (IsCloseEnoughToAttack())
         {
@@ -33,13 +66,6 @@ public class AIBehaviorAttack : MonoBehaviour
         {
             movementController.Move(target);
         }
-    }
-
-    private void Attack()
-    {
-        target = GameObject.FindObjectOfType<PlayerActor>();
-        Debug.Log(target);
-        weapon.Fire(target);
     }
 
     private bool IsCloseEnoughToAttack()

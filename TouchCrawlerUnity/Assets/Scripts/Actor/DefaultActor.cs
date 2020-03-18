@@ -4,11 +4,13 @@ using Assets.Scripts.Events;
 using Assets.Scripts.WeaponSystem;
 using Assets.WeaponSystem;
 using UnityEngine;
+using static StatsController;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(StatsController))]
 [RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(HealthController))]
+[RequireComponent(typeof(StatsController))]
 public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 {
 
@@ -26,9 +28,9 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         private set;
     }
 
-    public Weapon weapon { 
-        get; 
-        private set;
+    public Weapon weapon {
+        get { return gameObject.GetComponentInChildren<Weapon>(); }
+        //private set;
     }
 
     public MovementController movementController
@@ -36,6 +38,8 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         get;
         private set;
     }
+
+    public StatsController statsController { get; private set; }
 
     public HealthController healthController { get; private set; }
 
@@ -51,19 +55,30 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public Inventory inventory { get; private set; }
 
+    public bool wasAttacked
+    {
+        get;
+        private set;
+    }
+
     public void Awake()
     {
         movementController = GetComponent<MovementController>();
-        weapon = GetComponentInChildren<Weapon>();
+        //weapon = GetComponentInChildren<Weapon>();
         inventory = gameObject.GetComponent<Inventory>();
         healthController = GetComponent<HealthController>();
-
+        statsController = GetComponent<StatsController>();
+        wasAttacked = false;
+        
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);
             EventSystem.AddEventListener(EventSystem.EventChannel.inventory, EventSystem.EventSubChannel.item, this);
         }
+    }
 
+    public void Start()
+    {
         ProtectedStart();
     }
 
@@ -140,9 +155,34 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public bool DoDamage(Damage damage)
     {
-        healthController.TakeDamage(damage);
+        
         //Debug.Log(damage.ToString());
         //attacker = damage.weaponOwner;
+
+
+
+        //TODO: modify damage based on stats
+
+        Stat spellResistance = statsController.GetStat(StatType.SpellResistance);
+        Stat physicalResistance = statsController.GetStat(StatType.DamageResistance);
+
+        if (damage is SpellDamage) {
+            damage.amount -= spellResistance.CalculateStatValue() * 0.1f;
+            healthController.TakeDamage(damage);
+        }
+        if (damage is PhysicalDamage){
+            damage.amount -= physicalResistance.CalculateStatValue() * 0.1f;
+            healthController.TakeDamage(damage);
+        }
+        if (damage is FlatDamage){
+            healthController.TakeDamage(damage);
+        }
+
+        //healthController.TakeDamage(damage);
+        //Debug.Log(this + ": Attacked");
+        //Debug.Log(damage.ToString());
+        wasAttacked = true;
+
         return true;
     }
 
