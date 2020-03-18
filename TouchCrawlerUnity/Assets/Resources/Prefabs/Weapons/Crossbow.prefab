@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 144210252883658383}
   - component: {fileID: 6694880121952713780}
   - component: {fileID: 2402378866758099640}
+  - component: {fileID: 6863458171624638795}
   m_Layer: 0
   m_Name: Crossbow
   m_TagString: Weapon
@@ -349,3 +350,25 @@ MonoBehaviour:
   damageType: 1
   baseDamage: 0
   damagePerAttackPoint: 1
+--- !u!114 &6863458171624638795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969509287117074440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af9b045343203541b9e4657dc8d723e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0.1
+  particleGameObject: {fileID: 7142662635507482188, guid: e6e08e5ba2557fc4a8c76bbbca8dbb66,
+    type: 3}

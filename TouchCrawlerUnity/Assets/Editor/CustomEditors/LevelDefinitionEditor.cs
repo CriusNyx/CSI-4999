@@ -100,8 +100,6 @@ public class LevelDefinitionEditor : Editor
 
         CheckErrorsForInherritdDefinitions(warningStyle, defs);
 
-        
-
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(levelDefinition, "Edited Level Definition: " + levelDefinition.name);

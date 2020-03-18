@@ -1,14 +1,19 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Actor.EnemyAI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIBehaviorPatrol : MonoBehaviour
+public class AIBehaviorPatrol : AIBehaviour
 {
     public Vector2[] patrolPath;
     int patrolIterator;
     MovementController movementController;
     public int stopDuration = 10;
     private int stopTime;
+
+    public override float RandomWeight => 1f;
+
+    public override float ExecutionTime => 10f;
 
     void Start()
     {

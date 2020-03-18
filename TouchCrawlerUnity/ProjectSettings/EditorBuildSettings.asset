@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DemoForSprint2.unity
     guid: e21999f26b14bc349b041a56fd3808dc
+  - enabled: 1
+    path: Assets/Scenes/GameStart.unity
+    guid: ff480a9212421bc42b4e10c64fdd0aed
   m_configObjects: {}

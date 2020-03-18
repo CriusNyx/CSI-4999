@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.WeaponSystem;
+using Assets.Scripts.Actor.EnemyAI;
 
-public class AIBehaviorAttack : MonoBehaviour
+public class AIBehaviorAttack : AIBehaviour
 {
     Weapon weapon;
     public IActor target
@@ -11,6 +12,11 @@ public class AIBehaviorAttack : MonoBehaviour
         get;
         private set;
     }
+
+    public override float RandomWeight => 1f;
+
+    public override float ExecutionTime => 1f;
+
     public bool hasTarget = true;
     MovementController movementController;
     public bool manual = false;
