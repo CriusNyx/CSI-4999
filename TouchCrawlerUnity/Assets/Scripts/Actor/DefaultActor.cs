@@ -30,7 +30,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public Weapon weapon {
         get { return gameObject.GetComponentInChildren<Weapon>(); }
-        //private set;
+        private set { this.weapon = weapon; }
     }
 
     public MovementController movementController
@@ -193,6 +193,13 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
 
     public virtual void OnRoomExit(RoomController roomController)
     {
+
+    }
+    void SwitchWeapon()
+    {
+        Assets.WeaponSystem.Weapon[] allWeapons = GetComponentsInChildren<Assets.WeaponSystem.Weapon>();
+        Random random = new Random();
+        weapon = allWeapons[(int)Random.Range(0f, allWeapons.Length - 1)];
 
     }
 }
