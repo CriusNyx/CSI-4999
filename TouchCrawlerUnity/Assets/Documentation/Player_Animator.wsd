@@ -1,25 +1,71 @@
 @startuml
-title: Player Animator States
+[*] -> idle
 start -> idle
-idle <-> walk_front
-idle <-> walk_side
-idle <-> walk_back
-idle <-> attack_front
-idle <-> attack_side
-idle <-> attack_back
-walk_front <-> walk_side
-walk_front <-> walk_back
-walk_front <-> attack_front
-walk_front <-> attack_side
-walk_front <-> attack_back
-walk_side <-> walk_back
-walk_side <-> attack_front
-walk_side <-> attack_side
-walk_side <-> attack_back
-walk_back <-> attack_front
-walk_back <-> attack_side
-walk_back <-> attack_back
-attack_front <-> attack_side
-attack_front <-> attack_back
-attack_side <-> attack_back
+idle: isWalking = false
+idle: isAttacking = false
+idle -> walk_front
+idle -> walk_side
+idle -> walk_back
+idle -> attack_front
+idle -> attack_side
+idle -> attack_back
+
+walk_front: isWalking = true
+walk_front: isAttacking = false
+walk_front: direction = 1
+walk_front -> idle
+walk_front -> walk_side
+walk_front -> walk_back
+walk_front -> attack_front
+walk_front -> attack_side
+walk_front -> attack_back
+
+walk_side: isWalking = true
+walk_side: isAttacking = false
+walk_side: direction = 3
+walk_side -> idle
+walk_side -> walk_front
+walk_side -> walk_back
+walk_side -> attack_front
+walk_side -> attack_side
+walk_side -> attack_back
+
+walk_back: isWalking = true
+walk_back: isAttacking = false
+walk_back: direction = 2
+walk_back -> idle
+walk_back -> walk_front
+walk_back -> walk_side
+walk_back -> attack_front
+walk_back -> attack_side
+walk_back -> attack_back
+
+attack_front: isWalking = false
+attack_front: isAttacking = true
+attack_front: direction = 1
+attack_front -> idle
+attack_front -> walk_side
+attack_front -> walk_back
+attack_front -> walk_front
+attack_front -> attack_side
+attack_front -> attack_back
+
+attack_side: isWalking = false
+attack_side: isAttacking = true
+attack_side: direction = 3
+attack_side -> idle
+attack_side -> walk_back
+attack_side -> walk_front
+attack_side -> attack_front
+attack_side -> attack_back
+
+attack_back: isWalking = false
+attack_back: isAttacking = true
+attack_back: direction = 2
+attack_back -> idle
+attack_back -> walk_back
+attack_back -> walk_front
+attack_back -> attack_front
+attack_back -> attack_side
+
 @enduml
