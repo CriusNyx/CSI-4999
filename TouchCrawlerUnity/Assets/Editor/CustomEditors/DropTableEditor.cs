@@ -11,9 +11,9 @@ public class DropTableEditor : Editor
     {
         DropTable dropTable = target as DropTable;
 
-        
+        EditorGUI.BeginChangeCheck();
 
-        dropTable.items = EditorGUICustomUtility.DrawArrayEditor<DropTableSlot>(
+        var newItems = EditorGUICustomUtility.DrawArrayEditor<DropTableSlot>(
             dropTable.items, 
             (x) =>
             {
@@ -33,5 +33,17 @@ public class DropTableEditor : Editor
                 return x;
             }, 
             "Add item");
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(dropTable, $"Edited Drop Table {dropTable.name}");
+            dropTable.items = newItems;
+
+            PrefabUtility.RecordPrefabInstancePropertyModifications(dropTable);
+
+            EditorUtility.SetDirty(dropTable);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
     }
 }
