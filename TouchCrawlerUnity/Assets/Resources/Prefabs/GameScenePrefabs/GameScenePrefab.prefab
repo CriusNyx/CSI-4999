@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDecay: 0.1
-  targetPosition: {x: 0, y: 0}
 --- !u!114 &6793884620329862996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b3ec216ce8cbb4ea66e374f91987bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToTrack: {fileID: 0}
   target: {fileID: 0}
 --- !u!1 &3908505400422306729
 GameObject:

@@ -29,8 +29,8 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     }
 
     public Weapon weapon {
-        get { return gameObject.GetComponentInChildren<Weapon>(); }
-        set { this.weapon = weapon; }
+        get;
+        set;
     }
 
     public MovementController movementController
@@ -69,7 +69,7 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         healthController = GetComponent<HealthController>();
         statsController = GetComponent<StatsController>();
         wasAttacked = false;
-        
+        weapon = gameObject.GetComponentInChildren<Weapon>(); 
         if (IsPlayer())
         {
             EventSystem.AddEventListener(EventSystem.EventChannel.player, EventSystem.EventSubChannel.input, this);

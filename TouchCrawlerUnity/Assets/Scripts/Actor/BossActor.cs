@@ -12,7 +12,13 @@ public class BossActor :  NPCActor
     {
         Assets.WeaponSystem.Weapon[] allWeapons = GetComponentsInChildren<Assets.WeaponSystem.Weapon>();
         Random random = new Random();
-        weapon = allWeapons[(int)Random.Range(0f, allWeapons.Length - 1)];
-
+        try
+        {
+            weapon = allWeapons[(int)Random.Range(0f, allWeapons.Length)];
+        }
+        catch {
+            Debug.Log("Boss doesn't have a weapon");
+        }
+  
     }
 }
