@@ -20,6 +20,9 @@ GameObject:
   - component: {fileID: 1483766551661161668}
   - component: {fileID: 1483766551661161671}
   - component: {fileID: 1483766551661161669}
+  - component: {fileID: 641993995621436094}
+  - component: {fileID: 2147963738101436948}
+  - component: {fileID: 2271652739569918074}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Weapon
@@ -129,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: -1
 --- !u!114 &1483766551661161529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +244,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnAngles: []
+--- !u!114 &641993995621436094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483766551661161665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: 0}
+  range: -1
+--- !u!114 &2147963738101436948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483766551661161665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04843c4f75ad6c64a8f4f5828548721b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 289c6f0c2dc99f2459667befbfe0a50e, type: 2}
+--- !u!58 &2271652739569918074
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483766551661161665}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1

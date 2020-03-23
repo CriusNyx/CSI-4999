@@ -17,12 +17,13 @@ GameObject:
   - component: {fileID: 1183742535605916855}
   - component: {fileID: 8185229788685648518}
   - component: {fileID: 5659224516861995740}
-  - component: {fileID: 3818876268310459363}
   - component: {fileID: 7609961481845615910}
   - component: {fileID: 3531504000007252886}
   - component: {fileID: 379575319260834217}
   - component: {fileID: 1193923460008467950}
   - component: {fileID: 7458236166021123458}
+  - component: {fileID: 5343434696602554338}
+  - component: {fileID: 1673120012827106672}
   m_Layer: 0
   m_Name: TestWeapon
   m_TagString: Untagged
@@ -150,28 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trauma: 0.5
   length: 0.05
---- !u!114 &3818876268310459363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922492941089700679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4165057e677a17a458fb9c43b8caa164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  latch:
-    latchType: 0
-    counter:
-      targetCount: 1
-    dice:
-      percentChance: 0
-    cooldown:
-      cooldownTime: 0
-  damage:
-    ammount: 10
 --- !u!114 &7609961481845615910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,3 +236,42 @@ MonoBehaviour:
       cooldownTime: 0.1
   particleGameObject: {fileID: 5089381843828881700, guid: df91a44dd3e2a8146881432b62766ab0,
     type: 3}
+--- !u!58 &5343434696602554338
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &1673120012827106672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922492941089700679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef60a8c1aee4ab4cadc848bc33aa7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0.1
+  damageType: 1
+  baseDamage: 0
+  damagePerAttackPoint: 1

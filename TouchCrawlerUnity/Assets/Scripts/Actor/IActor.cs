@@ -38,6 +38,11 @@ public interface IActor : IEventListener, IWeaponTarget, IWeaponOwner
         get;
     }
 
+    StatsController statsController 
+    {
+        get;
+    }
+
     bool IsPlayer();
 
 

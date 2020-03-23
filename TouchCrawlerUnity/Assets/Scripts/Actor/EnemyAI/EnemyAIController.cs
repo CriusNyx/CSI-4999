@@ -14,7 +14,7 @@ public class EnemyAIController : MonoBehaviour
 
     public int stopDuration;
     private int stopTime;
-    public bool wander = false, patrol = false, attack = false;
+    private bool wasLastBehaviorWander;
 
 
     //Actor components
@@ -38,61 +38,35 @@ public class EnemyAIController : MonoBehaviour
         aIBehaviorAttack.enabled = false;
         actor = GetComponent<NPCActor>();
         body = GetComponent<Rigidbody2D>();
-        aIBehaviorAttack.enabled = attack;
-        aIBehaviorPatrol.enabled = patrol;
-        aIBehaviorWander.enabled = wander;
-        Debug.Log(aIBehaviorWander.isActiveAndEnabled);
-        if (wander)
+        wasLastBehaviorWander = false;
+        if (aIBehaviorWander.enabled)
         {
+            wasLastBehaviorWander = true;
             aIBehaviorWander.enabled = true;
             aIBehaviorPatrol.enabled = false;
             aIBehaviorAttack.enabled = false;
-        }else if (patrol)
+        }
+        if(aIBehaviorPatrol.enabled)
         {
             aIBehaviorWander.enabled = false;
             aIBehaviorPatrol.enabled = true;
             aIBehaviorAttack.enabled = false;
-        }
-        else if (attack)
-        {
-            aIBehaviorWander.enabled = false;
-            aIBehaviorPatrol.enabled = false;
-            aIBehaviorAttack.enabled = true;
         }
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (wander)
-        {
-            aIBehaviorWander.enabled = true;
-            aIBehaviorPatrol.enabled = false;
-            aIBehaviorAttack.enabled = false;
-        }
-        else if (patrol)
-        {
-            aIBehaviorWander.enabled = false;
-            aIBehaviorPatrol.enabled = true;
-            aIBehaviorAttack.enabled = false;
-        }
-        else if (attack)
-        {
-            aIBehaviorWander.enabled = false;
-            aIBehaviorPatrol.enabled = false;
-            aIBehaviorAttack.enabled = true;
-        }
-        if (WasAttackedYet())
+    { 
+        if (WasAttackedYet() && aIBehaviorAttack.hasTarget)
         {
             StartAttacking();
         }
+        if (!aIBehaviorAttack.hasTarget)
+        {
+            StopAtttacking();
+        }
     }
     
-
-
-
-
-
     private bool WasAttackedYet()
     {
         return actor.wasAttacked;
@@ -103,5 +77,18 @@ public class EnemyAIController : MonoBehaviour
         aIBehaviorAttack.enabled = true;
         aIBehaviorPatrol.enabled = false;
         aIBehaviorWander.enabled = false;
+    }
+    
+    private void StopAtttacking()
+    {
+        aIBehaviorAttack.enabled = false;
+        if (wasLastBehaviorWander)
+        {
+            aIBehaviorWander.enabled = true;
+        }
+        else
+        {
+            aIBehaviorPatrol.enabled = true;
+        }
     }
 }

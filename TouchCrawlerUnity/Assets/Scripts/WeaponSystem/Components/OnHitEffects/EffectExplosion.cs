@@ -27,7 +27,7 @@ public class EffectExplosion : EffectAOE
     }
 
     //TODO: Explosion Animations
-    protected override void SpawnAnimation(Vector2 location) {
+    protected void SpawnAnimation(Vector2 location) {
         throw new System.NotImplementedException();
     }
 }

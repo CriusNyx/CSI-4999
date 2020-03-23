@@ -4,19 +4,48 @@ using UnityEngine;
 
 public class InventorySlot : MonoBehaviour
 {
-    private Inventory inventory;
-    public int index;
+    private GameObject player;
+    private IActor actor;
 
-    void Start()
+    public void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        actor = player.GetComponent<IActor>();
     }
 
-    void Update()
+    public void EquipWeapon()
     {
-        //if (transform.childCount <= 0)
-        //{
-        //    inventory.items[index] = 0;
-        //}
+        // Checks if the inventory slot has an item
+        if (gameObject.transform.childCount > 1)
+        {
+            if (player.transform.childCount > 0)
+            {
+                // Item already equipped.. swap out (destroy and reattach new item)
+                Destroy(player.transform.GetChild(0).gameObject);
+
+                GameObject itemObject = gameObject.transform.GetChild(1).gameObject;
+                GameObject equippedWeapon = Instantiate(itemObject,
+                    new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, 0f),
+                    new Quaternion(0, 0, 0, 0), player.transform);
+
+                equippedWeapon.name = itemObject.name;
+                equippedWeapon.GetComponent<CircleCollider2D>().enabled = false;
+            }
+            else
+            {
+                // Equip weapon to Player
+                GameObject itemObject = gameObject.transform.GetChild(1).gameObject;
+                GameObject equippedWeapon = Instantiate(itemObject,
+                    new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, 0f),
+                    new Quaternion(0, 0, 0, 0), player.transform);
+
+                equippedWeapon.name = itemObject.name;
+                equippedWeapon.GetComponent<CircleCollider2D>().enabled = false;
+            }
+        }
+        else
+        {
+            // Empty inventory slot
+        }
     }
 }
