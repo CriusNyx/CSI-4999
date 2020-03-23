@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Util;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ public class RoomController : MonoBehaviour
     private void Update()
     {
         Color temp = fogMaterial.color;
-        if (isVisable)
+        if(isVisable)
         {
             temp.a = Mathf.MoveTowards(temp.a, 0f, Time.deltaTime * 2f);
         }
@@ -56,7 +57,7 @@ public class RoomController : MonoBehaviour
 
     public void SetDoorColliders(bool set)
     {
-        foreach (GameObject door in doorList)
+        foreach(GameObject door in doorList)
         {
             //Debug.Log("Setting doors enabled - room");
             door.GetComponent<DoorController>().SetEnabled(set);
@@ -66,24 +67,57 @@ public class RoomController : MonoBehaviour
 
     public void CheckNeighborDoors()
     {
-        //check if neighboring cells have rooms, set doors active
-        for (int i = 0; i < 5; i++)
+        ////check if neighboring cells have rooms, set doors active
+        //for(int i = 0; i < 5; i++)
+        //{
+        //    //Debug.Log("Locating Neighbor " + i);
+        //    doorList[i] = transform.GetChild(i + 2).gameObject;
+        //    if(i < 4)
+        //    {
+        //        playerSpawns[i] = transform.Find("PlayerSpawns").GetChild(i).gameObject;
+        //    }
+
+        //    //west = 0, north = 1, east = 2, south = 3, down = 4
+        //    doorList[i].SetActive(false);
+        //}
+
+
+        foreach(Transform child in transform)
         {
-            //Debug.Log("Locating Neighbor " + i);
-            doorList[i] = transform.GetChild(i + 2).gameObject;
-            if (i < 4)
+            switch(child.name)
+            {
+                case "door_1000":
+                    doorList[0] = child.gameObject;
+                    break;
+                case "door_0100":
+                    doorList[1] = child.gameObject;
+                    break;
+                case "door_0010":
+                    doorList[2] = child.gameObject;
+                    break;
+                case "door_0001":
+                    doorList[3] = child.gameObject;
+                    break;
+                case "door_down":
+                    doorList[4] = child.gameObject;
+                    break;
+            }
+        }
+
+        for(int i = 0; i < 5; i++)
+        {
+            if(i < 4)
             {
                 playerSpawns[i] = transform.Find("PlayerSpawns").GetChild(i).gameObject;
             }
 
-            //west = 0, north = 1, east = 2, south = 3, down = 4
             doorList[i].SetActive(false);
         }
 
-        for (int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++)
         {
             //doorList[0].SetActive(true);
-            if (neighbors[i] != null)
+            if(neighbors[i] != null)
             {
                 doorList[i].SetActive(true);
             }
@@ -97,7 +131,7 @@ public class RoomController : MonoBehaviour
 
     public void ToggleDoorOpen(int id, bool open)
     {
-        doorList[id].GetComponent<DoorController>().ToggleDoor(open);
+        doorList[id].GetComponent<DoorController>().SetDoor(open);
         SetDoorColliders(open);
     }
 
@@ -107,21 +141,54 @@ public class RoomController : MonoBehaviour
         doorList[id].GetComponent<DoorController>().ToggleLightDoor(set);
     }
 
-    public void OnRoomEnter()
+    public void OnRoomEnter(bool? cleared = null)
     {
         isVisable = true;
 
-        if (!cleared)
+        if(cleared != null)
+        {
+            this.cleared = cleared.Value;
+        }
+
+        if(!this.cleared)
         {
             WeightedRandomSelector<SpawnSet> randomSelector = new WeightedRandomSelector<SpawnSet>();
-            foreach (var spawn in gameObject.GetComponentsInChildren<SpawnSet>())
+            foreach(var spawn in gameObject.GetComponentsInChildren<SpawnSet>())
             {
                 randomSelector.Add(spawn, spawn.weight);
             }
             var spawner = randomSelector.Select(Random.value);
-            foreach (var spawnPoint in spawner.GetComponentsInChildren<SpawnPoint>())
+            var spawnPoints = spawner.GetComponentsInChildren<SpawnPoint>();
+            if(spawnPoints.Length > 0)
             {
-                spawnPoint.Spawn();
+                EnemyTracker tracker = gameObject.EnsureComponent<EnemyTracker>();
+                tracker.OnEmpty += Clear;
+
+                foreach(var spawnPoint in spawner.GetComponentsInChildren<SpawnPoint>())
+                {
+                    tracker.Track(spawnPoint.Spawn());
+                }
+                foreach(var door in doorList)
+                {
+                    if(door != null)
+                    {
+                        door.GetComponent<DoorController>()?.SetDoorLock(true);
+                    }
+                }
+
+                tracker.Trip();
+            }
+        }
+    }
+
+    public void Clear()
+    {
+        cleared = true;
+        foreach(var door in doorList)
+        {
+            if(door != null)
+            {
+                door.GetComponent<DoorController>()?.SetDoorLock(false);
             }
         }
     }

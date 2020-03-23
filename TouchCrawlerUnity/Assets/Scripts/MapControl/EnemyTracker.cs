@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Death;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,41 +7,46 @@ using UnityEngine;
 
 public class EnemyTracker : MonoBehaviour
 {
-    private List<GameObject> enemyList;
-    public GameObject enemy;
+    private HashSet<GameObject> enemiesToTrack = new HashSet<GameObject>();
+    public event Action OnEmpty;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Track(GameObject gameObject)
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void CreateEnemy(Vector3 position)
-    {
-        enemy = Instantiate(enemy, position, Quaternion.identity);
-        System.Action<IActor> deathAction = delegate (IActor actor)
+        if(gameObject != null)
         {
-            enemyList.Remove(actor.gameObject);
-        };
-        enemy.AddComponent<ActionOnDie>();
-        ActionOnDie actionOnDie = enemy.GetComponent<ActionOnDie>();
-        actionOnDie.createActionOnDie(deathAction, enemy.GetComponent<NPCActor>());
-        enemyList.Add(enemy);
+            enemiesToTrack.Add(gameObject);
+            TrackedGameObject.Create(gameObject, this);
+        }
     }
 
-    int CountEnemies()
+    public void Remove(GameObject gameObject)
     {
-        enemyList.TrimExcess();
-        return enemyList.Count();
+        enemiesToTrack.Remove(gameObject);
+        Trip();
     }
 
-    bool IsThereEnemies()
+    public void Trip()
     {
-        return (CountEnemies() > 0);
+        if(enemiesToTrack.Count == 0)
+        {
+            OnEmpty?.Invoke();
+        }
+    }
+}
+
+public class TrackedGameObject : MonoBehaviour
+{
+    private EnemyTracker tracker;
+
+    public static TrackedGameObject Create(GameObject gameObject, EnemyTracker tracker)
+    {
+        var tracked = gameObject.AddComponent<TrackedGameObject>();
+        tracked.tracker = tracker;
+        return tracked;
+    }
+
+    private void OnDestroy()
+    {
+        tracker.Remove(gameObject);
     }
 }

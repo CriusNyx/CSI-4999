@@ -48,7 +48,6 @@ public class AIBehaviorAttack : AIBehaviour
     {
         target = GameObject.FindObjectOfType<PlayerActor>();
         hasTarget = target != null;
-        Debug.Log(target);
         return weapon.Fire(target).weaponFired;
     }
     private void AutomaticAttack()
