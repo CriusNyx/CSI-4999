@@ -13,8 +13,7 @@ public class NPCAnimator : MonoBehaviour
     private Animator playAnimator;
     private MovementController playMove;
 
-    private bool isLizard = true;
-    private bool isSlime = false;
+    private bool flipped = false;
 
 
     void Start()
@@ -39,7 +38,7 @@ public class NPCAnimator : MonoBehaviour
         if (velocity.x > 0 && velocity.x > Mathf.Abs(velocity.y / 1.5f))
         {
             
-            playChar.GetComponent<SpriteRenderer>().flipX = isSlime;
+            playChar.GetComponent<SpriteRenderer>().flipX = flipped;
             isWalking = true;
             direction = 3;
 
@@ -47,7 +46,7 @@ public class NPCAnimator : MonoBehaviour
         else if (velocity.x < 0 && Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y / 1.5f))
         {
             
-            playChar.GetComponent<SpriteRenderer>().flipX = !isSlime;
+            playChar.GetComponent<SpriteRenderer>().flipX = !flipped;
             isWalking = true;
             direction = 3;
             
@@ -91,7 +90,7 @@ public class NPCAnimator : MonoBehaviour
                     (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/gobman/gobman_cont.controller", typeof(RuntimeAnimatorController));
                 break;
             case "lizard":
-                isLizard = true;
+                flipped = true;
                 playAnimator.runtimeAnimatorController =
          (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/lizard/lizard_cont.controller", typeof(RuntimeAnimatorController));
                 break;
@@ -125,7 +124,7 @@ public class NPCAnimator : MonoBehaviour
 (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/skeleton/skel_cont.controller", typeof(RuntimeAnimatorController));
                 break;
             case "slime":
-                isSlime = true;
+                flipped = true;
                 playAnimator.runtimeAnimatorController =
 (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/slime/slime_cont.controller", typeof(RuntimeAnimatorController));
                 break;
