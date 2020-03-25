@@ -375,6 +375,7 @@ MonoBehaviour:
   isWalking: 0
   isAttacking: 0
   direction: 1
+  enemyType: 
 --- !u!1 &331478839 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2560565595355545195, guid: 4434a2531d886024ea4825931c064be7,

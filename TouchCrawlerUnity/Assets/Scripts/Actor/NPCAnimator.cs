@@ -8,6 +8,7 @@ public class NPCAnimator : MonoBehaviour
     public bool isWalking = false;
     public bool isAttacking = false;
     public int direction = 1;
+    public string enemyType;
 
     private GameObject playChar;
     private Animator playAnimator;
@@ -21,6 +22,9 @@ public class NPCAnimator : MonoBehaviour
         playAnimator = this.gameObject.GetComponent<Animator>();
         playChar = this.gameObject;
         playMove = this.gameObject.GetComponent<MovementController>();
+
+        DefineEnemy(enemyType);
+
     }
 
     private void Update()
@@ -69,7 +73,7 @@ public class NPCAnimator : MonoBehaviour
 
     }
 
-    public void DefineEnemy(string type)
+    private void DefineEnemy(string type)
     {
         switch (type)
         {
