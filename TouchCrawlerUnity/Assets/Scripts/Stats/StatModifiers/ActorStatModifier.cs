@@ -9,8 +9,9 @@ public partial class ActorStatModifier : MonoBehaviour
 
     private void OnEnable()
     {
-        statsController = gameObject.GetComponentInParent<StatsController>();
-        foreach(var (key, mod) in modifierSet.GetMods())
+        statsController = //GameObject.FindGameObjectWithTag("Player").GetComponent<StatsController>();
+                          gameObject.GetComponentInParent<StatsController>();
+        foreach (var (key, mod) in modifierSet.GetMods())
         {
             statsController.GetStat(mod.statToModify).AddModifier(new StatsController.StatModifier(mod.name, key, mod.value, mod.modifierType));
         }

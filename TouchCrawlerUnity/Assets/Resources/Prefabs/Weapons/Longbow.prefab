@@ -181,7 +181,7 @@ MonoBehaviour:
     cooldown:
       cooldownTime: 0.1
   damage:
-    ammount: 10
+    amount: 50
 --- !u!114 &1662439740568296297
 MonoBehaviour:
   m_ObjectHideFlags: 0

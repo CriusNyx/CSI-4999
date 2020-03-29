@@ -181,7 +181,7 @@ MonoBehaviour:
     cooldown:
       cooldownTime: 0.1
   damage:
-    ammount: 10
+    amount: 30
 --- !u!114 &8504413596791578111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eca1ad1c0fe33e45bf39d3fdff7efda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileCount: 5
+  projectileCount: 1
 --- !u!114 &8504413596791578108
 MonoBehaviour:
   m_ObjectHideFlags: 0

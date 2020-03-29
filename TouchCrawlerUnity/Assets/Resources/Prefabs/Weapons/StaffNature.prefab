@@ -181,7 +181,7 @@ MonoBehaviour:
     cooldown:
       cooldownTime: 0.1
   damage:
-    ammount: 10
+    amount: 40
 --- !u!114 &7099505826039440725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80293e8f46ed7f7498d4dc3988c55257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleRange: 5
+  angleRange: 3
 --- !u!114 &7099505826039440727
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1327247425645525364, guid: 62888c9bcf547214b840f8af3f2ab219,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -181,7 +181,7 @@ MonoBehaviour:
     cooldown:
       cooldownTime: 0.1
   damage:
-    ammount: 10
+    amount: 40
 --- !u!114 &1483766551661161530
 MonoBehaviour:
   m_ObjectHideFlags: 0
