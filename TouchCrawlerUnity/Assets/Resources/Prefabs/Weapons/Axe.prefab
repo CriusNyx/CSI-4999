@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 1483766551661161668}
   - component: {fileID: 1483766551661161671}
   - component: {fileID: 1483766551661161669}
-  - component: {fileID: 641993995621436094}
   - component: {fileID: 2147963738101436948}
   - component: {fileID: 2271652739569918074}
   m_Layer: 0
@@ -244,20 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnAngles: []
---- !u!114 &641993995621436094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483766551661161665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPosition: {x: 0, y: 0}
-  range: -1
 --- !u!114 &2147963738101436948
 MonoBehaviour:
   m_ObjectHideFlags: 0

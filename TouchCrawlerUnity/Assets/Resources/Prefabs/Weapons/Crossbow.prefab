@@ -21,11 +21,9 @@ GameObject:
   - component: {fileID: 8969509287117074447}
   - component: {fileID: 8969509287117074446}
   - component: {fileID: 8969509287117074444}
-  - component: {fileID: 4039313626618955475}
   - component: {fileID: 7100080437972099597}
   - component: {fileID: 144210252883658383}
   - component: {fileID: 6694880121952713780}
-  - component: {fileID: 2402378866758099640}
   m_Layer: 0
   m_Name: Crossbow
   m_TagString: Weapon
@@ -260,20 +258,6 @@ MonoBehaviour:
       cooldownTime: 0.1
   duration: 0.1
   trauma: 1
---- !u!114 &4039313626618955475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969509287117074440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPosition: {x: 0, y: 0}
-  range: -1
 --- !u!114 &7100080437972099597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,29 +288,6 @@ CircleCollider2D:
   serializedVersion: 2
   m_Radius: 1
 --- !u!114 &6694880121952713780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969509287117074440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef60a8c1aee4ab4cadc848bc33aa7c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  latch:
-    latchType: 0
-    counter:
-      targetCount: 1
-    dice:
-      percentChance: 0
-    cooldown:
-      cooldownTime: 0.1
-  damageType: 1
-  baseDamage: 0
-  damagePerAttackPoint: 1
---- !u!114 &2402378866758099640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

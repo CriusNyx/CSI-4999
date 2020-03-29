@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6ce6f3ec3aef894f8b9c3b484f23581, type: 3}
-  m_Name: Attack+50
+  m_Name: SpellRes+10
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1869720883134965027, guid: c994580f54dbe7141bbbe28f539813cb, type: 3}
+  prefab: {fileID: 1906564940023965189, guid: 99d53a11648385444b26cacf91928e2e, type: 3}
   icon: {fileID: 21300000, guid: 0ef34fb2203db4c429b6f3f0b1ac0e8c, type: 3}
-  color: {r: 0.8392157, g: 0.11372549, b: 0.18431373, a: 1}
+  color: {r: 0.3254902, g: 0.03137255, b: 0.4627451, a: 1}
   itemEffect: No Effect
   NotAPickup: 0

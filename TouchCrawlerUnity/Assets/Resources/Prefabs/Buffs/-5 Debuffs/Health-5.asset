@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48dbaef66b4aebd48bd250866c80df50, type: 3}
-  m_Name: DamageRes+10
+  m_Name: Health-5
   m_EditorClassIdentifier: 
   modifiers:
-  - statToModify: 3
+  - statToModify: 0
     name: Add Health
-    value: 10
+    value: -5
     modifierType: 2
