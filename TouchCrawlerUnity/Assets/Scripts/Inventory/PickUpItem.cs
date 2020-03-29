@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PickUpItem : MonoBehaviour
 {
+    private GameObject player;
     private SpriteRenderer itemIcon;
     private bool isPickedUp = false;
     private GameObject[] itemSlots;
@@ -13,6 +14,7 @@ public class PickUpItem : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
     }
 
@@ -57,6 +59,15 @@ public class PickUpItem : MonoBehaviour
                 }
                 else
                 {
+                    // Equip buff to player
+                    GameObject equippedBuff = Instantiate(gameObject,
+                        new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, 0f),
+                        new Quaternion(0, 0, 0, 0), player.transform);
+
+                    equippedBuff.name = gameObject.name;
+                    equippedBuff.active = false;
+                    equippedBuff.GetComponent<CircleCollider2D>().enabled = false;
+
                     Destroy(gameObject);
                     return true;
                 }

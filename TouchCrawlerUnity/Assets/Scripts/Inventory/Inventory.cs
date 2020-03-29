@@ -36,6 +36,11 @@ public class Inventory : MonoBehaviour, ICollection<Item>
         onPickUp?.Invoke(item, itemObject);
     }
 
+    public void AddBuff(Item item, GameObject itemObject)
+    {
+        onPickUp?.Invoke(item, itemObject);
+    }
+
     public void Add(Item item)
     {
         Debug.Log("Don't call Inventory.Add() without GameObject");
