@@ -17,7 +17,7 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
         */
 
         float coefficient = 0.1f;
-        int burnTime = 6;
+        int time = 6;
 
         int ticks = 3;
 
@@ -35,7 +35,7 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
             this.amount = spellPower.BaseValue;
             this.amount += spellPower.CalculateStatValue() * coefficient;
 
-            EffectDot dot = new EffectDot(target, burnTime, ticks, new SpellDamage(amount/ticks));
+            EffectDot dot = new EffectDot(target, time, ticks, new SpellDamage(amount/ticks));
 
             result.applyEffects = true;
 
