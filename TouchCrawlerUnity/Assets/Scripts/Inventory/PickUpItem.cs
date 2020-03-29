@@ -12,10 +12,17 @@ public class PickUpItem : MonoBehaviour
     private GameObject[] itemSlots;
     public Item item;
 
+    // Consumable (Health Controller) stuff
+    public ConsumableItem consumableItem;
+    private HealthController playerHealth;
+    private int maxHealth = 100;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
+
+        playerHealth = player.GetComponent<HealthController>();
     }
 
     // Checks to see if player collides with item
@@ -56,6 +63,34 @@ public class PickUpItem : MonoBehaviour
                     actor.inventory.Add(item, gameObject);
                     Destroy(gameObject);
                     return true;
+                }
+                else if (gameObject.tag == "Consumable")
+                {
+                    // Add health back to health controller
+
+                    if (playerHealth.CurrentHealth == maxHealth)
+                    {
+                        // If health at 100 (current max), don't do anything
+                        Destroy(gameObject);
+                        return false;
+                    }
+                    else
+                    {
+                        // Add health back into controller
+                        float newHealth = playerHealth.CurrentHealth + consumableItem.value;
+
+                        if (newHealth > maxHealth)
+                        {
+                            playerHealth.CurrentHealth = maxHealth;
+                        }
+                        else
+                        {
+                            playerHealth.CurrentHealth += consumableItem.value;
+                        }
+
+                        Destroy(gameObject);
+                        return true;
+                    }
                 }
                 else
                 {
