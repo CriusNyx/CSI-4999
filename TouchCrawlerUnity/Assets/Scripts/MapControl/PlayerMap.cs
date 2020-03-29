@@ -8,13 +8,14 @@ public class PlayerMap : MonoBehaviour
     Camera camera;
     List<RoomController> rooms;
     RoomController currentRoomController;
+    MovementController movementController;
     int defaultCameraSize = 5;
-    int mapCameraSize = 20;
+    int mapCameraSize = 40;
     public bool showMap = false;
     private bool showLock;
     private bool wereRoomsAdded;
-    void Awake()
-    {
+    void Start()
+    { 
         showLock = false;
         wereRoomsAdded = false;
         rooms = new List<RoomController>();
@@ -32,12 +33,10 @@ public class PlayerMap : MonoBehaviour
         if (wereRoomsAdded && showMap && !showLock)
         {
             ShowMap();
-            showLock = true;
         }
         else if(!showMap && showLock)
         {
             HideMap();
-            showLock = false;
         }
     }
 
@@ -48,16 +47,21 @@ public class PlayerMap : MonoBehaviour
         {
             rooms.Add(r[i]);
         }
-        Debug.Log(rooms.Count);
+        movementController = GameObject.Find("Animator_tests").GetComponent<MovementController>();
         return rooms.Count > 0;
     }
 
-    private void ShowMap()
+    public void ShowMap()
     {
-        camera.orthographicSize = mapCameraSize;
-        Debug.Log("Show");
-        System.Action<RoomController> function = MakeRoomVisible;
-        rooms.ForEach(function);
+        if (wereRoomsAdded && showMap && !showLock)
+        {
+            camera.orthographicSize = mapCameraSize;
+            Debug.Log("Show");
+            System.Action<RoomController> function = MakeRoomVisible;
+            rooms.ForEach(function);
+            movementController.enabled = false;
+            showLock = true;
+        }
     }
 
     private void  MakeRoomVisible(RoomController room)
@@ -75,20 +79,25 @@ public class PlayerMap : MonoBehaviour
         Debug.Log(room.isVisible);
     }
 
-    private void HideMap()
+    public void HideMap()
     {
-        camera.orthographicSize = defaultCameraSize;
-        for (int i = 0; i < rooms.Count; i++)
+        if (!showMap && showLock)
         {
-            rooms[i].isVisible = false;
-        }
-        try
-        {
-            currentRoomController.isVisible = true;
-        }
-        catch
-        {
+            camera.orthographicSize = defaultCameraSize;
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                rooms[i].isVisible = false;
+            }
+            try
+            {
+                currentRoomController.isVisible = true;
+            }
+            catch
+            {
 
+            }
+            movementController.enabled = true;
+            showLock = false;
         }
     }
 }
