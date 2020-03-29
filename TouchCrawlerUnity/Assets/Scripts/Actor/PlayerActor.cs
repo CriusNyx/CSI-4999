@@ -38,8 +38,6 @@ public class PlayerActor : DefaultActor
         }
     }
 
-    
-
     public override void AcceptEvent(IEvent e)
     {
         base.AcceptEvent(e);
