@@ -65,7 +65,8 @@ public class PickUpItem : MonoBehaviour
                         new Quaternion(0, 0, 0, 0), player.transform);
 
                     equippedBuff.name = gameObject.name;
-                    equippedBuff.active = false;
+                    // Remove graphic when it's added to the player
+                    equippedBuff.GetComponent<SpriteRenderer>().enabled = false;
                     equippedBuff.GetComponent<CircleCollider2D>().enabled = false;
 
                     Destroy(gameObject);

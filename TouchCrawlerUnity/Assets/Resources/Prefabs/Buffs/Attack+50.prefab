@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1622224156006347558}
   - component: {fileID: 7567967075532880715}
-  - component: {fileID: 1906822883843839486}
+  - component: {fileID: 6824888603916246995}
   - component: {fileID: 2488501362249776830}
   - component: {fileID: 5457410697305889537}
   m_Layer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modifierSet: {fileID: 11400000, guid: a6d4c970ad9235147a8de064af9b4586, type: 2}
---- !u!212 &1906822883843839486
+--- !u!212 &6824888603916246995
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,11 +86,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0ef34fb2203db4c429b6f3f0b1ac0e8c, type: 3}
-  m_Color: {r: 0.8396226, g: 0.11485406, b: 0.18349369, a: 1}
+  m_Color: {r: 0.8392157, g: 0.11372549, b: 0.18431373, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
