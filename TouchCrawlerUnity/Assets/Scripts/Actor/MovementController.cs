@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class MovementController : MonoBehaviour
 {
     // Components
@@ -54,7 +53,6 @@ public class MovementController : MonoBehaviour
     public void Move(IActor target)
     {
         destination = target.GetLocation();
-
     }
 
     // Stops the actor

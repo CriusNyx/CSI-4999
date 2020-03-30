@@ -43,5 +43,4 @@ public class HealthController : MonoBehaviour
             return false;
         }
     }
-   
 }

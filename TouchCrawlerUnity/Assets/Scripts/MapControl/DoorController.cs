@@ -8,6 +8,7 @@ public class DoorController : MonoBehaviour
     public int doorID;
     public GameObject nextRoom;
     private bool enabledColl;
+    private bool locked = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,26 +22,41 @@ public class DoorController : MonoBehaviour
         //Debug.Log("Setting spawn room doors on - doors to : " + set + "|| is now: " + enabledColl);
     }
 
-    public void ToggleDoor(bool open)
+    public void SetDoor(bool open)
     {
-        if (open)
+        if(open)
         {
             transform.GetChild(1).gameObject.SetActive(true);
-            enabledColl = false;
+            enabledColl = true;
 
-        } else
+        }
+        else
         {
             transform.GetChild(1).gameObject.SetActive(false);
             enabledColl = false;
         }
     }
 
+    public void SetDoorLock(bool locked)
+    {
+        this.locked = locked;
+        if(this.locked)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
+    }
+
     public void ToggleLightDoor(bool light)
     {
-        if (light)
+        if(light)
         {
             roomLight.LightOn();
-        } else
+        }
+        else
         {
             roomLight.LightOff();
         }
@@ -49,7 +65,7 @@ public class DoorController : MonoBehaviour
     //
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player" && enabledColl)
+        if(other.gameObject.tag == "Player" && enabledColl && !locked)
         {
             //Debug.Log("Trigger entered!");
             //activate correct neighbor
@@ -59,7 +75,8 @@ public class DoorController : MonoBehaviour
             if(doorID > 1)
             {
                 newDoor = doorID - 2;
-            } else
+            }
+            else
             {
                 newDoor = doorID + 2;
             }

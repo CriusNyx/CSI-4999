@@ -20,9 +20,9 @@ GameObject:
   - component: {fileID: 3737432788367994420}
   - component: {fileID: 3737432788367994421}
   - component: {fileID: 3737432788367994418}
-  - component: {fileID: 6309126405697522740}
   - component: {fileID: 1063311847675142419}
   - component: {fileID: 753257002278089544}
+  - component: {fileID: 3368666984826635509}
   m_Layer: 0
   m_Name: StaffIce
   m_TagString: Weapon
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 8576197976935498907, guid: 62888c9bcf547214b840f8af3f2ab219,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -181,7 +181,7 @@ MonoBehaviour:
     cooldown:
       cooldownTime: 0.1
   damage:
-    ammount: 10
+    amount: 40
 --- !u!114 &3737432788367994423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eca1ad1c0fe33e45bf39d3fdff7efda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileCount: 5
+  projectileCount: 3
 --- !u!114 &3737432788367994418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,20 +244,6 @@ MonoBehaviour:
       cooldownTime: 0.1
   duration: 0.1
   trauma: 5
---- !u!114 &6309126405697522740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3737432788367994419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPosition: {x: 0, y: 0}
-  range: -1
 --- !u!114 &1063311847675142419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +273,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &3368666984826635509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737432788367994419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af9b045343203541b9e4657dc8d723e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0.1
+  particleGameObject: {fileID: 5089381843828881700, guid: df91a44dd3e2a8146881432b62766ab0,
+    type: 3}

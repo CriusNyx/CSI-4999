@@ -1,14 +1,20 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Actor.EnemyAI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIBehaviorWander : MonoBehaviour
+public class AIBehaviorWander : AIBehaviour
 {
     Rigidbody2D body;
     MovementController movementController;
     Vector2 nextWander;
     public int stopDuration = 10;
     private int stopTime;
+
+    public override float RandomWeight => 2f;
+
+    public override float ExecutionTime => 5f;
+
     // Start is called before the first frame update
     void Start()
     {

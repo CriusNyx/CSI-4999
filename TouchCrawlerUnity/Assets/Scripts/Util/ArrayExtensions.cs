@@ -52,5 +52,17 @@ namespace Assets.Scripts.Util
             Array.Copy(arr, indexToRemove + 1, output, indexToRemove, int.MaxValue);
             return output;
         }
+
+        public static T Random<T>(this T[] arr)
+        {
+            if (arr.Length > 0)
+            {
+                return arr[UnityEngine.Random.Range(0, arr.Length)];
+            }
+            else
+            {
+                return default(T);
+            }
+        }
     }
 }
