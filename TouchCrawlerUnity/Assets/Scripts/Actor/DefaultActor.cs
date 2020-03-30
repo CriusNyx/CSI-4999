@@ -29,9 +29,21 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
     }
 
     public Weapon weapon {
-        get;
-        set;
+        get
+        {
+            if (_weapon == null)
+            {
+                _weapon = gameObject.GetComponentInChildren<Weapon>();
+            }
+            return _weapon;
+        }
+        set
+        {
+            _weapon = value;
+        }
     }
+
+    private Weapon _weapon;
 
     public MovementController movementController
     {

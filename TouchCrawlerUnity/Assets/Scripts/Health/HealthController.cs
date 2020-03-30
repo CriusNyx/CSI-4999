@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Death;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,17 +9,26 @@ public class HealthController : MonoBehaviour
     /// CurrentHealth is the current health of a character. Float because that takes less memory space.
     /// </summary>
     public float CurrentHealth = 100f;
-    
+    public float MaxHealth = 100f;
+
     /// <summary>
     /// Each frame, the game will check to see if health is less than or equal to 0. It will crash if Health falls that low.
     /// This is not going to be in the final game, obviously. We don't want it to crash.
     /// </summary>
     private void Update()
     {
-       if(CurrentHealth <= 0)
+        MaxHealth = gameObject.GetComponent<StatsController>().GetStat(StatsController.StatType.Health).CalculateStatValue() * 10f;
+        if (CurrentHealth <= 0)
         {
             //throw new System.NotImplementedException();
-            Destroy(gameObject);
+            foreach(var onDieEffect in gameObject.GetComponents<OnDieEffect>())
+            {
+                onDieEffect.OnDie(gameObject.GetComponent<IActor>());
+            }
+        }
+        if(CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
         }
     }
 
@@ -33,8 +43,8 @@ public class HealthController : MonoBehaviour
 
         float damageAmount = damage.amount;
         CurrentHealth = CurrentHealth - damageAmount;
-        
-        if(CurrentHealth != oldHealth)
+
+        if (CurrentHealth != oldHealth)
         {
             return true;
         }
