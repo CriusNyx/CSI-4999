@@ -331,5 +331,28 @@ MonoBehaviour:
       percentChance: 0
     cooldown:
       cooldownTime: 0.1
+  damageType: 1
+  baseDamage: 0
+  damagePerAttackPoint: 1
+--- !u!114 &6863458171624638795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969509287117074440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af9b045343203541b9e4657dc8d723e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0.1
   particleGameObject: {fileID: 5089381843828881700, guid: df91a44dd3e2a8146881432b62766ab0,
     type: 3}

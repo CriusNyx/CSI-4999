@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Util;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public LevelDefinition levelDefinition;
     public GameObject spawnRoomPrefab;
     public int minRoomAmount;
     public int maxRoomAmount;
@@ -20,18 +20,16 @@ public class MapGenerator : MonoBehaviour
     {
         finalNumRooms = Random.Range(minRoomAmount, maxRoomAmount+1);
         //Origin point
-        GameObject seedRoom = Instantiate(spawnRoomPrefab);
-        seedRoom.transform.parent = transform;
-        RoomController seedRoomCont = seedRoom.GetComponent<RoomController>();
+        GameObject spawnRoom = Instantiate(spawnRoomPrefab);
+        spawnRoom.transform.parent = transform;
+        RoomController seedRoomController = spawnRoom.GetComponent<RoomController>();
 
-        seedRoomCont.gridPosition = new Vector3(0,0,0);
-        roomObjects.Add(seedRoom);
-
-        seedRoomCont.OnRoomEnter();
+        seedRoomController.gridPosition = new Vector3(0,0,0);
+        roomObjects.Add(spawnRoom);
 
         currNumRooms = 1;
 
-        nextToAdd.Enqueue(seedRoom);
+        nextToAdd.Enqueue(spawnRoom);
         AddRoom(Random.Range(2,5));
         RoomKill();
         FindNeighbors(roomObjects[0]); //closest to origin room
@@ -53,11 +51,14 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-
+        seedRoomController.OnRoomEnter(true);
     }
 
     void AddRoom(int forceNeighbors = 0)
     {
+        var levelDefinition = Resources.LoadAll<LevelDefinition>("ProceduralGenerationSystem/LevelDefinitions").Random();
+        var rooms = LevelDefinition.GetAllRoomPrefabs(levelDefinition);
+
         GameObject seedRoom = nextToAdd.Dequeue();
         RoomController seedRoomCont = seedRoom.GetComponent<RoomController>();
         int totalNeighbors = Random.Range(2, 5); // 2-4
@@ -100,7 +101,7 @@ public class MapGenerator : MonoBehaviour
             if(currNumRooms < finalNumRooms)
             {
                 //make 1 new room
-                GameObject room = Instantiate(levelDefinition.roomsToInstantiate[Random.Range(0, levelDefinition.roomsToInstantiate.Length)]);
+                GameObject room = Instantiate(rooms.Random());
                 room.transform.parent = transform;
                 RoomController roomController = room.GetComponent<RoomController>();
 
