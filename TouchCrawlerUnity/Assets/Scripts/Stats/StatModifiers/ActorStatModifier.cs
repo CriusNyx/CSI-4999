@@ -9,8 +9,9 @@ public partial class ActorStatModifier : MonoBehaviour
 
     private void OnEnable()
     {
-        statsController = gameObject.GetComponentInParent<StatsController>();
-        foreach(var (key, mod) in modifierSet.GetMods())
+        statsController = //GameObject.FindGameObjectWithTag("Player").GetComponent<StatsController>();
+                          gameObject.GetComponentInParent<StatsController>();
+        foreach (var (key, mod) in modifierSet.GetMods())
         {
             statsController.GetStat(mod.statToModify).AddModifier(new StatsController.StatModifier(mod.name, key, mod.value, mod.modifierType));
         }
@@ -18,10 +19,12 @@ public partial class ActorStatModifier : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach(var (key, mod) in modifierSet.GetMods())
+        // Note: Disabled for now, since we aren't allowing player to remove stats themselves
+
+        /*foreach(var (key, mod) in modifierSet.GetMods())
         {
             statsController.GetStat(mod.statToModify).RemoveModifier(key);
-        }
+        }*/
     }
 
     [Serializable]
