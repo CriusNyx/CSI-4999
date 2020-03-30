@@ -1,4 +1,4 @@
-using Assets.Scripts.Util.Latches;
+﻿using Assets.Scripts.Util.Latches;
 using Assets.Scripts.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using Assets.Scripts.WeaponSystem.Components.OnHitEffects;
 using Assets.WeaponSystem;
 using static StatsController;
 
-public class EffectPoison : OnHitEffect
+public class EffectBleed : OnHitEffect
 {
     /* Apply Nature typed DoT to target
     ** Damage is based on stats/level
@@ -15,9 +15,9 @@ public class EffectPoison : OnHitEffect
     */
 
     float coefficient = 0.01f;
-    int time = 12;
+    int time = 5;
 
-    int ticks = 12;
+    int ticks = 5;
 
     float amount = 0f;
 
@@ -29,12 +29,12 @@ public class EffectPoison : OnHitEffect
         StatsController srcStats = weapon.owner.actor.statsController;
         this.target = target;
 
-        Stat spellPower = srcStats.GetStat(StatType.SpellPower);
+        Stat attackPower = srcStats.GetStat(StatType.AttackPower);
 
-        this.amount = spellPower.BaseValue;
-        this.amount += spellPower.CalculateStatValue() * coefficient;
+        this.amount = attackPower.BaseValue;
+        this.amount += attackPower.CalculateStatValue() * coefficient;
 
-        EffectDot dot = new EffectDot(target, time, ticks, new SpellDamage(amount / ticks));
+        EffectDot dot = new EffectDot(target, time, ticks, new PhysicalDamage(amount / ticks));
 
         result.applyEffects = true;
 

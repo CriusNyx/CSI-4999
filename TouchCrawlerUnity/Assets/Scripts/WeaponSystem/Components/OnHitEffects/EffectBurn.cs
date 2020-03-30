@@ -17,9 +17,9 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
         */
 
         float coefficient = 0.1f;
-        int burnTime = 6;
+        int time = 6;
 
-        int SecondsPerTick = 2;
+        int ticks = 3;
 
         float amount = 0f;
 
@@ -35,22 +35,11 @@ namespace Assets.Scripts.WeaponSystem.Components.OnHitEffects {
             this.amount = spellPower.BaseValue;
             this.amount += spellPower.CalculateStatValue() * coefficient;
 
-            StartCoroutine(BurnTarget());
+            EffectDot dot = new EffectDot(target, time, ticks, new SpellDamage(amount/ticks));
 
             result.applyEffects = true;
 
             return result;
-        }
-        IEnumerator BurnTarget() {
-
-            for (int i = 0; i < (burnTime/SecondsPerTick); i++){
-
-                //TODO: Spawn Fire on targets location
-
-                yield return new WaitForSeconds(SecondsPerTick);
-                SpellDamage damage = new SpellDamage(amount/(burnTime/SecondsPerTick));
-                target.DoDamage(damage);
-            }
         }
     }
 
