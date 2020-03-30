@@ -26,6 +26,7 @@ public class PlayerMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        showMap = Input.GetKey(KeyCode.K);
         if (!wereRoomsAdded)
         {
             wereRoomsAdded = AddRooms();
@@ -68,12 +69,12 @@ public class PlayerMap : MonoBehaviour
     {
         Debug.Log(room);
         Debug.Log(room.cleared);
-        if (room.cleared)
+        if (room.isVisible)
         {
-            if (room.isVisible)
-            {
-                currentRoomController = room;
-            }
+            currentRoomController = room;
+        }
+        if (room.cleared || room == currentRoomController)
+        {   
             room.isVisible = true;
         }
         Debug.Log(room.isVisible);
