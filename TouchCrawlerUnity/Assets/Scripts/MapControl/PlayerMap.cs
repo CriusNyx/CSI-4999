@@ -48,7 +48,7 @@ public class PlayerMap : MonoBehaviour
         {
             rooms.Add(r[i]);
         }
-        movementController = GameObject.Find("Animator_tests").GetComponent<MovementController>();
+        movementController = GameObject.Find("Player").GetComponent<MovementController>();
         return rooms.Count > 0;
     }
 
