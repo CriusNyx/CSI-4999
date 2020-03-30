@@ -8,13 +8,13 @@ public class NPCAnimator : MonoBehaviour
     public bool isWalking = false;
     public bool isAttacking = false;
     public int direction = 1;
+    public string enemyType;
 
     private GameObject playChar;
     private Animator playAnimator;
     private MovementController playMove;
 
-    private bool isLizard = true;
-    private bool isSlime = false;
+    private bool flipped = false;
 
 
     void Start()
@@ -22,6 +22,9 @@ public class NPCAnimator : MonoBehaviour
         playAnimator = this.gameObject.GetComponent<Animator>();
         playChar = this.gameObject;
         playMove = this.gameObject.GetComponent<MovementController>();
+
+        DefineEnemy(enemyType);
+
     }
 
     private void Update()
@@ -39,7 +42,7 @@ public class NPCAnimator : MonoBehaviour
         if (velocity.x > 0 && velocity.x > Mathf.Abs(velocity.y / 1.5f))
         {
             
-            playChar.GetComponent<SpriteRenderer>().flipX = isSlime;
+            playChar.GetComponent<SpriteRenderer>().flipX = flipped;
             isWalking = true;
             direction = 3;
 
@@ -47,7 +50,7 @@ public class NPCAnimator : MonoBehaviour
         else if (velocity.x < 0 && Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y / 1.5f))
         {
             
-            playChar.GetComponent<SpriteRenderer>().flipX = !isSlime;
+            playChar.GetComponent<SpriteRenderer>().flipX = !flipped;
             isWalking = true;
             direction = 3;
             
@@ -70,7 +73,7 @@ public class NPCAnimator : MonoBehaviour
 
     }
 
-    public void DefineEnemy(string type)
+    private void DefineEnemy(string type)
     {
         switch (type)
         {
@@ -91,7 +94,7 @@ public class NPCAnimator : MonoBehaviour
                     (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/gobman/gobman_cont.controller", typeof(RuntimeAnimatorController));
                 break;
             case "lizard":
-                isLizard = true;
+                flipped = true;
                 playAnimator.runtimeAnimatorController =
          (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/lizard/lizard_cont.controller", typeof(RuntimeAnimatorController));
                 break;
@@ -125,7 +128,7 @@ public class NPCAnimator : MonoBehaviour
 (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/skeleton/skel_cont.controller", typeof(RuntimeAnimatorController));
                 break;
             case "slime":
-                isSlime = true;
+                flipped = true;
                 playAnimator.runtimeAnimatorController =
 (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/slime/slime_cont.controller", typeof(RuntimeAnimatorController));
                 break;
