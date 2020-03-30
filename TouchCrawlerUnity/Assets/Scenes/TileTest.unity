@@ -642,6 +642,7 @@ GameObject:
   - component: {fileID: 786101309}
   - component: {fileID: 786101308}
   - component: {fileID: 786101310}
+  - component: {fileID: 786101311}
   m_Layer: 0
   m_Name: DungeonFactory
   m_TagString: Untagged
@@ -692,6 +693,19 @@ MonoBehaviour:
   minRoomAmount: 20
   maxRoomAmount: 40
   gridRadius: 1000
+--- !u!114 &786101311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786101307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b70be521ac9bf4485f03e893cf907f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showMap: 0
 --- !u!1 &1433388618
 GameObject:
   m_ObjectHideFlags: 0
