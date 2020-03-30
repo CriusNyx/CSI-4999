@@ -31,6 +31,10 @@ namespace Assets.Editor
         /// <returns></returns>
         public static T[] DrawArrayEditor<T>(T[] arr, Func<T, T> elementEditor, string addElementButtonName, Func<T> constructor)
         {
+            if(arr == null)
+            {
+                arr = new T[] { };
+            }
             List<T> list = new List<T>(arr);
             int elementToRemove = -1;
 

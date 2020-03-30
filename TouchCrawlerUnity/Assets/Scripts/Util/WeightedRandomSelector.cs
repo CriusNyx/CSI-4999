@@ -83,7 +83,14 @@ public class WeightedRandomSelector<T>
 
     public T Select(float randomValue)
     {
-        randomValue *= pdf.Total;
-        return elements[pdf.Find(randomValue)];
+        try
+        {
+            randomValue *= pdf.Total;
+            return elements[pdf.Find(randomValue)];
+        }
+        catch
+        {
+            return default(T);
+        }
     }
 }

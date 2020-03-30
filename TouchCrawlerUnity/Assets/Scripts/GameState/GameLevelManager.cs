@@ -6,10 +6,10 @@ public class GameLevelManager : MonoBehaviour
 {
     private void Awake()
     {
-        var thisLevel = GetLevelDefinition();
-        var dungeonFactory = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Environment/DungeonFactory"));
-        var mapGenerator = dungeonFactory.GetComponent<MapGenerator>();
-        mapGenerator.levelDefinition = thisLevel;
+        //var thisLevel = GetLevelDefinition();
+        //var dungeonFactory = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Environment/DungeonFactory"));
+        //var mapGenerator = dungeonFactory.GetComponent<MapGenerator>();
+        //mapGenerator.levelDefinition = thisLevel;
     }
 
     private static LevelDefinition GetLevelDefinition()

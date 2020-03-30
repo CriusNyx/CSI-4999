@@ -51,7 +51,7 @@ namespace Assets.Scripts.WeaponSystem
         private void Awake()
         {
             this.gameObject.layer = LayerMask.NameToLayer("Projectile");
-            if (lifetime >= 0f)
+            if(lifetime >= 0f)
             {
                 destroyTime = Time.time + lifetime;
             }
@@ -79,38 +79,40 @@ namespace Assets.Scripts.WeaponSystem
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-//<<<<<<< HEAD
-//            Damage dmg = null;
-//            if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
-//            { 
-//                Destroy(this.gameObject);
-//            }
-//            if (col.otherCollider.gameObject.GetComponent<IWeaponTarget>() != null ) {
-//                dmg = new Damage(col.contacts);
-//                this.WeaponSrc.ApplyOnHitEffects(col.collider.GetComponent<IWeaponTarget>(), dmg);
-//=======
+            //<<<<<<< HEAD
+            //            Damage dmg = null;
+            //            if (this.WeaponSrc.ShouldDestroyProjectile(this, col.collider)) 
+            //            { 
+            //                Destroy(this.gameObject);
+            //            }
+            //            if (col.otherCollider.gameObject.GetComponent<IWeaponTarget>() != null ) {
+            //                dmg = new Damage(col.contacts);
+            //                this.WeaponSrc.ApplyOnHitEffects(col.collider.GetComponent<IWeaponTarget>(), dmg);
+            //=======
             var colliderTarget = collider.GetComponent<IWeaponTarget>();
             var otherProjectile = collider.GetComponent<IProjectile>();
 
-            if (colliderTarget != null)
+            if(colliderTarget != null)
             {
-                if (colliderTarget.ValidateTarget(attackTargetType))
+                if(colliderTarget.ValidateTarget(attackTargetType))
                 {
-                    if (this.WeaponSrc.ShouldDestroyProjectile(this, collider))
+                    if(this.WeaponSrc != null)
                     {
-                        Destroy(this.gameObject);
+                        if(this.WeaponSrc.ShouldDestroyProjectile(this, collider))
+                        {
+                            Destroy(this.gameObject);
+                        }
+                        this.WeaponSrc.ApplyOnHitEffects(transform.position, (previousPosition - collider.transform.position).normalized, colliderTarget);
                     }
-
-                    this.WeaponSrc.ApplyOnHitEffects(transform.position, (previousPosition - collider.transform.position).normalized, colliderTarget);
                 }
             }
-            else if (IgnoreOtherProjectiles && otherProjectile != null)
+            else if(IgnoreOtherProjectiles && otherProjectile != null)
             {
                 //Do Nothing. Ignore the collision
             }
             else
             {
-                if (this.WeaponSrc.ShouldDestroyProjectile(this, collider))
+                if(this.WeaponSrc.ShouldDestroyProjectile(this, collider))
                 {
                     Destroy(this.gameObject);
                 }
@@ -122,14 +124,14 @@ namespace Assets.Scripts.WeaponSystem
             velocity = velocity + AccelerationVector * Time.fixedDeltaTime;
             this.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
 
-            if (destroyTime != -1f && Time.time >= destroyTime)
+            if(destroyTime != -1f && Time.time >= destroyTime)
             {
                 Destroy(gameObject);
             }
 
-            if (maxTravelDistance != -1f)
+            if(maxTravelDistance != -1f)
             {
-                if (Vector2.Distance(Source, Current) > maxTravelDistance)
+                if(Vector2.Distance(Source, Current) > maxTravelDistance)
                 {
                     Destroy(gameObject);
                 }

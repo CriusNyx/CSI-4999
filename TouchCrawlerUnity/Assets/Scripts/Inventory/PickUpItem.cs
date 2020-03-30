@@ -6,14 +6,23 @@ using UnityEngine.UI;
 
 public class PickUpItem : MonoBehaviour
 {
+    private GameObject player;
     private SpriteRenderer itemIcon;
     private bool isPickedUp = false;
     private GameObject[] itemSlots;
     public Item item;
 
+    // Consumable (Health Controller) stuff
+    public ConsumableItem consumableItem;
+    private HealthController playerHealth;
+    private int maxHealth = 100;
+
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
+
+        playerHealth = player.GetComponent<HealthController>();
     }
 
     // Checks to see if player collides with item
@@ -55,8 +64,47 @@ public class PickUpItem : MonoBehaviour
                     Destroy(gameObject);
                     return true;
                 }
+                else if (gameObject.tag == "Consumable")
+                {
+                    // Add health back to health controller
+
+                    if (playerHealth.CurrentHealth == maxHealth)
+                    {
+                        // If health at 100 (current max), don't do anything
+                        Destroy(gameObject);
+                        return false;
+                    }
+                    else
+                    {
+                        // Add health back into controller
+                        float newHealth = playerHealth.CurrentHealth + consumableItem.value;
+
+                        if (newHealth > maxHealth)
+                        {
+                            playerHealth.CurrentHealth = maxHealth;
+                        }
+                        else
+                        {
+                            playerHealth.CurrentHealth += consumableItem.value;
+                        }
+
+                        Destroy(gameObject);
+                        return true;
+                    }
+                }
                 else
                 {
+                    // Equip buff to player
+                    GameObject equippedBuff = Instantiate(gameObject,
+                        new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, 0f),
+                        new Quaternion(0, 0, 0, 0), player.transform);
+
+                    equippedBuff.name = gameObject.name;
+
+                    // Remove graphic when it's added to the player
+                    equippedBuff.GetComponent<SpriteRenderer>().enabled = false;
+                    equippedBuff.GetComponent<CircleCollider2D>().enabled = false;
+
                     Destroy(gameObject);
                     return true;
                 }

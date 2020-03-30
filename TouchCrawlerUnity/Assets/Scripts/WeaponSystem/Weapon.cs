@@ -1,7 +1,5 @@
-﻿using Assets.Scripts.Util;
-using Assets.Scripts.WeaponSystem;
+﻿using Assets.Scripts.WeaponSystem;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Assets.Scripts.WeaponSystem.WeaponComponent;

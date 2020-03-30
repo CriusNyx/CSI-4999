@@ -38,8 +38,6 @@ public class PlayerActor : DefaultActor
         }
     }
 
-    
-
     public override void AcceptEvent(IEvent e)
     {
         base.AcceptEvent(e);
@@ -52,7 +50,8 @@ public class PlayerActor : DefaultActor
 
         if(e is PickupItemTouchedEvent pickupItemEvent)
         {
-            Debug.Log("Player: PickupItemTouchedEvent - " + pickupItemEvent.item.name);
+            //string itemName = String.IsNullOrEmpty(pickupItemEvent.item.name) ? "Consumable" : "Test";
+            //Debug.Log("Player: PickupItemTouchedEvent - " + itemName);
         }
     }
 

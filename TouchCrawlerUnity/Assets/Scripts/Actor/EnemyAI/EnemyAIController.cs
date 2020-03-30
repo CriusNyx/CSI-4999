@@ -1,94 +1,39 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.WeaponSystem;
 using Assets.WeaponSystem;
+using Assets.Scripts.Actor.EnemyAI;
+using Assets.Scripts.Util;
 
-[RequireComponent(typeof(AIBehaviorAttack))]
-[RequireComponent(typeof(AIBehaviorWander))]
-[RequireComponent(typeof(AIBehaviorPatrol))]
 public class EnemyAIController : MonoBehaviour
 {
     //Behavior variables
 
-    public int stopDuration;
-    private int stopTime;
-    private bool wasLastBehaviorWander;
+    private float nextCheck = -1f;
 
-
-    //Actor components
-    private AIBehaviorPatrol aIBehaviorPatrol;
-    private AIBehaviorWander aIBehaviorWander;
-    private AIBehaviorAttack aIBehaviorAttack;
-    private Rigidbody2D body;
-    private MovementController movementController;
-    private DefaultActor actor;
-    
-
-    void Start()
+    public void Update()
     {
-        movementController = GetComponent<MovementController>();
-        stopTime = 0;
-        aIBehaviorAttack = GetComponent<AIBehaviorAttack>();
-        aIBehaviorPatrol = GetComponent<AIBehaviorPatrol>();
-        aIBehaviorWander = GetComponent<AIBehaviorWander>();
-        aIBehaviorWander.enabled = false;
-        aIBehaviorPatrol.enabled = false;
-        aIBehaviorAttack.enabled = false;
-        actor = GetComponent<NPCActor>();
-        body = GetComponent<Rigidbody2D>();
-        wasLastBehaviorWander = false;
-        if (aIBehaviorWander.enabled)
-        {
-            wasLastBehaviorWander = true;
-            aIBehaviorWander.enabled = true;
-            aIBehaviorPatrol.enabled = false;
-            aIBehaviorAttack.enabled = false;
-        }
-        if(aIBehaviorPatrol.enabled)
-        {
-            aIBehaviorWander.enabled = false;
-            aIBehaviorPatrol.enabled = true;
-            aIBehaviorAttack.enabled = false;
-        }
+        if (Time.time > nextCheck)
+            SwapBehaviour();
     }
 
-    // Update is called once per frame
-    void Update()
-    { 
-        if (WasAttackedYet() && aIBehaviorAttack.hasTarget)
-        {
-            StartAttacking();
-        }
-        if (!aIBehaviorAttack.hasTarget)
-        {
-            StopAtttacking();
-        }
-    }
-    
-    private bool WasAttackedYet()
+    private void SwapBehaviour()
     {
-        return actor.wasAttacked;
-    }
+        WeightedRandomSelector<AIBehaviour> selector = new WeightedRandomSelector<AIBehaviour>();
 
-    private void StartAttacking()
-    {
-        aIBehaviorAttack.enabled = true;
-        aIBehaviorPatrol.enabled = false;
-        aIBehaviorWander.enabled = false;
-    }
-    
-    private void StopAtttacking()
-    {
-        aIBehaviorAttack.enabled = false;
-        if (wasLastBehaviorWander)
+        var behaviours = gameObject.GetComponents<AIBehaviour>();
+
+        foreach (var behaviour in behaviours)
         {
-            aIBehaviorWander.enabled = true;
+            behaviour.enabled = false;
+            selector.Add(behaviour, behaviour.RandomWeight);
         }
-        else
+        var current = selector.Select(Random.value);
+        if (current != null)
         {
-            aIBehaviorPatrol.enabled = true;
+            current.enabled = true;
+            nextCheck = Time.time + current.ExecutionTime;
         }
     }
 }
