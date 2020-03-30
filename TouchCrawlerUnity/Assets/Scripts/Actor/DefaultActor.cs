@@ -159,8 +159,6 @@ public class DefaultActor : MonoBehaviour, IActor, IEventListener, IWeaponOwner
         //Debug.Log(damage.ToString());
         //attacker = damage.weaponOwner;
 
-
-
         //TODO: modify damage based on stats
 
         Stat spellResistance = statsController.GetStat(StatType.SpellResistance);

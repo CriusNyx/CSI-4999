@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 8255215581167968724}
   m_Layer: 5
   m_Name: LifeText
-  m_TagString: Untagged
+  m_TagString: Life Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 2180979057263899436}
   m_Layer: 5
   m_Name: HeartController
-  m_TagString: Untagged
+  m_TagString: Heart Controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

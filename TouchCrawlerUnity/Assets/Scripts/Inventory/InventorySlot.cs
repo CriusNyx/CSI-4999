@@ -21,7 +21,16 @@ public class InventorySlot : MonoBehaviour
             if (player.transform.childCount > 0)
             {
                 // Item already equipped.. swap out (destroy and reattach new item)
-                Destroy(player.transform.GetChild(0).gameObject);
+                Transform playerChildren = player.transform;
+
+                // If there are PowerUps, only destroy the weapon
+                foreach (Transform child in playerChildren)
+                {
+                    if (child.tag == "Weapon")
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
 
                 GameObject itemObject = gameObject.transform.GetChild(1).gameObject;
                 GameObject equippedWeapon = Instantiate(itemObject,

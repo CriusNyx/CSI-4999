@@ -16,7 +16,7 @@ public class RoomController : MonoBehaviour
 
     private GameObject fog;
     private Material fogMaterial;
-    private bool isVisable = false;
+    public bool isVisible;
 
     void Awake()
     {
@@ -34,7 +34,8 @@ public class RoomController : MonoBehaviour
     private void Update()
     {
         Color temp = fogMaterial.color;
-        if(isVisable)
+
+        if (isVisible)
         {
             temp.a = Mathf.MoveTowards(temp.a, 0f, Time.deltaTime * 2f);
         }
@@ -143,7 +144,7 @@ public class RoomController : MonoBehaviour
 
     public void OnRoomEnter(bool? cleared = null)
     {
-        isVisable = true;
+        isVisible = true;
 
         if(cleared != null)
         {
@@ -195,7 +196,7 @@ public class RoomController : MonoBehaviour
 
     public void OnRoomExit()
     {
-        isVisable = false;
+        isVisible = false;
     }
 
     public void EnterDoor(IActor actor, int doorIndex)

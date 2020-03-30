@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 8105166356373043461}
   - component: {fileID: 8105166356373043458}
   - component: {fileID: 8105166356373043459}
+  - component: {fileID: 4561942692250973617}
   m_Layer: 0
-  m_Name: TestBullet
+  m_Name: RangedBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,3 +136,17 @@ MonoBehaviour:
   ignoreOtherProjectiles: 1
   lifetime: 10
   maxTravelDistance: -1
+--- !u!114 &4561942692250973617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105166356373043456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: 0}
+  range: -1

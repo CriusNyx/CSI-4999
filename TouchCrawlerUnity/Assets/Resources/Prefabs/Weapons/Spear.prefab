@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 8504413596791578110}
   - component: {fileID: 8504413596791578109}
   - component: {fileID: 8504413596791578108}
-  - component: {fileID: 3446909211626834990}
   - component: {fileID: 6663514813118610194}
   - component: {fileID: 6786289156720439223}
   m_Layer: 0
@@ -81,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2313266835999037447, guid: 62888c9bcf547214b840f8af3f2ab219,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -145,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f28c9deadf1bc47a26ee125f300ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8105166356373043456, guid: 718ecbfcd9f618a45b4b71a520e9c918, type: 3}
+  prefab: {fileID: 8105166356373043456, guid: b71d592a30ea6d2438a36307588f8f0e, type: 3}
 --- !u!114 &8504413596791578097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +180,7 @@ MonoBehaviour:
     cooldown:
       cooldownTime: 0.1
   damage:
-    ammount: 10
+    amount: 30
 --- !u!114 &8504413596791578111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eca1ad1c0fe33e45bf39d3fdff7efda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileCount: 5
+  projectileCount: 1
 --- !u!114 &8504413596791578108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,20 +243,6 @@ MonoBehaviour:
       cooldownTime: 0.1
   duration: 0.1
   trauma: 5
---- !u!114 &3446909211626834990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504413596791578107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4cca374193f454cb268c7924dc8bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPosition: {x: 0, y: 0}
-  range: -1
 --- !u!114 &6663514813118610194
 MonoBehaviour:
   m_ObjectHideFlags: 0
