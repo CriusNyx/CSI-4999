@@ -117,14 +117,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainMenuScene:
-    m_SceneAsset: {fileID: 0}
-    m_SceneName: 
+    m_SceneAsset: {fileID: 102900000, guid: 601c5a736e5792548a5aa8ffbd274f64, type: 3}
+    m_SceneName: MainMenu
   NewGameScene:
-    m_SceneAsset: {fileID: 0}
-    m_SceneName: 
+    m_SceneAsset: {fileID: 102900000, guid: ff480a9212421bc42b4e10c64fdd0aed, type: 3}
+    m_SceneName: GameStart
   LeaderboardScene:
-    m_SceneAsset: {fileID: 0}
-    m_SceneName: 
+    m_SceneAsset: {fileID: 102900000, guid: 98cb42688af2fe54b81035965f9beb72, type: 3}
+    m_SceneName: Leaderboard
 --- !u!1001 &47271580005777978
 PrefabInstance:
   m_ObjectHideFlags: 0

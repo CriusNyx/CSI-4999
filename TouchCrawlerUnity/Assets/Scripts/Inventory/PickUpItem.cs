@@ -14,7 +14,7 @@ public class PickUpItem : MonoBehaviour
 
     // Consumable (Health Controller) stuff
     public ConsumableItem consumableItem;
-    private HealthController playerHealth;
+    //private HealthController playerHealth;
     private int maxHealth = 100;
 
     void Start()
@@ -22,7 +22,7 @@ public class PickUpItem : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
 
-        playerHealth = player.GetComponent<HealthController>();
+        //playerHealth = player.GetComponent<HealthController>();
     }
 
     // Checks to see if player collides with item
@@ -64,34 +64,34 @@ public class PickUpItem : MonoBehaviour
                     Destroy(gameObject);
                     return true;
                 }
-                else if (gameObject.tag == "Consumable")
-                {
-                    // Add health back to health controller
+                //else if (gameObject.tag == "Consumable")
+                //{
+                //    // Add health back to health controller
 
-                    if (playerHealth.CurrentHealth == maxHealth)
-                    {
-                        // If health at 100 (current max), don't do anything
-                        Destroy(gameObject);
-                        return false;
-                    }
-                    else
-                    {
-                        // Add health back into controller
-                        float newHealth = playerHealth.CurrentHealth + consumableItem.value;
+                //    //if (playerHealth.CurrentHealth == maxHealth)
+                //    //{
+                //    //    // If health at 100 (current max), don't do anything
+                //    //    Destroy(gameObject);
+                //    //    return false;
+                //    //}
+                //    else
+                //    {
+                //        // Add health back into controller
+                //        float newHealth = playerHealth.CurrentHealth + consumableItem.value;
 
-                        if (newHealth > maxHealth)
-                        {
-                            playerHealth.CurrentHealth = maxHealth;
-                        }
-                        else
-                        {
-                            playerHealth.CurrentHealth += consumableItem.value;
-                        }
+                //        if (newHealth > maxHealth)
+                //        {
+                //            playerHealth.CurrentHealth = maxHealth;
+                //        }
+                //        else
+                //        {
+                //            playerHealth.CurrentHealth += consumableItem.value;
+                //        }
 
-                        Destroy(gameObject);
-                        return true;
-                    }
-                }
+                //        Destroy(gameObject);
+                //        return true;
+                //    }
+                //}
                 else
                 {
                     // Equip buff to player

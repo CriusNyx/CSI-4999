@@ -26,6 +26,8 @@ public class StatDefinitionSetEditor : Editor
         FieldInfo modifiersField = typeof(StatModifierSet).GetField("modifiers", (BindingFlags)(-1));
         StatModifierDefinition[] arr = modifiersField.GetValue(statModifier) as StatModifierDefinition[];
 
+        EditorGUI.BeginChangeCheck();
+
         //Draw editor for array
         arr = Assets.Editor.EditorGUICustomUtility.DrawArrayEditor(
             arr,
@@ -42,7 +44,18 @@ public class StatDefinitionSetEditor : Editor
             "Add Mod",
             () => new StatModifierDefinition());
 
-        //use reflection to set private property
-        modifiersField.SetValue(statModifier, arr);
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(statModifier, $"Edited Stats {statModifier.name}");
+
+            //use reflection to set private property
+            modifiersField.SetValue(statModifier, arr);
+
+            PrefabUtility.RecordPrefabInstancePropertyModifications(statModifier);
+
+            EditorUtility.SetDirty(statModifier);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
     }
 }

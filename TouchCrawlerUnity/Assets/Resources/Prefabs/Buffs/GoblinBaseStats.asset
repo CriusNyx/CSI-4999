@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dbaef66b4aebd48bd250866c80df50, type: 3}
   m_Name: GoblinBaseStats
   m_EditorClassIdentifier: 
-  modifiers: []
+  modifiers:
+  - statToModify: 1
+    name: 
+    value: -6
+    modifierType: 0
+  - statToModify: 2
+    name: 
+    value: -5
+    modifierType: 0
+  - statToModify: 3
+    name: 
+    value: -5
+    modifierType: 0
+  - statToModify: 4
+    name: 
+    value: -5
+    modifierType: 0
+  - statToModify: 0
+    name: 
+    value: -5
+    modifierType: 0

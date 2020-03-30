@@ -12,7 +12,7 @@ public class EnemyTracker : MonoBehaviour
 
     public void Track(GameObject gameObject)
     {
-        if(gameObject != null)
+        if (gameObject != null && gameObject.GetComponent<IActor>() != null)
         {
             enemiesToTrack.Add(gameObject);
             TrackedGameObject.Create(gameObject, this);
@@ -27,7 +27,7 @@ public class EnemyTracker : MonoBehaviour
 
     public void Trip()
     {
-        if(enemiesToTrack.Count == 0)
+        if (enemiesToTrack.Count == 0)
         {
             OnEmpty?.Invoke();
         }
