@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 1974541499228515137}
   - component: {fileID: 6673642770961299767}
   - component: {fileID: 269166428850794064}
-  - component: {fileID: 5999688854395950019}
-  - component: {fileID: -6420745447001580765}
   - component: {fileID: 6985493528243906387}
+  - component: {fileID: 6977758182273319372}
+  - component: {fileID: 8920362517513027498}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -143,6 +143,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList: []
+--- !u!114 &6985493528243906387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520028020045547558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c305d286ee1fd954190d57d77a5fe0de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
+  isWalking: 0
+  isAttacking: 0
+  direction: 1
 --- !u!212 &6977758182273319372
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -193,6 +209,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8920362517513027498
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -202,7 +219,7 @@ Animator:
   m_GameObject: {fileID: 1520028020045547558}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8f1a6deddc8103f45afa74abb7798a25, type: 2}
+  m_Controller: {fileID: 9100000, guid: d38ac9d0784f99f4689a9ed03ded86f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -211,19 +228,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6985493528243906387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520028020045547558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c305d286ee1fd954190d57d77a5fe0de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0}
-  isWalking: 0
-  isAttacking: 0
-  direction: 1
