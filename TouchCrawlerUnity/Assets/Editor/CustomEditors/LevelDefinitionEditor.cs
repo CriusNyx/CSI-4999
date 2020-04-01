@@ -78,20 +78,16 @@ public class LevelDefinitionEditor : Editor
                         Editor editor = Editor.CreateEditor(roomData);
                         editor.OnInspectorGUI();
                     }
-                    if (x.transform.position != Vector3.zero | x.transform.rotation != Quaternion.identity | x.transform.localScale != Vector3.one)
-                    {
-                        GUILayout.BeginHorizontal();
-                        {
-                            GUILayout.Label("<color=red>Warning:</color> Transform is not center");
-                            if (GUILayout.Button("Fix", GUILayout.Width(70)))
-                            {
-                                x.transform.position = Vector3.zero;
-                                x.transform.rotation = Quaternion.identity;
-                                x.transform.localScale = Vector3.one;
-                            }
-                        }
-                        GUILayout.EndHorizontal();
-                    }
+                    CheckErrorRoomIsCenter(x);
+                    CheckErrorObjectInPosition(x, "Walls", Vector3.zero);
+                    CheckErrorObjectInPosition(x, "Ground", Vector3.zero);
+                    CheckErrorObjectInPosition(x, "door_1000", new Vector3(0, 2, 0));
+                    CheckErrorObjectInPosition(x, "door_0100", new Vector3(0, 3, 0));
+                    CheckErrorObjectInPosition(x, "door_0010", new Vector3(0, 2, 0));
+                    CheckErrorObjectInPosition(x, "door_0001", new Vector3(0, 0, 0));
+                    CheckErrorObjectInPosition(x, "door_down", new Vector3(0, 0, 0));
+                    CheckErrorObjectInPosition(x, "door_down/closed_down", new Vector3(0, 0, 0));
+                    RoomHasGrid(x);
                 }
 
                 return x;
@@ -111,6 +107,62 @@ public class LevelDefinitionEditor : Editor
             EditorUtility.SetDirty(target);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+        }
+    }
+
+    private static void RoomHasGrid(GameObject x)
+    {
+        if(x.gameObject.GetComponent<Grid>() == null)
+        {
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.Label("<color=red>Warning:</color> Room is missing grid.\nThis will make it hard to edit.");
+                if (GUILayout.Button("Fix", GUILayout.Width(70)))
+                {
+                    x.AddComponent<Grid>();
+                }
+            }
+            GUILayout.EndHorizontal();
+        }
+    }
+
+    private static void CheckErrorRoomIsCenter(GameObject x)
+    {
+        if (x.transform.position != Vector3.zero || x.transform.rotation != Quaternion.identity || x.transform.localScale != Vector3.one)
+        {
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.Label("<color=red>Warning:</color> Transform is not center");
+                if (GUILayout.Button("Fix", GUILayout.Width(70)))
+                {
+                    x.transform.position = Vector3.zero;
+                    x.transform.rotation = Quaternion.identity;
+                    x.transform.localScale = Vector3.one;
+                }
+            }
+            GUILayout.EndHorizontal();
+        }
+    }
+
+    public static void CheckErrorObjectInPosition(GameObject x, string objectName, Vector3 position)
+    {
+        GameObject child = x.transform.Find(objectName)?.gameObject;
+        if (child != null)
+        {
+            if (child.transform.position != position || child.transform.rotation != Quaternion.identity || child.transform.localScale != Vector3.one)
+            {
+                GUILayout.BeginHorizontal();
+                {
+                    GUILayout.Label($"<color=red>Warning:</color> Transform is not correct for {objectName}");
+                    if(GUILayout.Button("Fix", GUILayout.Width(70)))
+                    {
+                        child.transform.position = position;
+                        child.transform.rotation = Quaternion.identity;
+                        child.transform.localScale = Vector3.one;
+                    }
+                }
+                GUILayout.EndHorizontal();
+            }
         }
     }
 
