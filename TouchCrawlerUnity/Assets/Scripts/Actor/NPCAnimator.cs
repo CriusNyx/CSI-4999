@@ -31,6 +31,7 @@ public class NPCAnimator : MonoBehaviour
         pill_bug,
         skelliton,
         slime,
+        player
     }
 
 

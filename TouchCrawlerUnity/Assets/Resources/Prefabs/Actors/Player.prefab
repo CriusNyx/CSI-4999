@@ -162,7 +162,7 @@ MonoBehaviour:
   isWalking: 0
   isAttacking: 0
   direction: 1
-  enemyType: 
+  enemyType: 13
 --- !u!212 &6977758182273319372
 SpriteRenderer:
   m_ObjectHideFlags: 0
