@@ -8,13 +8,31 @@ public class NPCAnimator : MonoBehaviour
     public bool isWalking = false;
     public bool isAttacking = false;
     public int direction = 1;
-    public string enemyType;
+    public EnemyType enemyType;
 
     private GameObject playChar;
     private Animator playAnimator;
     private MovementController playMove;
 
     private bool flipped = false;
+
+    public enum EnemyType
+    {
+        gob_blue,
+        gob_red,
+        gob_yellow,
+        gobman,
+        lizard,
+        mimic,
+        mush_standard,
+        mush_red,
+        mush_purple,
+        pill_large,
+        pill_bug,
+        skelliton,
+        slime,
+        player
+    }
 
 
     void Start()
@@ -41,7 +59,7 @@ public class NPCAnimator : MonoBehaviour
 
         if (velocity.x > 0 && velocity.x > Mathf.Abs(velocity.y / 1.5f))
         {
-            
+
             playChar.GetComponent<SpriteRenderer>().flipX = flipped;
             isWalking = true;
             direction = 3;
@@ -49,11 +67,11 @@ public class NPCAnimator : MonoBehaviour
         }
         else if (velocity.x < 0 && Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y / 1.5f))
         {
-            
+
             playChar.GetComponent<SpriteRenderer>().flipX = !flipped;
             isWalking = true;
             direction = 3;
-            
+
         }
         else if (velocity.y > 0)
         {
@@ -73,64 +91,64 @@ public class NPCAnimator : MonoBehaviour
 
     }
 
-    private void DefineEnemy(string type)
+    private void DefineEnemy(EnemyType type)
     {
         switch (type)
         {
-            case "gob_blue":
+            case EnemyType.gob_blue:
                 playAnimator.runtimeAnimatorController =
-                    (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/gobs/gob_blue_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/gobs/gob_blue_cont");
                 break;
-            case "gob_red":
+            case EnemyType.gob_red:
                 playAnimator.runtimeAnimatorController =
-                    (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/gobs/gob_red_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/gobs/gob_red_cont");
                 break;
-            case "gob_yell":
+            case EnemyType.gob_yellow:
                 playAnimator.runtimeAnimatorController =
-                    (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/gobs/gob_yell_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/gobs/gob_yell_cont");
                 break;
-            case "gobman":
+            case EnemyType.gobman:
                 playAnimator.runtimeAnimatorController =
-                    (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/gobman/gobman_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/gobman/gobman_cont");
                 break;
-            case "lizard":
+            case EnemyType.lizard:
                 flipped = true;
                 playAnimator.runtimeAnimatorController =
-         (RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/lizard/lizard_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/lizard/lizard_cont");
                 break;
-            case "mimic":
+            case EnemyType.mimic:
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/mimic/mimic_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/mimic/mimic_cont");
                 break;
-            case "mush_standard":
+            case EnemyType.mush_standard:
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/mush/mush_standard_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/mush/mush_standard_cont");
                 break;
-            case "mush_red":
+            case EnemyType.mush_red:
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/mush/mush_red_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/mush/mush_red_cont");
                 break;
-            case "mush_purp":
+            case EnemyType.mush_purple:
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/mush/mush_purp_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/mush/mush_purp_cont");
                 break;
-            case "pill_large":
+            case EnemyType.pill_large:
                 transform.localEulerAngles = new Vector3(0, 0, 90);
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/pill_large/pill_large_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/pill_large/pill_large_cont");
                 break;
-            case "pill_bug":
+            case EnemyType.pill_bug:
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/pill_bug/pill_bug_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/pill_bug/pill_bug_cont");
                 break;
-            case "skel":
+            case EnemyType.skelliton:
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/skeleton/skel_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/skeleton/skel_cont");
                 break;
-            case "slime":
+            case EnemyType.slime:
                 flipped = true;
                 playAnimator.runtimeAnimatorController =
-(RuntimeAnimatorController)Resources.Load("Assets/Resources/Animations/Enemies/slime/slime_cont.controller", typeof(RuntimeAnimatorController));
+                    Resources.Load<RuntimeAnimatorController>("Animations/Enemies/slime/slime_cont");
                 break;
         }
     }

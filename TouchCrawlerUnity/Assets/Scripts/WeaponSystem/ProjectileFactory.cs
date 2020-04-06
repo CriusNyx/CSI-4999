@@ -9,6 +9,7 @@ public class ProjectileFactory : WeaponComponent
 {
     public override ComponentType componentType => ComponentType.ProjectileFactory;
     public float range = -1f;
+    public float lifetime = -1f;
 
     //public GameObject prefab;
 
@@ -33,6 +34,12 @@ public class ProjectileFactory : WeaponComponent
         destroyWithRange.spawnPosition = instance.transform.position;
 
         var projectile = instance.GetComponent<IProjectile>();
+
+        if(lifetime >= 0f)
+        {
+            var destroyInSeconds = instance.AddComponent<DestroyInSeconds>();
+            destroyInSeconds.timeToLive = lifetime;
+        }
 
         if(projectile != null)
         {

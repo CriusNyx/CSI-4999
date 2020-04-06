@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8105166356373043459}
   - component: {fileID: 4561942692250973617}
   m_Layer: 0
-  m_Name: RangedBullet
+  m_Name: FireBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 0.1}
   m_Children:
-  - {fileID: 3990945934284172529}
+  - {fileID: 9062257675690610708}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 0
-  baseSpeed: 30
+  baseSpeed: 0
   ignoreOtherProjectiles: 1
   lifetime: 10
   maxTravelDistance: -1
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPosition: {x: 0, y: 0}
   range: -1
---- !u!1001 &3809094752084490753
+--- !u!1001 &9114639166810375908
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -220,9 +220,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cce4baae6904c84a9866cb76a9c3bcf, type: 3}
---- !u!4 &3990945934284172529 stripped
+--- !u!4 &9062257675690610708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 269705050329241328, guid: 5cce4baae6904c84a9866cb76a9c3bcf,
     type: 3}
-  m_PrefabInstance: {fileID: 3809094752084490753}
+  m_PrefabInstance: {fileID: 9114639166810375908}
   m_PrefabAsset: {fileID: 0}
