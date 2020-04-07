@@ -3413,7 +3413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnRoom: 0
-  isBossRoom: 0
+  isBossRoom: 1
   minDifficulty: -1
   maxDifficulty: -1
 --- !u!156049354 &1372542163645255599
