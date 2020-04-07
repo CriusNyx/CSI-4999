@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: EveryLevel
   m_EditorClassIdentifier: 
   definitionsToInherrit: []
-  roomsToInstantiate:
-  - {fileID: 0}
+  roomsToInstantiate: []
