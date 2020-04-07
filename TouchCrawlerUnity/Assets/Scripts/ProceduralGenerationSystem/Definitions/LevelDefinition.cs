@@ -18,6 +18,9 @@ public class LevelDefinition : ScriptableObject
     [SerializeField]
     public GameObject[] roomsToInstantiate = new GameObject[] { };
 
+    [SerializeField]
+    public GameObject bossRoomToInstantiate;
+
     public static LevelDefinition[] ResolveDependancies(LevelDefinition levelDefinition)
     {
         HashSet<LevelDefinition> knownDefinitions = new HashSet<LevelDefinition>();
@@ -55,7 +58,7 @@ public class LevelDefinition : ScriptableObject
                 }
             }
         }
-
+        //prefabs.Add(levelDefinition.bossRoomToInstantiate);
         return prefabs.ToArray();
     }
 }

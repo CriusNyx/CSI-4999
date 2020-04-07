@@ -6001,6 +6001,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Spawn
       objectReference: {fileID: 0}
+    - target: {fileID: 8575789330620487975, guid: 2ebcad8a575f5614db54c0ec7cd4ff26,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 7952936687216408345, guid: 0632f59087ef7f74ca9a373ae3a10e82,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ebcad8a575f5614db54c0ec7cd4ff26, type: 3}
 --- !u!4 &2332964759612301215 stripped
