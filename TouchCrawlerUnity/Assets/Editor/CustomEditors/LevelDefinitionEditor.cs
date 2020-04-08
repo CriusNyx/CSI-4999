@@ -10,7 +10,6 @@ using UnityEditor.SceneManagement;
 [CustomEditor(typeof(LevelDefinition))]
 public class LevelDefinitionEditor : Editor
 {
-    public GameObject bossRoom;
     public override void OnInspectorGUI()
     {
         GUILayout.Label(target.name, "BoldLabel");
@@ -19,7 +18,8 @@ public class LevelDefinitionEditor : Editor
 
         EditorGUI.BeginChangeCheck();
 
-        GUILayout.Label("Boss Roon", "BoldLabel");
+        GUILayout.Label("Boss Room", "BoldLabel");
+        GameObject bossRoom = levelDefinition.bossRoomToInstantiate;
         bossRoom = EditorGUILayout.ObjectField(bossRoom, typeof(GameObject), false) as GameObject;
 
         GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition. It behaives a little like css."), "BoldLabel");
