@@ -18,33 +18,37 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        finalNumRooms = Random.Range(minRoomAmount, maxRoomAmount+1);
+        finalNumRooms = Random.Range(minRoomAmount, maxRoomAmount + 1);
         //Origin point
         GameObject spawnRoom = Instantiate(spawnRoomPrefab);
         spawnRoom.transform.parent = transform;
         RoomController seedRoomController = spawnRoom.GetComponent<RoomController>();
 
-        seedRoomController.gridPosition = new Vector3(0,0,0);
+        seedRoomController.gridPosition = new Vector3(0, 0, 0);
         roomObjects.Add(spawnRoom);
 
         currNumRooms = 1;
 
         nextToAdd.Enqueue(spawnRoom);
-        AddRoom(Random.Range(2,5));
+        AddRoom(Random.Range(2, 5));
+        AddBossRoom();
         RoomKill();
         FindNeighbors(roomObjects[0]); //closest to origin room
         HangingRoomKill();
+
 
         foreach (GameObject room in roomObjects)
         {
             room.GetComponent<RoomController>().CheckNeighborDoors();
         }
-        for (int i = 0; i < roomObjects.Count; i++ ){
-            
-            if(i == 0)
+        for (int i = 0; i < roomObjects.Count; i++)
+        {
+
+            if (i == 0)
             {
                 roomObjects[0].GetComponent<RoomController>().SetDoorColliders(true);
-            } else
+            }
+            else
             {
                 //roomObjects[i].SetActive(false);
                 roomObjects[i].GetComponent<RoomController>().SetDoorColliders(false);
@@ -54,10 +58,47 @@ public class MapGenerator : MonoBehaviour
         seedRoomController.OnRoomEnter(true);
     }
 
+    void AddBossRoom()
+    {
+        Debug.Log("Adding Boss Room...");
+        var levelDefinition = Resources.LoadAll<LevelDefinition>("ProceduralGenerationSystem/LevelDefinitions").Random();
+        GameObject bossRoom = levelDefinition.bossRoomToInstantiate;
+        List<GameObject> rooms = new List<GameObject>(); ;
+        for(int i =  0; i < gameObject.transform.childCount; i++)
+        {
+            rooms.Add(gameObject.transform.GetChild(i).gameObject);
+        }
+        int roomIndex = Random.Range(0, gameObject.transform.childCount);
+        var room = rooms.ToArray()[roomIndex];
+        RoomController brc = bossRoom.GetComponent<RoomController>();
+        RoomController rc = room.GetComponent<RoomController>();
+
+        Debug.Log(bossRoom);
+        Instantiate(bossRoom).transform.parent = gameObject.transform;
+
+        bossRoom.transform.GetChild(2).gameObject.transform.position = room.transform.GetChild(2).gameObject.transform.position;
+        bossRoom.transform.GetChild(3).gameObject.transform.position = room.transform.GetChild(3).gameObject.transform.position;
+        bossRoom.transform.GetChild(4).gameObject.transform.position = room.transform.GetChild(4).gameObject.transform.position;
+        bossRoom.transform.GetChild(5).gameObject.transform.position = room.transform.GetChild(5).gameObject.transform.position;
+        brc.transform.position = (room.transform.position);
+
+        Debug.Log(room);
+        Destroy(room);
+
+
+
+    }
+
     void AddRoom(int forceNeighbors = 0)
     {
         var levelDefinition = Resources.LoadAll<LevelDefinition>("ProceduralGenerationSystem/LevelDefinitions").Random();
-        var rooms = LevelDefinition.GetAllRoomPrefabs(levelDefinition);
+        List<GameObject> roomList = new List<GameObject>();
+        foreach (GameObject rm in LevelDefinition.GetAllRoomPrefabs(levelDefinition)) {
+            roomList.Add(rm);
+        }
+       // roomList.Add(levelDefinition.bossRoomToInstantiate);
+        var rooms = roomList.ToArray();
+
 
         GameObject seedRoom = nextToAdd.Dequeue();
         RoomController seedRoomCont = seedRoom.GetComponent<RoomController>();
@@ -157,14 +198,16 @@ public class MapGenerator : MonoBehaviour
 
         if ((currNumRooms < finalNumRooms) && nextToAdd.Count > 0)
         {
-            //FOR NEXT IN QUEUE
-            AddRoom();
-        }
+
+                //FOR NEXT IN QUEUE
+                AddRoom();
+         }
 
 
     }
 
-    private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
+    
+private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
     {
         return (IsAdjacentHorizontal(seedRoom, checkRoom))
                         || IsAdjacentVertical(seedRoom, checkRoom);
