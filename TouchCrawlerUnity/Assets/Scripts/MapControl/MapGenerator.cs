@@ -31,11 +31,9 @@ public class MapGenerator : MonoBehaviour
 
         nextToAdd.Enqueue(spawnRoom);
         AddRoom(Random.Range(2, 5));
-        AddBossRoom();
         RoomKill();
         FindNeighbors(roomObjects[0]); //closest to origin room
         HangingRoomKill();
-
 
         foreach (GameObject room in roomObjects)
         {
@@ -54,6 +52,7 @@ public class MapGenerator : MonoBehaviour
                 roomObjects[i].GetComponent<RoomController>().SetDoorColliders(false);
             }
         }
+       AddBossRoom();
 
         seedRoomController.OnRoomEnter(true);
     }
@@ -73,16 +72,32 @@ public class MapGenerator : MonoBehaviour
         RoomController brc = bossRoom.GetComponent<RoomController>();
         RoomController rc = room.GetComponent<RoomController>();
 
-        Debug.Log(bossRoom);
         Instantiate(bossRoom).transform.parent = gameObject.transform;
 
-        bossRoom.transform.GetChild(2).gameObject.transform.position = room.transform.GetChild(2).gameObject.transform.position;
-        bossRoom.transform.GetChild(3).gameObject.transform.position = room.transform.GetChild(3).gameObject.transform.position;
-        bossRoom.transform.GetChild(4).gameObject.transform.position = room.transform.GetChild(4).gameObject.transform.position;
-        bossRoom.transform.GetChild(5).gameObject.transform.position = room.transform.GetChild(5).gameObject.transform.position;
+        List<GameObject> doors = new List<GameObject>();
+        doors.Add(room.transform.GetChild(2).gameObject);
+        doors.Add(room.transform.GetChild(3).gameObject);
+        doors.Add(room.transform.GetChild(4).gameObject);
+        doors.Add(room.transform.GetChild(5).gameObject);
+        doors.Add(room.transform.GetChild(6).gameObject);
+
+        brc.doorList = doors.ToArray();
+        brc.doorList[4].SetActive(false);
+
+        brc.CheckNeighborDoors();
+       // brc.doorList[0].gameObject.transform.parent.GetComponent<RoomController>().neighbors[].;
+
+        for (int i = 0; i < rc.doorList.Length; i++)
+        {
+            brc.doorList[i].transform.parent = brc.gameObject.transform.parent;
+        }
+
+        bossRoom.transform.GetChild(2).gameObject.transform.position = brc.doorList[4].gameObject.transform.position;
+        bossRoom.transform.GetChild(3).gameObject.transform.position = brc.doorList[4].gameObject.transform.position;
+        bossRoom.transform.GetChild(4).gameObject.transform.position = brc.doorList[4].gameObject.transform.position;
+        bossRoom.transform.GetChild(5).gameObject.transform.position = brc.doorList[4].gameObject.transform.position;
         brc.transform.position = (room.transform.position);
 
-        Debug.Log(room);
         Destroy(room);
 
 

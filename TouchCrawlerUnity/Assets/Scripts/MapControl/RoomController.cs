@@ -192,6 +192,14 @@ public class RoomController : MonoBehaviour
                 door.GetComponent<DoorController>()?.SetDoorLock(false);
             }
         }
+        if (cleared && GetComponent<RoomDefinition>().isBossRoom)
+        {
+            gameObject.transform.GetChild(6).gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.transform.GetChild(6).gameObject.SetActive(false);
+        }
     }
 
     public void OnRoomExit()
