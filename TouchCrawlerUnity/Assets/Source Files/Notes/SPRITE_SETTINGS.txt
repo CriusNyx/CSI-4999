@@ -13,7 +13,7 @@ Import Settings
 Override for PC...
 Max Size: 2048
 Resize Algorithm: Mitchell
-Format: RGB 16 bit
+Format: RGBa 32
 
 Override for Android...
 Max Size: 2048

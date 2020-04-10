@@ -1,9 +1,0 @@
-Asset notes:
-
-16x16 tiles
-each 'biome' needs: upper corner, upper edge, bottom corner, bottom edge, doorway (2 block?), ground, ground alt 1, ground alt 2?
-
-breakables: pots/urns, skulls, rocks, mushrooms, trees (mimic tree)
-
-
-
