@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(AudioSource))]
 public class DoorFlicker : MonoBehaviour
 {
     private Tilemap overlay;
@@ -17,6 +18,7 @@ public class DoorFlicker : MonoBehaviour
         torch_loop = (AudioClip)Resources.Load("Sounds/effects/Torch/Torch_Loop_1.mp3");
         torch_light = (AudioClip)Resources.Load("Sounds/effects/Torch/Torch_Light.wav");
         torch_extinguish = (AudioClip)Resources.Load("Sounds/effects/Torch/Torch_Extinguish.mp3");
+        audioSource = GetComponent<AudioSource>();
         on = false;
         overlay = GetComponent<Tilemap>();
     }
