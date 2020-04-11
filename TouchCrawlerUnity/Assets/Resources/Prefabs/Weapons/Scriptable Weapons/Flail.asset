@@ -17,3 +17,9 @@ MonoBehaviour:
   color: {r: 1, g: 1, b: 1, a: 1}
   itemEffect: No Effect
   NotAPickup: 0
+  sounds:
+  - {fileID: 8300000, guid: c66ac7545122a9944997bbef64639177, type: 3}
+  - {fileID: 8300000, guid: bbe92e53f643f594a9a0e613e8da2678, type: 3}
+  - {fileID: 8300000, guid: 23cc9a3d7b7683a42ba99d386dbb55d5, type: 3}
+  - {fileID: 8300000, guid: 5d7b39bf97e6fea4b82c04f872eb435f, type: 3}
+  test: {fileID: 0}
