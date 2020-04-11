@@ -7,9 +7,16 @@ public class DoorFlicker : MonoBehaviour
 {
     private Tilemap overlay;
     private bool on;
+    private AudioClip torch_loop;
+    private AudioClip torch_light;
+    private AudioClip torch_extinguish;
+    private AudioSource audioSource;
     
     void Start()
     {
+        torch_loop = (AudioClip)Resources.Load("Sounds/effects/Torch/Torch_Loop_1.mp3");
+        torch_light = (AudioClip)Resources.Load("Sounds/effects/Torch/Torch_Light.wav");
+        torch_extinguish = (AudioClip)Resources.Load("Sounds/effects/Torch/Torch_Extinguish.mp3");
         on = false;
         overlay = GetComponent<Tilemap>();
     }
@@ -22,6 +29,9 @@ public class DoorFlicker : MonoBehaviour
         var temp = overlay.color;
         temp.a = 0;
         overlay.color = temp;
+        audioSource.loop = false;
+        audioSource.clip = torch_extinguish;
+        audioSource.Play();
     }
 
     public void LightOn() {
@@ -42,6 +52,9 @@ public class DoorFlicker : MonoBehaviour
 
         if(temp.a <= .95)
         {
+            audioSource.loop = false;
+            audioSource.clip = torch_light;
+            audioSource.Play();
             LightOn();
         } else
         {
@@ -53,6 +66,10 @@ public class DoorFlicker : MonoBehaviour
     // will need to call flicker after reactivating a room.
     public void Flicker()
     {
+        audioSource.clip = torch_loop;
+        audioSource.loop = true;
+        audioSource.volume = 0.3f;
+        audioSource.Play();
         StartCoroutine(WaitFlicker());
         StopCoroutine(WaitFlicker());
     }
