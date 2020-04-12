@@ -13,7 +13,7 @@ public class ScoreHandler : MonoBehaviour
 
     public Text leaderboard;
     public int start = 0;
-    public int end = 2;
+    public int end = -1;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +40,13 @@ public class ScoreHandler : MonoBehaviour
                 foreach (JArray score in results.data)
                 {
                     DateTime date = new DateTime(1970,1,1,0,0,0, DateTimeKind.Utc);
-                    info += string.Format("{0,-16} {2,-22} {1,-17} {3} \n", i, score[0], score[1], date.AddSeconds(Convert.ToDouble(Regex.Replace((string)score[2], "[^0-9]", ""))).ToString("dd-MM-yyyy"));
+                    if(score[2].ToString().IndexOf("nano") >= 0)
+                        score[2] = score[2].ToString().Substring(0, score[2].ToString().IndexOf("nano"));
+                    info += string.Format("{0,-15} {2,-18} {1,-13} {3} \n", i, score[0], score[1], date.AddSeconds(Convert.ToDouble(Regex.Replace((string)score[2], "[^0-9]", ""))).ToString("MM-dd-yyyy"));
                     i++;
                 }
                 this.leaderboard.text = info;
+                Debug.Log(info);
             }else
             {
                 Debug.Log("Error in HTTPRequest");
