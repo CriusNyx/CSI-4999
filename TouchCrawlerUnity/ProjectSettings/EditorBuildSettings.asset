@@ -5,28 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/TileTest.unity
-    guid: ddd6767a7f83c7b44b84f36e50668b19
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/Foo.unity
-    guid: 43b2a41c444477649a2f7e30a01fdf87
-  - enabled: 0
-    path: Assets/Scenes/Login.unity
-    guid: 71d4b3f6a0e4d7348a8782ba3985ea48
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 601c5a736e5792548a5aa8ffbd274f64
-  - enabled: 0
-    path: Assets/Scenes/DemoForSprint2.unity
-    guid: e21999f26b14bc349b041a56fd3808dc
   - enabled: 1
     path: Assets/Scenes/GameStart.unity
     guid: ff480a9212421bc42b4e10c64fdd0aed
   - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 98cb42688af2fe54b81035965f9beb72
+  - enabled: 1
+    path: Assets/Scenes/TileTest.unity
+    guid: ddd6767a7f83c7b44b84f36e50668b19
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Foo.unity
+    guid: 43b2a41c444477649a2f7e30a01fdf87
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 71d4b3f6a0e4d7348a8782ba3985ea48
+  - enabled: 1
+    path: Assets/Scenes/DemoForSprint2.unity
+    guid: e21999f26b14bc349b041a56fd3808dc
   m_configObjects: {}

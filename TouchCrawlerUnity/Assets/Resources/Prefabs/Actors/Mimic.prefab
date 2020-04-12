@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 5090825972686458182}
   - component: {fileID: 1462626973957476572}
   - component: {fileID: 6813589534396187453}
+  - component: {fileID: 5345846781585174122}
   - component: {fileID: 2799855245641605316}
   m_Layer: 0
   m_Name: Mimic
@@ -152,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15ac8e9b2500da438b5c287eca99322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTarget: 1
+  manual: 0
   attackDistance: 3
   stopDistance: 1.5
 --- !u!114 &8807293918185784545
@@ -193,10 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38374eac5e210941b5011a8c7065f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDuration: 0
-  wander: 0
-  patrol: 0
-  attack: 0
 --- !u!114 &8807293918185784558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 100
+  MaxHealth: 100
 --- !u!114 &8807293918185784554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,10 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38374eac5e210941b5011a8c7065f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDuration: 0
-  wander: 0
-  patrol: 1
-  attack: 0
 --- !u!114 &8807293918185784552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15ac8e9b2500da438b5c287eca99322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTarget: 1
+  manual: 0
   attackDistance: 3
   stopDistance: 1.5
 --- !u!114 &8921455399467812370
@@ -368,6 +366,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 100
+  MaxHealth: 100
+--- !u!114 &5345846781585174122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807293918185784338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7198c2e2a9422942b3fba74a7a06399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 3
 --- !u!114 &2799855245641605316
 MonoBehaviour:
   m_ObjectHideFlags: 0
