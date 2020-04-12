@@ -10,18 +10,17 @@ public class DEBUGButtons : MonoBehaviour
 
     public void SetDebug()
     {
-        text.text = UserCredentials.token + "\n" + UserCredentials.name;
 
-        UnityWebRequest www = UnityWebRequest.Post(string.Format("https://touchcrawler.appspot.com/addscore?key={0}&score={1}", UserCredentials.token, "2468"), "");
-        www.SendWebRequest();
+       // UnityWebRequest www = UnityWebRequest.Post(string.Format("https://touchcrawler.appspot.com/addscore?key={0}&score={1}", UserCredentials.token, "2468"), "");
+       // www.SendWebRequest();
 
-        if (www.isNetworkError || www.isHttpError)
-        {
-            Debug.Log(www.error);
-        }
-        else
-        {
-            Debug.Log("Success");
-        }
+       // if (www.isNetworkError || www.isHttpError)
+       // {
+       //     Debug.Log(www.error);
+       // }
+       // else
+       // {
+       //     Debug.Log("Success");
+       // }
     }
 }

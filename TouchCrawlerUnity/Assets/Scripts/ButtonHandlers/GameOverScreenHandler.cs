@@ -31,4 +31,10 @@ public class GameOverScreenHandler : MonoBehaviour
     public void NewGame() {
         SceneManager.LoadScene(NewGameScene, LoadSceneMode.Single);
     }
+
+    public void SubmitScore()
+    {
+        GoogleSignInDemo demo = new GoogleSignInDemo();
+        demo.SignInWithGoogle();
+    }
 }
