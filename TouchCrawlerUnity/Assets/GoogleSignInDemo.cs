@@ -6,8 +6,8 @@ using Firebase;
 using Firebase.Auth;
 using Google;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GoogleSignInDemo : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
+
 
     public SceneField MainMenu;
 
@@ -48,18 +49,16 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private void OnSignIn()
     {
-        infoText.text = "";
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        AddToInformation("Signing In");
+        AddToInformation("Calling SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
     private void OnSignOut()
     {
-        infoText.text = "";
         AddToInformation("Calling SignOut");
         GoogleSignIn.DefaultInstance.SignOut();
     }
@@ -93,20 +92,12 @@ public class GoogleSignInDemo : MonoBehaviour
         }
         else
         {
-            // AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            // AddToInformation("Email = " + task.Result.Email);
-            // AddToInformation("Google ID Token = " + task.Result.IdToken);
-            // AddToInformation("Email = " + task.Result.Email);
-            if (MainMenu != null)
-            {
-                SignInWithGoogleOnFirebase(task.Result.IdToken);
-                SceneManager.LoadScene(MainMenu, LoadSceneMode.Single);
-                
-            }
-            else
-            {
-                AddToInformation("No Main Menu Scene set.");
-            }
+            //AddToInformation("Welcome: " + task.Result.DisplayName + "!");
+            //AddToInformation("Email = " + task.Result.Email);
+            //AddToInformation("Google ID Token = " + task.Result.IdToken);
+            //AddToInformation("Email = " + task.Result.Email);
+            SignInWithGoogleOnFirebase(task.Result.IdToken);
+            UserCredentials.name = task.Result.DisplayName;
             
         }
     }
@@ -125,6 +116,8 @@ public class GoogleSignInDemo : MonoBehaviour
             }
             else
             {
+                UserCredentials.token = idToken;
+                SceneManager.LoadScene(MainMenu, LoadSceneMode.Single);
                 AddToInformation("Sign In Successful.");
             }
         });
