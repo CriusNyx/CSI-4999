@@ -60,7 +60,7 @@ public class NPCAnimator : MonoBehaviour
         if (velocity.x > 0 && velocity.x > Mathf.Abs(velocity.y / 1.5f))
         {
 
-            playChar.GetComponent<SpriteRenderer>().flipX = flipped;
+            playChar.GetComponent<SpriteRenderer>().flipX = !flipped;
             isWalking = true;
             direction = 3;
 
@@ -68,7 +68,7 @@ public class NPCAnimator : MonoBehaviour
         else if (velocity.x < 0 && Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y / 1.5f))
         {
 
-            playChar.GetComponent<SpriteRenderer>().flipX = !flipped;
+            playChar.GetComponent<SpriteRenderer>().flipX = flipped;
             isWalking = true;
             direction = 3;
 
@@ -112,7 +112,6 @@ public class NPCAnimator : MonoBehaviour
                     Resources.Load<RuntimeAnimatorController>("Animations/Enemies/gobman/gobman_cont");
                 break;
             case EnemyType.lizard:
-                flipped = true;
                 playAnimator.runtimeAnimatorController =
                     Resources.Load<RuntimeAnimatorController>("Animations/Enemies/lizard/lizard_cont");
                 break;
@@ -146,7 +145,6 @@ public class NPCAnimator : MonoBehaviour
                     Resources.Load<RuntimeAnimatorController>("Animations/Enemies/skeleton/skel_cont");
                 break;
             case EnemyType.slime:
-                flipped = true;
                 playAnimator.runtimeAnimatorController =
                     Resources.Load<RuntimeAnimatorController>("Animations/Enemies/slime/slime_cont");
                 break;
