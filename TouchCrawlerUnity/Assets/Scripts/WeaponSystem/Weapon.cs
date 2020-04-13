@@ -41,6 +41,19 @@ namespace Assets.WeaponSystem
             }
         }
 
+        public void PlaySound()
+        {
+            Item weaponType = GetComponent<PickUpItem>().item;
+            Debug.Log("name "+weaponType.name);
+            AudioSource source = GetComponent<AudioSource>();
+            if (source != null) {
+                var rand = new System.Random();
+                source.clip = weaponType.sounds[rand.Next(weaponType.sounds.Length)];
+                source.Play();
+            }
+            
+        }
+
         public virtual (bool cooldownPassed, bool weaponFired, IEnumerable<IProjectile> projectiles) Fire(IWeaponTarget target)
         {
             var components = GetAllComponents();
@@ -53,6 +66,7 @@ namespace Assets.WeaponSystem
 
             if (requestResult.fireRequestSuccessful)
             {
+                PlaySound();
                 FireResult fireResult = new FireResult();
                 var accuracyControllerResult = PropegateMonad(
                     new ComponentSearchResult<AccuracyController>(),
