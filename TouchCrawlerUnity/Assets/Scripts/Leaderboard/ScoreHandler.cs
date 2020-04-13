@@ -42,7 +42,8 @@ public class ScoreHandler : MonoBehaviour
                     DateTime date = new DateTime(1970,1,1,0,0,0, DateTimeKind.Utc);
                     if(score[2].ToString().IndexOf("nano") >= 0)
                         score[2] = score[2].ToString().Substring(0, score[2].ToString().IndexOf("nano"));
-                    info += string.Format("{0,-15} {2,-18} {1,-13} {3} \n", i, score[0], score[1], date.AddSeconds(Convert.ToDouble(Regex.Replace((string)score[2], "[^0-9]", ""))).ToString("MM-dd-yyyy"));
+                    info += string.Format("{0,-9} {2,-13} {1,-11} {3} \n", i, score[0], score[1], date.AddSeconds(Convert.ToDouble(Regex.Replace((string)score[2], "[^0-9]", ""))).ToString("MM-dd-yyyy"));
+                    info.Replace(" ", "\u2007");
                     i++;
                 }
                 this.leaderboard.text = info;

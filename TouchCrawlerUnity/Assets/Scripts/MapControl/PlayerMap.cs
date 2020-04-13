@@ -48,12 +48,13 @@ public class PlayerMap : MonoBehaviour
         {
             rooms.Add(r[i]);
         }
-        movementController = new MovementController(); // GameObject.Find("Player").GetComponent<MovementController>();
+        movementController = GameObject.Find("Player").GetComponent<MovementController>(); //new MovementController(); // GameObject.Find("Player").GetComponent<MovementController>();
         return rooms.Count > 0;
     }
 
     public void ShowMap()
     {
+        //GameObject.Find("Player").GetComponent<MovementController>();
         if (wereRoomsAdded && showMap && !showLock)
         {
             camera.orthographicSize = mapCameraSize;
