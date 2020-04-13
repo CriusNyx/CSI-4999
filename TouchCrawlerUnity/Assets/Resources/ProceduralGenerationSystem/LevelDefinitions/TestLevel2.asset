@@ -15,3 +15,5 @@ MonoBehaviour:
   definitionsToInherrit:
   - {fileID: 11400000, guid: 62271b1ad5b10d643abc558d08eae3ab, type: 2}
   roomsToInstantiate: []
+  bossRoomToInstantiate: {fileID: 2462112882890517713, guid: e1667caca80e1454d93c666bbdd22cd4,
+    type: 3}

@@ -142,6 +142,7 @@ MonoBehaviour:
   isWalking: 0
   isAttacking: 0
   direction: 1
+  enemyType: 0
 --- !u!114 &140949052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652d88ca929ac6d489ffe0e8706ed16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDefinition: {fileID: 11400000, guid: 62271b1ad5b10d643abc558d08eae3ab, type: 2}
   spawnRoomPrefab: {fileID: 4754820465505261761, guid: b2f8ddcfc2e74574f91a354559490ace,
     type: 3}
   minRoomAmount: 20

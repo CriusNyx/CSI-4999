@@ -15,49 +15,74 @@ public class MapGenerator : MonoBehaviour
     private int finalNumRooms;
     private List<int> indexes;
     private Queue<GameObject> nextToAdd = new Queue<GameObject>();
+    private bool wasBossRoomAdded;
 
     void Start()
     {
-        finalNumRooms = Random.Range(minRoomAmount, maxRoomAmount+1);
+        wasBossRoomAdded = false;
+        finalNumRooms = Random.Range(minRoomAmount, maxRoomAmount + 1);
         //Origin point
         GameObject spawnRoom = Instantiate(spawnRoomPrefab);
         spawnRoom.transform.parent = transform;
         RoomController seedRoomController = spawnRoom.GetComponent<RoomController>();
 
-        seedRoomController.gridPosition = new Vector3(0,0,0);
-        roomObjects.Add(spawnRoom);
+        seedRoomController.gridPosition = new Vector3(0, 0, 0);
+            roomObjects.Add(spawnRoom);
 
-        currNumRooms = 1;
-
-        nextToAdd.Enqueue(spawnRoom);
-        AddRoom(Random.Range(2,5));
-        RoomKill();
-        FindNeighbors(roomObjects[0]); //closest to origin room
-        HangingRoomKill();
+            currNumRooms = 1;
+            while (!wasBossRoomAdded) { 
+            nextToAdd.Enqueue(spawnRoom);
+            AddRoom(Random.Range(2, 5));
+            RoomKill();
+            FindNeighbors(roomObjects[0]); //closest to origin room
+            HangingRoomKill();
+            KillExtraBossRooms();
+            if (!wasBossRoomAdded)
+            {
+                nextToAdd.Clear();
+            }
+        }
 
         foreach (GameObject room in roomObjects)
         {
             room.GetComponent<RoomController>().CheckNeighborDoors();
         }
-        for (int i = 0; i < roomObjects.Count; i++ ){
-            
-            if(i == 0)
+        for (int i = 0; i < roomObjects.Count; i++)
+        {
+
+            if (i == 0)
             {
                 roomObjects[0].GetComponent<RoomController>().SetDoorColliders(true);
-            } else
+            }
+            else
             {
                 //roomObjects[i].SetActive(false);
                 roomObjects[i].GetComponent<RoomController>().SetDoorColliders(false);
             }
         }
 
+
+        
+
         seedRoomController.OnRoomEnter(true);
     }
 
     void AddRoom(int forceNeighbors = 0)
     {
+        //Debug.Log(wasBossRoomAdded);
         var levelDefinition = Resources.LoadAll<LevelDefinition>("ProceduralGenerationSystem/LevelDefinitions").Random();
-        var rooms = LevelDefinition.GetAllRoomPrefabs(levelDefinition);
+        List<GameObject> roomList = new List<GameObject>();
+        GameObject bossRoom = levelDefinition.bossRoomToInstantiate;
+        foreach (GameObject rm in LevelDefinition.GetAllRoomPrefabs(levelDefinition)) {
+            roomList.Add(rm);
+        }
+        // roomList.Add(levelDefinition.bossRoomToInstantiate);
+
+        //if (!wasBossRoomAdded) {
+            roomList.Add(bossRoom);
+        //}
+        var rooms = roomList.ToArray();
+
 
         GameObject seedRoom = nextToAdd.Dequeue();
         RoomController seedRoomCont = seedRoom.GetComponent<RoomController>();
@@ -101,7 +126,26 @@ public class MapGenerator : MonoBehaviour
             if(currNumRooms < finalNumRooms)
             {
                 //make 1 new room
-                GameObject room = Instantiate(rooms.Random());
+                
+                GameObject room = rooms.Random();
+                //Debug.Log(room);
+                /*while(wasBossRoomAdded && room.Equals(bossRoom))
+                {
+                    Debug.Log("Loop Run");
+                    room = rooms.Random();
+
+                }
+
+                Debug.Log("Cur: " + currNumRooms + " vs Final: " + finalNumRooms);
+                Debug.Log(wasBossRoomAdded);
+                Debug.Log(room);
+                if(!wasBossRoomAdded && currNumRooms > (finalNumRooms / 2))
+                {
+                    Debug.Log("Emergency bossRoom");
+                    room = bossRoom;
+                }
+                rooms = CheckIfBossRoomWasAdded(bossRoom, roomList, room);*/
+                room = Instantiate(room);
                 room.transform.parent = transform;
                 RoomController roomController = room.GetComponent<RoomController>();
 
@@ -147,24 +191,31 @@ public class MapGenerator : MonoBehaviour
                         roomController.gridPosition = newPosition;
                         roomController.setPosition();
                         currNumRooms++;
+
+                       // Debug.Log(room);
                         nextToAdd.Enqueue(room);
                         roomObjects.Add(room);
+
 
                     }
                 }
             }
         }
 
+       
+
+
         if ((currNumRooms < finalNumRooms) && nextToAdd.Count > 0)
         {
-            //FOR NEXT IN QUEUE
-            AddRoom();
-        }
+
+                //FOR NEXT IN QUEUE
+                AddRoom();
+         }
 
 
     }
-
-    private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
+    
+private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
     {
         return (IsAdjacentHorizontal(seedRoom, checkRoom))
                         || IsAdjacentVertical(seedRoom, checkRoom);
@@ -183,13 +234,18 @@ public class MapGenerator : MonoBehaviour
     //add some more variability
     void RoomKill()
     {
-        for(int i = 0; i < roomObjects.Count*.25; i++)
+        for (int i = 0; i < roomObjects.Count / 5; i++)
         {
             int rand = Random.Range(1, roomObjects.Count - 1);
             GameObject temp = roomObjects[rand];
-            roomObjects.Remove(roomObjects[rand]);
-            GameObject.Destroy(temp);
-
+            if (temp.GetComponent<RoomDefinition>().isBossRoom)
+            {
+                Debug.Log("Boss room saved from destruction");
+            }
+            else { 
+                roomObjects.Remove(roomObjects[rand]);
+                GameObject.Destroy(temp);
+            }
         }
     }
 
@@ -207,6 +263,34 @@ public class MapGenerator : MonoBehaviour
                 i--; //list is smaller
             }
         }
+    }
+
+    void KillExtraBossRooms()
+    {
+        List<GameObject> bossRoomList = new List<GameObject>();
+        GameObject[] bossRooms;
+        foreach(GameObject room in roomObjects)
+        {
+            if (room.GetComponent<RoomDefinition>().isBossRoom)
+            {
+                bossRoomList.Add(room);
+            }
+        }
+        bossRooms = bossRoomList.ToArray();
+        if (bossRooms.Length > 0)
+        {
+            wasBossRoomAdded = true;
+            for (int i = 0; i < bossRooms.Length - 1; i++)
+            {
+                roomObjects.Remove(bossRooms[i]);
+                Destroy(bossRooms[i]);
+            }
+        }
+        else
+        {
+            wasBossRoomAdded = false;
+        }
+        
     }
 
     //start from origin (called in start) and as neighbors are found, they, in turn, find their neighbors

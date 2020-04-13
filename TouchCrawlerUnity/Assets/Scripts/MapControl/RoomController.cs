@@ -7,7 +7,7 @@ public class RoomController : MonoBehaviour
 {
     public GameObject[] doorList = new GameObject[5];
     public GameObject[] neighbors = new GameObject[4];
-    private GameObject[] playerSpawns = new GameObject[4];
+    public GameObject[] playerSpawns = new GameObject[4];
     public CameraTarget CameraTarget { get; private set; }
 
     public int neighborCount;
@@ -192,7 +192,29 @@ public class RoomController : MonoBehaviour
                 door.GetComponent<DoorController>()?.SetDoorLock(false);
             }
         }
+        if (cleared && GetComponent<RoomDefinition>().isBossRoom)
+        {
+            gameObject.transform.GetChild(6).gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.transform.GetChild(6).gameObject.SetActive(false);
+        }
     }
+
+    public void BecomePartialClone(RoomController rc)
+    {
+        doorList = rc.doorList;
+        neighbors = rc.neighbors;
+        //playerSpawns = rc.playerSpawns;
+        CameraTarget = rc.CameraTarget;
+        neighborCount = rc.neighborCount;
+        cleared = rc.cleared;
+        gridPosition = rc.gridPosition;
+        //fog = rc.fog;
+        //fogMaterial = rc.fogMaterial;
+        isVisible = rc.isVisible;
+}
 
     public void OnRoomExit()
     {

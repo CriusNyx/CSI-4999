@@ -24,3 +24,5 @@ MonoBehaviour:
   - {fileID: 4754820465505261761, guid: bff4b2ca1b669cb4c88994c6fa2dd6ba, type: 3}
   - {fileID: 4754820465505261761, guid: 3bdb42f828deb9e47b12cc716c57b8e6, type: 3}
   - {fileID: 4754820465505261761, guid: 0eb65880f2322e6449f2170142ad00b5, type: 3}
+  bossRoomToInstantiate: {fileID: 2462112882890517713, guid: e1667caca80e1454d93c666bbdd22cd4,
+    type: 3}

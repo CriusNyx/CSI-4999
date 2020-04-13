@@ -18,6 +18,10 @@ public class LevelDefinitionEditor : Editor
 
         EditorGUI.BeginChangeCheck();
 
+        GUILayout.Label("Boss Room", "BoldLabel");
+        GameObject bossRoom = levelDefinition.bossRoomToInstantiate;
+        bossRoom = EditorGUILayout.ObjectField(bossRoom, typeof(GameObject), false) as GameObject;
+
         GUILayout.Label(new GUIContent("Inherrited Definitions", "These level definitions will be inherrited by the current level definition. It behaives a little like css."), "BoldLabel");
 
         var newDefinitionsToInherrit = levelDefinition.definitionsToInherrit =
@@ -101,6 +105,7 @@ public class LevelDefinitionEditor : Editor
             Undo.RecordObject(levelDefinition, "Edited Level Definition: " + levelDefinition.name);
             levelDefinition.definitionsToInherrit = newDefinitionsToInherrit;
             levelDefinition.roomsToInstantiate = newRoomArray;
+            levelDefinition.bossRoomToInstantiate = bossRoom;
 
             PrefabUtility.RecordPrefabInstancePropertyModifications(levelDefinition);
 
