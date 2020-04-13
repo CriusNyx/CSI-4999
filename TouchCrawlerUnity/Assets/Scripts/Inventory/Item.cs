@@ -13,4 +13,6 @@ public class Item : ScriptableObject
     public string itemEffect = "No Effect";
 
     public bool NotAPickup = false;
+    public AudioClip[] sounds;
+    public AudioClip test;
 }
