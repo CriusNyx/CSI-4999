@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ShakeOnFire : WeaponComponent
 {
-    public float trauma = 1f, length = 0.1f;
+    public float trauma = 0.3f, length = 0.1f;
 
     public override ComponentType componentType => ComponentType.None;
 

@@ -6,16 +6,18 @@ using Firebase;
 using Firebase.Auth;
 using Google;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GoogleSignInDemo : MonoBehaviour
 {
-    public Text infoText;
-    public string webClientId = "<your client id here>";
+    //public Text infoText;
+    public string webClientId = "854533643896-25ntsjdgia88pfqen1rkkue3quk101t1.apps.googleusercontent.com";
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
+
 
     public SceneField MainMenu;
 
@@ -48,18 +50,16 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private void OnSignIn()
     {
-        infoText.text = "";
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        AddToInformation("Signing In");
+        AddToInformation("Calling SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
     private void OnSignOut()
     {
-        infoText.text = "";
         AddToInformation("Calling SignOut");
         GoogleSignIn.DefaultInstance.SignOut();
     }
@@ -93,20 +93,11 @@ public class GoogleSignInDemo : MonoBehaviour
         }
         else
         {
-            // AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            // AddToInformation("Email = " + task.Result.Email);
-            // AddToInformation("Google ID Token = " + task.Result.IdToken);
-            // AddToInformation("Email = " + task.Result.Email);
-            if (MainMenu != null)
-            {
-                SignInWithGoogleOnFirebase(task.Result.IdToken);
-                SceneManager.LoadScene(MainMenu, LoadSceneMode.Single);
-                
-            }
-            else
-            {
-                AddToInformation("No Main Menu Scene set.");
-            }
+            //AddToInformation("Welcome: " + task.Result.DisplayName + "!");
+            //AddToInformation("Email = " + task.Result.Email);
+            //AddToInformation("Google ID Token = " + task.Result.IdToken);
+            //AddToInformation("Email = " + task.Result.Email);
+            SignInWithGoogleOnFirebase(task.Result.IdToken);
             
         }
     }
@@ -125,6 +116,9 @@ public class GoogleSignInDemo : MonoBehaviour
             }
             else
             {
+                UnityWebRequest www = UnityWebRequest.Post(string.Format("https://touchcrawler.appspot.com/addscore?key={0}&score={1}", idToken, UserSettings.score), "");
+                www.SendWebRequest();
+                SceneManager.LoadScene(MainMenu, LoadSceneMode.Single);
                 AddToInformation("Sign In Successful.");
             }
         });
@@ -151,5 +145,6 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
-    private void AddToInformation(string str) { infoText.text += "\n" + str; }
+    private void AddToInformation(string str) { //infoText.text += "\n" + str;
+    }
 }
