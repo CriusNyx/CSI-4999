@@ -238,14 +238,14 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
         {
             int rand = Random.Range(1, roomObjects.Count - 1);
             GameObject temp = roomObjects[rand];
-            if (temp.GetComponent<RoomDefinition>().isBossRoom)
+            /*if (temp.GetComponent<RoomDefinition>().isBossRoom)
             {
                 Debug.Log("Boss room saved from destruction");
             }
-            else { 
+            else { */
                 roomObjects.Remove(roomObjects[rand]);
                 GameObject.Destroy(temp);
-            }
+         //  }
         }
     }
 
