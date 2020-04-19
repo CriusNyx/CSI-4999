@@ -27,17 +27,18 @@ public class MapGenerator : MonoBehaviour
         RoomController seedRoomController = spawnRoom.GetComponent<RoomController>();
 
         seedRoomController.gridPosition = new Vector3(0, 0, 0);
-            roomObjects.Add(spawnRoom);
+        roomObjects.Add(spawnRoom);
 
-            currNumRooms = 1;
-            while (!wasBossRoomAdded) { 
+        currNumRooms = 1;
+        while (!wasBossRoomAdded)
+        {
             nextToAdd.Enqueue(spawnRoom);
             AddRoom(Random.Range(2, 5));
             RoomKill();
             KillExtraBossRooms();
             FindNeighbors(roomObjects[0]); //closest to origin room
             HangingRoomKill();
-            
+
             if (!wasBossRoomAdded)
             {
                 nextToAdd.Clear();
@@ -63,7 +64,7 @@ public class MapGenerator : MonoBehaviour
         }
 
 
-        
+
 
         seedRoomController.OnRoomEnter(true);
     }
@@ -74,13 +75,14 @@ public class MapGenerator : MonoBehaviour
         var levelDefinition = Resources.LoadAll<LevelDefinition>("ProceduralGenerationSystem/LevelDefinitions").Random();
         List<GameObject> roomList = new List<GameObject>();
         GameObject bossRoom = levelDefinition.bossRoomToInstantiate;
-        foreach (GameObject rm in LevelDefinition.GetAllRoomPrefabs(levelDefinition)) {
+        foreach (GameObject rm in LevelDefinition.GetAllRoomPrefabs(levelDefinition))
+        {
             roomList.Add(rm);
         }
         // roomList.Add(levelDefinition.bossRoomToInstantiate);
 
         //if (!wasBossRoomAdded) {
-            roomList.Add(bossRoom);
+        roomList.Add(bossRoom);
         //}
         var rooms = roomList.ToArray();
 
@@ -89,13 +91,13 @@ public class MapGenerator : MonoBehaviour
         RoomController seedRoomCont = seedRoom.GetComponent<RoomController>();
         int totalNeighbors = Random.Range(2, 5); // 2-4
 
-        if(forceNeighbors > 0)
+        if (forceNeighbors > 0)
         {
             totalNeighbors = forceNeighbors;
         }
 
         //check for existing neighbors
-        foreach(GameObject checkRoom in roomObjects)
+        foreach (GameObject checkRoom in roomObjects)
         {
             // neighbor exist?
             if (IsAdjacent(seedRoom, checkRoom))
@@ -124,10 +126,10 @@ public class MapGenerator : MonoBehaviour
 
         for (int i = 0; i < totalNeighbors; i++)
         {
-            if(currNumRooms < finalNumRooms)
+            if (currNumRooms < finalNumRooms)
             {
                 //make 1 new room
-                
+
                 GameObject room = rooms.Random();
                 //Debug.Log(room);
                 /*while(wasBossRoomAdded && room.Equals(bossRoom))
@@ -172,13 +174,14 @@ public class MapGenerator : MonoBehaviour
                     // outside of grid
                     GameObject.Destroy(room);
                     totalNeighbors = System.Math.Max(4, totalNeighbors++);
-                } else
+                }
+                else
                 {
                     bool exists = false;
                     foreach (GameObject roomCheck in roomObjects)
                     {
                         RoomController roomCheckCont = roomCheck.GetComponent<RoomController>();
-                        if(roomCheckCont.gridPosition == newPosition)
+                        if (roomCheckCont.gridPosition == newPosition)
                         {
                             //room exists here already
                             GameObject.Destroy(room);
@@ -193,7 +196,7 @@ public class MapGenerator : MonoBehaviour
                         roomController.setPosition();
                         currNumRooms++;
 
-                       // Debug.Log(room);
+                        // Debug.Log(room);
                         nextToAdd.Enqueue(room);
                         roomObjects.Add(room);
 
@@ -203,20 +206,20 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-       
+
 
 
         if ((currNumRooms < finalNumRooms) && nextToAdd.Count > 0)
         {
 
-                //FOR NEXT IN QUEUE
-                AddRoom();
-         }
+            //FOR NEXT IN QUEUE
+            AddRoom();
+        }
 
 
     }
-    
-private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
+
+    private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
     {
         return (IsAdjacentHorizontal(seedRoom, checkRoom))
                         || IsAdjacentVertical(seedRoom, checkRoom);
@@ -244,9 +247,9 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
                 Debug.Log("Boss room saved from destruction");
             }
             else { */
-                roomObjects.Remove(roomObjects[rand]);
-                GameObject.Destroy(temp);
-         //  }
+            roomObjects.Remove(roomObjects[rand]);
+            GameObject.Destroy(temp);
+            //  }
         }
     }
 
@@ -254,7 +257,7 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
     //takes no input, makes sure all rooms are reachable from the origin point
     void HangingRoomKill()
     {
-        for(int i = 0; i < roomObjects.Count; i++)
+        for (int i = 0; i < roomObjects.Count; i++)
         {
             if (roomObjects[i].GetComponent<RoomController>().neighborCount == 0)
             {
@@ -274,7 +277,7 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
     {
         List<GameObject> bossRoomList = new List<GameObject>();
         GameObject[] bossRooms;
-        foreach(GameObject room in roomObjects)
+        foreach (GameObject room in roomObjects)
         {
             if (room.GetComponent<RoomDefinition>().isBossRoom)
             {
@@ -295,7 +298,7 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
         {
             wasBossRoomAdded = false;
         }
-        
+
     }
 
     //start from origin (called in start) and as neighbors are found, they, in turn, find their neighbors
@@ -313,7 +316,7 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
             {
                 case "01":
                     //without internal if check, will constantly call its already found neighbors
-                    if(seedCont.neighbors[3] != checkRoom)
+                    if (seedCont.neighbors[3] != checkRoom)
                     {
                         seedCont.neighbors[3] = checkRoom;
                         seedCont.neighborCount++;
@@ -332,7 +335,7 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
                         neighborCont.neighborCount++;
                         FindNeighbors(checkRoom);
                     }
-                    
+
                     break;
 
                 case "10":
@@ -344,7 +347,7 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
                         neighborCont.neighborCount++;
                         FindNeighbors(checkRoom);
                     }
-                        
+
                     break;
 
                 case "-10":
@@ -356,14 +359,14 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
                         neighborCont.neighborCount++;
                         FindNeighbors(checkRoom);
                     }
-                        
+
                     break;
 
             }
 
         }
 
-    
+
     }
 
 
