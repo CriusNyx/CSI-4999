@@ -49,6 +49,7 @@ namespace Assets.WeaponSystem
             if (source != null) {
                 var rand = new System.Random();
                 source.clip = weaponType.sounds[rand.Next(weaponType.sounds.Length)];
+                source.volume = UserSettings.sfxVolume;
                 source.Play();
             }
             
