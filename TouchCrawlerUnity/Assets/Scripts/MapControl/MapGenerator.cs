@@ -34,9 +34,10 @@ public class MapGenerator : MonoBehaviour
             nextToAdd.Enqueue(spawnRoom);
             AddRoom(Random.Range(2, 5));
             RoomKill();
+            KillExtraBossRooms();
             FindNeighbors(roomObjects[0]); //closest to origin room
             HangingRoomKill();
-            KillExtraBossRooms();
+            
             if (!wasBossRoomAdded)
             {
                 nextToAdd.Clear();
@@ -259,6 +260,10 @@ private static bool IsAdjacent(GameObject seedRoom, GameObject checkRoom)
             {
                 GameObject temp = roomObjects[i];
                 roomObjects.Remove(roomObjects[i]);
+                if (temp.GetComponent<RoomDefinition>().isBossRoom)
+                {
+                    wasBossRoomAdded = false;
+                }
                 GameObject.Destroy(temp);
                 i--; //list is smaller
             }
