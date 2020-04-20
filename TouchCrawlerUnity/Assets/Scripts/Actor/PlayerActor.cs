@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerActor : DefaultActor
 {
+    private GameObject gui;
+    private bool escapeOpen = false;
     public static PlayerActor Instance { get; private set; }
 
     private GameObject player;
@@ -18,7 +20,8 @@ public class PlayerActor : DefaultActor
         base.ProtectedStart();
 
         Instance = this;
-
+        gui = GameObject.Instantiate(Resources.Load("Prefabs/GUIs/GameOverScreen")) as GameObject;
+        gui.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
         itemSlots = GameObject.FindGameObjectsWithTag("Item Slot");
         //actor = player.GetComponent<IActor>();
@@ -35,6 +38,30 @@ public class PlayerActor : DefaultActor
             {
                 Debug.Log(item.name);
             }
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                
+                if (gui == null)
+                {
+                    gui = GameObject.Instantiate(Resources.Load("Prefabs/GUIs/EscapeScreen")) as GameObject;
+                    gui.SetActive(false);
+                }
+                if (!gui.activeSelf && !escapeOpen)
+                {
+                    gui.SetActive(true);
+                }
+                else
+                {
+                    gui.SetActive(false);
+                }
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            escapeOpen = !escapeOpen;
         }
     }
 
