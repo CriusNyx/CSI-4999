@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb36df14a581441bb8001be930e751, type: 3}
   m_Name: DropTable
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - weight: 1
+    drop: {fileID: 1662439740568296301, guid: 29871307af07842408a22e3e6076cff1, type: 3}
+  - weight: 1
+    drop: {fileID: 1483766551661161665, guid: 36eeb09f38289204b8ed0e0b7de24c9e, type: 3}

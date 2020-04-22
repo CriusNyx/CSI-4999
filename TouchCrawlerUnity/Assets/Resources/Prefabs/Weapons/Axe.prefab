@@ -17,12 +17,12 @@ GameObject:
   - component: {fileID: 1483766551661161528}
   - component: {fileID: 1483766551661161531}
   - component: {fileID: 1483766551661161530}
-  - component: {fileID: 1483766551661161668}
   - component: {fileID: 1483766551661161671}
   - component: {fileID: 1483766551661161669}
   - component: {fileID: 2147963738101436948}
   - component: {fileID: 2271652739569918074}
   - component: {fileID: -8923827604426064020}
+  - component: {fileID: 7274985247541350989}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Weapon
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: -1
+  range: 1.6
   lifetime: -1
 --- !u!114 &1483766551661161529
 MonoBehaviour:
@@ -197,19 +197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trauma: 1
   length: 0.1
---- !u!114 &1483766551661161668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483766551661161665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eca1ad1c0fe33e45bf39d3fdff7efda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileCount: 1
 --- !u!114 &1483766551661161671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,3 +358,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7274985247541350989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483766551661161665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910ab43bf3592a94d9b0e83ed1da8a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

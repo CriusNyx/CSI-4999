@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -106,6 +107,13 @@ namespace Assets.Scripts.Events
             {
                 log.RemoveAt(0);
             }
+        }
+
+        public static void ExecuteJob(IEnumerator Job) => instance._ExecuteJob(Job);
+
+        private void _ExecuteJob(IEnumerator Job)
+        {
+
         }
     }
 }
