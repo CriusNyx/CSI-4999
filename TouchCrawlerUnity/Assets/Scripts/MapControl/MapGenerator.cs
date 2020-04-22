@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -30,8 +32,18 @@ public class MapGenerator : MonoBehaviour
         roomObjects.Add(spawnRoom);
 
         currNumRooms = 1;
+
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
         while (!wasBossRoomAdded)
         {
+            if(stopwatch.ElapsedMilliseconds > 5000)
+            {
+                SceneManager.LoadScene("GameStart");
+                UnityEngine.Debug.Log("Timeout");
+                return;
+            }
             nextToAdd.Enqueue(spawnRoom);
             AddRoom(Random.Range(2, 5));
             RoomKill();
@@ -132,22 +144,6 @@ public class MapGenerator : MonoBehaviour
 
                 GameObject room = rooms.Random();
                 //Debug.Log(room);
-                /*while(wasBossRoomAdded && room.Equals(bossRoom))
-                {
-                    Debug.Log("Loop Run");
-                    room = rooms.Random();
-
-                }
-
-                Debug.Log("Cur: " + currNumRooms + " vs Final: " + finalNumRooms);
-                Debug.Log(wasBossRoomAdded);
-                Debug.Log(room);
-                if(!wasBossRoomAdded && currNumRooms > (finalNumRooms / 2))
-                {
-                    Debug.Log("Emergency bossRoom");
-                    room = bossRoom;
-                }
-                rooms = CheckIfBossRoomWasAdded(bossRoom, roomList, room);*/
                 room = Instantiate(room);
                 room.transform.parent = transform;
                 RoomController roomController = room.GetComponent<RoomController>();
