@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
@@ -67,32 +68,33 @@ public class DoorController : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && enabledColl && !locked)
         {
-            //Debug.Log("Trigger entered!");
-            //activate correct neighbor
-
-            //teleport player to correct door spawn
-            int newDoor;
-            if(doorID > 1)
+            if (name == "door_down")
             {
-                newDoor = doorID - 2;
+                SceneManager.LoadScene("TileTest");
+                other.gameObject.transform.position = Vector3.zero;
+                other.gameObject.GetComponent<IActor>()?.movementController.Stop();
             }
             else
             {
-                newDoor = doorID + 2;
+                //activate correct neighbor
+
+                //teleport player to correct door spawn
+                int newDoor;
+                if (doorID > 1)
+                {
+                    newDoor = doorID - 2;
+                }
+                else
+                {
+                    newDoor = doorID + 2;
+                }
+
+                this.GetComponentInParent<RoomController>().OnRoomExit();
+
+                var roomController = nextRoom.GetComponent<RoomController>();
+                roomController.EnterDoor(other.GetComponent<IActor>(), newDoor);
+                roomController.OnRoomEnter();         
             }
-
-            this.GetComponentInParent<RoomController>().OnRoomExit();
-
-            var roomController = nextRoom.GetComponent<RoomController>();
-            roomController.EnterDoor(other.GetComponent<IActor>(), newDoor);
-            roomController.OnRoomEnter();
-            //nextRoom.GetComponent<RoomController>().doorList[newDoor].GetComponent<DoorController>().SetEnabled(false);
-            //other.gameObject.GetComponent<MovementController>().Warp(nextRoom.GetComponent<RoomController>().getSpawns(newDoor));
-
-            //set camera target
-
-            //gameObject.transform.parent.gameObject.SetActive(false);            
-
         }
     }
 

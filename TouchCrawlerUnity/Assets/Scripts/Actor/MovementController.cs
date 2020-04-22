@@ -60,11 +60,15 @@ public class MovementController : MonoBehaviour
     public void Move(Vector2 nextLocation)
     {
         this.destination = nextLocation;
+
+        attackMoveTarget = null;
     }
 
     // Sets the destination of the actor to the position of an actor
     public void Move(IActor target)
     {
+        attackMoveTarget = null;
+
         destination = target.GetLocation();
     }
 
