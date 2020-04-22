@@ -90,10 +90,17 @@ public class DoorController : MonoBehaviour
                 }
 
                 this.GetComponentInParent<RoomController>().OnRoomExit();
-
-                var roomController = nextRoom.GetComponent<RoomController>();
-                roomController.EnterDoor(other.GetComponent<IActor>(), newDoor);
-                roomController.OnRoomEnter();         
+                if (nextRoom != null)
+                {
+                    var roomController = nextRoom.GetComponent<RoomController>();
+                    roomController.EnterDoor(other.GetComponent<IActor>(), newDoor);
+                    roomController.OnRoomEnter();
+                }
+                else { 
+                    SceneManager.LoadScene("TileTest");
+                    GameObject player = GameObject.Find("Player");
+                    player.transform.position = new Vector2(0, 0);
+                }
             }
         }
     }
