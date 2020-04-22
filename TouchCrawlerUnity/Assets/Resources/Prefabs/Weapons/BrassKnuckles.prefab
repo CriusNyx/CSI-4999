@@ -17,12 +17,13 @@ GameObject:
   - component: {fileID: 8295030466092973120}
   - component: {fileID: 8295030466092973121}
   - component: {fileID: 8295030466092973122}
-  - component: {fileID: 8295030466092973124}
   - component: {fileID: 8295030466092973125}
   - component: {fileID: 2305307747216375207}
   - component: {fileID: 5047601793346123837}
   - component: {fileID: 181425310530826105}
   - component: {fileID: -5853220194501578558}
+  - component: {fileID: 6692753365883392048}
+  - component: {fileID: 3944986674497684540}
   m_Layer: 0
   m_Name: BrassKnuckles
   m_TagString: Weapon
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e9a515b1b48d44a9230b1a0c960834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: -1
+  range: 2
   lifetime: -1
 --- !u!114 &8295030466092973135
 MonoBehaviour:
@@ -197,19 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trauma: 1
   length: 0.1
---- !u!114 &8295030466092973124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8295030466092973126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eca1ad1c0fe33e45bf39d3fdff7efda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileCount: 1
 --- !u!114 &8295030466092973125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,3 +359,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6692753365883392048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295030466092973126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910ab43bf3592a94d9b0e83ed1da8a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3944986674497684540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295030466092973126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af9b045343203541b9e4657dc8d723e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0.1
+  particleGameObject: {fileID: 7142662635507482188, guid: e6e08e5ba2557fc4a8c76bbbca8dbb66,
+    type: 3}

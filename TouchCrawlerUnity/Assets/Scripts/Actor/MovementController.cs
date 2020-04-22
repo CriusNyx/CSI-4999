@@ -10,6 +10,8 @@ public class MovementController : MonoBehaviour
 
     // Velocity variables
     Vector2 destination;
+    IActor attackMoveTarget = null;
+    float attackMoveDistance = -1f;
     public Vector2 velocity;
     public Vector2 maxVelocity = new Vector2(3f, 3f);
 
@@ -24,6 +26,17 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(attackMoveTarget != null)
+        {
+            Vector2 target = attackMoveTarget.gameObject.transform.position;
+            destination = target;
+            if(Vector2.Distance(destination, transform.position) < attackMoveDistance * 0.95f)
+            {
+                GetComponent<IActor>().weapon.Fire(attackMoveTarget);
+                attackMoveTarget = null;
+            }
+        }
+
         if (IsAtDestination())
         {
             Stop();
@@ -53,6 +66,12 @@ public class MovementController : MonoBehaviour
     public void Move(IActor target)
     {
         destination = target.GetLocation();
+    }
+
+    public void AttackMove(IActor attackMoveTarget, float attackMoveDistance)
+    {
+        this.attackMoveTarget = attackMoveTarget;
+        this.attackMoveDistance = attackMoveDistance;
     }
 
     // Stops the actor

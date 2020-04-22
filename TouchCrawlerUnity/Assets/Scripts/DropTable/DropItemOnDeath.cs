@@ -22,7 +22,7 @@ public class DropItemOnDeath : MonoBehaviour
 
     private void OnDestroy()
     {
-        //if (Random.value <= dropPercent)
+        if (Random.value <= dropPercent)
         {
             var dropTable = DropTable;
             var drop = dropTable.GetRandom();
