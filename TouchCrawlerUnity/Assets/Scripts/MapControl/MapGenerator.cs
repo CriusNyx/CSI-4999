@@ -40,7 +40,7 @@ public class MapGenerator : MonoBehaviour
         {
             if(stopwatch.ElapsedMilliseconds > 5000)
             {
-                SceneManager.LoadScene("GameStart");
+                SceneManager.LoadScene("TileTest");
                 UnityEngine.Debug.Log("Timeout");
                 return;
             }
