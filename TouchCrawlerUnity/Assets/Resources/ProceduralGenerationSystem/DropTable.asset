@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: DropTable
   m_EditorClassIdentifier: 
   items:
-  - weight: 1
+  - weight: 2
     drop: {fileID: 1662439740568296301, guid: 29871307af07842408a22e3e6076cff1, type: 3}
   - weight: 1
     drop: {fileID: 1483766551661161665, guid: 36eeb09f38289204b8ed0e0b7de24c9e, type: 3}
+  - weight: 1
+    drop: {fileID: 8295030466092973126, guid: 3276b492762f5734196400a8e3b74a02, type: 3}
+  - weight: 1
+    drop: {fileID: 6092149902539042580, guid: 33d5c5dbc09fa5e4996008a9510561a5, type: 3}
+  - weight: 1
+    drop: {fileID: 6031049468265668194, guid: d27a0908c1083904582e8c8531df8925, type: 3}
+  - weight: 1
+    drop: {fileID: 375747735168188556, guid: c7fcc6e514ef47a46847e0e3c6c684b9, type: 3}
+  - weight: 1
+    drop: {fileID: 8504413596791578107, guid: 12f26f021ab7c564fb8907fd5e98d79c, type: 3}
+  - weight: 1
+    drop: {fileID: 8595434533583182404, guid: 48f2568939d283240a2f15d4740123fd, type: 3}

@@ -19,13 +19,11 @@ public class MeleeTrigger : WeaponComponent
             Vector3 targetPos = targetActor.gameObject.transform.position;
             if(Vector3.Distance(myPos, targetPos) < 1.5f)
             {
-                Debug.Log("Succ");
-                result.fireRequestSuccessful = true;
             }
             else
             {
-                Debug.Log("Fail");
-                myActor.movementController.Move(targetActor);
+                myActor.movementController.AttackMove(targetActor, 1.5f);
+                result.blockWeaponFire = true;
             }
         }
         

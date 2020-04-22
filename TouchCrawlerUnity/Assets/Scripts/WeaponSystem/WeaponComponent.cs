@@ -92,6 +92,7 @@ namespace Assets.Scripts.WeaponSystem
         public class FireRequestResult
         {
             public bool fireRequestSuccessful = false;
+            public bool blockWeaponFire = false;
             public int projectileCount { get; private set; } = 0;
             public readonly BulletSpawnInfo spawnInfo = new BulletSpawnInfo();
 

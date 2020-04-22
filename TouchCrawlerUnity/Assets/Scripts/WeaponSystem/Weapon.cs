@@ -65,7 +65,7 @@ namespace Assets.WeaponSystem
                 (x, y) => x.RequestFire(this, target, y));
 
 
-            if (requestResult.fireRequestSuccessful)
+            if (requestResult.fireRequestSuccessful && !requestResult.blockWeaponFire)
             {
                 PlaySound();
                 FireResult fireResult = new FireResult();

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 6663514813118610194}
   - component: {fileID: 6786289156720439223}
   - component: {fileID: 8147957172494073170}
+  - component: {fileID: 8801023101068207053}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Weapon
@@ -146,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f28c9deadf1bc47a26ee125f300ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8105166356373043456, guid: b71d592a30ea6d2438a36307588f8f0e, type: 3}
+  prefab: {fileID: 8105166356373043456, guid: 718ecbfcd9f618a45b4b71a520e9c918, type: 3}
 --- !u!114 &8504413596791578097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,3 +372,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8801023101068207053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504413596791578107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af9b045343203541b9e4657dc8d723e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  latch:
+    latchType: 0
+    counter:
+      targetCount: 1
+    dice:
+      percentChance: 0
+    cooldown:
+      cooldownTime: 0.1
+  particleGameObject: {fileID: 7142662635507482188, guid: e6e08e5ba2557fc4a8c76bbbca8dbb66,
+    type: 3}
