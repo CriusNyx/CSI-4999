@@ -11,6 +11,13 @@ public class HealthController : MonoBehaviour
     public float CurrentHealth = 100f;
     public float MaxHealth = 100f;
 
+    private void Start()
+    {
+        {
+            CurrentHealth = MaxHealth = gameObject.GetComponent<StatsController>().GetStat(StatsController.StatType.Health).CalculateStatValue() * 10f;
+        }
+    }
+
     /// <summary>
     /// Each frame, the game will check to see if health is less than or equal to 0. It will crash if Health falls that low.
     /// This is not going to be in the final game, obviously. We don't want it to crash.
@@ -21,12 +28,12 @@ public class HealthController : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             //throw new System.NotImplementedException();
-            foreach(var onDieEffect in gameObject.GetComponents<OnDieEffect>())
+            foreach (var onDieEffect in gameObject.GetComponents<OnDieEffect>())
             {
                 onDieEffect.OnDie(gameObject.GetComponent<IActor>());
             }
         }
-        if(CurrentHealth > MaxHealth)
+        if (CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
         }
