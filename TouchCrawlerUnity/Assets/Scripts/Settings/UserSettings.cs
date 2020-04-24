@@ -6,6 +6,6 @@ public class UserSettings : MonoBehaviour
 {
     public static int score = 0;
     public static string username = "null";
-    public static float sfxVolume = 0.3f;
-    public static float musicVolume = 0.3f;
+    public static float sfxVolume = 0.2f;
+    public static float musicVolume = 0.1f;
 }
